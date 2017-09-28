@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author             = { "Alexis Aubry" => "me@alexaubry.fr" }
   s.social_media_url   = "https://twitter.com/_alexaubry"
-  s.ios.deployment_target = "8.0"
+  s.ios.deployment_target = "9.0"
   s.source       = { :git => "https://github.com/alexaubry/Bulletin.git", :tag => s.version.to_s }
   s.source_files  = "Sources/**/*"
   s.frameworks  = "UIKit"
