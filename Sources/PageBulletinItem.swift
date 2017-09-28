@@ -176,14 +176,13 @@ open class PageBulletinItem: BulletinItem {
         }
 
         let actionButton = HighlightButton(type: .custom)
-        actionButton.setTitle(actionButtonTitle, for: .normal)
         actionButton.setBackgroundColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), forState: .normal)
-        actionButton.contentHorizontalAlignment = .fill
-        actionButton.layer.cornerRadius = 12
-        actionButton.clipsToBounds = true
         actionButton.contentHorizontalAlignment = .center
         actionButton.autoresizingMask = .flexibleWidth
+        actionButton.setTitle(actionButtonTitle, for: .normal)
         actionButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        actionButton.layer.cornerRadius = 12
+        actionButton.clipsToBounds = true
 
         let actionContainer = ContainerView<HighlightButton>(actionButton)
         actionContainer.heightAnchor.constraint(equalToConstant: 55).isActive = true

@@ -14,6 +14,8 @@
 		558A124F1F7D7865005EC97C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 558A124D1F7D7865005EC97C /* LaunchScreen.storyboard */; };
 		55DADE721F7D795E001B11A2 /* Bulletin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DADE711F7D795E001B11A2 /* Bulletin.framework */; };
 		55DADE731F7D795E001B11A2 /* Bulletin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55DADE711F7D795E001B11A2 /* Bulletin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		55DADE761F7D7AEA001B11A2 /* BulletinDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DADE751F7D7AEA001B11A2 /* BulletinDataSource.swift */; };
+		55DADE781F7D8B29001B11A2 /* PetSelectorBulletinPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DADE771F7D8B29001B11A2 /* PetSelectorBulletinPage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,6 +41,8 @@
 		558A124E1F7D7865005EC97C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		558A12501F7D7865005EC97C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55DADE711F7D795E001B11A2 /* Bulletin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bulletin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		55DADE751F7D7AEA001B11A2 /* BulletinDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinDataSource.swift; sourceTree = "<group>"; };
+		55DADE771F7D8B29001B11A2 /* PetSelectorBulletinPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSelectorBulletinPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,8 @@
 			children = (
 				558A12441F7D7865005EC97C /* AppDelegate.swift */,
 				558A12461F7D7865005EC97C /* ViewController.swift */,
+				55DADE751F7D7AEA001B11A2 /* BulletinDataSource.swift */,
+				55DADE771F7D8B29001B11A2 /* PetSelectorBulletinPage.swift */,
 				558A12481F7D7865005EC97C /* Main.storyboard */,
 				558A124B1F7D7865005EC97C /* Assets.xcassets */,
 				558A124D1F7D7865005EC97C /* LaunchScreen.storyboard */,
@@ -157,7 +163,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				558A12471F7D7865005EC97C /* ViewController.swift in Sources */,
+				55DADE781F7D8B29001B11A2 /* PetSelectorBulletinPage.swift in Sources */,
 				558A12451F7D7865005EC97C /* AppDelegate.swift in Sources */,
+				55DADE761F7D7AEA001B11A2 /* BulletinDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,7 +304,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75E8K39Z38;
-				INFOPLIST_FILE = Example/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Bulletin.Example;
@@ -312,7 +320,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75E8K39Z38;
-				INFOPLIST_FILE = Example/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Bulletin.Example;
