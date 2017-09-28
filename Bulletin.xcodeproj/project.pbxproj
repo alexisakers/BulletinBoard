@@ -8,7 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		52D6D9871BEFF229002C0205 /* Bulletin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D97C1BEFF229002C0205 /* Bulletin.framework */; };
-		8933C7851EB5B820000D00A4 /* Bulletin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7841EB5B820000D00A4 /* Bulletin.swift */; };
+		558A12301F7D73CD005EC97C /* BulletinController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122A1F7D73CD005EC97C /* BulletinController.swift */; };
+		558A12311F7D73CD005EC97C /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122B1F7D73CD005EC97C /* ContainerView.swift */; };
+		558A12321F7D73CD005EC97C /* BulletinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122C1F7D73CD005EC97C /* BulletinViewController.swift */; };
+		558A12331F7D73CD005EC97C /* HighlightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122D1F7D73CD005EC97C /* HighlightButton.swift */; };
+		558A12341F7D73CD005EC97C /* DimmingPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122E1F7D73CD005EC97C /* DimmingPresentationController.swift */; };
+		558A12351F7D73CD005EC97C /* PageBulletinItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122F1F7D73CD005EC97C /* PageBulletinItem.swift */; };
+		558A12371F7D73E6005EC97C /* BulletinItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A12361F7D73E5005EC97C /* BulletinItem.swift */; };
 		8933C7901EB5B82D000D00A4 /* BulletinTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7891EB5B82A000D00A4 /* BulletinTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,7 +31,13 @@
 /* Begin PBXFileReference section */
 		52D6D97C1BEFF229002C0205 /* Bulletin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bulletin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52D6D9861BEFF229002C0205 /* BulletinTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BulletinTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8933C7841EB5B820000D00A4 /* Bulletin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bulletin.swift; sourceTree = "<group>"; };
+		558A122A1F7D73CD005EC97C /* BulletinController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletinController.swift; sourceTree = "<group>"; };
+		558A122B1F7D73CD005EC97C /* ContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
+		558A122C1F7D73CD005EC97C /* BulletinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletinViewController.swift; sourceTree = "<group>"; };
+		558A122D1F7D73CD005EC97C /* HighlightButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighlightButton.swift; sourceTree = "<group>"; };
+		558A122E1F7D73CD005EC97C /* DimmingPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimmingPresentationController.swift; sourceTree = "<group>"; };
+		558A122F1F7D73CD005EC97C /* PageBulletinItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageBulletinItem.swift; sourceTree = "<group>"; };
+		558A12361F7D73E5005EC97C /* BulletinItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinItem.swift; sourceTree = "<group>"; };
 		8933C7891EB5B82A000D00A4 /* BulletinTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletinTests.swift; sourceTree = "<group>"; };
 		AD2FAA261CD0B6D800659CF4 /* Bulletin.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Bulletin.plist; sourceTree = "<group>"; };
 		AD2FAA281CD0B6E100659CF4 /* BulletinTests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BulletinTests.plist; sourceTree = "<group>"; };
@@ -81,7 +93,13 @@
 		8933C7811EB5B7E0000D00A4 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				8933C7841EB5B820000D00A4 /* Bulletin.swift */,
+				558A122A1F7D73CD005EC97C /* BulletinController.swift */,
+				558A12361F7D73E5005EC97C /* BulletinItem.swift */,
+				558A122F1F7D73CD005EC97C /* PageBulletinItem.swift */,
+				558A122C1F7D73CD005EC97C /* BulletinViewController.swift */,
+				558A122B1F7D73CD005EC97C /* ContainerView.swift */,
+				558A122D1F7D73CD005EC97C /* HighlightButton.swift */,
+				558A122E1F7D73CD005EC97C /* DimmingPresentationController.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -221,7 +239,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8933C7851EB5B820000D00A4 /* Bulletin.swift in Sources */,
+				558A12331F7D73CD005EC97C /* HighlightButton.swift in Sources */,
+				558A12371F7D73E6005EC97C /* BulletinItem.swift in Sources */,
+				558A12341F7D73CD005EC97C /* DimmingPresentationController.swift in Sources */,
+				558A12311F7D73CD005EC97C /* ContainerView.swift in Sources */,
+				558A12301F7D73CD005EC97C /* BulletinController.swift in Sources */,
+				558A12351F7D73CD005EC97C /* PageBulletinItem.swift in Sources */,
+				558A12321F7D73CD005EC97C /* BulletinViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +423,7 @@
 		52D6D9941BEFF229002C0205 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CODE_SIGN_STYLE = Manual;
@@ -414,6 +439,7 @@
 		52D6D9951BEFF229002C0205 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CODE_SIGN_STYLE = Manual;
