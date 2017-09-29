@@ -151,7 +151,6 @@ final class BulletinViewController: UIViewController {
 
         }
 
-
     }
 
     // MARK: - Touch Events

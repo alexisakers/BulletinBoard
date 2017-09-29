@@ -26,6 +26,7 @@ public class BulletinInterfaceFactory {
     /// The title color to apply to action button.
     public var actionButtonTitleColor = UIColor.white
 
+
     // MARK: - Fonts
 
     /// The font size of title elements.
@@ -40,6 +41,7 @@ public class BulletinInterfaceFactory {
     /// The font size of action buttons.
     public let actionButtonFontSize: CGFloat = 17
 
+
     // MARK: - Colors
 
     /// The color of title text labels.
@@ -48,6 +50,7 @@ public class BulletinInterfaceFactory {
     /// The color of description text labels.
     public let descriptionTextColor = UIColor.black
 
+    
     // MARK: - Factories
 
     /**
