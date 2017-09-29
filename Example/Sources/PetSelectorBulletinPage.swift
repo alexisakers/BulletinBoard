@@ -208,6 +208,11 @@ class PetSelectorBulletinPage: BulletinItem {
     /// Called when the save button is tapped.
     @objc func saveButtonTapped() {
 
+        // Play haptic feedback
+
+        feedbackGenerator.prepare()
+        feedbackGenerator.selectionChanged()
+
         // Ask the manager to present the next item.
         manager?.displayNextItem()
 

@@ -30,9 +30,9 @@ enum BulletinDataSource {
 
     // MARK: - Pages
 
-    static func makeIntroPage() -> PageBulletinItem {
+    static func makeIntroPage() -> FeedbackPageBulletinItem {
 
-        let page = PageBulletinItem(title: "Welcome to Hello Pet")
+        let page = FeedbackPageBulletinItem(title: "Welcome to Hello Pet")
         page.image = #imageLiteral(resourceName: "RoundedIcon")
 
         page.descriptionText = "Discover curated images of the best pets in the world."
@@ -48,9 +48,9 @@ enum BulletinDataSource {
 
     }
 
-    static func makeNotitificationsPage() -> PageBulletinItem {
+    static func makeNotitificationsPage() -> FeedbackPageBulletinItem {
 
-        let page = PageBulletinItem(title: "Push Notifications")
+        let page = FeedbackPageBulletinItem(title: "Push Notifications")
         page.image = #imageLiteral(resourceName: "NotificationPrompt")
 
         page.descriptionText = "Receive push notifications when new photos of pets are available."
@@ -71,9 +71,9 @@ enum BulletinDataSource {
 
     }
 
-    static func makeLocationPage() -> PageBulletinItem {
+    static func makeLocationPage() -> FeedbackPageBulletinItem {
 
-        let page = PageBulletinItem(title: "Customize Feed")
+        let page = FeedbackPageBulletinItem(title: "Customize Feed")
         page.image = #imageLiteral(resourceName: "LocationPrompt")
 
         page.descriptionText = "We can use your location to customize the feed. This data will be sent to our servers anonymously. You can update your choice later in the app settings."
