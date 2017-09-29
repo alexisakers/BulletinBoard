@@ -41,7 +41,7 @@ final class BulletinViewController: UIViewController {
 
     override func loadView() {
 
-        view = UIView()
+        super.loadView()
         view.backgroundColor = .clear
 
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
