@@ -30,6 +30,8 @@ final class BulletinViewController: UIViewController {
 
     private let contentView = UIView()
 
+    private var containerBottomConstraint: NSLayoutConstraint!
+
     private var leadingConstraint: NSLayoutConstraint!
     private var trailingConstraint: NSLayoutConstraint!
     private var centerXConstraint: NSLayoutConstraint!
@@ -70,7 +72,9 @@ final class BulletinViewController: UIViewController {
         maxWidthConstraint.priority = .required
         maxWidthConstraint.isActive = true
 
-        contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -12).isActive = true
+        containerBottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        containerBottomConstraint.isActive = true
+        containerBottomConstraint.constant = bottomSpacingForCurrentLayout()
 
         // Content Stack View
 
@@ -151,6 +155,25 @@ final class BulletinViewController: UIViewController {
 
         }
 
+    }
+
+    func bottomSpacingForCurrentLayout() -> CGFloat {
+
+        let bottomInset: CGFloat
+
+        if #available(iOS 11.0, *) {
+            let safeBottomInset = view.safeAreaInsets.bottom
+            bottomInset = safeBottomInset > 0 ? safeBottomInset : 12
+        } else {
+            bottomInset = 12
+        }
+
+        return -bottomInset
+
+    }
+
+    override func viewSafeAreaInsetsDidChange() {
+        containerBottomConstraint.constant = bottomSpacingForCurrentLayout()
     }
 
     // MARK: - Touch Events
