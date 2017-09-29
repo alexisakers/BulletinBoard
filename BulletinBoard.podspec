@@ -1,0 +1,16 @@
+Pod::Spec.new do |s|
+  s.name         = "BulletinBoard"
+  s.version      = "0.1"
+  s.summary      = "Card Interface for iOS"
+  s.description  = <<-DESC
+    BulletinBoard provides a set of tools to build card interfaces on iOS. It has a look similar to the AirPods configuration screen on iOS 10 and later. BulletinBoard is especially well suited for quick user interactions, such as onboardings.
+  DESC
+  s.homepage     = "https://github.com/alexaubry/BulletinBoard"
+  s.license      = { :type => "MIT", :file => "LICENSE" }
+  s.author             = { "Alexis Aubry" => "me@alexaubry.fr" }
+  s.social_media_url   = "https://twitter.com/_alexaubry"
+  s.ios.deployment_target = "9.0"
+  s.source       = { :git => "https://github.com/alexaubry/BulletinBoard.git", :tag => s.version.to_s }
+  s.source_files  = "Sources/**/*"
+  s.frameworks  = "UIKit"
+end

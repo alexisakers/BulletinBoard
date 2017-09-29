@@ -1,10 +1,10 @@
 /**
- *  Bulletin
+ *  BulletinBoard
  *  Copyright (c) 2017 Alexis Aubry. Licensed under the MIT license.
  */
 
 import UIKit
-import Bulletin
+import BulletinBoard
 
 /**
  * A subclass of page bulletin item that plays an haptic feedback when the buttons are pressed.

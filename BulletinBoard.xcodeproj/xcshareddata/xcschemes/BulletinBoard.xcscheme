@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "52D6D97B1BEFF229002C0205"
-               BuildableName = "Bulletin.framework"
-               BlueprintName = "Bulletin"
-               ReferencedContainer = "container:Bulletin.xcodeproj">
+               BuildableName = "BulletinBoard.framework"
+               BlueprintName = "BulletinBoard"
+               ReferencedContainer = "container:BulletinBoard.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -31,15 +31,6 @@
       codeCoverageEnabled = "YES">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "52D6D97B1BEFF229002C0205"
-            BuildableName = "Bulletin.framework"
-            BlueprintName = "Bulletin"
-            ReferencedContainer = "container:Bulletin.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -58,9 +49,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "52D6D97B1BEFF229002C0205"
-            BuildableName = "Bulletin.framework"
-            BlueprintName = "Bulletin"
-            ReferencedContainer = "container:Bulletin.xcodeproj">
+            BuildableName = "BulletinBoard.framework"
+            BlueprintName = "BulletinBoard"
+            ReferencedContainer = "container:BulletinBoard.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +67,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "52D6D97B1BEFF229002C0205"
-            BuildableName = "Bulletin.framework"
-            BlueprintName = "Bulletin"
-            ReferencedContainer = "container:Bulletin.xcodeproj">
+            BuildableName = "BulletinBoard.framework"
+            BlueprintName = "BulletinBoard"
+            ReferencedContainer = "container:BulletinBoard.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
