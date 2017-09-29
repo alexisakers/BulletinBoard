@@ -27,7 +27,7 @@ enum BulletinDataSource {
 
     static func makeIntroPage() -> FeedbackPageBulletinItem {
 
-        let page = FeedbackPageBulletinItem(title: "Welcome to Pugtersest")
+        let page = FeedbackPageBulletinItem(title: "Welcome to Instanimal")
         page.image = #imageLiteral(resourceName: "RoundedIcon")
 
         page.descriptionText = "Discover curated images of the best pets in the world."
@@ -136,7 +136,7 @@ enum BulletinDataSource {
         page.interfaceFactory.tintColor = #colorLiteral(red: 0.2941176471, green: 0.8509803922, blue: 0.3921568627, alpha: 1)
         page.interfaceFactory.actionButtonTitleColor = .white
 
-        page.descriptionText = "Pugtersest is ready for you to use. Happy browsing!"
+        page.descriptionText = "Instanimal is ready for you to use. Happy browsing!"
         page.actionButtonTitle = "Get started"
 
         page.isDismissable = true

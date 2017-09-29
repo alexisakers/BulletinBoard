@@ -18,6 +18,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var showIntoButtonItem: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView!
 
+    /// The data provider for the collection view.
+    private var dataSource: CollectionDataSource!
+
     // MARK: - Bulletin Manager
 
     /**
@@ -42,9 +45,24 @@ class ViewController: UIViewController {
     // MARK: - View
 
     override func viewDidLoad() {
+
         super.viewDidLoad()
         prepareForBulletin()
-        segmentedControl.selectedSegmentIndex = BulletinDataSource.favoriteTabIndex
+
+        // Set up the data
+
+        let favoriteTab = BulletinDataSource.favoriteTabIndex
+        segmentedControl.selectedSegmentIndex = favoriteTab
+        dataSource = favoriteTab == 0 ? .cat : .dog
+
+        // Set up the collection view
+
+        collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+
+        collectionView.backgroundColor = .white
+        collectionView.delegate = self
+        collectionView.dataSource = self
+
     }
 
     deinit {
@@ -94,6 +112,10 @@ class ViewController: UIViewController {
         showBulletin()
     }
 
+    @IBAction func tabIndexChanged(_ sender: UISegmentedControl) {
+        updateTab(sender.selectedSegmentIndex)
+    }
+
     @objc func setupDidComplete() {
         BulletinDataSource.userDidCompleteSetup = true
     }
@@ -104,8 +126,56 @@ class ViewController: UIViewController {
             return
         }
 
+        updateTab(newIndex)
+
+    }
+
+    /**
+     * Update the selected tab.
+     */
+
+    private func updateTab(_ newIndex: Int) {
+
         segmentedControl.selectedSegmentIndex = newIndex
+        dataSource = newIndex == 0 ? .cat : .dog
         BulletinDataSource.favoriteTabIndex = newIndex
+
+        collectionView.reloadData()
+
+    }
+
+}
+
+// MARK: - Collection View
+
+extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dataSource.numberOfImages
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ImageCollectionViewCell
+        cell.imageView.image = dataSource.image(at: indexPath.row)
+
+        return cell
+
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        let image = dataSource.image(at: indexPath.row)
+        let aspectRatio = image.size.height / image.size.width
+
+        let width = view.frame.width
+        let height = width * aspectRatio
+
+        return CGSize(width: width, height: height)
 
     }
 

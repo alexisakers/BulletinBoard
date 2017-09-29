@@ -19,6 +19,7 @@
 		55DADE7C1F7E3A53001B11A2 /* SelectionFeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DADE7B1F7E3A53001B11A2 /* SelectionFeedbackGenerator.swift */; };
 		55DADE811F7E3C0B001B11A2 /* FeedbackPageBulletinItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DADE801F7E3C0B001B11A2 /* FeedbackPageBulletinItem.swift */; };
 		55DADE831F7E4204001B11A2 /* PermissionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DADE821F7E4204001B11A2 /* PermissionsManager.swift */; };
+		55DADE851F7E592F001B11A2 /* CollectionUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DADE841F7E592F001B11A2 /* CollectionUtilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +50,7 @@
 		55DADE7B1F7E3A53001B11A2 /* SelectionFeedbackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionFeedbackGenerator.swift; sourceTree = "<group>"; };
 		55DADE801F7E3C0B001B11A2 /* FeedbackPageBulletinItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackPageBulletinItem.swift; sourceTree = "<group>"; };
 		55DADE821F7E4204001B11A2 /* PermissionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsManager.swift; sourceTree = "<group>"; };
+		55DADE841F7E592F001B11A2 /* CollectionUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionUtilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				558A12441F7D7865005EC97C /* AppDelegate.swift */,
+				55DADE841F7E592F001B11A2 /* CollectionUtilities.swift */,
 				55DADE7B1F7E3A53001B11A2 /* SelectionFeedbackGenerator.swift */,
 				55DADE821F7E4204001B11A2 /* PermissionsManager.swift */,
 				558A12481F7D7865005EC97C /* Main.storyboard */,
@@ -188,6 +191,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				558A12471F7D7865005EC97C /* ViewController.swift in Sources */,
+				55DADE851F7E592F001B11A2 /* CollectionUtilities.swift in Sources */,
 				55DADE831F7E4204001B11A2 /* PermissionsManager.swift in Sources */,
 				55DADE7C1F7E3A53001B11A2 /* SelectionFeedbackGenerator.swift in Sources */,
 				55DADE781F7D8B29001B11A2 /* PetSelectorBulletinPage.swift in Sources */,

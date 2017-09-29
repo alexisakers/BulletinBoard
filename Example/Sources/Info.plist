@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We can use your location to customize your feed. NB: Pugterest is a demo app. No location data will actually be used.</string>
+	<string>We can use your location to customize your feed. NB: Instanimal is a demo app. No location data will actually be used.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Pugtersest</string>
+	<string>Instanimal</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
