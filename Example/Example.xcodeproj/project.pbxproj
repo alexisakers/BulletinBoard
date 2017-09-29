@@ -81,7 +81,6 @@
 		558A12431F7D7865005EC97C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				558A12441F7D7865005EC97C /* AppDelegate.swift */,
 				558A12461F7D7865005EC97C /* ViewController.swift */,
 				55DADE7F1F7E3BE6001B11A2 /* Bulletin */,
 				55DADE7D1F7E3BBA001B11A2 /* Supporting Files */,
@@ -92,6 +91,7 @@
 		55DADE7D1F7E3BBA001B11A2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				558A12441F7D7865005EC97C /* AppDelegate.swift */,
 				55DADE7B1F7E3A53001B11A2 /* SelectionFeedbackGenerator.swift */,
 				558A12481F7D7865005EC97C /* Main.storyboard */,
 				558A124B1F7D7865005EC97C /* Assets.xcassets */,

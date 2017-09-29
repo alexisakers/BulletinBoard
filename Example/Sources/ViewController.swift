@@ -6,6 +6,12 @@
 import UIKit
 import Bulletin
 
+/**
+ * A view controller displaying a set of images.
+ *
+ * This demonstrates how to set up a bulletin manager and present the bulletin.
+ */
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -13,6 +19,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
 
     // MARK: - Bulletin Manager
+
+    /**
+     * Configures the bulletin manager.
+     *
+     * We first need to create the bulletin items we want to display. Then, we use them to create
+     * the bulletin manager.
+     */
 
     lazy var bulletinManager: BulletinManager = {
 
@@ -39,7 +52,13 @@ class ViewController: UIViewController {
 
     // MARK: - Bulletin
 
+    /**
+     * Prepares the view controller for the bulletin interface.
+     */
+
     func prepareForBulletin() {
+
+        // Register notification observers
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(setupDidComplete),
@@ -51,11 +70,17 @@ class ViewController: UIViewController {
                                                name: .FavoriteTabIndexDidChange,
                                                object: nil)
 
+        // If the user did not complete the setup, present the bulletin automatically
+
         if !BulletinDataSource.userDidCompleteSetup {
             showBulletin()
         }
 
     }
+
+    /**
+     * Displays the bulletin.
+     */
 
     func showBulletin() {
         bulletinManager.prepare()
