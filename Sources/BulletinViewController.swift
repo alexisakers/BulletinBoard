@@ -136,9 +136,9 @@ final class BulletinViewController: UIViewController {
 
         switch (traitCollection.verticalSizeClass, traitCollection.horizontalSizeClass) {
         case (.regular, .regular):
-            contentLeadingConstraint.constant = 36
-            contentTrailingConstraint.constant = -36
-            contentBottomConstraint.constant = -36
+            contentLeadingConstraint.constant = 32
+            contentTrailingConstraint.constant = -32
+            contentBottomConstraint.constant = -24
 
             contentStackView.spacing = 32
 
