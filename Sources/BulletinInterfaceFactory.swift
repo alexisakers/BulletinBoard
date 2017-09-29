@@ -12,6 +12,12 @@ import UIKit
 
 public class BulletinInterfaceFactory {
 
+    /**
+     * Creates a new interface factory with the default configuration.
+     */
+
+    public init() {}
+
     // MARK: - Customization
 
     /// The tint color to apply to button elements.
@@ -133,16 +139,16 @@ public class BulletinInterfaceFactory {
     }
 
     /**
-     * Creates a stack view to contain a group of buttons.
+     * Creates a stack view to contain a group of objects.
      */
 
-    public func makeButtonsStack() -> UIStackView {
+    public func makeGroupStack(spacing: CGFloat = 10) -> UIStackView {
 
         let buttonsStack = UIStackView()
         buttonsStack.axis = .vertical
         buttonsStack.alignment = .fill
         buttonsStack.distribution = .fill
-        buttonsStack.spacing = 10
+        buttonsStack.spacing = spacing
 
         return buttonsStack
 

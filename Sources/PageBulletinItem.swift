@@ -54,7 +54,7 @@ open class PageBulletinItem: BulletinItem {
 
     // MARK: - Behavior
 
-    public var manager: BulletinManager? = nil
+    public weak var manager: BulletinManager? = nil
     public var isDismissable: Bool = false
 
     /**
@@ -146,7 +146,7 @@ open class PageBulletinItem: BulletinItem {
 
         // Buttons Stack
 
-        let buttonsStack = interfaceFactory.makeButtonsStack()
+        let buttonsStack = interfaceFactory.makeGroupStack()
 
         if let actionButtonTitle = self.actionButtonTitle {
 
