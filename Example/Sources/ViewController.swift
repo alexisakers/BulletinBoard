@@ -44,6 +44,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareForBulletin()
+        segmentedControl.selectedSegmentIndex = BulletinDataSource.favoriteTabIndex
     }
 
     deinit {
