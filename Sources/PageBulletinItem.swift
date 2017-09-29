@@ -128,7 +128,7 @@ open class PageBulletinItem: BulletinItem {
             let imageView = UIImageView()
             imageView.image = image
             imageView.contentMode = .scaleAspectFit
-            imageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+            imageView.heightAnchor.constraint(lessThanOrEqualToConstant: 100).isActive = true
 
             arrangedSubviews.append(imageView)
 

@@ -33,7 +33,10 @@ final class BulletinViewController: UIViewController {
     private var leadingConstraint: NSLayoutConstraint!
     private var trailingConstraint: NSLayoutConstraint!
     private var centerXConstraint: NSLayoutConstraint!
-    private var maxWidthConstraint: NSLayoutConstraint!
+    private var minWidthConstraint: NSLayoutConstraint!
+    private var contentLeadingConstraint: NSLayoutConstraint!
+    private var contentTrailingConstraint: NSLayoutConstraint!
+    private var contentBottomConstraint: NSLayoutConstraint!
 
     // MARK: - Lifecycle
 
@@ -59,7 +62,13 @@ final class BulletinViewController: UIViewController {
         leadingConstraint = contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12)
         trailingConstraint = contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12)
         centerXConstraint = contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        maxWidthConstraint = contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: 444)
+
+        minWidthConstraint = contentView.widthAnchor.constraint(equalToConstant: 444)
+        minWidthConstraint.priority = .defaultHigh
+
+        let maxWidthConstraint = contentView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, constant: -24)
+        maxWidthConstraint.priority = .required
+        maxWidthConstraint.isActive = true
 
         contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -12).isActive = true
 
@@ -67,10 +76,22 @@ final class BulletinViewController: UIViewController {
 
         contentView.addSubview(contentStackView)
 
-        contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 36).isActive = true
-        contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -36).isActive = true
-        contentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24).isActive = true
-        contentView.topAnchor.constraint(equalTo: contentStackView.topAnchor, constant: -24).isActive = true
+        contentLeadingConstraint = contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 36)
+        contentLeadingConstraint.isActive = true
+
+        contentTrailingConstraint = contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -36)
+        contentTrailingConstraint.isActive = true
+
+        contentBottomConstraint = contentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24)
+        contentBottomConstraint.isActive = true
+
+        let topConstraint = contentView.topAnchor.constraint(equalTo: contentStackView.topAnchor, constant: -24)
+        topConstraint.isActive = true
+        topConstraint.priority = .defaultHigh
+
+        let minYConstraint = contentView.topAnchor.constraint(greaterThanOrEqualTo: topLayoutGuide.bottomAnchor)
+        minYConstraint.isActive = true
+        minYConstraint.priority = .required
 
         contentStackView.axis = .vertical
         contentStackView.alignment = .fill
@@ -94,38 +115,42 @@ final class BulletinViewController: UIViewController {
 
     private func setUpLayout(with traitCollection: UITraitCollection) {
 
-        contentStackView.spacing = contentSpacing(for: traitCollection)
-
         switch traitCollection.horizontalSizeClass {
         case .regular:
             leadingConstraint.isActive = false
             trailingConstraint.isActive = false
 
             centerXConstraint.isActive = true
-            maxWidthConstraint.isActive = true
+            minWidthConstraint.isActive = true
 
         case .compact:
             leadingConstraint.isActive = true
             trailingConstraint.isActive = true
 
             centerXConstraint.isActive = false
-            maxWidthConstraint.isActive = false
+            minWidthConstraint.isActive = false
 
         default:
             break
         }
 
-    }
+        switch (traitCollection.verticalSizeClass, traitCollection.horizontalSizeClass) {
+        case (.regular, .regular):
+            contentLeadingConstraint.constant = 36
+            contentTrailingConstraint.constant = -36
+            contentBottomConstraint.constant = -36
 
-    private func contentSpacing(for traitCollection: UITraitCollection) -> CGFloat {
-
-        switch traitCollection.verticalSizeClass {
-        case .regular:
-            return 30
+            contentStackView.spacing = 32
 
         default:
-            return 12
+            contentLeadingConstraint.constant = 24
+            contentTrailingConstraint.constant = -24
+            contentBottomConstraint.constant = -16
+
+            contentStackView.spacing = 24
+
         }
+
 
     }
 

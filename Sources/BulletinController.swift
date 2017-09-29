@@ -198,7 +198,7 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
         let newArrangedSubviews = currentItem.makeArrangedSubviews()
 
         for arrangedSubview in newArrangedSubviews {
-            arrangedSubview.isHidden = true
+            arrangedSubview.isHidden = isPreparing ? false : true
             viewController.contentStackView.addArrangedSubview(arrangedSubview)
         }
 
