@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         let introPage = BulletinDataSource.makeIntroPage()
         let notificationsPage = BulletinDataSource.makeNotitificationsPage()
         let locationPage = BulletinDataSource.makeLocationPage()
-        let petSelectorPage = PetSelectorBulletinPage()
+        let petSelectorPage = BulletinDataSource.makeChoicePage()
         let completionPage = BulletinDataSource.makeCompletionPage()
 
         return BulletinManager(items: [introPage, notificationsPage, locationPage, petSelectorPage, completionPage])

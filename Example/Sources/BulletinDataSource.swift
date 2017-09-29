@@ -6,29 +6,24 @@
 import UIKit
 import Bulletin
 
+/**
+ * A set of tools to interact with the demo data.
+ *
+ * This demonstrates how to create and configure bulletin items.
+ */
+
 enum BulletinDataSource {
 
-    // MARK: - User Defaults
-
-    static var favoriteTabIndex: Int {
-        get {
-            return UserDefaults.standard.integer(forKey: "HelloPetFavoriteTabIndex")
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: "HelloPetFavoriteTabIndex")
-        }
-    }
-
-    static var userDidCompleteSetup: Bool {
-        get {
-            return UserDefaults.standard.bool(forKey: "HelloPetUserDidCompleteSetup")
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: "HelloPetUserDidCompleteSetup")
-        }
-    }
-
     // MARK: - Pages
+
+    /**
+     * Create the introduction page.
+     *
+     * This creates a `FeedbackPageBulletinItem` with: a title, an image, a description text and
+     * and action button.
+     *
+     * The action button presents the next item in the items stack.
+     */
 
     static func makeIntroPage() -> FeedbackPageBulletinItem {
 
@@ -47,6 +42,15 @@ enum BulletinDataSource {
         return page
 
     }
+
+    /**
+     * Create the notifications page.
+     *
+     * This creates a `FeedbackPageBulletinItem` with: a title, an image, a description text, an action
+     * and an ignore button.
+     *
+     * The action and the ignore buttons present the next item in the items stack.
+     */
 
     static func makeNotitificationsPage() -> FeedbackPageBulletinItem {
 
@@ -70,6 +74,15 @@ enum BulletinDataSource {
         return page
 
     }
+
+    /**
+     * Create the location page.
+     *
+     * This creates a `FeedbackPageBulletinItem` with: a title, an image, a compact description text,
+     * an action and an ignore button.
+     *
+     * The action and the ignore buttons present the next item in the items stack.
+     */
 
     static func makeLocationPage() -> FeedbackPageBulletinItem {
 
@@ -95,6 +108,23 @@ enum BulletinDataSource {
 
     }
 
+    /**
+     * Creates a custom item.
+     */
+
+    static func makeChoicePage() -> PetSelectorBulletinPage {
+        return PetSelectorBulletinPage()
+    }
+
+    /**
+     * Create the location page.
+     *
+     * This creates a `PageBulletinItem` with: a title, an image, a description text, and an action
+     * button. The item can be dismissed. The tint color of the action button is customized.
+     *
+     * The action and the ignore buttons present the next item in the items stack.
+     */
+
     static func makeCompletionPage() -> PageBulletinItem {
 
         let page = PageBulletinItem(title: "Setup Completed")
@@ -116,13 +146,50 @@ enum BulletinDataSource {
 
     }
 
+    // MARK: - User Defaults
+
+    /// The current favorite tab index.
+    static var favoriteTabIndex: Int {
+        get {
+            return UserDefaults.standard.integer(forKey: "HelloPetFavoriteTabIndex")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "HelloPetFavoriteTabIndex")
+        }
+    }
+
+    /// Whether user completed setup.
+    static var userDidCompleteSetup: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: "HelloPetUserDidCompleteSetup")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "HelloPetUserDidCompleteSetup")
+        }
+    }
+
 }
 
 // MARK: - Notifications
 
 extension Notification.Name {
 
+    /**
+     * The favorite tab index did change.
+     *
+     * The user info dictionary contains the following values:
+     *
+     * - `"Index"` = an integer with the new favorite tab index.
+     */
+
     static let FavoriteTabIndexDidChange = Notification.Name("HelloPetFavoriteTabIndexDidChangeNotification")
+
+    /**
+     * The setup did complete.
+     *
+     * The user info dictionary is empty.
+     */
+
     static let SetupDidComplete = Notification.Name("HelloPetSetupDidCompleteNotification")
 
 }
