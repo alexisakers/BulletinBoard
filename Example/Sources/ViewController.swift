@@ -63,6 +63,10 @@ class ViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
 
+        let guide = view.readableContentGuide
+        collectionView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
+
     }
 
     deinit {
@@ -172,7 +176,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
         let image = dataSource.image(at: indexPath.row)
         let aspectRatio = image.size.height / image.size.width
 
-        let width = view.frame.width
+        let width = collectionView.frame.width
         let height = width * aspectRatio
 
         return CGSize(width: width, height: height)
