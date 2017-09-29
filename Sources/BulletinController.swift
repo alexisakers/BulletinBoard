@@ -67,10 +67,12 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
 
         viewController.modalPresentationStyle = .custom
         viewController.transitioningDelegate = self
+        viewController.manager = self
 
         isPrepared = true
-        displayCurrentItem()
+        isPreparing = true
 
+        displayCurrentItem()
         isPreparing = false
 
     }
@@ -153,6 +155,12 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
         currentItem.manager = nil
 
         viewController.dismiss(animated: true, completion: nil)
+        viewController.manager = nil
+        viewController.transitioningDelegate = nil
+
+        currentItem = items[0]
+        currentItemIndex = 0
+        isPrepared = false
 
     }
 

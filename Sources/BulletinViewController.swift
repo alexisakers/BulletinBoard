@@ -37,6 +37,8 @@ final class BulletinViewController: UIViewController {
 
     // MARK: - Lifecycle
 
+    weak var manager: BulletinManager?
+
     override func loadView() {
 
         view = UIView()
@@ -135,7 +137,7 @@ final class BulletinViewController: UIViewController {
             return
         }
 
-        dismiss(animated: true)
+        manager?.dismissBulletin(animated: true)
 
     }
 
