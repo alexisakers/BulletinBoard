@@ -7,11 +7,20 @@ import UIKit
 
 /**
  * A standard bulletin item with a title and optional additional informations.
+ *
+ * You can override this class to add custom button handling. Override the `actionButtonTapped(sender:)`
+ * and `ignoreButtonTapped(sender:)` to handle tap events. Make sure to call `super` if you do.
  */
 
 open class PageBulletinItem: BulletinItem {
 
-    fileprivate let interfaceFactory = BulletinInterfaceFactory()
+    /**
+     * The interface factory used to generate the interface of the page.
+     *
+     * Use this property to customize the appearance of buttons.
+     */
+
+    public let interfaceFactory = BulletinInterfaceFactory()
 
     // MARK: Initialization
 
@@ -42,17 +51,6 @@ open class PageBulletinItem: BulletinItem {
 
     /// The title of the ignore button.
     public var ignoreButtonTitle: String?
-
-    /// The color to apply to buttons.
-    public var tintColor: UIColor {
-        get {
-            return interfaceFactory.tintColor
-        }
-        set {
-            interfaceFactory.tintColor = newValue
-        }
-    }
-
 
     // MARK: - Behavior
 
@@ -85,6 +83,9 @@ open class PageBulletinItem: BulletinItem {
 
     /**
      * Handles a tap on the action button.
+     *
+     * You can override this method to add custom tap handling. You have to call `super.actionButtonTapped(sender:)`
+     * in your implementation.
      */
 
     @objc open func actionButtonTapped(sender: UIButton) {
@@ -93,6 +94,9 @@ open class PageBulletinItem: BulletinItem {
 
     /**
      * Handles a tap on the ignore button.
+     *
+     * You can override this method to add custom tap handling. You have to call `super.ignoreButtonTapped(sender:)`
+     * in your implementation.
      */
 
     @objc open func ignoreButtonTapped(sender: UIButton) {
@@ -102,12 +106,12 @@ open class PageBulletinItem: BulletinItem {
 
     // MARK: - View Management
 
-    open func tearDown() {
+    public func tearDown() {
         actionButton?.contentView.removeTarget(self, action: nil, for: .touchUpInside)
         ignoreButton?.removeTarget(self, action: nil, for: .touchUpInside)
     }
 
-    open func makeArrangedSubviews() -> [UIView] {
+    public func makeArrangedSubviews() -> [UIView] {
 
         var arrangedSubviews = [UIView]()
 
