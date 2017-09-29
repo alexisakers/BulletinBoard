@@ -35,3 +35,39 @@ class SelectionFeedbackGenerator {
     }
 
 }
+
+/**
+ * A 3D Touch success feedback generator wrapper that uses the API only when available.
+ */
+
+class SuccessFeedbackGenerator {
+
+    private let anyObject: AnyObject?
+
+    init() {
+
+        if #available(iOS 10.0, *) {
+            anyObject = UINotificationFeedbackGenerator()
+        } else {
+            anyObject = nil
+        }
+
+    }
+
+    func prepare() {
+
+        if #available(iOS 10, *) {
+            (anyObject as! UINotificationFeedbackGenerator).prepare()
+        }
+
+    }
+
+    func success() {
+
+        if #available(iOS 10, *) {
+            (anyObject as! UINotificationFeedbackGenerator).notificationOccurred(.success)
+        }
+
+    }
+
+}

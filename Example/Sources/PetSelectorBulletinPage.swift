@@ -49,7 +49,8 @@ class PetSelectorBulletinPage: BulletinItem {
     private var dogButtonContainer: ContainerView<UIButton>!
     private var saveButtonContainer: ContainerView<HighlightButton>!
 
-    private var feedbackGenerator = SelectionFeedbackGenerator()
+    private var selectionFeedbackGenerator = SelectionFeedbackGenerator()
+    private var successFeedbackGenerator = SuccessFeedbackGenerator()
 
     // MARK: - BulletinItem
 
@@ -158,8 +159,8 @@ class PetSelectorBulletinPage: BulletinItem {
 
         // Play haptic feedback
 
-        feedbackGenerator.prepare()
-        feedbackGenerator.selectionChanged()
+        selectionFeedbackGenerator.prepare()
+        selectionFeedbackGenerator.selectionChanged()
 
         // Update UI
 
@@ -184,8 +185,8 @@ class PetSelectorBulletinPage: BulletinItem {
 
         // Play haptic feedback
 
-        feedbackGenerator.prepare()
-        feedbackGenerator.selectionChanged()
+        selectionFeedbackGenerator.prepare()
+        selectionFeedbackGenerator.selectionChanged()
 
         // Update UI
 
@@ -210,8 +211,8 @@ class PetSelectorBulletinPage: BulletinItem {
 
         // Play haptic feedback
 
-        feedbackGenerator.prepare()
-        feedbackGenerator.selectionChanged()
+        successFeedbackGenerator.prepare()
+        successFeedbackGenerator.success()
 
         // Ask the manager to present the next item.
         manager?.displayNextItem()
