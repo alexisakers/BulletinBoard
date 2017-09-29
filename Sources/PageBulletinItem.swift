@@ -11,6 +11,8 @@ import UIKit
 
 open class PageBulletinItem: BulletinItem {
 
+    fileprivate let interfaceFactory = BulletinInterfaceFactory()
+
     // MARK: Initialization
 
     /**
@@ -40,6 +42,16 @@ open class PageBulletinItem: BulletinItem {
 
     /// The title of the ignore button.
     public var ignoreButtonTitle: String?
+
+    /// The color to apply to buttons.
+    public var tintColor: UIColor {
+        get {
+            return interfaceFactory.tintColor
+        }
+        set {
+            interfaceFactory.tintColor = newValue
+        }
+    }
 
 
     // MARK: - Behavior
@@ -101,14 +113,8 @@ open class PageBulletinItem: BulletinItem {
 
         // Title Label
 
-        let titleLabel = UILabel()
+        let titleLabel = interfaceFactory.makeTitleLabel()
         titleLabel.text = title
-        titleLabel.font = UIFont.systemFont(ofSize: 30, weight: .medium)
-        titleLabel.textColor = #colorLiteral(red: 0.568627451, green: 0.5647058824, blue: 0.5725490196, alpha: 1)
-        titleLabel.numberOfLines = 1
-        titleLabel.adjustsFontSizeToFitWidth = true
-        titleLabel.textAlignment = .center
-
         arrangedSubviews.append(titleLabel)
 
         // Image View
@@ -128,80 +134,38 @@ open class PageBulletinItem: BulletinItem {
 
         if let descriptionText = self.descriptionText {
 
-            let descriptionLabel = UILabel()
+            let descriptionLabel = interfaceFactory.makeDescriptionLabel(isCompact: isLongDescriptionText)
             descriptionLabel.text = descriptionText
-            descriptionLabel.numberOfLines = 0
-            descriptionLabel.textAlignment = .center
-
-            let fontSize: CGFloat = isLongDescriptionText ? 15 : 20
-            descriptionLabel.font = UIFont.systemFont(ofSize: fontSize)
-
             arrangedSubviews.append(descriptionLabel)
 
         }
 
         // Buttons Stack
 
-        let buttonsStack = UIStackView()
-        buttonsStack.axis = .vertical
-        buttonsStack.alignment = .fill
-        buttonsStack.distribution = .fill
-        buttonsStack.spacing = 10
+        let buttonsStack = interfaceFactory.makeButtonsStack()
 
-        buttonsStack.isHidden = true
+        if let actionButtonTitle = self.actionButtonTitle {
 
-        actionButton = makeActionButton()
-        ignoreButton = makeIgnoreButton()
-
-        if let actionButton = self.actionButton {
+            let actionButton = interfaceFactory.makeActionButton(title: actionButtonTitle)
             buttonsStack.addArrangedSubview(actionButton)
             actionButton.contentView.addTarget(self, action: #selector(actionButtonTapped(sender:)), for: .touchUpInside)
+
+            self.actionButton = actionButton
+
         }
 
-        if let ignoreButton = self.ignoreButton {
+        if let ignoreButtonTitle = self.ignoreButtonTitle {
+
+            let ignoreButton = interfaceFactory.makeIgnoreButton(title: ignoreButtonTitle)
             buttonsStack.addArrangedSubview(ignoreButton)
             ignoreButton.addTarget(self, action: #selector(ignoreButtonTapped(sender:)), for: .touchUpInside)
+
+            self.ignoreButton = ignoreButton
+
         }
 
         arrangedSubviews.append(buttonsStack)
-
         return arrangedSubviews
-
-    }
-
-    open func makeActionButton() -> ContainerView<HighlightButton>? {
-
-        guard let actionButtonTitle = self.actionButtonTitle else {
-            return nil
-        }
-
-        let actionButton = HighlightButton(type: .custom)
-        actionButton.setBackgroundColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), forState: .normal)
-        actionButton.contentHorizontalAlignment = .center
-        actionButton.autoresizingMask = .flexibleWidth
-        actionButton.setTitle(actionButtonTitle, for: .normal)
-        actionButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        actionButton.layer.cornerRadius = 12
-        actionButton.clipsToBounds = true
-
-        let actionContainer = ContainerView<HighlightButton>(actionButton)
-        actionContainer.heightAnchor.constraint(equalToConstant: 55).isActive = true
-
-        return actionContainer
-
-    }
-
-    open func makeIgnoreButton() -> UIButton? {
-
-        guard let ignoreButtonTitle = self.ignoreButtonTitle else {
-            return nil
-        }
-
-        let ignoreButton = UIButton(type: .system)
-        ignoreButton.setTitle(ignoreButtonTitle, for: .normal)
-        ignoreButton.setTitleColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), for: .normal)
-
-        return ignoreButton
 
     }
 
