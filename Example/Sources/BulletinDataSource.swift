@@ -49,7 +49,8 @@ enum BulletinDataSource {
      * This creates a `FeedbackPageBulletinItem` with: a title, an image, a description text, an action
      * and an ignore button.
      *
-     * The action and the ignore buttons present the next item in the items stack.
+     * The action and the ignore buttons present the next item in the items stack. The action button
+     * registers for local notifications.
      */
 
     static func makeNotitificationsPage() -> FeedbackPageBulletinItem {
@@ -64,6 +65,7 @@ enum BulletinDataSource {
         page.isDismissable = false
 
         page.actionHandler = { item in
+            PermissionsManager.shared.requestLocalNotifications()
             page.manager?.displayNextItem()
         }
 
@@ -81,7 +83,8 @@ enum BulletinDataSource {
      * This creates a `FeedbackPageBulletinItem` with: a title, an image, a compact description text,
      * an action and an ignore button.
      *
-     * The action and the ignore buttons present the next item in the items stack.
+     * The action and the ignore buttons present the next item in the items stack. The action button
+     * requests permission for location.
      */
 
     static func makeLocationPage() -> FeedbackPageBulletinItem {
@@ -97,6 +100,7 @@ enum BulletinDataSource {
         page.isDismissable = false
 
         page.actionHandler = { item in
+            PermissionsManager.shared.requestWhenInUseLocation()
             page.manager?.displayNextItem()
         }
 
