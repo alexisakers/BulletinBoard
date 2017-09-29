@@ -22,7 +22,7 @@ enum BulletinDataSource {
      * This creates a `FeedbackPageBulletinItem` with: a title, an image, a description text and
      * and action button.
      *
-     * The action button presents the next item in the items stack.
+     * The action button presents the next item (the notification page).
      */
 
     static func makeIntroPage() -> FeedbackPageBulletinItem {
@@ -36,8 +36,10 @@ enum BulletinDataSource {
         page.isDismissable = false
 
         page.actionHandler = { item in
-            page.manager?.displayNextItem()
+            item.displayNextItem()
         }
+
+        page.nextItem = makeNotitificationsPage()
 
         return page
 
@@ -47,10 +49,10 @@ enum BulletinDataSource {
      * Create the notifications page.
      *
      * This creates a `FeedbackPageBulletinItem` with: a title, an image, a description text, an action
-     * and an ignore button.
+     * and an alternative button.
      *
-     * The action and the ignore buttons present the next item in the items stack. The action button
-     * registers for local notifications.
+     * The action and the alternative buttons present the next item (the location page). The action button
+     * starts a notification registration request.
      */
 
     static func makeNotitificationsPage() -> FeedbackPageBulletinItem {
@@ -60,18 +62,20 @@ enum BulletinDataSource {
 
         page.descriptionText = "Receive push notifications when new photos of pets are available."
         page.actionButtonTitle = "Subscribe"
-        page.ignoreButtonTitle = "Not now"
+        page.alternativeButtonTitle = "Not now"
 
         page.isDismissable = false
 
         page.actionHandler = { item in
             PermissionsManager.shared.requestLocalNotifications()
-            page.manager?.displayNextItem()
+            item.displayNextItem()
         }
 
-        page.ignoreHandler = { item in
-            page.manager?.displayNextItem()
+        page.alternativeHandler = { item in
+            item.displayNextItem()
         }
+
+        page.nextItem = makeLocationPage()
 
         return page
 
@@ -81,9 +85,9 @@ enum BulletinDataSource {
      * Create the location page.
      *
      * This creates a `FeedbackPageBulletinItem` with: a title, an image, a compact description text,
-     * an action and an ignore button.
+     * an action and an alternative button.
      *
-     * The action and the ignore buttons present the next item in the items stack. The action button
+     * The action and the alternative buttons present the next item (the animal choice page). The action button
      * requests permission for location.
      */
 
@@ -94,19 +98,21 @@ enum BulletinDataSource {
 
         page.descriptionText = "We can use your location to customize the feed. This data will be sent to our servers anonymously. You can update your choice later in the app settings."
         page.actionButtonTitle = "Send location data"
-        page.ignoreButtonTitle = "No thanks"
+        page.alternativeButtonTitle = "No thanks"
 
         page.isLongDescriptionText = true
         page.isDismissable = false
 
         page.actionHandler = { item in
             PermissionsManager.shared.requestWhenInUseLocation()
-            page.manager?.displayNextItem()
+            item.displayNextItem()
         }
 
-        page.ignoreHandler = { item in
-            page.manager?.displayNextItem()
+        page.alternativeHandler = { item in
+            item.displayNextItem()
         }
+
+        page.nextItem = makeChoicePage()
 
         return page
 
@@ -114,6 +120,8 @@ enum BulletinDataSource {
 
     /**
      * Creates a custom item.
+     *
+     * The next item is managed by the item itself. See `PetSelectorBulletinPage` for more info.
      */
 
     static func makeChoicePage() -> PetSelectorBulletinPage {
@@ -126,7 +134,7 @@ enum BulletinDataSource {
      * This creates a `PageBulletinItem` with: a title, an image, a description text, and an action
      * button. The item can be dismissed. The tint color of the action button is customized.
      *
-     * The action and the ignore buttons present the next item in the items stack.
+     * The action button dismisses the bulletin. The alternative button pops to the root item.
      */
 
     static func makeCompletionPage() -> PageBulletinItem {
@@ -138,12 +146,17 @@ enum BulletinDataSource {
 
         page.descriptionText = "Instanimal is ready for you to use. Happy browsing!"
         page.actionButtonTitle = "Get started"
+        page.alternativeButtonTitle = "Replay"
 
         page.isDismissable = true
 
         page.actionHandler = { item in
             page.manager?.dismissBulletin(animated: true)
             NotificationCenter.default.post(name: .SetupDidComplete, object: item)
+        }
+
+        page.alternativeHandler = { item in
+            item.manager?.popToRootItem()
         }
 
         return page

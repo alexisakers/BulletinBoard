@@ -6,10 +6,11 @@
 import UIKit
 
 /**
- * A standard bulletin item with a title and optional additional informations.
+ * A standard bulletin item with a title and optional additional informations. It can display a large
+ * action button and a smaller button for alternative options.
  *
  * You can override this class to add custom button handling. Override the `actionButtonTapped(sender:)`
- * and `ignoreButtonTapped(sender:)` to handle tap events. Make sure to call `super` if you do.
+ * and `alternativeButtonTapped(sender:)` to handle tap events. Make sure to call `super` if you do.
  */
 
 open class PageBulletinItem: BulletinItem {
@@ -49,13 +50,15 @@ open class PageBulletinItem: BulletinItem {
     /// The title of the action button.
     public var actionButtonTitle: String?
 
-    /// The title of the ignore button.
-    public var ignoreButtonTitle: String?
+    /// The title of the alternative button.
+    public var alternativeButtonTitle: String?
+
 
     // MARK: - Behavior
 
     public weak var manager: BulletinManager? = nil
     public var isDismissable: Bool = false
+    public var nextItem: BulletinItem? = nil
 
     /**
      * Whether the description text is long. If `true`, the text will be displayed with a smaller font.
@@ -67,7 +70,7 @@ open class PageBulletinItem: BulletinItem {
     // MARK: - Buttons
 
     fileprivate var actionButton: ContainerView<HighlightButton>? = nil
-    fileprivate var ignoreButton: UIButton? = nil
+    fileprivate var alternativeButton: UIButton? = nil
 
     /**
      * The code to execute when the action button is pressed.
@@ -76,10 +79,10 @@ open class PageBulletinItem: BulletinItem {
     public var actionHandler: ((PageBulletinItem) -> Void)? = nil
 
     /**
-     * The code to execute when the ignore button is pressed.
+     * The code to execute when the alternative button is pressed.
      */
 
-    public var ignoreHandler: ((PageBulletinItem) -> Void)? = nil
+    public var alternativeHandler: ((PageBulletinItem) -> Void)? = nil
 
     /**
      * Handles a tap on the action button.
@@ -93,14 +96,14 @@ open class PageBulletinItem: BulletinItem {
     }
 
     /**
-     * Handles a tap on the ignore button.
+     * Handles a tap on the alternative button.
      *
-     * You can override this method to add custom tap handling. You have to call `super.ignoreButtonTapped(sender:)`
+     * You can override this method to add custom tap handling. You have to call `super.alternativeButtonTapped(sender:)`
      * in your implementation.
      */
 
-    @objc open func ignoreButtonTapped(sender: UIButton) {
-        ignoreHandler?(self)
+    @objc open func alternativeButtonTapped(sender: UIButton) {
+        alternativeHandler?(self)
     }
 
 
@@ -108,7 +111,7 @@ open class PageBulletinItem: BulletinItem {
 
     public func tearDown() {
         actionButton?.contentView.removeTarget(self, action: nil, for: .touchUpInside)
-        ignoreButton?.removeTarget(self, action: nil, for: .touchUpInside)
+        alternativeButton?.removeTarget(self, action: nil, for: .touchUpInside)
     }
 
     public func makeArrangedSubviews() -> [UIView] {
@@ -158,13 +161,13 @@ open class PageBulletinItem: BulletinItem {
 
         }
 
-        if let ignoreButtonTitle = self.ignoreButtonTitle {
+        if let alternativeButtonTitle = self.alternativeButtonTitle {
 
-            let ignoreButton = interfaceFactory.makeIgnoreButton(title: ignoreButtonTitle)
-            buttonsStack.addArrangedSubview(ignoreButton)
-            ignoreButton.addTarget(self, action: #selector(ignoreButtonTapped(sender:)), for: .touchUpInside)
+            let alternativeButton = interfaceFactory.makeAlternativeButton(title: alternativeButtonTitle)
+            buttonsStack.addArrangedSubview(alternativeButton)
+            alternativeButton.addTarget(self, action: #selector(alternativeButtonTapped(sender:)), for: .touchUpInside)
 
-            self.ignoreButton = ignoreButton
+            self.alternativeButton = alternativeButton
 
         }
 

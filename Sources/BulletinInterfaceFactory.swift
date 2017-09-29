@@ -121,20 +121,20 @@ public class BulletinInterfaceFactory {
     }
 
     /**
-     * Creates a standard ignore button.
+     * Creates a standard alternative button.
      *
      * The created button will have no background color and a title color set to `tintColor`.
      *
      * - parameter title: The title of the button.
      */
 
-    public func makeIgnoreButton(title: String) -> UIButton {
+    public func makeAlternativeButton(title: String) -> UIButton {
 
-        let ignoreButton = UIButton(type: .system)
-        ignoreButton.setTitle(title, for: .normal)
-        ignoreButton.setTitleColor(tintColor, for: .normal)
+        let alternativeButton = UIButton(type: .system)
+        alternativeButton.setTitle(title, for: .normal)
+        alternativeButton.setTitleColor(tintColor, for: .normal)
 
-        return ignoreButton
+        return alternativeButton
 
     }
 

@@ -9,7 +9,8 @@ import Bulletin
 /**
  * An item that displays a choice with two buttons.
  *
- * This item demonstrates how to create a bulletin item with a custom interface.
+ * This item demonstrates how to create a bulletin item with a custom interface, and changing the
+ * next item based on user interaction.
  */
 
 class PetSelectorBulletinPage: BulletinItem {
@@ -34,6 +35,15 @@ class PetSelectorBulletinPage: BulletinItem {
     var isDismissable: Bool = false
 
     /**
+     * The item to display after this one. You can modify it at runtime based on user selection for
+     * instance.
+     *
+     * Here, we will change the time based on the pet chosen by the user.
+     */
+
+    var nextItem: BulletinItem?
+
+    /**
      * An object that creates standard inteface components.
      *
      * You should use it to create views whenever possible. It also allows to customize the tint color
@@ -50,7 +60,6 @@ class PetSelectorBulletinPage: BulletinItem {
     private var saveButtonContainer: ContainerView<HighlightButton>!
 
     private var selectionFeedbackGenerator = SelectionFeedbackGenerator()
-    private var successFeedbackGenerator = SuccessFeedbackGenerator()
 
     // MARK: - BulletinItem
 
@@ -178,6 +187,10 @@ class PetSelectorBulletinPage: BulletinItem {
                                         object: self,
                                         userInfo: ["Index": 0])
 
+        // Set the next item
+
+        nextItem = PetSelectorValidationBulletinPage(animalName: "cats", animalEmoji: "🐱")
+
     }
 
     /// Called when the dog button is tapped.
@@ -204,19 +217,139 @@ class PetSelectorBulletinPage: BulletinItem {
                                         object: self,
                                         userInfo: ["Index": 1])
 
+        // Set the next item
+
+        nextItem = PetSelectorValidationBulletinPage(animalName: "dogs", animalEmoji: "🐶")
+
     }
 
     /// Called when the save button is tapped.
     @objc func saveButtonTapped() {
 
-        // Play haptic feedback
-
-        successFeedbackGenerator.prepare()
-        successFeedbackGenerator.success()
-
         // Ask the manager to present the next item.
-        manager?.displayNextItem()
+        displayNextItem()
 
     }
 
 }
+
+/**
+ * A bulletin page that allows the user to validate its selection
+ *
+ * This item demonstrates popping to the previous item.
+ */
+
+class PetSelectorValidationBulletinPage: BulletinItem {
+
+    weak var manager: BulletinManager? = nil
+    var isDismissable: Bool = false
+    var nextItem: BulletinItem? = BulletinDataSource.makeCompletionPage()
+
+    let interfaceFactory = BulletinInterfaceFactory()
+
+    // MARK: - Configuration
+
+    let animalName: String
+    let animalEmoji: String
+
+    init(animalName: String, animalEmoji: String) {
+        self.animalName = animalName
+        self.animalEmoji = animalEmoji
+    }
+
+    private var selectionFeedbackGenerator = SelectionFeedbackGenerator()
+    private var successFeedbackGenerator = SuccessFeedbackGenerator()
+
+    // MARK: - Interface Elements
+
+    private var validateButton: ContainerView<HighlightButton>?
+    private var backButton: UIButton?
+
+    // MARK: - BulletinItem
+
+    func tearDown() {
+        validateButton?.contentView.removeTarget(self, action: nil, for: .touchUpInside)
+        backButton?.removeTarget(self, action: nil, for: .touchUpInside)
+    }
+
+    func makeArrangedSubviews() -> [UIView] {
+
+        var arrangedSubviews = [UIView]()
+
+        // Title Label
+
+        let titleLabel = interfaceFactory.makeTitleLabel()
+        titleLabel.text = "Choose your Favorite"
+        arrangedSubviews.append(titleLabel)
+
+        // Emoji
+
+        let emojiLabel = UILabel()
+        emojiLabel.numberOfLines = 1
+        emojiLabel.textAlignment = .center
+        emojiLabel.adjustsFontSizeToFitWidth = true
+        emojiLabel.font = UIFont.systemFont(ofSize: 66)
+        emojiLabel.text = animalEmoji
+
+        arrangedSubviews.append(emojiLabel)
+
+        // Description Label
+
+        let descriptionLabel = interfaceFactory.makeDescriptionLabel(isCompact: false)
+        descriptionLabel.text = "You chose \(animalName) as your favorite animal type. Are you sure?"
+        arrangedSubviews.append(descriptionLabel)
+
+        // Validate Button
+
+        let buttonsStack = interfaceFactory.makeGroupStack()
+        arrangedSubviews.append(buttonsStack)
+
+        let validateButton = interfaceFactory.makeActionButton(title: "Validate")
+        buttonsStack.addArrangedSubview(validateButton)
+
+        validateButton.contentView.addTarget(self, action: #selector(validateButtonTapped), for: .touchUpInside)
+        self.validateButton = validateButton
+
+        // Back Button
+
+        let backButton = interfaceFactory.makeAlternativeButton(title: "Change")
+        buttonsStack.addArrangedSubview(backButton)
+
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        self.backButton = backButton
+
+        return arrangedSubviews
+
+    }
+
+    // MARK: - Touch Events
+
+    @objc private func validateButtonTapped() {
+
+        // Play success haptic feedback
+
+        successFeedbackGenerator.prepare()
+        successFeedbackGenerator.success()
+
+        // Display next item
+
+        nextItem = BulletinDataSource.makeCompletionPage()
+        displayNextItem()
+
+    }
+
+    @objc private func backButtonTapped() {
+
+        // Play selection haptic feedback
+
+        selectionFeedbackGenerator.prepare()
+        selectionFeedbackGenerator.selectionChanged()
+
+        // Display previous item
+
+        manager?.popItem()
+
+    }
+
+}
+

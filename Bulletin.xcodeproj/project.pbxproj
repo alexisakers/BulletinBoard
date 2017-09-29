@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		558A12301F7D73CD005EC97C /* BulletinController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122A1F7D73CD005EC97C /* BulletinController.swift */; };
+		558A12301F7D73CD005EC97C /* BulletinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122A1F7D73CD005EC97C /* BulletinManager.swift */; };
 		558A12311F7D73CD005EC97C /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122B1F7D73CD005EC97C /* ContainerView.swift */; };
 		558A12321F7D73CD005EC97C /* BulletinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122C1F7D73CD005EC97C /* BulletinViewController.swift */; };
 		558A12331F7D73CD005EC97C /* HighlightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122D1F7D73CD005EC97C /* HighlightButton.swift */; };
@@ -19,7 +19,7 @@
 
 /* Begin PBXFileReference section */
 		52D6D97C1BEFF229002C0205 /* Bulletin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bulletin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		558A122A1F7D73CD005EC97C /* BulletinController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletinController.swift; sourceTree = "<group>"; };
+		558A122A1F7D73CD005EC97C /* BulletinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletinManager.swift; sourceTree = "<group>"; };
 		558A122B1F7D73CD005EC97C /* ContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
 		558A122C1F7D73CD005EC97C /* BulletinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletinViewController.swift; sourceTree = "<group>"; };
 		558A122D1F7D73CD005EC97C /* HighlightButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighlightButton.swift; sourceTree = "<group>"; };
@@ -69,7 +69,7 @@
 		8933C7811EB5B7E0000D00A4 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				558A122A1F7D73CD005EC97C /* BulletinController.swift */,
+				558A122A1F7D73CD005EC97C /* BulletinManager.swift */,
 				558A12361F7D73E5005EC97C /* BulletinItem.swift */,
 				55DADE791F7D9428001B11A2 /* BulletinInterfaceFactory.swift */,
 				558A122F1F7D73CD005EC97C /* PageBulletinItem.swift */,
@@ -165,7 +165,7 @@
 				558A12371F7D73E6005EC97C /* BulletinItem.swift in Sources */,
 				558A12341F7D73CD005EC97C /* DimmingPresentationController.swift in Sources */,
 				558A12311F7D73CD005EC97C /* ContainerView.swift in Sources */,
-				558A12301F7D73CD005EC97C /* BulletinController.swift in Sources */,
+				558A12301F7D73CD005EC97C /* BulletinManager.swift in Sources */,
 				558A12351F7D73CD005EC97C /* PageBulletinItem.swift in Sources */,
 				558A12321F7D73CD005EC97C /* BulletinViewController.swift in Sources */,
 			);

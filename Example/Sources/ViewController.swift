@@ -26,20 +26,13 @@ class ViewController: UIViewController {
     /**
      * Configures the bulletin manager.
      *
-     * We first need to create the bulletin items we want to display. Then, we use them to create
+     * We first need to create the first bulletin item we want to display. Then, we use it to create
      * the bulletin manager.
      */
 
     lazy var bulletinManager: BulletinManager = {
-
         let introPage = BulletinDataSource.makeIntroPage()
-        let notificationsPage = BulletinDataSource.makeNotitificationsPage()
-        let locationPage = BulletinDataSource.makeLocationPage()
-        let petSelectorPage = BulletinDataSource.makeChoicePage()
-        let completionPage = BulletinDataSource.makeCompletionPage()
-
-        return BulletinManager(items: [introPage, notificationsPage, locationPage, petSelectorPage, completionPage])
-
+        return BulletinManager(rootItem: introPage)
     }()
 
     // MARK: - View

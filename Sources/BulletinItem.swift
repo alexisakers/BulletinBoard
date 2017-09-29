@@ -17,6 +17,9 @@ public protocol BulletinItem: class {
     /// Whether the page can be dismissed.
     var isDismissable: Bool { get set }
 
+    /// The item to display after this one.
+    var nextItem: BulletinItem? { get set }
+
     /**
      * Creates the list of views to display on the bulletin.
      *
@@ -31,5 +34,23 @@ public protocol BulletinItem: class {
      */
 
     func tearDown()
+
+}
+
+extension BulletinItem {
+
+    /**
+     * Displays the next item if it was set.
+     */
+
+    public func displayNextItem() {
+
+        guard let nextItem = self.nextItem else {
+            return
+        }
+
+        manager?.push(item: nextItem)
+
+    }
 
 }

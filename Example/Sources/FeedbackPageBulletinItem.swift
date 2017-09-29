@@ -29,7 +29,7 @@ class FeedbackPageBulletinItem: PageBulletinItem {
 
     }
 
-    override func ignoreButtonTapped(sender: UIButton) {
+    override func alternativeButtonTapped(sender: UIButton) {
 
         // Play an haptic feedback
 
@@ -38,7 +38,7 @@ class FeedbackPageBulletinItem: PageBulletinItem {
 
         // Call super
 
-        super.ignoreButtonTapped(sender: sender)
+        super.alternativeButtonTapped(sender: sender)
 
     }
 

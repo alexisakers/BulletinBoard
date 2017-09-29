@@ -8,17 +8,15 @@ import UIKit
 /**
  * An object that manages the presentation of a bulletin.
  *
- * You create a bulletin manager by passing an array of `BulletinItem`s, that contains the data to display.
+ * You create a bulletin manager by passing a root `BulletinItem`s, that contains the data to display.
  *
- * The manager support displaying a sequence of mutiple items. When an item requests to display the
- * next or the previous item, the manager hides the contents of the current item, resizes the card if
- * needed and displays the new item.
- *
- * Use the `displayNextItem` function to request the next item ; and the `displayPreviousItem` function
- * to display the previous item.
+ * The manager works similar to a navigation controller. You can push new items to display them and
+ * pop existing ones to go back.
  *
  * You must call the `prepare` function before displaying the view controller or changing the current
  * item.
+ *
+ * `BulletinManager` must be used on the main thread only.
  */
 
 public final class BulletinManager: NSObject, UIViewControllerTransitioningDelegate {
@@ -28,12 +26,14 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
 
     // MARK: - Private Properties
 
-    private let items: [BulletinItem]
+    private let rootItem: BulletinItem
+
+    private var itemsStack: [BulletinItem]
     private var currentItem: BulletinItem
     private var previousItem: BulletinItem?
-    private var currentItemIndex: Int
+
     private var isPrepared: Bool = false
-    private var isPreparing: Bool = true
+    private var isPreparing: Bool = false
 
     // MARK: - Initialization
 
@@ -45,13 +45,11 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
      * - parameter items: The items to display.
      */
 
-    public init(items: [BulletinItem]) {
+    public init(rootItem: BulletinItem) {
 
-        precondition(items.count > 0, "You must provide at least one bulletin item to create a bulletin manager.")
-
-        self.items = items
-        self.currentItem = items[0]
-        self.currentItemIndex = 0
+        self.rootItem = rootItem
+        self.itemsStack = []
+        self.currentItem = rootItem
 
         self.viewController = BulletinViewController()
 
@@ -60,10 +58,12 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
     // MARK: - Interacting with the Bulletin
 
     /**
-     * Prepares the bulletin iterface and displays the first item.
+     * Prepares the bulletin iterface and displays the root item.
      */
 
     public func prepare() {
+
+        precondition(Thread.isMainThread)
 
         viewController.modalPresentationStyle = .custom
         viewController.transitioningDelegate = self
@@ -78,46 +78,63 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
     }
 
     /**
-     * Displays the previous item in the sequence.
-     *
-     * If there is no previous item, nothing happens.
+     * Displays a new item after the current one.
+     * - parameter item: The item to display.
      */
 
-    public func displayPreviousItem() {
+    public func push(item: BulletinItem) {
 
-        let previousIndex = currentItemIndex - 1
+        precondition(Thread.isMainThread)
 
-        guard previousIndex >= items.startIndex else {
-            return
-        }
+        previousItem = currentItem
+        itemsStack.append(item)
 
-        previousItem = items[currentItemIndex]
-
-        currentItemIndex = previousIndex
-        currentItem = items[currentItemIndex]
-
+        currentItem = item
         displayCurrentItem()
 
     }
 
     /**
-     * Displays the next item in the sequence.
-     *
-     * If there is no next item, nothing happens.
+     * Removes the current item from the stack and displays the previous item.
      */
 
-    public func displayNextItem() {
+    public func popItem() {
 
-        let nextIndex = currentItemIndex + 1
+        precondition(Thread.isMainThread)
 
-        guard nextIndex < items.endIndex else {
+        guard let previousItem = itemsStack.popLast() else {
+            popToRootItem()
             return
         }
 
-        previousItem = items[currentItemIndex]
+        self.previousItem = previousItem
 
-        currentItemIndex = nextIndex
-        currentItem = items[currentItemIndex]
+        guard let currentItem = itemsStack.last else {
+            popToRootItem()
+            return
+        }
+
+        self.currentItem = currentItem
+        displayCurrentItem()
+
+    }
+
+    /**
+     * Removes all the items from the stack and displays the root item.
+     */
+
+    public func popToRootItem() {
+
+        precondition(Thread.isMainThread)
+
+        guard currentItem !== rootItem else {
+            return
+        }
+
+        previousItem = currentItem
+        currentItem = rootItem
+
+        itemsStack = []
 
         displayCurrentItem()
 
@@ -137,6 +154,8 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
                                 animated: Bool = true,
                                 completion: (() -> Void)? = nil) {
 
+        precondition(Thread.isMainThread)
+
         precondition(isPrepared, "You must call the `prepare` function before interacting with the bulletin.")
         presentingVC.present(viewController, animated: animated, completion: completion)
 
@@ -149,6 +168,7 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
 
     public func dismissBulletin( animated: Bool) {
 
+        precondition(Thread.isMainThread)
         precondition(isPrepared, "You must call the `prepare` function before interacting with the bulletin.")
 
         currentItem.tearDown()
@@ -158,8 +178,7 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
         viewController.manager = nil
         viewController.transitioningDelegate = nil
 
-        currentItem = items[0]
-        currentItemIndex = 0
+        currentItem = rootItem
         isPrepared = false
 
     }
@@ -167,6 +186,8 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
     public func presentationController(forPresented presented: UIViewController,
                                 presenting: UIViewController?,
                                 source: UIViewController) -> UIPresentationController? {
+
+        precondition(Thread.isMainThread)
 
         if presented is BulletinViewController {
             return DimmingPresentationController(presentedViewController: presented, presenting: presenting)
