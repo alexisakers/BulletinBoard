@@ -57,7 +57,51 @@ github "alexaubry/BulletinBoard"
 
 ## Usage
 
+In this section, you will learn:
 
+- the basics
+- how to create custom items
+
+If you need help integrating the library, feel free to open an issue.
+
+### The Basics
+
+The `BulletinManager` class generates, manages and displays bulletin items.
+
+Bulletin items are objects that conform to the `BulletinItem` protocol.
+
+The library provides a standard page item type: `PageBulletinItem`. 
+
+### Creating Page Items
+
+You create page items using the `PageBulletinItem` class.
+
+It takes care of generating a user interface with standard components:
+
+- `title`
+- `image`
+- `descriptionText`
+- `actionButtonTitle`
+- `alternativeButtonTitle`
+
+For example, this interface was created using `PageBulletinItem`:
+
+![Customizing PageBulletinItem](.github/page_customization.png)
+
+To recreate this interface, use this code:
+
+~~~swift
+let page = PageBulletinItem(title: "Push Notifications")
+page.image = UIImage(named: "...")
+
+page.descriptionText = "Receive push notifications when new photos of pets are available."
+page.actionButtonTitle = "Subscribe"
+page.alternativeButtonTitle = "Not now"
+~~~
+
+If you omit an optional property, a view will not be generated for it. For instance, if you set `image` to `nil`, the card won't display an image view.
+
+### Creating Custom Items
 
 ## Author
 
