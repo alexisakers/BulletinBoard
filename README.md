@@ -20,11 +20,16 @@ Here's a video showing it in action:
 
 ## Demo
 
-A demo application is included in the `BulletinBoard` workspace. It demonstrates how to set up the library and customize it for your needs.
+A demo application is included in the `BulletinBoard` workspace. It demonstrates how to: 
+
+- integrate the library (setup, data flow)
+- create standard page panes
+- create custom page subclasses to add features
+- create custom cards from scratch
 
 Build and run the `Instanimal` scheme to use it.
 
-Here are some screenshots:
+Here are some screenshots showing what you can build with BulletinBoard:
 
 ![Demo Screenshots](.github/demo_screenshots.png)
 
