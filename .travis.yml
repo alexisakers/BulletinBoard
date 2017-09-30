@@ -1,0 +1,26 @@
+osx_image: xcode9
+language: objective-c
+
+env:
+  global:
+    - WORKSPACE="BulletinBoard.xcworkspace"
+  matrix:
+    - DESTINATION="platform=iOS Simulator,name=iPhone 6,OS=9.0" PLATFORM="iOS"
+    - DESTINATION="platform=iOS Simulator,name=iPhone 6,OS=11.0" PLATFORM="iOS"
+
+before_install:
+  - brew update
+  - brew outdated carthage || brew upgrade carthage
+  - gem install xcpretty
+
+before_script:
+  - open -b com.apple.iphonesimulator
+
+script:
+  # Build Framework
+  - set -o pipefail && xcodebuild clean build -workspace "$WORKSPACE" -scheme "BulletinBoard" -destination "$DESTINATION" | xcpretty
+  # Build Demo Project
+  - set -o pipefail && xcodebuild test -project "$PROJECT" -scheme "Instanimal" -destination "$DESTINATION" | xcpretty
+  # Build Project with Package Managers
+  - carthage build --platform $PLATFORM --no-skip-current
+  - pod lib lint

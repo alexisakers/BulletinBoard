@@ -1,9 +1,11 @@
 # BulletinBoard
 
 [![CI Status](https://travis-ci.org/alexaubry/BulletinBoard.svg?branch=master)](https://travis-ci.org/alexaubry/BulletinBoard)
-[![Version](https://img.shields.io/cocoapods/v/BulletinBoard.svg?style=flat)](http://cocoapods.org/pods/BulletinBoard)
-[![License](https://img.shields.io/cocoapods/l/BulletinBoard.svg?style=flat)](http://cocoapods.org/pods/BulletinBoard)
-[![Platform](https://img.shields.io/cocoapods/p/BulletinBoard.svg?style=flat)](http://cocoapods.org/pods/BulletinBoard)
+[![Version](https://img.shields.io/cocoapods/v/BulletinBoard.svg?style=flat)](https://cocoapods.org/pods/BulletinBoard)
+[![License](https://img.shields.io/cocoapods/l/BulletinBoard.svg?style=flat)](https://cocoapods.org/pods/BulletinBoard)
+[![Platform](https://img.shields.io/cocoapods/p/BulletinBoard.svg?style=flat)](https://cocoapods.org/pods/BulletinBoard)
+[![Documentation](https://img.shields.io/badge/Documentation-available-blue.svg)](https://alexaubry.github.io/BulletinBoard)
+[![Contact: @_alexaubry](.github/twitter_badge.svg)](https://twitter.com/_alexaubry)
 
 BulletinBoard is an iOS library that generates and manages contextual cards displayed at the bottom of the screen. It is especially well suited for quick user interactions such as onboarding screens or configuration.
 
@@ -54,6 +56,8 @@ github "alexaubry/BulletinBoard"
 ~~~
 
 ## Usage
+
+
 
 ## Author
 
