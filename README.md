@@ -26,7 +26,7 @@ Build and run the `Instanimal` scheme to use it.
 
 Here are some screenshots:
 
-> Insert Screenshots here.
+![Demo Screenshots](.github/demo_screenshots.png)
 
 ## Installation
 
