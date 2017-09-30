@@ -9,9 +9,9 @@ BulletinBoard is an iOS library that generates and manages contextual cards disp
 
 It has an interface similar to the cards displayed by iOS for AirPods, Apple TV configuration and NFC tag scanning,
 
-Here's a video showing it in action:
+Here are some screenshots showing what you can build with BulletinBoard:
 
-[![Watch Demo on YouTube](.github/demo_thumbnail.png)](https://youtu.be/igNner7z13U)
+![Demo Screenshots](.github/demo_screenshots.png)
 
 ## Requirements
 
@@ -29,9 +29,9 @@ A demo application is included in the `BulletinBoard` workspace. It demonstrates
 
 Build and run the `Instanimal` scheme to use it.
 
-Here are some screenshots showing what you can build with BulletinBoard:
+Here's a video showing it in action:
 
-![Demo Screenshots](.github/demo_screenshots.png)
+[![Watch Demo on YouTube](.github/demo_thumbnail.png)](https://youtu.be/igNner7z13U)
 
 ## Installation
 
