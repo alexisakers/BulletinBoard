@@ -11,7 +11,7 @@ It has an interface similar to the cards displayed by iOS for AirPods, Apple TV 
 
 Here's a video showing it in action:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/igNner7z13U" frameborder="0" allowfullscreen></iframe>
+[![Watch Demo on YouTube](.github/demo_thumbnail.png)](https://youtu.be/igNner7z13U)
 
 ## Requirements
 
