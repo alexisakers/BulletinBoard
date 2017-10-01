@@ -20,7 +20,7 @@ script:
   # Build Framework
   - set -o pipefail && xcodebuild clean build -workspace "$WORKSPACE" -scheme "BulletinBoard" -destination "$DESTINATION" | xcpretty
   # Build Demo Project
-  - set -o pipefail && xcodebuild test -project "$PROJECT" -scheme "Instanimal" -destination "$DESTINATION" | xcpretty
+  - set -o pipefail && xcodebuild clean build -project "$PROJECT" -scheme "Instanimal" -destination "$DESTINATION" | xcpretty
   # Build Project with Package Managers
   - carthage build --platform $PLATFORM --no-skip-current
   - pod lib lint

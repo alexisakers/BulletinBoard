@@ -1,9 +1,10 @@
 Pod::Spec.new do |s|
   s.name         = "BulletinBoard"
   s.version      = "0.1"
-  s.summary      = "Card Interface for iOS"
+  s.summary      = "Generate and Display Bottom Card Interfaces for iOS"
   s.description  = <<-DESC
-    BulletinBoard provides a set of tools to build card interfaces on iOS. It has a look similar to the AirPods configuration screen on iOS 10 and later. BulletinBoard is especially well suited for quick user interactions, such as onboardings.
+    BulletinBoard is an iOS library that generates and manages contextual cards displayed at the bottom of the screen. It is especially well suited for quick user interactions such as onboarding screens or configuration.
+    It has an interface similar to the cards displayed by iOS for AirPods, Apple TV configuration and NFC tag scanning.
   DESC
   s.homepage     = "https://github.com/alexaubry/BulletinBoard"
   s.license      = { :type => "MIT", :file => "LICENSE" }
@@ -13,4 +14,5 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/alexaubry/BulletinBoard.git", :tag => s.version.to_s }
   s.source_files  = "Sources/**/*"
   s.frameworks  = "UIKit"
+  s.documentation_url = "https://alexaubry.github.io/BulletinBoard"
 end
