@@ -150,7 +150,7 @@ This produces a card with the following appearance:
 
 #### Text Size
 
-If the description text is long, you can set the `isLongDescriptionText` property to `true` to reduce the text size.
+If the description text is long, you can set the `shouldCompactDescriptionText` property to `true` to reduce the text size.
 
 ![Text Size](.github/demo_long_text.png)
 

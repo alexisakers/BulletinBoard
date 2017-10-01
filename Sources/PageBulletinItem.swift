@@ -33,7 +33,7 @@ open class PageBulletinItem: BulletinItem {
     /// The title of the page.
     public let title: String
 
-    /// An image to display below the title. Should be 128x128px.
+    /// An image to display below the title. Should be less than or equal to 128x128px.
     public var image: UIImage?
 
     /// A description text to display below the image.
@@ -61,18 +61,20 @@ open class PageBulletinItem: BulletinItem {
     // MARK: - Customization
 
     /**
-     * Whether the description text is long. If `true`, the text will be displayed with a smaller font.
-     */
-
-    public var isLongDescriptionText: Bool = false
-
-    /**
      * The interface factory used to generate the interface of the page.
      *
-     * Use this property to customize the appearance of buttons.
+     * Use this property to customize the appearance of the generated elements.
      */
 
     public let interfaceFactory = BulletinInterfaceFactory()
+
+    /**
+     * Whether the description text should be displayed with a smaller font.
+     *
+     * You should set this to `true` if your text is long (more that two sentences).
+     */
+
+    public var shouldCompactDescriptionText: Bool = false
 
 
     // MARK: - Buttons
@@ -117,11 +119,7 @@ open class PageBulletinItem: BulletinItem {
 
     // MARK: - View Management
 
-    public func tearDown() {
-        actionButton?.contentView.removeTarget(self, action: nil, for: .touchUpInside)
-        alternativeButton?.removeTarget(self, action: nil, for: .touchUpInside)
-    }
-
+    /// :nodoc:
     public func makeArrangedSubviews() -> [UIView] {
 
         var arrangedSubviews = [UIView]()
@@ -139,7 +137,7 @@ open class PageBulletinItem: BulletinItem {
             let imageView = UIImageView()
             imageView.image = image
             imageView.contentMode = .scaleAspectFit
-            imageView.heightAnchor.constraint(lessThanOrEqualToConstant: 100).isActive = true
+            imageView.heightAnchor.constraint(lessThanOrEqualToConstant: 128).isActive = true
 
             arrangedSubviews.append(imageView)
 
@@ -149,7 +147,7 @@ open class PageBulletinItem: BulletinItem {
 
         if let descriptionText = self.descriptionText {
 
-            let descriptionLabel = interfaceFactory.makeDescriptionLabel(isCompact: isLongDescriptionText)
+            let descriptionLabel = interfaceFactory.makeDescriptionLabel(isCompact: shouldCompactDescriptionText)
             descriptionLabel.text = descriptionText
             arrangedSubviews.append(descriptionLabel)
 
@@ -182,6 +180,12 @@ open class PageBulletinItem: BulletinItem {
         arrangedSubviews.append(buttonsStack)
         return arrangedSubviews
 
+    }
+
+    /// :nodoc:
+    public func tearDown() {
+        actionButton?.contentView.removeTarget(self, action: nil, for: .touchUpInside)
+        alternativeButton?.removeTarget(self, action: nil, for: .touchUpInside)
     }
 
 }

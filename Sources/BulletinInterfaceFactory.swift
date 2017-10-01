@@ -143,6 +143,8 @@ public class BulletinInterfaceFactory {
 
     /**
      * Creates a stack view to contain a group of objects.
+     *
+     * - parameter spacing: The spacing between elements. Defaults to `10`.
      */
 
     public func makeGroupStack(spacing: CGFloat = 10) -> UIStackView {

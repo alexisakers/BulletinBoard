@@ -11,13 +11,37 @@ import UIKit
 
 public protocol BulletinItem: class {
 
-    /// The current object managing the item.
+    // MARK: - Configuration
+
+    /**
+     * The current object managing the item.
+     *
+     * This property is set when the item is currently being displayed. It will be set to `nil` when
+     * the item is removed from view.
+     *
+     * When implementing `BulletinItem`, you should make this property `weak` to avoid retain cycles.
+     */
+
     var manager: BulletinManager? { get set }
 
-    /// Whether the page can be dismissed.
+    /**
+     * Whether the page can be dismissed.
+     *
+     * If you set this value to `true`, the user will be able to dismiss the bulletin by tapping outside
+     * the card.
+     *
+     * You should set it to `true` for the last item you want to display.
+     */
+
     var isDismissable: Bool { get set }
 
-    /// The item to display after this one.
+    /**
+     * The item to display after this one.
+     *
+     * If you set this value, you'll be able to call `displayNextItem()` to present the next item to
+     * the stack.
+     */
+
     var nextItem: BulletinItem? { get set }
 
     /**
