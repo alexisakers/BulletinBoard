@@ -67,7 +67,7 @@
 
 <p>BulletinBoard is an iOS library that generates and manages contextual cards displayed at the bottom of the screen. It is especially well suited for quick user interactions such as onboarding screens or configuration.</p>
 
-<p>It has an interface similar to the cards displayed by iOS for AirPods, Apple TV configuration and NFC tag scanning,</p>
+<p>It has an interface similar to the cards displayed by iOS for AirPods, Apple TV configuration and NFC tag scanning.</p>
 
 <p>Here are some screenshots showing what you can build with BulletinBoard:</p>
 
@@ -146,7 +146,7 @@
 
 <ul>
 <li>a title (required)</li>
-<li>an icon image (should be 100x100px or less)</li>
+<li>an icon image (should be 128x128px or less)</li>
 <li>a description text</li>
 <li>a large action button</li>
 <li>a smaller alternative button</li>
@@ -166,7 +166,7 @@
 </code></pre>
 
 <p>If you omit an optional property, the page won&rsquo;t generate a view for it. For instance, if you set <code>alternativeButtonTitle</code> to <code>nil</code>, the card won&rsquo;t display an alternative button.</p>
-<h3 id='customizing-the-appearance' class='heading'>Customizing The Appearance</h3>
+<h3 id='customizing-the-appearance' class='heading'>Customizing the Appearance</h3>
 <h4 id='colors' class='heading'>Colors</h4>
 
 <p>You can customize the colors on the page by using the <code>interfaceFactory</code> property.</p>
@@ -254,8 +254,8 @@
 <p>You should set this property to <code>true</code> for the last item.</p>
 <h2 id='creating-custom-items' class='heading'>Creating Custom Items</h2>
 
-<p>To create custom bulletin items, create a class that implements the <code>BulletinItem</code>. To learn with a concrete example, you can read the implementation of <code>PageBulletinItem</code>.</p>
-<h3 id='conforming-to-bulletinitem' class='heading'>Conforming to BulletinItem</h3>
+<p>To create custom bulletin items, create a class that implements the <code>BulletinItem</code> protocol. To learn with a concrete example, you can read the implementation of <code>PageBulletinItem</code>.</p>
+<h3 id='conforming-to-code-bulletinitem-code' class='heading'>Conforming to <code>BulletinItem</code></h3>
 
 <p>To conform to this protocol, you need to add the required properties and implement two methods:</p>
 <h4 id='code-makearrangedsubviews-code' class='heading'><code>makeArrangedSubviews()</code></h4>
