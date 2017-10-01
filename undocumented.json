@@ -1,0 +1,47 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/aleks/Developer/OSS/BulletinBoard/Sources/BulletinManager.swift",
+      "line": 186,
+      "symbol": "BulletinManager.presentationController(forPresented:presenting:source:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aleks/Developer/OSS/BulletinBoard/Sources/ContainerView.swift",
+      "line": 52,
+      "symbol": "ContainerView.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aleks/Developer/OSS/BulletinBoard/Sources/HighlightButton.swift",
+      "line": 21,
+      "symbol": "HighlightButton.bounds",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aleks/Developer/OSS/BulletinBoard/Sources/HighlightButton.swift",
+      "line": 41,
+      "symbol": "HighlightButton.touchesBegan(_:with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aleks/Developer/OSS/BulletinBoard/Sources/HighlightButton.swift",
+      "line": 45,
+      "symbol": "HighlightButton.touchesMoved(_:with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/aleks/Developer/OSS/BulletinBoard/Sources/HighlightButton.swift",
+      "line": 68,
+      "symbol": "HighlightButton.touchesEnded(_:with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/aleks/Developer/OSS/BulletinBoard"
+}

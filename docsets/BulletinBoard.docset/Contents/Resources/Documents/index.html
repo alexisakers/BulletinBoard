@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>BulletinBoard  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="BulletinBoard  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">BulletinBoard Docs</a> (90% documented)</p>
+        <p class="header-right"><a href="https://github.com/alexaubry/BulletinBoard"><img src="img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right"><a href="dash-feed://https%3A%2F%2Falexaubry%2Egithub%2Eio%2Fdocsets%2FBulletinBoard%2Exml"><img src="img/dash.png"/>Install in Dash</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">BulletinBoard Reference</a>
+        <img id="carat" src="img/carat.png" />
+        BulletinBoard  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/BulletinInterfaceFactory.html">BulletinInterfaceFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/BulletinManager.html">BulletinManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ContainerView.html">ContainerView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/HighlightButton.html">HighlightButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/PageBulletinItem.html">PageBulletinItem</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/UIButton.html">UIButton</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Protocols/BulletinItem.html">BulletinItem</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <h1 id='bulletinboard' class='heading'>BulletinBoard</h1>
+
+<p><a href="https://travis-ci.org/alexaubry/BulletinBoard"><img src="https://travis-ci.org/alexaubry/BulletinBoard.svg?branch=master" alt="CI Status"></a>
+<a href="https://cocoapods.org/pods/BulletinBoard"><img src="https://img.shields.io/cocoapods/v/BulletinBoard.svg?style=flat" alt="Version"></a>
+<a href="https://cocoapods.org/pods/BulletinBoard"><img src="https://img.shields.io/cocoapods/l/BulletinBoard.svg?style=flat" alt="License"></a>
+<a href="https://cocoapods.org/pods/BulletinBoard"><img src="https://img.shields.io/cocoapods/p/BulletinBoard.svg?style=flat" alt="Platform"></a>
+<a href="https://alexaubry.github.io/BulletinBoard"><img src="https://img.shields.io/badge/Documentation-available-blue.svg" alt="Documentation"></a>
+<a href="https://twitter.com/_alexaubry"><img src=".github/twitter_badge.svg" alt="Contact: @_alexaubry"></a></p>
+
+<p>BulletinBoard is an iOS library that generates and manages contextual cards displayed at the bottom of the screen. It is especially well suited for quick user interactions such as onboarding screens or configuration.</p>
+
+<p>It has an interface similar to the cards displayed by iOS for AirPods, Apple TV configuration and NFC tag scanning,</p>
+
+<p>Here are some screenshots showing what you can build with BulletinBoard:</p>
+
+<p><img src=".github/demo_screenshots.png" alt="Demo Screenshots"></p>
+<h2 id='requirements' class='heading'>Requirements</h2>
+
+<ul>
+<li>iOS 9 and later</li>
+<li>Swift 4</li>
+</ul>
+<h2 id='demo' class='heading'>Demo</h2>
+
+<p>A demo application is included in the <code>BulletinBoard</code> workspace. It demonstrates how to: </p>
+
+<ul>
+<li>integrate the library (setup, data flow)</li>
+<li>create standard page panes</li>
+<li>create custom page subclasses to add features</li>
+<li>create custom cards from scratch</li>
+</ul>
+
+<p>Build and run the <code>Instanimal</code> scheme to use it.</p>
+
+<p>Here&rsquo;s a video showing it in action:</p>
+
+<p><a href="https://youtu.be/igNner7z13U"><img src=".github/demo_thumbnail.png" alt="Watch Demo on YouTube"></a></p>
+<h2 id='installation' class='heading'>Installation</h2>
+
+<p>BulletinBoard is available via CocoaPods and Carthage.</p>
+<h3 id='cocoapods' class='heading'>CocoaPods</h3>
+
+<p>To install BulletinBoard using <a href="https://cocoapods.org">CocoaPods</a>, add this line to your <code>Podfile</code>:</p>
+<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s2">"BulletinBoard"</span>
+</code></pre>
+<h3 id='carthage' class='heading'>Carthage</h3>
+
+<p>To install BulletinBoard using <a href="https://github.com/Carthage/Carthage">Carthage</a>, add this line to your <code>Cartfile</code>:</p>
+<pre class="highlight plaintext"><code>github "alexaubry/BulletinBoard"
+</code></pre>
+<h2 id='usage' class='heading'>Usage</h2>
+<h3 id='the-basics' class='heading'>The Basics</h3>
+
+<p>The <code>BulletinManager</code> class generates, manages and displays bulletin items. Bulletin items are objects that conform to the <code>BulletinItem</code> protocol.</p>
+
+<p>The library provides a standard page item type: <code>PageBulletinItem</code>. If you need to customize the items, you can override this class, or create new item types from scratch.</p>
+
+<p>To present bulletins, you need to follow these steps:</p>
+
+<ol>
+<li>Create a root item</li>
+<li>Create a bulletin manager</li>
+<li>Use the bulletin manager to present the bulletin over your view controller</li>
+</ol>
+<h3 id='creating-page-items' class='heading'>Creating Page Items</h3>
+
+<p>You can create standard page items using the <code>PageBulletinItem</code> class.</p>
+
+<p>It takes care of generating a user interface with standard components:</p>
+
+<ul>
+<li>a title</li>
+<li>an icon image (should be 100x100px or less)</li>
+<li>a description text</li>
+<li>a large action button</li>
+<li>a smaller alternative button</li>
+</ul>
+
+<p>For example, this interface was created using <code>PageBulletinItem</code>:</p>
+
+<p><img src=".github/page_customization.png" alt="Customizing PageBulletinItem"></p>
+
+<p>To recreate this interface, use this code:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">page</span> <span class="o">=</span> <span class="kt">PageBulletinItem</span><span class="p">(</span><span class="nv">title</span><span class="p">:</span> <span class="s">"Push Notifications"</span><span class="p">)</span>
+<span class="n">page</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="kt">UIImage</span><span class="p">(</span><span class="nv">named</span><span class="p">:</span> <span class="s">"..."</span><span class="p">)</span>
+
+<span class="n">page</span><span class="o">.</span><span class="n">descriptionText</span> <span class="o">=</span> <span class="s">"Receive push notifications when new photos of pets are available."</span>
+<span class="n">page</span><span class="o">.</span><span class="n">actionButtonTitle</span> <span class="o">=</span> <span class="s">"Subscribe"</span>
+<span class="n">page</span><span class="o">.</span><span class="n">alternativeButtonTitle</span> <span class="o">=</span> <span class="s">"Not now"</span>
+</code></pre>
+
+<p>If you omit an optional property, the page won&rsquo;t generate a view for it. For instance, if you set <code>alternativeButtonTitle</code> to <code>nil</code>, the card won&rsquo;t display an alternative button.</p>
+
+<p>You can also customize</p>
+<h3 id='creating-custom-items' class='heading'>Creating Custom Items</h3>
+<h2 id='author' class='heading'>Author</h2>
+
+<p>Written by Alexis Aubry. You can <a href="https://twitter.com/_alexaubry">find me on Twitter</a>.</p>
+<h2 id='license' class='heading'>License</h2>
+
+<p>BulletinBoard is available under the MIT license. See the <a href="LICENSE">LICENSE</a> file for more info.</p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>Copyright © 2017 Alexis Aubry. Available under the MIT License.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

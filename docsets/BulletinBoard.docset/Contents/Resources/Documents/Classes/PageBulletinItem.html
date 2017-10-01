@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PageBulletinItem Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/PageBulletinItem" class="dashAnchor"></a>
+    <a title="PageBulletinItem Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">BulletinBoard Docs</a> (90% documented)</p>
+        <p class="header-right"><a href="https://github.com/alexaubry/BulletinBoard"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right"><a href="dash-feed://https%3A%2F%2Falexaubry%2Egithub%2Eio%2Fdocsets%2FBulletinBoard%2Exml"><img src="../img/dash.png"/>Install in Dash</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">BulletinBoard Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        PageBulletinItem Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/BulletinInterfaceFactory.html">BulletinInterfaceFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BulletinManager.html">BulletinManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ContainerView.html">ContainerView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/HighlightButton.html">HighlightButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PageBulletinItem.html">PageBulletinItem</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/UIButton.html">UIButton</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/BulletinItem.html">BulletinItem</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>PageBulletinItem</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="n">open</span> <span class="kd">class</span> <span class="kt">PageBulletinItem</span><span class="p">:</span> <span class="kt"><a href="../Protocols/BulletinItem.html">BulletinItem</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>A standard bulletin item with a title and optional additional informations. It can display a large
+ action button and a smaller button for alternative options.</p>
+
+<p>You can override this class to add custom button handling. Override the <code>actionButtonTapped(sender:)</code>
+ and <code>alternativeButtonTapped(sender:)</code> to handle tap events. Make sure to call <code>super</code> if you do.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13BulletinBoard04PageA4ItemC16interfaceFactoryAA0a9InterfaceF0Cv"></a>
+                    <a name="//apple_ref/swift/Property/interfaceFactory" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard04PageA4ItemC16interfaceFactoryAA0a9InterfaceF0Cv">interfaceFactory</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The interface factory used to generate the interface of the page.</p>
+
+<p>Use this property to customize the appearance of buttons.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">interfaceFactory</span> <span class="o">=</span> <span class="kt"><a href="../Classes/BulletinInterfaceFactory.html">BulletinInterfaceFactory</a></span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L24">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Initialization"></a>
+                <a name="//apple_ref/swift/Section/Initialization" class="dashAnchor"></a>
+                <a href="#/Initialization">
+                  <h3 class="section-name">Initialization</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13BulletinBoard04PageA4ItemCACSS5title_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(title:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard04PageA4ItemCACSS5title_tcfc">init(title:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a bulletin page with the specified title.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>title</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The title of the page.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L34-L36">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Page%20Contents"></a>
+                <a name="//apple_ref/swift/Section/Page Contents" class="dashAnchor"></a>
+                <a href="#/Page%20Contents">
+                  <h3 class="section-name">Page Contents</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13BulletinBoard04PageA4ItemC5titleSSv"></a>
+                    <a name="//apple_ref/swift/Property/title" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard04PageA4ItemC5titleSSv">title</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The title of the page.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L42">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13BulletinBoard04PageA4ItemC5imageSo7UIImageCSgv"></a>
+                    <a name="//apple_ref/swift/Property/image" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard04PageA4ItemC5imageSo7UIImageCSgv">image</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An image to display below the title. Should be 128x128px.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">image</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L45">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13BulletinBoard04PageA4ItemC15descriptionTextSSSgv"></a>
+                    <a name="//apple_ref/swift/Property/descriptionText" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard04PageA4ItemC15descriptionTextSSSgv">descriptionText</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A description text to display below the image.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">descriptionText</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L48">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13BulletinBoard04PageA4ItemC17actionButtonTitleSSSgv"></a>
+                    <a name="//apple_ref/swift/Property/actionButtonTitle" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard04PageA4ItemC17actionButtonTitleSSSgv">actionButtonTitle</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The title of the action button.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">actionButtonTitle</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L51">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13BulletinBoard04PageA4ItemC22alternativeButtonTitleSSSgv"></a>
+                    <a name="//apple_ref/swift/Property/alternativeButtonTitle" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard04PageA4ItemC22alternativeButtonTitleSSSgv">alternativeButtonTitle</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The title of the alternative button.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">alternativeButtonTitle</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L54">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Behavior"></a>
+                <a name="//apple_ref/swift/Section/Behavior" class="dashAnchor"></a>
+                <a href="#/Behavior">
+                  <h3 class="section-name">Behavior</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13BulletinBoard0A4ItemP7managerAA0A7ManagerCSgXwv"></a>
+                    <a name="//apple_ref/swift/Property/manager" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard0A4ItemP7managerAA0A7ManagerCSgXwv">manager</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">manager</span><span class="p">:</span> <span class="kt"><a href="../Classes/BulletinManager.html">BulletinManager</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L15">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13BulletinBoard0A4ItemP13isDismissableSbv"></a>
+                    <a name="//apple_ref/swift/Property/isDismissable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard0A4ItemP13isDismissableSbv">isDismissable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">isDismissable</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L18">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13BulletinBoard0A4ItemP04nextC0AaB_pSgv"></a>
+                    <a name="//apple_ref/swift/Property/nextItem" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard0A4ItemP04nextC0AaB_pSgv">nextItem</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">nextItem</span><span class="p">:</span> <span class="kt"><a href="../Protocols/BulletinItem.html">BulletinItem</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L21">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13BulletinBoard04PageA4ItemC21isLongDescriptionTextSbv"></a>
+                    <a name="//apple_ref/swift/Property/isLongDescriptionText" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard04PageA4ItemC21isLongDescriptionTextSbv">isLongDescriptionText</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Whether the description text is long. If <code>true</code>, the text will be displayed with a smaller font.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">isLongDescriptionText</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L67">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Buttons"></a>
+                <a name="//apple_ref/swift/Section/Buttons" class="dashAnchor"></a>
+                <a href="#/Buttons">
+                  <h3 class="section-name">Buttons</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13BulletinBoard04PageA4ItemC13actionHandleryACcSgv"></a>
+                    <a name="//apple_ref/swift/Property/actionHandler" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard04PageA4ItemC13actionHandleryACcSgv">actionHandler</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The code to execute when the action button is pressed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">actionHandler</span><span class="p">:</span> <span class="p">((</span><span class="kt">PageBulletinItem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L79">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13BulletinBoard04PageA4ItemC18alternativeHandleryACcSgv"></a>
+                    <a name="//apple_ref/swift/Property/alternativeHandler" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard04PageA4ItemC18alternativeHandleryACcSgv">alternativeHandler</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The code to execute when the alternative button is pressed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">alternativeHandler</span><span class="p">:</span> <span class="p">((</span><span class="kt">PageBulletinItem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L85">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13BulletinBoard04PageA4ItemC18actionButtonTappedySo8UIButtonC6sender_tF"></a>
+                    <a name="//apple_ref/swift/Method/actionButtonTapped(sender:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard04PageA4ItemC18actionButtonTappedySo8UIButtonC6sender_tF">actionButtonTapped(sender:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Handles a tap on the action button.</p>
+
+<p>You can override this method to add custom tap handling. You have to call <code>super.actionButtonTapped(sender:)</code>
+ in your implementation.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@objc</span> <span class="n">open</span> <span class="kd">func</span> <span class="nf">actionButtonTapped</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">UIButton</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L94-L96">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13BulletinBoard04PageA4ItemC23alternativeButtonTappedySo8UIButtonC6sender_tF"></a>
+                    <a name="//apple_ref/swift/Method/alternativeButtonTapped(sender:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard04PageA4ItemC23alternativeButtonTappedySo8UIButtonC6sender_tF">alternativeButtonTapped(sender:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Handles a tap on the alternative button.</p>
+
+<p>You can override this method to add custom tap handling. You have to call <code>super.alternativeButtonTapped(sender:)</code>
+ in your implementation.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@objc</span> <span class="n">open</span> <span class="kd">func</span> <span class="nf">alternativeButtonTapped</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">UIButton</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L105-L107">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/View%20Management"></a>
+                <a name="//apple_ref/swift/Section/View Management" class="dashAnchor"></a>
+                <a href="#/View%20Management">
+                  <h3 class="section-name">View Management</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13BulletinBoard0A4ItemP8tearDownyyF"></a>
+                    <a name="//apple_ref/swift/Method/tearDown()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard0A4ItemP8tearDownyyF">tearDown()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tearDown</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L112-L115">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13BulletinBoard0A4ItemP20makeArrangedSubviewsSaySo6UIViewCGyF"></a>
+                    <a name="//apple_ref/swift/Method/makeArrangedSubviews()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard0A4ItemP20makeArrangedSubviewsSaySo6UIViewCGyF">makeArrangedSubviews()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">makeArrangedSubviews</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">UIView</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L117-L177">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>Copyright © 2017 Alexis Aubry. Available under the MIT License.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

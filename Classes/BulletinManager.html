@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>BulletinManager Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/BulletinManager" class="dashAnchor"></a>
+    <a title="BulletinManager Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">BulletinBoard Docs</a> (90% documented)</p>
+        <p class="header-right"><a href="https://github.com/alexaubry/BulletinBoard"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right"><a href="dash-feed://https%3A%2F%2Falexaubry%2Egithub%2Eio%2Fdocsets%2FBulletinBoard%2Exml"><img src="../img/dash.png"/>Install in Dash</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">BulletinBoard Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        BulletinManager Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/BulletinInterfaceFactory.html">BulletinInterfaceFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BulletinManager.html">BulletinManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ContainerView.html">ContainerView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/HighlightButton.html">HighlightButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PageBulletinItem.html">PageBulletinItem</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/UIButton.html">UIButton</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/BulletinItem.html">BulletinItem</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>BulletinManager</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">BulletinManager</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">UIViewControllerTransitioningDelegate</span></code></pre>
+
+                </div>
+              </div>
+            <p>An object that manages the presentation of a bulletin.</p>
+
+<p>You create a bulletin manager by passing a root <code><a href="../Protocols/BulletinItem.html">BulletinItem</a></code>s, that contains the data to display.</p>
+
+<p>The manager works similar to a navigation controller. You can push new items to display them and
+ pop existing ones to go back.</p>
+
+<p>You must call the <code>prepare</code> function before displaying the view controller or changing the current
+ item.</p>
+
+<p><code>BulletinManager</code> must be used on the main thread only.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Initialization"></a>
+                <a name="//apple_ref/swift/Section/Initialization" class="dashAnchor"></a>
+                <a href="#/Initialization">
+                  <h3 class="section-name">Initialization</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13BulletinBoard0A7ManagerCAcA0A4Item_p04rootD0_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(rootItem:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard0A7ManagerCAcA0A4Item_p04rootD0_tcfc">init(rootItem:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a bulletin manager with the list of items to display.</p>
+
+<p>An item represents the contents available on a single card.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">rootItem</span><span class="p">:</span> <span class="kt"><a href="../Protocols/BulletinItem.html">BulletinItem</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>items</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The items to display.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinManager.swift#L48-L56">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Interacting%20with%20the%20Bulletin"></a>
+                <a name="//apple_ref/swift/Section/Interacting with the Bulletin" class="dashAnchor"></a>
+                <a href="#/Interacting%20with%20the%20Bulletin">
+                  <h3 class="section-name">Interacting with the Bulletin</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13BulletinBoard0A7ManagerC7prepareyyF"></a>
+                    <a name="//apple_ref/swift/Method/prepare()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard0A7ManagerC7prepareyyF">prepare()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Prepares the bulletin iterface and displays the root item.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">prepare</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinManager.swift#L64-L78">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13BulletinBoard0A7ManagerC4pushyAA0A4Item_p4item_tF"></a>
+                    <a name="//apple_ref/swift/Method/push(item:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard0A7ManagerC4pushyAA0A4Item_p4item_tF">push(item:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Displays a new item after the current one.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">push</span><span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="kt"><a href="../Protocols/BulletinItem.html">BulletinItem</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>item</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The item to display.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinManager.swift#L85-L95">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13BulletinBoard0A7ManagerC7popItemyyF"></a>
+                    <a name="//apple_ref/swift/Method/popItem()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard0A7ManagerC7popItemyyF">popItem()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Removes the current item from the stack and displays the previous item.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">popItem</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinManager.swift#L101-L120">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13BulletinBoard0A7ManagerC13popToRootItemyyF"></a>
+                    <a name="//apple_ref/swift/Method/popToRootItem()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard0A7ManagerC13popToRootItemyyF">popToRootItem()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Removes all the items from the stack and displays the root item.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">popToRootItem</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinManager.swift#L126-L141">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Presentation%20/%20Dismissal"></a>
+                <a name="//apple_ref/swift/Section/Presentation / Dismissal" class="dashAnchor"></a>
+                <a href="#/Presentation%20/%20Dismissal">
+                  <h3 class="section-name">Presentation / Dismissal</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13BulletinBoard0A7ManagerC07presentA0ySo16UIViewControllerC5above_Sb8animatedyycSg10completiontF"></a>
+                    <a name="//apple_ref/swift/Method/presentBulletin(above:animated:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard0A7ManagerC07presentA0ySo16UIViewControllerC5above_Sb8animatedyycSg10completiontF">presentBulletin(above:animated:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Presents the bulletin above the specified view controller.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">presentBulletin</span><span class="p">(</span><span class="n">above</span> <span class="nv">presentingVC</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span>
+                                <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+                                <span class="nv">completion</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>presentingVC</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The view controller to use to present the bulletin.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>animated</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether to animate presentation. Defaults to <code>true</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional block to execute after presentation. Default to <code>nil</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinManager.swift#L153-L162">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13BulletinBoard0A7ManagerC07dismissA0ySb8animated_tF"></a>
+                    <a name="//apple_ref/swift/Method/dismissBulletin(animated:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard0A7ManagerC07dismissA0ySb8animated_tF">dismissBulletin(animated:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Dismisses the bulletin and clears the current page.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">dismissBulletin</span><span class="p">(</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>animated</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether to animate dismissal.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinManager.swift#L169-L184">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@BulletinBoard@objc(cs)BulletinManager(im)presentationControllerForPresentedViewController:presentingViewController:sourceViewController:"></a>
+                    <a name="//apple_ref/swift/Method/presentationController(forPresented:presenting:source:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@BulletinBoard@objc(cs)BulletinManager(im)presentationControllerForPresentedViewController:presentingViewController:sourceViewController:">presentationController(forPresented:presenting:source:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">BulletinManager</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">UIViewControllerTransitioningDelegate</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinManager.swift#L186-L198">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>Copyright © 2017 Alexis Aubry. Available under the MIT License.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
