@@ -8,7 +8,7 @@ import UIKit
 /**
  * An object that manages the presentation of a bulletin.
  *
- * You create a bulletin manager by passing a root `BulletinItem`s, that contains the data to display.
+ * You create a bulletin manager by passing a root `BulletinItem`, that contains the data to display.
  *
  * The manager works similar to a navigation controller. You can push new items to display them and
  * pop existing ones to go back.
