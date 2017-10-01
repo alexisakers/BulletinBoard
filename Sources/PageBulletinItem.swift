@@ -15,14 +15,6 @@ import UIKit
 
 open class PageBulletinItem: BulletinItem {
 
-    /**
-     * The interface factory used to generate the interface of the page.
-     *
-     * Use this property to customize the appearance of buttons.
-     */
-
-    public let interfaceFactory = BulletinInterfaceFactory()
-
     // MARK: Initialization
 
     /**
@@ -54,17 +46,33 @@ open class PageBulletinItem: BulletinItem {
     public var alternativeButtonTitle: String?
 
 
-    // MARK: - Behavior
+    // MARK: - BulletinItem
 
+    /// :nodoc:
     public weak var manager: BulletinManager? = nil
+
+    /// :nodoc:
     public var isDismissable: Bool = false
+
+    /// :nodoc:
     public var nextItem: BulletinItem? = nil
+
+    
+    // MARK: - Customization
 
     /**
      * Whether the description text is long. If `true`, the text will be displayed with a smaller font.
      */
 
     public var isLongDescriptionText: Bool = false
+
+    /**
+     * The interface factory used to generate the interface of the page.
+     *
+     * Use this property to customize the appearance of buttons.
+     */
+
+    public let interfaceFactory = BulletinInterfaceFactory()
 
 
     // MARK: - Buttons

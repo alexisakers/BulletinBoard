@@ -66,17 +66,25 @@
 			path = Configs;
 			sourceTree = "<group>";
 		};
-		8933C7811EB5B7E0000D00A4 /* Sources */ = {
+		55DADEB81F8153B3001B11A2 /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				558A122A1F7D73CD005EC97C /* BulletinManager.swift */,
-				558A12361F7D73E5005EC97C /* BulletinItem.swift */,
-				55DADE791F7D9428001B11A2 /* BulletinInterfaceFactory.swift */,
-				558A122F1F7D73CD005EC97C /* PageBulletinItem.swift */,
-				558A122C1F7D73CD005EC97C /* BulletinViewController.swift */,
 				558A122B1F7D73CD005EC97C /* ContainerView.swift */,
 				558A122D1F7D73CD005EC97C /* HighlightButton.swift */,
 				558A122E1F7D73CD005EC97C /* DimmingPresentationController.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		8933C7811EB5B7E0000D00A4 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				558A12361F7D73E5005EC97C /* BulletinItem.swift */,
+				558A122A1F7D73CD005EC97C /* BulletinManager.swift */,
+				55DADE791F7D9428001B11A2 /* BulletinInterfaceFactory.swift */,
+				558A122F1F7D73CD005EC97C /* PageBulletinItem.swift */,
+				558A122C1F7D73CD005EC97C /* BulletinViewController.swift */,
+				55DADEB81F8153B3001B11A2 /* Support */,
 			);
 			path = Sources;
 			sourceTree = "<group>";

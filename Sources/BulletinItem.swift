@@ -12,7 +12,7 @@ import UIKit
 public protocol BulletinItem: class {
 
     /// The current object managing the item.
-    weak var manager: BulletinManager? { get set }
+    var manager: BulletinManager? { get set }
 
     /// Whether the page can be dismissed.
     var isDismissable: Bool { get set }

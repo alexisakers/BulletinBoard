@@ -85,8 +85,11 @@ class ViewController: UIViewController {
 To present your bulletin, call this method:
 
 ~~~swift
+bulletinManager.prepare()
 bulletinManager.presentBulletin(above: self)
 ~~~
+
+Always call `prepare()` before calling `presentBulletin()`! Failure to do so will cause a precondition failure (TL;DR your app will crash).
 
 For the case of onboarding, you can call it in `viewWillAppear(animated:)` after checking if the user has already completed onboarding.
 

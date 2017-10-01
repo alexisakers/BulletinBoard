@@ -183,6 +183,7 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
 
     }
 
+    /// :nodoc:
     public func presentationController(forPresented presented: UIViewController,
                                 presenting: UIViewController?,
                                 source: UIViewController) -> UIPresentationController? {
