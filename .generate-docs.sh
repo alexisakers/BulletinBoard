@@ -23,4 +23,5 @@ jazzy \
     -r "$GH_PAGES_URL" \
     -o "$OUTPUT"\
     --min-acl public \
-    --use-safe-filenames
+    --use-safe-filenames \
+    --exclude="Sources/Support/*.swift"
