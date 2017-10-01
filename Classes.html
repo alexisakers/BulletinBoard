@@ -13,7 +13,7 @@
     <a title="Classes  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">BulletinBoard Docs</a> (90% documented)</p>
+        <p><a href="index.html">BulletinBoard Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/alexaubry/BulletinBoard"><img src="img/gh.png"/>View on GitHub</a></p>
         <p class="header-right"><a href="dash-feed://https%3A%2F%2Falexaubry%2Egithub%2Eio%2Fdocsets%2FBulletinBoard%2Exml"><img src="img/dash.png"/>Install in Dash</a></p>
       </div>
@@ -38,21 +38,7 @@
                 <a href="Classes/BulletinManager.html">BulletinManager</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/ContainerView.html">ContainerView</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/HighlightButton.html">HighlightButton</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Classes/PageBulletinItem.html">PageBulletinItem</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a href="Extensions.html">Extensions</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="Extensions/UIButton.html">UIButton</a>
               </li>
             </ul>
           </li>
@@ -74,44 +60,6 @@
 
           </section>
           <section class="section task-group-section">
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@BulletinBoard@objc(cs)HighlightButton"></a>
-                    <a name="//apple_ref/swift/Class/HighlightButton" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@BulletinBoard@objc(cs)HighlightButton">HighlightButton</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A button that provides a visual feedback when the user interacts with it.</p>
-
-<p>This style of button works best with a solid background color. Use the <code>setBackgroundColor</code>
- function on <code>UIButton</code> to set one.</p>
-
-                        <a href="Classes/HighlightButton.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">HighlightButton</span><span class="p">:</span> <span class="kt">UIButton</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/HighlightButton.swift#L15-L106">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
             <div class="task-group">
               <ul>
                 <li class="item">
@@ -141,45 +89,7 @@ standard components.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinInterfaceFactory.swift#L13-L160">Show on GitHub</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:13BulletinBoard13ContainerViewC"></a>
-                    <a name="//apple_ref/swift/Class/ContainerView" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13BulletinBoard13ContainerViewC">ContainerView</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A view containing a subview, known as the content view.</p>
-
-<p>The four edges of the content view are pinned to the container. You can specifiy insets to move the
- edges of the content view inside the container.</p>
-
-                        <a href="Classes/ContainerView.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">ContainerView</span><span class="o">&lt;</span><span class="kt">V</span><span class="o">&gt;</span><span class="p">:</span> <span class="kt">UIView</span> <span class="k">where</span> <span class="kt">V</span><span class="p">:</span> <span class="kt">UIView</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/ContainerView.swift#L15-L74">Show on GitHub</a>
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinInterfaceFactory.swift#L13-L162">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -203,7 +113,7 @@ standard components.</p>
                       <div class="abstract">
                         <p>An object that manages the presentation of a bulletin.</p>
 
-<p>You create a bulletin manager by passing a root <code><a href="Protocols/BulletinItem.html">BulletinItem</a></code>s, that contains the data to display.</p>
+<p>You create a bulletin manager by passing a root <code><a href="Protocols/BulletinItem.html">BulletinItem</a></code>, that contains the data to display.</p>
 
 <p>The manager works similar to a navigation controller. You can push new items to display them and
  pop existing ones to go back.</p>
@@ -224,7 +134,7 @@ standard components.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinManager.swift#L22-L288">Show on GitHub</a>
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinManager.swift#L22-L289">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -263,7 +173,7 @@ standard components.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L16-L179">Show on GitHub</a>
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L16-L191">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

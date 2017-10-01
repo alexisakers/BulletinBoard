@@ -13,7 +13,7 @@
     <a title="BulletinBoard  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">BulletinBoard Docs</a> (90% documented)</p>
+        <p><a href="index.html">BulletinBoard Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/alexaubry/BulletinBoard"><img src="img/gh.png"/>View on GitHub</a></p>
         <p class="header-right"><a href="dash-feed://https%3A%2F%2Falexaubry%2Egithub%2Eio%2Fdocsets%2FBulletinBoard%2Exml"><img src="img/dash.png"/>Install in Dash</a></p>
       </div>
@@ -38,21 +38,7 @@
                 <a href="Classes/BulletinManager.html">BulletinManager</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/ContainerView.html">ContainerView</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/HighlightButton.html">HighlightButton</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Classes/PageBulletinItem.html">PageBulletinItem</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a href="Extensions.html">Extensions</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="Extensions/UIButton.html">UIButton</a>
               </li>
             </ul>
           </li>
@@ -77,7 +63,7 @@
 <a href="https://cocoapods.org/pods/BulletinBoard"><img src="https://img.shields.io/cocoapods/l/BulletinBoard.svg?style=flat" alt="License"></a>
 <a href="https://cocoapods.org/pods/BulletinBoard"><img src="https://img.shields.io/cocoapods/p/BulletinBoard.svg?style=flat" alt="Platform"></a>
 <a href="https://alexaubry.github.io/BulletinBoard"><img src="https://img.shields.io/badge/Documentation-available-blue.svg" alt="Documentation"></a>
-<a href="https://twitter.com/_alexaubry"><img src=".github/twitter_badge.svg" alt="Contact: @_alexaubry"></a></p>
+<a href="https://twitter.com/_alexaubry"><img src="https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.github/twitter_badge.svg?sanitize=true" alt="Contact: @_alexaubry"></a></p>
 
 <p>BulletinBoard is an iOS library that generates and manages contextual cards displayed at the bottom of the screen. It is especially well suited for quick user interactions such as onboarding screens or configuration.</p>
 
@@ -85,7 +71,7 @@
 
 <p>Here are some screenshots showing what you can build with BulletinBoard:</p>
 
-<p><img src=".github/demo_screenshots.png" alt="Demo Screenshots"></p>
+<p><img src="https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.github/demo_screenshots.png" alt="Demo Screenshots"></p>
 <h2 id='requirements' class='heading'>Requirements</h2>
 
 <ul>
@@ -98,7 +84,7 @@
 
 <ul>
 <li>integrate the library (setup, data flow)</li>
-<li>create standard page panes</li>
+<li>create standard page cards</li>
 <li>create custom page subclasses to add features</li>
 <li>create custom cards from scratch</li>
 </ul>
@@ -107,7 +93,7 @@
 
 <p>Here&rsquo;s a video showing it in action:</p>
 
-<p><a href="https://youtu.be/igNner7z13U"><img src=".github/demo_thumbnail.png" alt="Watch Demo on YouTube"></a></p>
+<p><a href="https://youtu.be/igNner7z13U"><img src="https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.github/demo_thumbnail.png" alt="Watch Demo on YouTube"></a></p>
 <h2 id='installation' class='heading'>Installation</h2>
 
 <p>BulletinBoard is available via CocoaPods and Carthage.</p>
@@ -122,36 +108,53 @@
 <pre class="highlight plaintext"><code>github "alexaubry/BulletinBoard"
 </code></pre>
 <h2 id='usage' class='heading'>Usage</h2>
-<h3 id='the-basics' class='heading'>The Basics</h3>
+<h2 id='the-basics' class='heading'>The Basics</h2>
 
-<p>The <code>BulletinManager</code> class generates, manages and displays bulletin items. Bulletin items are objects that conform to the <code>BulletinItem</code> protocol.</p>
+<p>The <code>BulletinManager</code> class generates, manages and displays bulletin cards. Cards are created using bulletin items. Bulletin items are objects that conform to the <code>BulletinItem</code> protocol.</p>
 
-<p>The library provides a standard page item type: <code>PageBulletinItem</code>. If you need to customize the items, you can override this class, or create new item types from scratch.</p>
+<p>The library provides a standard item type: <code>PageBulletinItem</code>. If you need to customize the items, you can override this class, or create new item types from scratch.</p>
+<h2 id='displaying-bulletins' class='heading'>Displaying Bulletins</h2>
 
-<p>To present bulletins, you need to follow these steps:</p>
+<p>To display bulletins you first need to create the root item to display (explained in the next sections).</p>
 
-<ol>
-<li>Create a root item</li>
-<li>Create a bulletin manager</li>
-<li>Use the bulletin manager to present the bulletin over your view controller</li>
-</ol>
-<h3 id='creating-page-items' class='heading'>Creating Page Items</h3>
+<p>With this root item, you need to create a <code>BulletinManager</code>. We recommand to put it in the view controller that will display the bulletin.</p>
+<pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">ViewController</span><span class="p">:</span> <span class="kt">UIViewController</span> <span class="p">{</span>
+
+    <span class="kd">lazy</span> <span class="k">var</span> <span class="nv">bulletinManager</span><span class="p">:</span> <span class="kt">BulletinManager</span> <span class="o">=</span> <span class="p">{</span>
+
+        <span class="k">let</span> <span class="nv">rootItem</span><span class="p">:</span> <span class="kt">BulletinItem</span> <span class="o">=</span> <span class="c1">// ... create your item here</span>
+        <span class="k">return</span> <span class="kt">BulletinManager</span><span class="p">(</span><span class="nv">rootItem</span><span class="p">:</span> <span class="n">rootItem</span><span class="p">)</span>
+
+    <span class="p">}()</span>
+
+<span class="p">}</span>
+</code></pre>
+
+<p>To present your bulletin, call this method:</p>
+<pre class="highlight swift"><code><span class="n">bulletinManager</span><span class="o">.</span><span class="nf">prepare</span><span class="p">()</span>
+<span class="n">bulletinManager</span><span class="o">.</span><span class="nf">presentBulletin</span><span class="p">(</span><span class="nv">above</span><span class="p">:</span> <span class="k">self</span><span class="p">)</span>
+</code></pre>
+
+<p>Always call <code>prepare()</code> before calling <code>presentBulletin()</code>! Failure to do so will cause a precondition failure (TL;DR your app will crash).</p>
+
+<p>For the case of onboarding, you can call it in <code>viewWillAppear(animated:)</code> after checking if the user has already completed onboarding.</p>
+<h2 id='creating-page-items' class='heading'>Creating Page Items</h2>
 
 <p>You can create standard page items using the <code>PageBulletinItem</code> class.</p>
 
 <p>It takes care of generating a user interface with standard components:</p>
 
 <ul>
-<li>a title</li>
+<li>a title (required)</li>
 <li>an icon image (should be 100x100px or less)</li>
 <li>a description text</li>
 <li>a large action button</li>
 <li>a smaller alternative button</li>
 </ul>
 
-<p>For example, this interface was created using <code>PageBulletinItem</code>:</p>
+<p>For example, this interface was created using a <code>PageBulletinItem</code>:</p>
 
-<p><img src=".github/page_customization.png" alt="Customizing PageBulletinItem"></p>
+<p><img src="https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.github/page_customization.png" alt="Customizing PageBulletinItem"></p>
 
 <p>To recreate this interface, use this code:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">page</span> <span class="o">=</span> <span class="kt">PageBulletinItem</span><span class="p">(</span><span class="nv">title</span><span class="p">:</span> <span class="s">"Push Notifications"</span><span class="p">)</span>
@@ -163,9 +166,124 @@
 </code></pre>
 
 <p>If you omit an optional property, the page won&rsquo;t generate a view for it. For instance, if you set <code>alternativeButtonTitle</code> to <code>nil</code>, the card won&rsquo;t display an alternative button.</p>
+<h3 id='customizing-the-appearance' class='heading'>Customizing The Appearance</h3>
+<h4 id='colors' class='heading'>Colors</h4>
 
-<p>You can also customize</p>
-<h3 id='creating-custom-items' class='heading'>Creating Custom Items</h3>
+<p>You can customize the colors on the page by using the <code>interfaceFactory</code> property.</p>
+
+<p>This property references a <code>BulletinInterfaceFactory</code>, which is responsible for generating the standard components (more on this later).</p>
+
+<p>There are two properties that you can change:</p>
+
+<ul>
+<li><code>tintColor</code> - the tint color of the buttons (defaults to iOS blue)</li>
+<li><code>actionButtonTitleColor</code> - the color of action button titles</li>
+</ul>
+
+<p>You need to set these before you present / push the item. Changing them after presentation will have no effect.</p>
+
+<p><strong>Example</strong></p>
+<pre class="highlight swift"><code><span class="n">page</span><span class="o">.</span><span class="n">interfaceFactory</span><span class="o">.</span><span class="n">tintColor</span> <span class="o">=</span> <span class="kt">UIColor</span><span class="p">(</span><span class="nv">red</span><span class="p">:</span> <span class="mf">0.294</span><span class="p">,</span> <span class="nv">green</span><span class="p">:</span> <span class="mf">0.85</span><span class="p">,</span> <span class="nv">blue</span><span class="p">:</span> <span class="mf">0.392</span><span class="p">,</span> <span class="nv">alpha</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">// green</span>
+<span class="n">page</span><span class="o">.</span><span class="n">interfaceFactory</span><span class="o">.</span><span class="n">actionButtonTitleColor</span> <span class="o">=</span> <span class="o">.</span><span class="n">white</span>
+</code></pre>
+
+<p>This produces a card with the following appearance:</p>
+
+<p><img src="https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.github/demo_tint_color.png" alt="Demo Tint Color"></p>
+<h4 id='text-size' class='heading'>Text Size</h4>
+
+<p>If the description text is long, you can set the <code>shouldCompactDescriptionText</code> property to <code>true</code> to reduce the text size.</p>
+
+<p><img src="https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.github/demo_long_text.png" alt="Text Size"></p>
+
+<p>This property is <code>false</code> by default.</p>
+<h3 id='handling-button-taps' class='heading'>Handling Button Taps</h3>
+
+<p>To handle taps on buttons, set a closure for these properties:</p>
+
+<ul>
+<li><code>actionHandler</code> - called when the action button is tapped.</li>
+<li><code>alternativeHandler</code> - called when the alternative button is tapped.</li>
+</ul>
+<pre class="highlight swift"><code><span class="n">page</span><span class="o">.</span><span class="n">actionHandler</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="kt">PageBulletinItem</span><span class="p">)</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Action button tapped"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>This prints <code>&quot;Action button tapped&quot;</code> when the action button is tapped.</p>
+<pre class="highlight swift"><code><span class="n">page</span><span class="o">.</span><span class="n">alternativeHandler</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="kt">PageBulletinItem</span><span class="p">)</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Alternative button tapped"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>This prints <code>&quot;Alternative button tapped&quot;</code> when the alternative button is tapped.</p>
+
+<p>Use these handlers as an opportunity to change the presented item, dismiss the bulletin and/or pass data to your model.</p>
+<h2 id='changing-the-presented-item' class='heading'>Changing the Presented Item</h2>
+
+<p>The <code>BulletinItem</code> protocol exposes a <code>manager</code> property that is set when the item is currently being displayed by a manager.</p>
+
+<p>You can use it to interact with the presented bulletin. Call:</p>
+
+<ul>
+<li><code>manager?.popItem()</code> to go back to the previous item</li>
+<li><code>manager?.popToRootItem()</code> to go back to the first item</li>
+<li><code>manager?.push(item:)</code> with a <code>BulletinItem</code> to present a new item</li>
+<li><code>manager?.dismissBulletin(animated:)</code> to dismiss the bulletin</li>
+</ul>
+
+<p>You need to call these methods from the main thread. Never force unwrap <code>manager</code>, as this property will be unset as soon as the item is removed from the bulletin.</p>
+
+<p>It is also possible to set the <code>nextItem</code> property to the <code>BulletinItem</code> that should be displayed next and call the <code>displayNextItem()</code> method when you want to display it.</p>
+
+<p>For instance, to present a new card when the user taps the action button:</p>
+<pre class="highlight swift"><code><span class="n">page</span><span class="o">.</span><span class="n">nextItem</span> <span class="o">=</span> <span class="nf">makeLocationPage</span><span class="p">()</span> <span class="c1">// Creates a new PageBulletinItem</span>
+
+<span class="n">page</span><span class="o">.</span><span class="n">actionHandler</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="kt">PageBulletinItem</span><span class="p">)</span> <span class="k">in</span>
+    <span class="n">item</span><span class="o">.</span><span class="nf">displayNextItem</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>This creates the following interaction:</p>
+
+<p><img src="https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.github/demo_segue.png" alt="Next Item"></p>
+<h2 id='automatic-dismissal' class='heading'>Automatic Dismissal</h2>
+
+<p>If you set the <code>isDismissable</code> property to <code>true</code>, the user will be able to dismiss the bulletin by tapping outside of the card.</p>
+
+<p>You should set this property to <code>true</code> for the last item.</p>
+<h2 id='creating-custom-items' class='heading'>Creating Custom Items</h2>
+
+<p>To create custom bulletin items, create a class that implements the <code>BulletinItem</code>. To learn with a concrete example, you can read the implementation of <code>PageBulletinItem</code>.</p>
+<h3 id='conforming-to-bulletinitem' class='heading'>Conforming to BulletinItem</h3>
+
+<p>To conform to this protocol, you need to add the required properties and implement two methods:</p>
+<h4 id='code-makearrangedsubviews-code' class='heading'><code>makeArrangedSubviews()</code></h4>
+
+<p>This method should return all the elements to display on the card.</p>
+
+<p>Please note that the <code>alpha</code> and <code>isHidden</code> properties will be ignored.</p>
+<h4 id='code-teardown-code' class='heading'><code>tearDown()</code></h4>
+
+<p>In this method, clear all the resources allocated for the item (such as notification observers or button targets). After this method is called, the <code>manager</code> will be set to <code>nil</code> and the arranged subviews will be hidden and removed from the card.</p>
+<h3 id='generating-standard-views' class='heading'>Generating Standard Views</h3>
+
+<p>Even though you are creating a custom card, you may still want to display some standard elements, such as title labels or action buttons.</p>
+
+<p>To generate standard elements, use the methods of <code>BulletinInterfaceFactory</code>:</p>
+
+<ul>
+<li><code>makeTitleLabel()</code> to create a title label</li>
+<li><code>makeDescriptionLabel(isCompact:)</code> to create a description label</li>
+<li><code>makeActionButton(title:)</code> to create an action button</li>
+<li><code>makeAlternativeButton(title:)</code> to create an alternative button</li>
+<li><code>makeGroupStack(spacing:)</code> to create a vertical stack view with the given spacing</li>
+</ul>
+<h2 id='internals' class='heading'>Internals</h2>
+
+<p>BulletinBoard uses stack views and Auto Layout to display and manage cards. It automatically adapts to changes in width and height. iPad and iPhone X are supported out of the box.</p>
+
+<p>If you are interested in learning how it works in more details, look at the implementation of <code>BulletinManager</code>, <code>BulletinViewController</code> and <code>BulletinInterfaceFactory</code>.</p>
 <h2 id='author' class='heading'>Author</h2>
 
 <p>Written by Alexis Aubry. You can <a href="https://twitter.com/_alexaubry">find me on Twitter</a>.</p>
