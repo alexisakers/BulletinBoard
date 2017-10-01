@@ -63,11 +63,32 @@ The `BulletinManager` class generates, manages and displays bulletin cards. Card
 
 The library provides a standard item type: `PageBulletinItem`. If you need to customize the items, you can override this class, or create new item types from scratch.
 
-To present bulletins, you need to follow these steps:
+## Displaying Bulletins
 
-1. Create a root item
-2. Create a bulletin manager with the root item
-3. Use the bulletin manager to present the bulletin over your view controller
+To display bulletins you first need to create the root item to display (explained in the next sections).
+
+With this root item, you need to create a `BulletinManager`. We recommand to put it in the view controller that will display the bulletin.
+
+~~~swift
+class ViewController: UIViewController {
+
+    lazy var bulletinManager: BulletinManager = {
+
+        let rootItem: BulletinItem = // ... create your item here
+        return BulletinManager(rootItem: rootItem)
+
+    }()
+
+}
+~~~
+
+To present your bulletin, call this method:
+
+~~~swift
+bulletinManager.presentBulletin(above: self)
+~~~
+
+For the case of onboarding, you can call it in `viewWillAppear(animated:)` after checking if the user has already completed onboarding.
 
 ## Creating Page Items
 
@@ -102,7 +123,7 @@ If you omit an optional property, the page won't generate a view for it. For ins
 
 #### Colors
 
-You can customize the colors of the page by using the `interfaceFactory` property.
+You can customize the colors on the page by using the `interfaceFactory` property.
 
 This property references a `BulletinInterfaceFactory`, which is responsible for generating the standard components (more on this later).
 
@@ -113,11 +134,24 @@ There are two properties that you can change:
 
 You need to set these before you present / push the item. Changing them after presentation will have no effect.
 
+**Example**
+
+~~~swift
+page.interfaceFactory.tintColor = UIColor(red: 0.294, green: 0.85, blue: 0.392, alpha: 1) // green
+page.interfaceFactory.actionButtonTitleColor = .white
+~~~
+
+This produces a card with the following appearance:
+
+![Demo Tint Color](.github/demo_tint_color.png)
+
 #### Text Size
 
 If the description text is long, you can set the `isLongDescriptionText` property to `true` to reduce the text size.
 
 ![Text Size](.github/demo_long_text.png)
+
+This property is `false` by default.
 
 ### Handling Button Taps
 
@@ -152,13 +186,14 @@ You can use it to interact with the presented bulletin. Call:
 
 - `manager?.popItem()` to go back to the previous item
 - `manager?.popToRootItem()` to go back to the first item
-- `manager?.push(item:)` with a `BulletinItem` to present a new item.
+- `manager?.push(item:)` with a `BulletinItem` to present a new item
+- `manager?.dismissBulletin(animated:)` to dismiss the bulletin
 
-You need to call these methods from the main thread. Never force unwrap `manager`, as this property will be unset as soon as the item will be hidden from the bulletin.
+You need to call these methods from the main thread. Never force unwrap `manager`, as this property will be unset as soon as the item is removed from the bulletin.
 
-It is also possible to set the `nextItem` property to the `BulletinItem` that should be displayed next and all the `displayNextItem()` method when you want to display it. This provides a more flexible and reusable way to build your item hierarchy.
+It is also possible to set the `nextItem` property to the `BulletinItem` that should be displayed next and call the `displayNextItem()` method when you want to display it.
 
-For instance, to change
+For instance, to present a new card when the user taps the action button:
 
 ~~~swift
 page.nextItem = makeLocationPage() // Creates a new PageBulletinItem
@@ -172,9 +207,35 @@ This creates the following interaction:
 
 ![Next Item](.github/demo_segue.png)
 
+## Automatic Dismissal
+
+If you set the `isDismissable` property to `true`, the user will be able to dismiss the bulletin by tapping outside of the card.
+
+You should set this property to `true` for the last item.
+
 ## Creating Custom Items
 
+To create custom bulletin items, create a class that implements the `BulletinItem`.
+
+### Conforming to BulletinItem
+
+### Generating Standard Views
+
+Even though you are creating a custom card, you may still want to display some standard elements, such as title labels or action button.
+
+To generate standard elements, use the methods of `BulletinInterfaceFactory`:
+
+- `makeTitleLabel()` to create a title label
+- `makeDescriptionLabel(isCompact:)` to create a description label
+- `makeActionButton(title:)` to create an action button
+- `makeAlternativeButton(title:)` to create an alternative button
+- `makeGroupStack(spacing:)` to create a vertical stack view with the given spacing
+
 ## Internals
+
+BulletinBoard uses stack views and Auto Layout to display and manage cards. It automatically adapts to changes in width and height. iPad and iPhone X are supported out of the box.
+
+If you are interested in learning how it works in more details, look at the implementation of `BulletinManager`, `BulletinViewController` and `BulletinInterfaceFactory`.
 
 ## Author
 
