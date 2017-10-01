@@ -100,7 +100,7 @@ enum BulletinDataSource {
         page.actionButtonTitle = "Send location data"
         page.alternativeButtonTitle = "No thanks"
 
-        page.isLongDescriptionText = true
+        //page.isLongDescriptionText = true
         page.isDismissable = false
 
         page.actionHandler = { item in
