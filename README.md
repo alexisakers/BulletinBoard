@@ -215,13 +215,25 @@ You should set this property to `true` for the last item.
 
 ## Creating Custom Items
 
-To create custom bulletin items, create a class that implements the `BulletinItem`.
+To create custom bulletin items, create a class that implements the `BulletinItem`. To learn with a concrete example, you can read the implementation of `PageBulletinItem`.
 
 ### Conforming to BulletinItem
 
+To conform to this protocol, you need to add the required properties and implement two methods:
+
+#### `makeArrangedSubviews()`
+
+This method should return all the elements to display on the card.
+
+Please note that the `alpha` and `isHidden` properties will be ignored.
+
+#### `tearDown()`
+
+In this method, clear all the resources allocated for the item (such as notification observers or button targets). After this method is called, the `manager` will be set to `nil` and the arranged subviews will be hidden and removed from the card.
+
 ### Generating Standard Views
 
-Even though you are creating a custom card, you may still want to display some standard elements, such as title labels or action button.
+Even though you are creating a custom card, you may still want to display some standard elements, such as title labels or action buttons.
 
 To generate standard elements, use the methods of `BulletinInterfaceFactory`:
 
