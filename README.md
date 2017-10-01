@@ -9,7 +9,7 @@
 
 BulletinBoard is an iOS library that generates and manages contextual cards displayed at the bottom of the screen. It is especially well suited for quick user interactions such as onboarding screens or configuration.
 
-It has an interface similar to the cards displayed by iOS for AirPods, Apple TV configuration and NFC tag scanning,
+It has an interface similar to the cards displayed by iOS for AirPods, Apple TV configuration and NFC tag scanning.
 
 Here are some screenshots showing what you can build with BulletinBoard:
 
@@ -100,7 +100,7 @@ You can create standard page items using the `PageBulletinItem` class.
 It takes care of generating a user interface with standard components:
 
 - a title (required)
-- an icon image (should be 100x100px or less)
+- an icon image (should be 128x128px or less)
 - a description text
 - a large action button
 - a smaller alternative button
@@ -122,7 +122,7 @@ page.alternativeButtonTitle = "Not now"
 
 If you omit an optional property, the page won't generate a view for it. For instance, if you set `alternativeButtonTitle` to `nil`, the card won't display an alternative button.
 
-### Customizing The Appearance
+### Customizing the Appearance
 
 #### Colors
 
@@ -218,9 +218,9 @@ You should set this property to `true` for the last item.
 
 ## Creating Custom Items
 
-To create custom bulletin items, create a class that implements the `BulletinItem`. To learn with a concrete example, you can read the implementation of `PageBulletinItem`.
+To create custom bulletin items, create a class that implements the `BulletinItem` protocol. To learn with a concrete example, you can read the implementation of `PageBulletinItem`.
 
-### Conforming to BulletinItem
+### Conforming to `BulletinItem`
 
 To conform to this protocol, you need to add the required properties and implement two methods:
 
