@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/cocoapods/l/BulletinBoard.svg?style=flat)](https://cocoapods.org/pods/BulletinBoard)
 [![Platform](https://img.shields.io/cocoapods/p/BulletinBoard.svg?style=flat)](https://cocoapods.org/pods/BulletinBoard)
 [![Documentation](https://img.shields.io/badge/Documentation-available-blue.svg)](https://alexaubry.github.io/BulletinBoard)
-[![Contact: @_alexaubry](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.github/twitter_badge.svg?sanitize=true)](https://twitter.com/_alexaubry)
+[![Contact: @_alexaubry](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/twitter_badge.svg?sanitize=true)](https://twitter.com/_alexaubry)
 
 BulletinBoard is an iOS library that generates and manages contextual cards displayed at the bottom of the screen. It is especially well suited for quick user interactions such as onboarding screens or configuration.
 
@@ -13,7 +13,7 @@ It has an interface similar to the cards displayed by iOS for AirPods, Apple TV 
 
 Here are some screenshots showing what you can build with BulletinBoard:
 
-![Demo Screenshots](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.github/demo_screenshots.png)
+![Demo Screenshots](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_screenshots.png)
 
 ## Requirements
 
@@ -33,7 +33,7 @@ Build and run the `Instanimal` scheme to use it.
 
 Here's a video showing it in action:
 
-[![Watch Demo on YouTube](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.github/demo_thumbnail.png)](https://youtu.be/igNner7z13U)
+[![Watch Demo on YouTube](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_thumbnail.png)](https://youtu.be/igNner7z13U)
 
 ## Installation
 
@@ -107,7 +107,7 @@ It takes care of generating a user interface with standard components:
 
 For example, this interface was created using a `PageBulletinItem`:
 
-![Customizing PageBulletinItem](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.github/page_customization.png)
+![Customizing PageBulletinItem](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/page_customization.png)
 
 To recreate this interface, use this code:
 
@@ -146,13 +146,13 @@ page.interfaceFactory.actionButtonTitleColor = .white
 
 This produces a card with the following appearance:
 
-![Demo Tint Color](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.github/demo_tint_color.png)
+![Demo Tint Color](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_tint_color.png)
 
 #### Text Size
 
 If the description text is long, you can set the `shouldCompactDescriptionText` property to `true` to reduce the text size.
 
-![Text Size](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.github/demo_long_text.png)
+![Text Size](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_long_text.png)
 
 This property is `false` by default.
 
@@ -208,7 +208,7 @@ page.actionHandler = { (item: PageBulletinItem) in
 
 This creates the following interaction:
 
-![Next Item](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.github/demo_segue.png)
+![Next Item](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_segue.png)
 
 ## Automatic Dismissal
 
@@ -251,6 +251,16 @@ To generate standard elements, use the methods of `BulletinInterfaceFactory`:
 BulletinBoard uses stack views and Auto Layout to display and manage cards. It automatically adapts to changes in width and height. iPad and iPhone X are supported out of the box.
 
 If you are interested in learning how it works in more details, look at the implementation of `BulletinManager`, `BulletinViewController` and `BulletinInterfaceFactory`.
+
+## Contributing
+
+Thank you for your interest in the project! Contributions are welcome and appreciated.
+
+Make sure to read these guides before getting started:
+
+- [Code of Conduct](https://github.com/alexaubry/BulletinBoard/blob/master/CODE_OF_CONDUCT.md)
+- [Contribution Guidelines](https://github.com/alexaubry/BulletinBoard/blob/master/CONTRIBUTING.md)
+
 
 ## Author
 
