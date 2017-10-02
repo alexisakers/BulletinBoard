@@ -1,7 +1,7 @@
 <!--- Provide a short summary of your issue in the Title above -->
 
 ### New Issue Checklist
-<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- Go over all the following points, and put an `x` and remove the space in all the boxes that apply. -->
 
 - [ ] I updated BulletinBoard to the latest version
 - [ ] I read the [Contribution Guidelines](https://github.com/alexaubry/BulletinBoard/blob/master/CONTRIBUTING.md)
