@@ -278,6 +278,7 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
                         self.viewController.contentStackView.removeArrangedSubview(arrangedSubview)
                     }
 
+                    UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, newArrangedSubviews.first)
                 }
 
             }
