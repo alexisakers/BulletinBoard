@@ -188,5 +188,16 @@ final class BulletinViewController: UIViewController {
         manager?.dismissBulletin(animated: true)
 
     }
+    
+    // MARK: - Accessibility
+    
+    override func accessibilityPerformEscape() -> Bool {
+        guard isDismissable else {
+            return false
+        }
+        
+        manager?.dismissBulletin(animated: true)
+        return true
+    }
 
 }
