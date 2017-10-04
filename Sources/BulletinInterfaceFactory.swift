@@ -62,6 +62,7 @@ public class BulletinInterfaceFactory {
         let titleLabel = UILabel()
         titleLabel.textAlignment = .center
         titleLabel.textColor = titleTextColor
+        titleLabel.accessibilityTraits |= UIAccessibilityTraitHeader
         titleLabel.numberOfLines = 1
         titleLabel.adjustsFontSizeToFitWidth = true
 
