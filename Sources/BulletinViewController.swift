@@ -176,28 +176,34 @@ final class BulletinViewController: UIViewController {
     override func viewSafeAreaInsetsDidChange() {
         containerBottomConstraint.constant = bottomSpacingForCurrentLayout()
     }
+    
+    /// dismisses the presnted BulletinViewController if isDissmisable is set to true
+    @discardableResult
+    private func dismissIfPossible() -> Bool {
+    
+        guard isDismissable else {
+            return false
+        }
+    
+        manager?.dismissBulletin(animated: true)
+        return true
+
+    }
 
     // MARK: - Touch Events
 
     @objc private func handleTap(recognizer: UITapGestureRecognizer) {
 
-        guard isDismissable else {
-            return
-        }
-
-        manager?.dismissBulletin(animated: true)
-
+        dismissIfPossible()
+        
     }
     
     // MARK: - Accessibility
     
     override func accessibilityPerformEscape() -> Bool {
-        guard isDismissable else {
-            return false
-        }
+    
+        return dismissIfPossible()
         
-        manager?.dismissBulletin(animated: true)
-        return true
     }
 
 }
