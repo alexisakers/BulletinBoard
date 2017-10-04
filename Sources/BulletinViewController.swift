@@ -53,6 +53,7 @@ final class BulletinViewController: UIViewController {
         view.addGestureRecognizer(recognizer)
 
         contentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.accessibilityViewIsModal = true
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(contentView)
