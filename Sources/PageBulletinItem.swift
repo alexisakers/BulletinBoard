@@ -35,6 +35,9 @@ open class PageBulletinItem: BulletinItem {
 
     /// An image to display below the title. Should be less than or equal to 128x128px.
     public var image: UIImage?
+    
+    /// An accessibility label which gets announced to VoiceOver users if the image gets focused.
+    public var imageAccessibilityLabel: String?
 
     /// A description text to display below the image.
     public var descriptionText: String?
@@ -138,6 +141,11 @@ open class PageBulletinItem: BulletinItem {
             imageView.image = image
             imageView.contentMode = .scaleAspectFit
             imageView.heightAnchor.constraint(lessThanOrEqualToConstant: 128).isActive = true
+            
+            if let imageAccessibilityLabel = imageAccessibilityLabel {
+                imageView.isAccessibilityElement = true
+                imageView.accessibilityLabel = imageAccessibilityLabel
+            }
 
             arrangedSubviews.append(imageView)
 

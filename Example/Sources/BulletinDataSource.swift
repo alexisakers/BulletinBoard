@@ -29,6 +29,7 @@ enum BulletinDataSource {
 
         let page = FeedbackPageBulletinItem(title: "Welcome to Instanimal")
         page.image = #imageLiteral(resourceName: "RoundedIcon")
+        page.imageAccessibilityLabel = "😻"
 
         page.descriptionText = "Discover curated images of the best pets in the world."
         page.actionButtonTitle = "Configure"
@@ -59,6 +60,7 @@ enum BulletinDataSource {
 
         let page = FeedbackPageBulletinItem(title: "Push Notifications")
         page.image = #imageLiteral(resourceName: "NotificationPrompt")
+        page.imageAccessibilityLabel = "Notifications Icon"
 
         page.descriptionText = "Receive push notifications when new photos of pets are available."
         page.actionButtonTitle = "Subscribe"
@@ -95,6 +97,7 @@ enum BulletinDataSource {
 
         let page = FeedbackPageBulletinItem(title: "Customize Feed")
         page.image = #imageLiteral(resourceName: "LocationPrompt")
+        page.imageAccessibilityLabel = "Location Icon"
 
         page.descriptionText = "We can use your location to customize the feed. This data will be sent to our servers anonymously. You can update your choice later in the app settings."
         page.actionButtonTitle = "Send location data"
@@ -141,6 +144,7 @@ enum BulletinDataSource {
 
         let page = PageBulletinItem(title: "Setup Completed")
         page.image = #imageLiteral(resourceName: "IntroCompletion")
+        page.imageAccessibilityLabel = "Checkmark"
         page.interfaceFactory.tintColor = #colorLiteral(red: 0.2941176471, green: 0.8509803922, blue: 0.3921568627, alpha: 1)
         page.interfaceFactory.actionButtonTitleColor = .white
 

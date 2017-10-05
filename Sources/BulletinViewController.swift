@@ -53,6 +53,7 @@ final class BulletinViewController: UIViewController {
         view.addGestureRecognizer(recognizer)
 
         contentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.accessibilityViewIsModal = true
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(contentView)
@@ -175,17 +176,34 @@ final class BulletinViewController: UIViewController {
     override func viewSafeAreaInsetsDidChange() {
         containerBottomConstraint.constant = bottomSpacingForCurrentLayout()
     }
+    
+    /// dismisses the presnted BulletinViewController if isDissmisable is set to true
+    @discardableResult
+    private func dismissIfPossible() -> Bool {
+    
+        guard isDismissable else {
+            return false
+        }
+    
+        manager?.dismissBulletin(animated: true)
+        return true
+
+    }
 
     // MARK: - Touch Events
 
     @objc private func handleTap(recognizer: UITapGestureRecognizer) {
 
-        guard isDismissable else {
-            return
-        }
-
-        manager?.dismissBulletin(animated: true)
-
+        dismissIfPossible()
+        
+    }
+    
+    // MARK: - Accessibility
+    
+    override func accessibilityPerformEscape() -> Bool {
+    
+        return dismissIfPossible()
+        
     }
 
 }
