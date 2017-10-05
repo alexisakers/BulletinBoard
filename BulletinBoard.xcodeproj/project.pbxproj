@@ -80,9 +80,9 @@
 			isa = PBXGroup;
 			children = (
 				558A12361F7D73E5005EC97C /* BulletinItem.swift */,
+				558A122F1F7D73CD005EC97C /* PageBulletinItem.swift */,
 				558A122A1F7D73CD005EC97C /* BulletinManager.swift */,
 				55DADE791F7D9428001B11A2 /* BulletinInterfaceFactory.swift */,
-				558A122F1F7D73CD005EC97C /* PageBulletinItem.swift */,
 				558A122C1F7D73CD005EC97C /* BulletinViewController.swift */,
 				55DADEB81F8153B3001B11A2 /* Support */,
 			);

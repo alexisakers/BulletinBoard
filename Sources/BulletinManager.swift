@@ -174,11 +174,22 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
         currentItem.tearDown()
         currentItem.manager = nil
 
-        viewController.dismiss(animated: true, completion: nil)
+        viewController.dismiss(animated: true) {
+
+            for arrangedSubview in self.viewController.contentStackView.arrangedSubviews {
+                self.viewController.contentStackView.removeArrangedSubview(arrangedSubview)
+                arrangedSubview.removeFromSuperview()
+            }
+
+        }
+
+        currentItem = rootItem
+        tearDownItemsChain(startingAt: self.rootItem)
+        itemsStack.removeAll()
+
         viewController.manager = nil
         viewController.transitioningDelegate = nil
 
-        currentItem = rootItem
         isPrepared = false
 
     }
@@ -276,6 +287,7 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
 
                     for arrangedSubview in oldArrangedSubviews {
                         self.viewController.contentStackView.removeArrangedSubview(arrangedSubview)
+                        arrangedSubview.removeFromSuperview()
                     }
 
                     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, newArrangedSubviews.first)
@@ -283,6 +295,16 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
 
             }
 
+        }
+
+    }
+
+    private func tearDownItemsChain(startingAt item: BulletinItem) {
+
+        item.tearDown()
+
+        if let nextItem = item.nextItem {
+            tearDownItemsChain(startingAt: nextItem)
         }
 
     }

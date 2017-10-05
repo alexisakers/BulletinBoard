@@ -262,7 +262,7 @@ class PetSelectorValidationBulletinPage: BulletinItem {
 
     weak var manager: BulletinManager? = nil
     var isDismissable: Bool = false
-    var nextItem: BulletinItem? = BulletinDataSource.makeCompletionPage()
+    var nextItem: BulletinItem?
 
     let interfaceFactory = BulletinInterfaceFactory()
 
@@ -285,11 +285,6 @@ class PetSelectorValidationBulletinPage: BulletinItem {
     private var backButton: UIButton?
 
     // MARK: - BulletinItem
-
-    func tearDown() {
-        validateButton?.contentView.removeTarget(self, action: nil, for: .touchUpInside)
-        backButton?.removeTarget(self, action: nil, for: .touchUpInside)
-    }
 
     func makeArrangedSubviews() -> [UIView] {
 
@@ -356,6 +351,13 @@ class PetSelectorValidationBulletinPage: BulletinItem {
         nextItem = BulletinDataSource.makeCompletionPage()
         displayNextItem()
 
+    }
+
+    func tearDown() {
+        validateButton?.contentView.removeTarget(self, action: nil, for: .touchUpInside)
+        backButton?.removeTarget(self, action: nil, for: .touchUpInside)
+        validateButton = nil
+        backButton = nil
     }
 
     @objc private func backButtonTapped() {

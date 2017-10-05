@@ -155,7 +155,7 @@ enum BulletinDataSource {
         page.isDismissable = true
 
         page.actionHandler = { item in
-            page.manager?.dismissBulletin(animated: true)
+            item.manager?.dismissBulletin(animated: true)
             NotificationCenter.default.post(name: .SetupDidComplete, object: item)
         }
 

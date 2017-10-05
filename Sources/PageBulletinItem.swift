@@ -52,7 +52,7 @@ open class PageBulletinItem: BulletinItem {
     // MARK: - BulletinItem
 
     /// :nodoc:
-    public weak var manager: BulletinManager? = nil
+    public weak var manager: BulletinManager?
 
     /// :nodoc:
     public var isDismissable: Bool = false
@@ -194,6 +194,8 @@ open class PageBulletinItem: BulletinItem {
     public func tearDown() {
         actionButton?.contentView.removeTarget(self, action: nil, for: .touchUpInside)
         alternativeButton?.removeTarget(self, action: nil, for: .touchUpInside)
+        actionButton = nil
+        alternativeButton = nil
     }
 
 }
