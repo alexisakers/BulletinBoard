@@ -164,6 +164,10 @@ class PetSelectorBulletinPage: BulletinItem {
         buttonContainer.contentView.setTitleColor(buttonColor, for: .normal)
         buttonContainer.layer.borderColor = buttonColor.cgColor
 
+        if isSelected {
+            nextItem = PetSelectorValidationBulletinPage(animalName: title.lowercased(), animalEmoji: emoji)
+        }
+
         return buttonContainer
 
     }
