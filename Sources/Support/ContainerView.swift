@@ -50,7 +50,7 @@ public class ContainerView<V>: UIView where V: UIView {
     }
 
     public required init?(coder aDecoder: NSCoder) {
-        fatalError("InsetView must be initialized with a view using the init(_:) initalizer.")
+        fatalError("ContainerView must be initialized with a view using the init(_:) initalizer.")
     }
 
     // MARK: - Insets

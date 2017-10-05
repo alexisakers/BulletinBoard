@@ -78,6 +78,24 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
     }
 
     /**
+     * Hides the contents of the stack and displays a black activity indicator view.
+     *
+     * Use this method if you need to perform a long task or fetch som edata before changing the item.
+     *
+     * Displaying the loading indicator does not change the height of the page. Call one of `push(item:)`,
+     * `popItem` or `popToRootItem` to hide the activity indicator and change the current item.
+     */
+
+    public func displayActivityIndicator() {
+
+        precondition(Thread.isMainThread)
+        precondition(isPrepared, "You must call the `prepare` function before interacting with the bulletin.")
+
+        viewController.displayActivityIndicator()
+
+    }
+
+    /**
      * Displays a new item after the current one.
      * - parameter item: The item to display.
      */
@@ -155,8 +173,8 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
                                 completion: (() -> Void)? = nil) {
 
         precondition(Thread.isMainThread)
-
         precondition(isPrepared, "You must call the `prepare` function before interacting with the bulletin.")
+
         presentingVC.present(viewController, animated: animated, completion: completion)
 
     }
@@ -243,6 +261,8 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
 
         let initialAlphaAnimations = {
 
+            self.viewController.hideActivityIndicator()
+
             for arrangedSubview in oldArrangedSubviews {
                 arrangedSubview.alpha = 0
             }
@@ -281,6 +301,8 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
 
             UIView.animate(withDuration: transitionAnimationDuration, animations: transitionAnimation) { _ in
 
+                self.viewController.contentStackView.alpha = 1
+
                 UIView.animate(withDuration: finalAlphaAnimationDuration, animations: finalAlphaAnimation) { _ in
 
                     self.viewController.isDismissable = self.currentItem.isDismissable
@@ -291,6 +313,7 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
                     }
 
                     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, newArrangedSubviews.first)
+                    
                 }
 
             }

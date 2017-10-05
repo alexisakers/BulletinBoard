@@ -341,15 +341,32 @@ class PetSelectorValidationBulletinPage: BulletinItem {
 
     @objc private func validateButtonTapped() {
 
-        // Play success haptic feedback
+        // > Play Haptic Feedback
 
-        successFeedbackGenerator.prepare()
-        successFeedbackGenerator.success()
+        selectionFeedbackGenerator.prepare()
+        selectionFeedbackGenerator.selectionChanged()
 
-        // Display next item
+        // > Display the loading indicator
 
-        nextItem = BulletinDataSource.makeCompletionPage()
-        displayNextItem()
+        manager?.displayActivityIndicator()
+
+        // > Wait for a "task" to complete before displaying the next item
+
+        let delay = DispatchTime.now() + .seconds(2)
+
+        DispatchQueue.main.asyncAfter(deadline: delay) {
+
+            // Play success haptic feedback
+
+            self.successFeedbackGenerator.prepare()
+            self.successFeedbackGenerator.success()
+
+            // Display next item
+
+            self.nextItem = BulletinDataSource.makeCompletionPage()
+            self.displayNextItem()
+
+        }
 
     }
 

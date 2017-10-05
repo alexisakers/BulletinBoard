@@ -26,9 +26,32 @@ final class BulletinViewController: UIViewController {
 
     var isDismissable: Bool = false
 
+    // MARK: - Activity Indicator
+
+    func displayActivityIndicator() {
+
+        activityIndicator.startAnimating()
+
+        let animations = {
+            self.activityIndicator.alpha = 1
+            self.contentStackView.alpha = 0
+        }
+
+        UIView.animate(withDuration: 0.25, animations: animations) { _ in
+            UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self.activityIndicator)
+        }
+
+    }
+
+    func hideActivityIndicator() {
+        activityIndicator.stopAnimating()
+        activityIndicator.alpha = 0
+    }
+
     // MARK: - Private Interface Elements
 
     private let contentView = UIView()
+    private let activityIndicator = ActivityIndicator()
 
     private var containerBottomConstraint: NSLayoutConstraint!
 
@@ -102,8 +125,22 @@ final class BulletinViewController: UIViewController {
         contentStackView.alignment = .fill
         contentStackView.distribution = .fill
 
-        contentView.backgroundColor = #colorLiteral(red: 0.9921568627, green: 1, blue: 1, alpha: 1)
+        // Activity Indicator
 
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(activityIndicator)
+        activityIndicator.leftAnchor.constraint(equalTo: contentStackView.leftAnchor).isActive = true
+        activityIndicator.rightAnchor.constraint(equalTo: contentStackView.rightAnchor).isActive = true
+        activityIndicator.topAnchor.constraint(equalTo: contentStackView.topAnchor).isActive = true
+        activityIndicator.bottomAnchor.constraint(equalTo: contentStackView.bottomAnchor).isActive = true
+
+        activityIndicator.activityIndicatorViewStyle = .whiteLarge
+        activityIndicator.color = .black
+
+        activityIndicator.alpha = 0
+
+        contentView.backgroundColor = #colorLiteral(red: 0.9921568627, green: 1, blue: 1, alpha: 1)
         setUpLayout(with: traitCollection)
 
     }
@@ -193,17 +230,13 @@ final class BulletinViewController: UIViewController {
     // MARK: - Touch Events
 
     @objc private func handleTap(recognizer: UITapGestureRecognizer) {
-
         dismissIfPossible()
-        
     }
     
     // MARK: - Accessibility
     
     override func accessibilityPerformEscape() -> Bool {
-    
         return dismissIfPossible()
-        
     }
 
 }
