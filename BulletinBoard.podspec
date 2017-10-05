@@ -5,6 +5,7 @@ Pod::Spec.new do |s|
   s.description  = <<-DESC
     BulletinBoard is an iOS library that generates and manages contextual cards displayed at the bottom of the screen. It is especially well suited for quick user interactions such as onboarding screens or configuration.
     It has an interface similar to the cards displayed by iOS for AirPods, Apple TV configuration and NFC tag scanning.
+    It has built-in support for accessibility features such as VoiceOver and Switch Control.
   DESC
   s.homepage     = "https://github.com/alexaubry/BulletinBoard"
   s.license      = { :type => "MIT", :file => "LICENSE" }

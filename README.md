@@ -11,6 +11,8 @@ BulletinBoard is an iOS library that generates and manages contextual cards disp
 
 It has an interface similar to the cards displayed by iOS for AirPods, Apple TV configuration and NFC tag scanning.
 
+It has built-in support for accessibility features such as VoiceOver and Switch Control.
+
 Here are some screenshots showing what you can build with BulletinBoard:
 
 ![Demo Screenshots](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_screenshots.png)
@@ -33,7 +35,7 @@ Build and run the `Instanimal` scheme to use it.
 
 Here's a video showing it in action:
 
-[![Watch Demo on YouTube](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_thumbnail.png)](https://youtu.be/igNner7z13U)
+[![Watch Demo on YouTube](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_thumbnail.png)](https://youtu.be/36pFHov7MTE)
 
 ## Installation
 
@@ -210,6 +212,30 @@ This creates the following interaction:
 
 ![Next Item](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_segue.png)
 
+##
+
+If you need to perform a task between the moment the user taps a button and the moment you'll be able to change the presented item, you can call `displayActivityIndicator()` method on the item manager to hide the current card and display an activity indicator.
+
+This is especially useful if you need to fetch data from a server (in-app purchase price, subscription status, ...) or save data (e.g. Core Data).
+
+Once your task is finished, call one of the methods described in [Changing the Presented Item](#changing-the-presented-item).
+
+**Example**:
+
+~~~swift
+page.actionHandler = { (item: PageBulletinItem) in
+    item.manager?.displayActivityIndicator()
+    // do your task
+    // ...
+    // when your task is finished, transition to the appropriate bulletin item
+    item.displayNextItem()
+}
+~~~
+
+This creates the following interaction:
+
+![Activity Indicator](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_activity.png)
+
 ## Automatic Dismissal
 
 If you set the `isDismissable` property to `true`, the user will be able to dismiss the bulletin by tapping outside of the card.
@@ -261,6 +287,9 @@ Make sure to read these guides before getting started:
 - [Code of Conduct](https://github.com/alexaubry/BulletinBoard/blob/master/CODE_OF_CONDUCT.md)
 - [Contribution Guidelines](https://github.com/alexaubry/BulletinBoard/blob/master/CONTRIBUTING.md)
 
+## Apps Using _BulletinBoard_
+
+Feel free to submit a PR if you’re using this library in your apps.
 
 ## Author
 
