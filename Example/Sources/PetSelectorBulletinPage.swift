@@ -145,8 +145,13 @@ class PetSelectorBulletinPage: BulletinItem {
         button.setTitle(emoji + " " + title, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         button.contentHorizontalAlignment = .center
-        button.isSelected = isSelected
         button.accessibilityLabel = title
+
+        if isSelected {
+            button.accessibilityTraits |= UIAccessibilityTraitSelected
+        } else {
+            button.accessibilityTraits &= ~UIAccessibilityTraitSelected
+        }
 
         let buttonContainer = ContainerView<UIButton>(button)
         buttonContainer.layer.cornerRadius = 12
@@ -178,12 +183,12 @@ class PetSelectorBulletinPage: BulletinItem {
         let catButtonColor = interfaceFactory.tintColor
         catButtonContainer?.layer.borderColor = catButtonColor.cgColor
         catButtonContainer?.contentView.setTitleColor(catButtonColor, for: .normal)
-        catButtonContainer?.contentView.isSelected = true
+        catButtonContainer?.contentView.accessibilityTraits |= UIAccessibilityTraitSelected
 
         let dogButtonColor = UIColor.lightGray
         dogButtonContainer?.layer.borderColor = dogButtonColor.cgColor
         dogButtonContainer?.contentView.setTitleColor(dogButtonColor, for: .normal)
-        dogButtonContainer?.contentView.isSelected = false
+        dogButtonContainer?.contentView.accessibilityTraits &= ~UIAccessibilityTraitSelected
 
         // Send a notification to inform observers of the change
 
@@ -210,12 +215,12 @@ class PetSelectorBulletinPage: BulletinItem {
         let catButtonColor = UIColor.lightGray
         catButtonContainer?.layer.borderColor = catButtonColor.cgColor
         catButtonContainer?.contentView.setTitleColor(catButtonColor, for: .normal)
-        catButtonContainer?.contentView.isSelected = false
+        catButtonContainer?.contentView.accessibilityTraits &= ~UIAccessibilityTraitSelected
 
         let dogButtonColor = interfaceFactory.tintColor
         dogButtonContainer?.layer.borderColor = dogButtonColor.cgColor
         dogButtonContainer?.contentView.setTitleColor(dogButtonColor, for: .normal)
-        dogButtonContainer?.contentView.isSelected = true
+        dogButtonContainer?.contentView.accessibilityTraits |= UIAccessibilityTraitSelected
 
         // Send a notification to inform observers of the change
 
