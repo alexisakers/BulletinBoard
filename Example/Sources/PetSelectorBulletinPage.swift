@@ -109,7 +109,7 @@ class PetSelectorBulletinPage: BulletinItem {
 
         // Cat Button
 
-        let catButtonContainer = createChoiceCell(title: "🐱 Cats", isSelected: favoriteTabIndex == 0)
+        let catButtonContainer = createChoiceCell(emoji: "🐱", title: "Cats", isSelected: favoriteTabIndex == 0)
         catButtonContainer.contentView.addTarget(self, action: #selector(catButtonTapped), for: .touchUpInside)
         petsStack.addArrangedSubview(catButtonContainer)
 
@@ -117,7 +117,7 @@ class PetSelectorBulletinPage: BulletinItem {
 
         // Dog Button
 
-        let dogButtonContainer = createChoiceCell(title: "🐶 Dogs", isSelected: favoriteTabIndex == 1)
+        let dogButtonContainer = createChoiceCell(emoji: "🐶", title: "Dogs", isSelected: favoriteTabIndex == 1)
         dogButtonContainer.contentView.addTarget(self, action: #selector(dogButtonTapped), for: .touchUpInside)
         petsStack.addArrangedSubview(dogButtonContainer)
 
@@ -139,12 +139,14 @@ class PetSelectorBulletinPage: BulletinItem {
      * Creates a custom choice cell.
      */
 
-    func createChoiceCell(title: String, isSelected: Bool) -> ContainerView<UIButton> {
+    func createChoiceCell(emoji: String, title: String, isSelected: Bool) -> ContainerView<UIButton> {
 
         let button = UIButton(type: .system)
-        button.setTitle(title, for: .normal)
+        button.setTitle(emoji + " " + title, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         button.contentHorizontalAlignment = .center
+        button.isSelected = isSelected
+        button.accessibilityLabel = title
 
         let buttonContainer = ContainerView<UIButton>(button)
         buttonContainer.layer.cornerRadius = 12
@@ -176,10 +178,12 @@ class PetSelectorBulletinPage: BulletinItem {
         let catButtonColor = interfaceFactory.tintColor
         catButtonContainer?.layer.borderColor = catButtonColor.cgColor
         catButtonContainer?.contentView.setTitleColor(catButtonColor, for: .normal)
+        catButtonContainer?.contentView.isSelected = true
 
         let dogButtonColor = UIColor.lightGray
         dogButtonContainer?.layer.borderColor = dogButtonColor.cgColor
         dogButtonContainer?.contentView.setTitleColor(dogButtonColor, for: .normal)
+        dogButtonContainer?.contentView.isSelected = false
 
         // Send a notification to inform observers of the change
 
@@ -206,10 +210,12 @@ class PetSelectorBulletinPage: BulletinItem {
         let catButtonColor = UIColor.lightGray
         catButtonContainer?.layer.borderColor = catButtonColor.cgColor
         catButtonContainer?.contentView.setTitleColor(catButtonColor, for: .normal)
+        catButtonContainer?.contentView.isSelected = false
 
         let dogButtonColor = interfaceFactory.tintColor
         dogButtonContainer?.layer.borderColor = dogButtonColor.cgColor
         dogButtonContainer?.contentView.setTitleColor(dogButtonColor, for: .normal)
+        dogButtonContainer?.contentView.isSelected = true
 
         // Send a notification to inform observers of the change
 
@@ -294,6 +300,7 @@ class PetSelectorValidationBulletinPage: BulletinItem {
         emojiLabel.adjustsFontSizeToFitWidth = true
         emojiLabel.font = UIFont.systemFont(ofSize: 66)
         emojiLabel.text = animalEmoji
+        emojiLabel.isAccessibilityElement = false
 
         arrangedSubviews.append(emojiLabel)
 
