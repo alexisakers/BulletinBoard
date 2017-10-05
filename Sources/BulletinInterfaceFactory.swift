@@ -117,7 +117,7 @@ public class BulletinInterfaceFactory {
         actionButton.layer.cornerRadius = 12
         actionButton.clipsToBounds = true
 
-        let actionContainer = ContainerView<HighlightButton>(actionButton)
+        let actionContainer = ContainerView(actionButton)
         actionContainer.heightAnchor.constraint(equalToConstant: 55).isActive = true
 
         return actionContainer

@@ -153,7 +153,7 @@ class PetSelectorBulletinPage: BulletinItem {
             button.accessibilityTraits &= ~UIAccessibilityTraitSelected
         }
 
-        let buttonContainer = ContainerView<UIButton>(button)
+        let buttonContainer = ContainerView(button)
         buttonContainer.layer.cornerRadius = 12
         buttonContainer.layer.borderWidth = 2
 
