@@ -51,13 +51,33 @@ open class PageBulletinItem: BulletinItem {
 
     // MARK: - BulletinItem
 
-    /// :nodoc:
+    /**
+     * The current object managing the item.
+     *
+     * This property is set when the item is currently being displayed. It will be set to `nil` when
+     * the item is removed from view.
+     */
+
     public weak var manager: BulletinManager?
 
-    /// :nodoc:
+    /**
+     * Whether the page can be dismissed.
+     *
+     * If you set this value to `true`, the user will be able to dismiss the bulletin by tapping outside
+     * the card.
+     *
+     * You should set it to `true` for the last item you want to display.
+     */
+
     public var isDismissable: Bool = false
 
-    /// :nodoc:
+    /**
+     * The item to display after this one.
+     *
+     * If you set this value, you'll be able to call `displayNextItem()` to present the next item to
+     * the stack.
+     */
+
     public var nextItem: BulletinItem? = nil
 
     
@@ -122,7 +142,12 @@ open class PageBulletinItem: BulletinItem {
 
     // MARK: - View Management
 
-    /// :nodoc:
+    /**
+     * Creates the list of views to display on the bulletin.
+     *
+     * This is an implementation detail of `BulletinItem` and you should not call it directly.
+     */
+
     public func makeArrangedSubviews() -> [UIView] {
 
         var arrangedSubviews = [UIView]()
@@ -190,7 +215,13 @@ open class PageBulletinItem: BulletinItem {
 
     }
 
-    /// :nodoc:
+    /**
+     * Called by the manager when the item was removed from the bulletin view. Use this function
+     * to remove any button target or gesture recognizers from your managed views.
+     *
+     * This is an implementation detail of `BulletinItem` and you should not call it directly.
+     */
+
     public func tearDown() {
         actionButton?.contentView.removeTarget(self, action: nil, for: .touchUpInside)
         alternativeButton?.removeTarget(self, action: nil, for: .touchUpInside)

@@ -9,7 +9,7 @@ import UIKit
  * A view controller that displays a card at the bottom of the screen.
  */
 
-final class BulletinViewController: UIViewController {
+final class BulletinViewController: UIViewController, UIGestureRecognizerDelegate {
 
     /**
      * The stack view displaying the content of the card.
@@ -49,6 +49,8 @@ final class BulletinViewController: UIViewController {
     }
 
     // MARK: - Private Interface Elements
+
+    private var panGesture: UIPanGestureRecognizer!
 
     private let contentView = UIView()
     private let activityIndicator = ActivityIndicator()
@@ -90,10 +92,10 @@ final class BulletinViewController: UIViewController {
         centerXConstraint = contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
 
         minWidthConstraint = contentView.widthAnchor.constraint(equalToConstant: 444)
-        minWidthConstraint.priority = .defaultHigh
+        minWidthConstraint.priority = UILayoutPriorityDefaultHigh
 
         let maxWidthConstraint = contentView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, constant: -24)
-        maxWidthConstraint.priority = .required
+        maxWidthConstraint.priority = UILayoutPriorityRequired
         maxWidthConstraint.isActive = true
 
         containerBottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -115,11 +117,11 @@ final class BulletinViewController: UIViewController {
 
         let topConstraint = contentView.topAnchor.constraint(equalTo: contentStackView.topAnchor, constant: -24)
         topConstraint.isActive = true
-        topConstraint.priority = .defaultHigh
+        topConstraint.priority = UILayoutPriorityDefaultHigh
 
         let minYConstraint = contentView.topAnchor.constraint(greaterThanOrEqualTo: topLayoutGuide.bottomAnchor)
         minYConstraint.isActive = true
-        minYConstraint.priority = .required
+        minYConstraint.priority = UILayoutPriorityRequired
 
         contentStackView.axis = .vertical
         contentStackView.alignment = .fill
@@ -137,11 +139,21 @@ final class BulletinViewController: UIViewController {
 
         activityIndicator.activityIndicatorViewStyle = .whiteLarge
         activityIndicator.color = .black
+        activityIndicator.isUserInteractionEnabled = true
 
         activityIndicator.alpha = 0
 
         contentView.backgroundColor = #colorLiteral(red: 0.9921568627, green: 1, blue: 1, alpha: 1)
         setUpLayout(with: traitCollection)
+
+        // Pan Gesture
+
+        panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
+        panGesture.maximumNumberOfTouches = 1
+        panGesture.cancelsTouchesInView = false
+        panGesture.delegate = self
+
+        contentView.addGestureRecognizer(panGesture)
 
     }
 
@@ -239,4 +251,74 @@ final class BulletinViewController: UIViewController {
         return dismissIfPossible()
     }
 
+    // MARK: - Pan Gesture
+
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        return !(touch.view is UIControl)
+    }
+
+    @objc private func handlePanGesture(gestureRecognizer: UIPanGestureRecognizer) {
+
+        switch gestureRecognizer.state {
+        case .began:
+            gestureRecognizer.setTranslation(.zero, in: contentView)
+
+        case .changed:
+            let translation = gestureRecognizer.translation(in: contentView)
+            updateContentView(forVerticalTranslation: translation.y)
+
+        case .ended:
+
+            let translation = gestureRecognizer.translation(in: contentView)
+            let dismissThreshold = 1/2 * contentView.frame.height
+
+            guard translation.y >= dismissThreshold && isDismissable else {
+
+                UIView.animate(withDuration: 0.25) {
+                    self.contentView.transform = .identity
+                }
+
+                return
+
+            }
+
+            dismissIfPossible()
+
+        default:
+            break
+
+        }
+
+    }
+
+    private func updateContentView(forVerticalTranslation translation: CGFloat) {
+
+        let translationFactor: CGFloat = translation < 0 ? 1/2 : 2/3
+
+        let contentViewTranslation: CGFloat
+
+        if translation < 0 || !(isDismissable) {
+
+            let frictionTranslation = 30 * atan(translation/120) + translation/10
+            contentViewTranslation = frictionTranslation * translationFactor
+
+        } else {
+            contentViewTranslation = translation * translationFactor
+        }
+
+        contentView.transform = CGAffineTransform(translationX: 0, y: contentViewTranslation)
+
+    }
+
+    func resetContentView() {
+        contentView.transform = .identity
+    }
+
 }
+
+// MARK: - Swift Compatibility
+
+#if swift(>=4.0)
+private let UILayoutPriorityRequired = UILayoutPriority.required
+private let UILayoutPriorityDefaultHigh = UILayoutPriority.defaultHigh
+#endif

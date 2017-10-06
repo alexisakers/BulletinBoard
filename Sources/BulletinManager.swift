@@ -181,10 +181,13 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
 
     /**
      * Dismisses the bulletin and clears the current page.
-     * - parameter animated: Whether to animate dismissal.
+     *
+     * - parameter animated: Whether to animate dismissal. Defaults to `true`.
+     * - parameter completion: An optional block to execute after dismissal. Default to `nil`.
      */
 
-    public func dismissBulletin( animated: Bool) {
+    public func dismissBulletin(animated: Bool = true,
+                                completion: (() -> Void)? = nil) {
 
         precondition(Thread.isMainThread)
         precondition(isPrepared, "You must call the `prepare` function before interacting with the bulletin.")
@@ -192,12 +195,16 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
         currentItem.tearDown()
         currentItem.manager = nil
 
-        viewController.dismiss(animated: true) {
+        viewController.dismiss(animated: animated) {
+
+            completion?()
 
             for arrangedSubview in self.viewController.contentStackView.arrangedSubviews {
                 self.viewController.contentStackView.removeArrangedSubview(arrangedSubview)
                 arrangedSubview.removeFromSuperview()
             }
+
+            self.viewController.resetContentView()
 
         }
 
@@ -212,7 +219,7 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
 
     }
 
-    /// :nodoc:
+    /// Returns the presentation controller for the bulletin view controller.
     public func presentationController(forPresented presented: UIViewController,
                                 presenting: UIViewController?,
                                 source: UIViewController) -> UIPresentationController? {
