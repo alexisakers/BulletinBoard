@@ -69,6 +69,8 @@
 
 <p>It has an interface similar to the cards displayed by iOS for AirPods, Apple TV configuration and NFC tag scanning.</p>
 
+<p>It has built-in support for accessibility features such as VoiceOver and Switch Control.</p>
+
 <p>Here are some screenshots showing what you can build with BulletinBoard:</p>
 
 <p><img src="https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_screenshots.png" alt="Demo Screenshots"></p>
@@ -76,7 +78,7 @@
 
 <ul>
 <li>iOS 9 and later</li>
-<li>Swift 4</li>
+<li>Swift 3.2 and later</li>
 </ul>
 <h2 id='demo' class='heading'>Demo</h2>
 
@@ -93,7 +95,7 @@
 
 <p>Here&rsquo;s a video showing it in action:</p>
 
-<p><a href="https://youtu.be/igNner7z13U"><img src="https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_thumbnail.png" alt="Watch Demo on YouTube"></a></p>
+<p><a href="https://youtu.be/36pFHov7MTE"><img src="https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_thumbnail.png" alt="Watch Demo on YouTube"></a></p>
 <h2 id='installation' class='heading'>Installation</h2>
 
 <p>BulletinBoard is available via CocoaPods and Carthage.</p>
@@ -247,9 +249,29 @@
 <p>This creates the following interaction:</p>
 
 <p><img src="https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_segue.png" alt="Next Item"></p>
-<h2 id='automatic-dismissal' class='heading'>Automatic Dismissal</h2>
 
-<p>If you set the <code>isDismissable</code> property to <code>true</code>, the user will be able to dismiss the bulletin by tapping outside of the card.</p>
+<p>If you need to perform a task between the moment the user taps a button and the moment you&rsquo;ll be able to change the presented item, you can call <code>displayActivityIndicator()</code> method on the item manager to hide the current card and display an activity indicator.</p>
+
+<p>This is especially useful if you need to fetch data from a server (in-app purchase price, subscription status, &hellip;) or save data (e.g. Core Data).</p>
+
+<p>Once your task is finished, call one of the methods described in <a href="#changing-the-presented-item">Changing the Presented Item</a>.</p>
+
+<p><strong>Example</strong>:</p>
+<pre class="highlight swift"><code><span class="n">page</span><span class="o">.</span><span class="n">actionHandler</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="kt">PageBulletinItem</span><span class="p">)</span> <span class="k">in</span>
+    <span class="n">item</span><span class="o">.</span><span class="n">manager</span><span class="p">?</span><span class="o">.</span><span class="nf">displayActivityIndicator</span><span class="p">()</span>
+    <span class="c1">// do your task</span>
+    <span class="c1">// ...</span>
+    <span class="c1">// when your task is finished, transition to the appropriate bulletin item</span>
+    <span class="n">item</span><span class="o">.</span><span class="nf">displayNextItem</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>This creates the following interaction:</p>
+
+<p><img src="https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_activity.png" alt="Activity Indicator"></p>
+<h2 id='dismissal' class='heading'>Dismissal</h2>
+
+<p>If you set the <code>isDismissable</code> property to <code>true</code>, the user will be able to dismiss the bulletin by tapping outside of the card or by swiping the card down.</p>
 
 <p>You should set this property to <code>true</code> for the last item.</p>
 <h2 id='creating-custom-items' class='heading'>Creating Custom Items</h2>
@@ -294,6 +316,9 @@
 <li><a href="https://github.com/alexaubry/BulletinBoard/blob/master/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
 <li><a href="https://github.com/alexaubry/BulletinBoard/blob/master/CONTRIBUTING.md">Contribution Guidelines</a></li>
 </ul>
+<h2 id='apps-using-em-bulletinboard-em' class='heading'>Apps Using <em>BulletinBoard</em></h2>
+
+<p>Feel free to submit a PR if you’re using this library in your apps.</p>
 <h2 id='author' class='heading'>Author</h2>
 
 <p>Written by Alexis Aubry. You can <a href="https://twitter.com/_alexaubry">find me on Twitter</a>.</p>
