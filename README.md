@@ -236,9 +236,9 @@ This creates the following interaction:
 
 ![Activity Indicator](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_activity.png)
 
-## Automatic Dismissal
+## Dismissal
 
-If you set the `isDismissable` property to `true`, the user will be able to dismiss the bulletin by tapping outside of the card.
+If you set the `isDismissable` property to `true`, the user will be able to dismiss the bulletin by tapping outside of the card or by swiping the card down.
 
 You should set this property to `true` for the last item.
 
