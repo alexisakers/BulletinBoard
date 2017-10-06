@@ -18,9 +18,11 @@ before_script:
 
 script:
   # Build Framework
-  - set -o pipefail && xcodebuild clean build -workspace "$WORKSPACE" -scheme "BulletinBoard" -destination "$DESTINATION" | xcpretty
+  - set -o pipefail && xcodebuild clean build -workspace "$WORKSPACE" -scheme "BulletinBoard" -destination "$DESTINATION" SWIFT_VERSION="3.0" | xcpretty
+  - set -o pipefail && xcodebuild clean build -workspace "$WORKSPACE" -scheme "BulletinBoard" -destination "$DESTINATION" SWIFT_VERSION="4.0" | xcpretty
   # Build Demo Project
   - set -o pipefail && xcodebuild clean build -workspace "$WORKSPACE" -scheme "Instanimal" -destination "$DESTINATION" | xcpretty
   # Build Project with Package Managers
   - carthage build --platform $PLATFORM --no-skip-current
-  - pod lib lint
+  - pod lib lint --swift-version=3.0
+  - pod lib lint --swift-version=4.0

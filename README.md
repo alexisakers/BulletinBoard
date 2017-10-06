@@ -20,7 +20,7 @@ Here are some screenshots showing what you can build with BulletinBoard:
 ## Requirements
 
 - iOS 9 and later
-- Swift 4
+- Swift 3.2 and later
 
 ## Demo
 

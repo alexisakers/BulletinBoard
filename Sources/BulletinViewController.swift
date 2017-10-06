@@ -90,10 +90,10 @@ final class BulletinViewController: UIViewController {
         centerXConstraint = contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
 
         minWidthConstraint = contentView.widthAnchor.constraint(equalToConstant: 444)
-        minWidthConstraint.priority = .defaultHigh
+        minWidthConstraint.priority = UILayoutPriorityDefaultHigh
 
         let maxWidthConstraint = contentView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, constant: -24)
-        maxWidthConstraint.priority = .required
+        maxWidthConstraint.priority = UILayoutPriorityRequired
         maxWidthConstraint.isActive = true
 
         containerBottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -115,11 +115,11 @@ final class BulletinViewController: UIViewController {
 
         let topConstraint = contentView.topAnchor.constraint(equalTo: contentStackView.topAnchor, constant: -24)
         topConstraint.isActive = true
-        topConstraint.priority = .defaultHigh
+        topConstraint.priority = UILayoutPriorityDefaultHigh
 
         let minYConstraint = contentView.topAnchor.constraint(greaterThanOrEqualTo: topLayoutGuide.bottomAnchor)
         minYConstraint.isActive = true
-        minYConstraint.priority = .required
+        minYConstraint.priority = UILayoutPriorityRequired
 
         contentStackView.axis = .vertical
         contentStackView.alignment = .fill
@@ -240,3 +240,10 @@ final class BulletinViewController: UIViewController {
     }
 
 }
+
+// MARK: - Swift Compatibility
+
+#if swift(>=4.0)
+private let UILayoutPriorityRequired = UILayoutPriority.required
+private let UILayoutPriorityDefaultHigh = UILayoutPriority.defaultHigh
+#endif

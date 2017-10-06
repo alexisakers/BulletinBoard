@@ -66,7 +66,7 @@ public class BulletinInterfaceFactory {
         titleLabel.numberOfLines = 1
         titleLabel.adjustsFontSizeToFitWidth = true
 
-        titleLabel.font = UIFont.systemFont(ofSize: titleFontSize, weight: .medium)
+        titleLabel.font = UIFont.systemFont(ofSize: titleFontSize, weight: UIFontWeightMedium)
 
         return titleLabel
 
@@ -112,12 +112,12 @@ public class BulletinInterfaceFactory {
         actionButton.autoresizingMask = .flexibleWidth
 
         actionButton.setTitle(title, for: .normal)
-        actionButton.titleLabel?.font = UIFont.systemFont(ofSize: actionButtonFontSize, weight: .semibold)
+        actionButton.titleLabel?.font = UIFont.systemFont(ofSize: actionButtonFontSize, weight: UIFontWeightSemibold)
 
         actionButton.layer.cornerRadius = 12
         actionButton.clipsToBounds = true
 
-        let actionContainer = ContainerView(actionButton)
+        let actionContainer = ContainerView<HighlightButton>(actionButton)
         actionContainer.heightAnchor.constraint(equalToConstant: 55).isActive = true
 
         return actionContainer
@@ -161,3 +161,10 @@ public class BulletinInterfaceFactory {
     }
 
 }
+
+// MARK: - Swift Compatibility
+
+#if swift(>=4.0)
+private let UIFontWeightMedium = UIFont.Weight.medium
+private let UIFontWeightSemibold = UIFont.Weight.semibold
+#endif
