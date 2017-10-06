@@ -199,6 +199,8 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
                 arrangedSubview.removeFromSuperview()
             }
 
+            self.viewController.resetContentView()
+
         }
 
         currentItem = rootItem
