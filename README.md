@@ -69,7 +69,7 @@ The library provides a standard item type: `PageBulletinItem`. If you need to cu
 
 To display bulletins you first need to create the root item to display (explained in the next sections).
 
-With this root item, you need to create a `BulletinManager`. We recommand to put it in the view controller that will display the bulletin.
+With this root item, you need to create a `BulletinManager`. We recommend putting it in the view controller that will display the bulletin.
 
 ~~~swift
 class ViewController: UIViewController {
