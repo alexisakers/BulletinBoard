@@ -95,6 +95,26 @@ Always call `prepare()` before calling `presentBulletin()`! Failure to do so wil
 
 For the case of onboarding, you can call it in `viewWillAppear(animated:)` after checking if the user has already completed onboarding.
 
+To change background view style, set it in `presentBulletin()`:
+
+~~~swift
+bulletinManager.prepare()
+bulletinManager.presentBulletin(above: self, backgroundStyle: .blurredExtraLight)
+~~~
+
+There are several styles available:
+
+~~~swift
+public enum BackgroundViewStyle {
+    case dimmed
+    case blurredLight
+    case blurredExtraLight
+    case blurredDark
+}
+~~~
+
+![Background Style](https://raw.githubusercontent.com/buddax2/BulletinBoard/master/.assets/demo_background_styles.png)
+
 ## Creating Page Items
 
 You can create standard page items using the `PageBulletinItem` class.
@@ -298,3 +318,5 @@ Written by Alexis Aubry. You can [find me on Twitter](https://twitter.com/_alexa
 ## License
 
 BulletinBoard is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
+
+
