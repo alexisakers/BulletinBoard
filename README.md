@@ -113,7 +113,7 @@ public enum BackgroundViewStyle {
 }
 ~~~
 
-![Background Style](https://raw.githubusercontent.com/buddax2/BulletinBoard/master/.assets/demo_background_styles.png)
+![Background Style](https://raw.githubusercontent.com/buddax2/BulletinBoard/blurredBackgroundView/.assets/demo_background_styles.png)
 
 ## Creating Page Items
 
