@@ -100,7 +100,7 @@ class ViewController: UIViewController {
 
     func showBulletin() {
         bulletinManager.prepare()
-        bulletinManager.presentBulletin(above: self)
+        bulletinManager.presentBulletin(above: self, backgroundStyle: .blurredExtraLight)
     }
 
     // MARK: - Actions

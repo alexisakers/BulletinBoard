@@ -26,6 +26,8 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
 
     // MARK: - Private Properties
 
+    private var backgroundViewStyle: BackgroundViewStyle = .dimmed
+    
     private let rootItem: BulletinItem
 
     private var itemsStack: [BulletinItem]
@@ -170,11 +172,15 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
 
     public func presentBulletin(above presentingVC: UIViewController,
                                 animated: Bool = true,
+                                backgroundStyle: BackgroundViewStyle? = nil,
                                 completion: (() -> Void)? = nil) {
 
         precondition(Thread.isMainThread)
         precondition(isPrepared, "You must call the `prepare` function before interacting with the bulletin.")
 
+        if let backgroundStyle = backgroundStyle {
+            self.backgroundViewStyle = backgroundStyle
+        }
         presentingVC.present(viewController, animated: animated, completion: completion)
 
     }
@@ -227,7 +233,7 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
         precondition(Thread.isMainThread)
 
         if presented is BulletinViewController {
-            return DimmingPresentationController(presentedViewController: presented, presenting: presenting)
+            return DimmingPresentationController(presentedViewController: presented, presenting: presenting, style: backgroundViewStyle)
         }
 
         return nil
