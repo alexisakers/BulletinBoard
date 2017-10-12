@@ -26,7 +26,7 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
 
     // MARK: - Private Properties
 
-    private var backgroundViewStyle: BackgroundViewStyle = .dimmed
+    private var backgroundViewStyle: BackgroundViewStyle?
     
     private let rootItem: BulletinItem
 
@@ -167,20 +167,19 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
      *
      * - parameter presentingVC: The view controller to use to present the bulletin.
      * - parameter animated: Whether to animate presentation. Defaults to `true`.
+     * - parameter backgroundStyle: Style which applies to the dimming view. Default to `.dimmed` .
      * - parameter completion: An optional block to execute after presentation. Default to `nil`.
      */
 
     public func presentBulletin(above presentingVC: UIViewController,
                                 animated: Bool = true,
-                                backgroundStyle: BackgroundViewStyle? = nil,
+                                backgroundStyle: BackgroundViewStyle = .dimmed,
                                 completion: (() -> Void)? = nil) {
 
         precondition(Thread.isMainThread)
         precondition(isPrepared, "You must call the `prepare` function before interacting with the bulletin.")
 
-        if let backgroundStyle = backgroundStyle {
-            self.backgroundViewStyle = backgroundStyle
-        }
+        self.backgroundViewStyle = backgroundStyle
         presentingVC.present(viewController, animated: animated, completion: completion)
 
     }
