@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		550675691F90A0A500874D8B /* BulletinBackgroundViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550675681F90A0A500874D8B /* BulletinBackgroundViewStyle.swift */; };
 		5568227E1F864B270038E8DD /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568227D1F864B270038E8DD /* ActivityIndicator.swift */; };
 		558A12301F7D73CD005EC97C /* BulletinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122A1F7D73CD005EC97C /* BulletinManager.swift */; };
 		558A12311F7D73CD005EC97C /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122B1F7D73CD005EC97C /* ContainerView.swift */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		52D6D97C1BEFF229002C0205 /* BulletinBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BulletinBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		550675681F90A0A500874D8B /* BulletinBackgroundViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinBackgroundViewStyle.swift; sourceTree = "<group>"; };
 		5568227D1F864B270038E8DD /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		558A122A1F7D73CD005EC97C /* BulletinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletinManager.swift; sourceTree = "<group>"; };
 		558A122B1F7D73CD005EC97C /* ContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				558A122A1F7D73CD005EC97C /* BulletinManager.swift */,
 				55DADE791F7D9428001B11A2 /* BulletinInterfaceFactory.swift */,
 				558A122C1F7D73CD005EC97C /* BulletinViewController.swift */,
+				550675681F90A0A500874D8B /* BulletinBackgroundViewStyle.swift */,
 				55DADEB81F8153B3001B11A2 /* Support */,
 			);
 			path = Sources;
@@ -177,6 +180,7 @@
 				558A12341F7D73CD005EC97C /* DimmingPresentationController.swift in Sources */,
 				558A12311F7D73CD005EC97C /* ContainerView.swift in Sources */,
 				558A12301F7D73CD005EC97C /* BulletinManager.swift in Sources */,
+				550675691F90A0A500874D8B /* BulletinBackgroundViewStyle.swift in Sources */,
 				558A12351F7D73CD005EC97C /* PageBulletinItem.swift in Sources */,
 				5568227E1F864B270038E8DD /* ActivityIndicator.swift in Sources */,
 				558A12321F7D73CD005EC97C /* BulletinViewController.swift in Sources */,

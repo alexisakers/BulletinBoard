@@ -14,12 +14,22 @@ import BulletinBoard
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var styleButtonItem: UIBarButtonItem!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var showIntoButtonItem: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView!
 
     /// The data provider for the collection view.
     private var dataSource: CollectionDataSource!
+
+    // MARK: - Customization
+
+    /// The available background styles.
+    let backgroundStyles = BackgroundStyles()
+
+    /// The current background style.
+    var currentBackground = (name: "Dimmed", style: BulletinBackgroundViewStyle.dimmed)
+
 
     // MARK: - Bulletin Manager
 
@@ -47,6 +57,8 @@ class ViewController: UIViewController {
         let favoriteTab = BulletinDataSource.favoriteTabIndex
         segmentedControl.selectedSegmentIndex = favoriteTab
         dataSource = favoriteTab == 0 ? .cat : .dog
+
+        styleButtonItem.title = currentBackground.name
 
         // Set up the collection view
 
@@ -100,10 +112,38 @@ class ViewController: UIViewController {
 
     func showBulletin() {
         bulletinManager.prepare()
-        bulletinManager.presentBulletin(above: self)
+        bulletinManager.presentBulletin(above: self, backgroundStyle: currentBackground.style)
     }
 
     // MARK: - Actions
+
+    @IBAction func styleButtonTapped(_ sender: Any) {
+
+        let styleSelectorSheet = UIAlertController(title: "Bulletin Background Style",
+                                                   message: nil,
+                                                   preferredStyle: .actionSheet)
+
+        for backgroundStyle in backgroundStyles {
+
+            let action = UIAlertAction(title: backgroundStyle.name, style: .default) { _ in
+                self.styleButtonItem.title = backgroundStyle.name
+                self.currentBackground = backgroundStyle
+            }
+
+            let isSelected = backgroundStyle.name == currentBackground.name
+            action.setValue(isSelected, forKey: "checked")
+
+            styleSelectorSheet.addAction(action)
+
+        }
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        styleSelectorSheet.addAction(cancelAction)
+
+        present(styleSelectorSheet, animated: true)
+
+    }
+
 
     @IBAction func showIntroButtonTapped(_ sender: UIBarButtonItem) {
         showBulletin()
