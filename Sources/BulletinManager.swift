@@ -26,7 +26,7 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
 
     // MARK: - Private Properties
 
-    private var backgroundViewStyle: BackgroundViewStyle?
+    private var backgroundViewStyle: BulletinBackgroundViewStyle?
     
     private let rootItem: BulletinItem
 
@@ -173,7 +173,7 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
 
     public func presentBulletin(above presentingVC: UIViewController,
                                 animated: Bool = true,
-                                backgroundStyle: BackgroundViewStyle = .dimmed,
+                                backgroundStyle: BulletinBackgroundViewStyle = .dimmed,
                                 completion: (() -> Void)? = nil) {
 
         precondition(Thread.isMainThread)

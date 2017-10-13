@@ -50,6 +50,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="cae-YT-ehs">
                         <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" title="%@STYLE%@" id="euD-bA-1s9">
+                            <connections>
+                                <action selector="styleButtonTapped:" destination="BYZ-38-t0r" id="1rg-Du-hGB"/>
+                            </connections>
+                        </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="nJY-e8-Bxo">
                             <rect key="frame" x="141" y="7" width="93" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -71,6 +76,7 @@
                         <outlet property="collectionView" destination="YHu-o9-ydd" id="rNj-Cu-gIm"/>
                         <outlet property="segmentedControl" destination="nJY-e8-Bxo" id="yMc-mY-K37"/>
                         <outlet property="showIntoButtonItem" destination="EpR-v7-nqd" id="JpO-bg-kRh"/>
+                        <outlet property="styleButtonItem" destination="euD-bA-1s9" id="kdp-XB-EEC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
