@@ -71,6 +71,10 @@ class ViewController: UIViewController {
         let guide = view.readableContentGuide
         collectionView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
+        collectionView.topAnchor.constraint(equalTo: guide.topAnchor).isActive = true
+
+        collectionView.contentInset.top = 8
+        collectionView.contentInset.bottom = 8
 
     }
 
