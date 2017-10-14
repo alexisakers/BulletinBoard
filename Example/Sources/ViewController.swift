@@ -115,8 +115,9 @@ class ViewController: UIViewController {
      */
 
     func showBulletin() {
+        bulletinManager.backgroundViewStyle = currentBackground.style
         bulletinManager.prepare()
-        bulletinManager.presentBulletin(above: self, backgroundStyle: currentBackground.style)
+        bulletinManager.presentBulletin(above: self)
     }
 
     // MARK: - Actions

@@ -12,6 +12,12 @@ import UIKit
 public enum BulletinBackgroundViewStyle {
 
     /**
+     * The background is not covered.
+     */
+
+    case none
+
+    /**
      * The background is covered with a semi-transparent view. Similar to the view displayed behind
      * UIKit alerts and action sheets.
      */

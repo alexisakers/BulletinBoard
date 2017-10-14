@@ -34,7 +34,7 @@ enum BulletinDataSource {
         page.descriptionText = "Discover curated images of the best pets in the world."
         page.actionButtonTitle = "Configure"
 
-        page.isDismissable = false
+        page.isDismissable = true
 
         page.actionHandler = { item in
             item.displayNextItem()

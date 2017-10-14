@@ -50,10 +50,8 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
     // MARK: - Private Interface Elements
 
-    private var panGesture: UIPanGestureRecognizer!
-
-    private let contentView = UIView()
-    private let activityIndicator = ActivityIndicator()
+    fileprivate let contentView = UIView()
+    fileprivate let activityIndicator = ActivityIndicator()
 
     private var containerBottomConstraint: NSLayoutConstraint!
 
@@ -64,6 +62,10 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     private var contentLeadingConstraint: NSLayoutConstraint!
     private var contentTrailingConstraint: NSLayoutConstraint!
     private var contentBottomConstraint: NSLayoutConstraint!
+
+    // MARK: - Private Controllers
+
+    fileprivate lazy var swipeInteractionController = BulletinSwipeInteractionController()
 
     // MARK: - Lifecycle
 
@@ -146,14 +148,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         contentView.backgroundColor = #colorLiteral(red: 0.9921568627, green: 1, blue: 1, alpha: 1)
         setUpLayout(with: traitCollection)
 
-        // Pan Gesture
-
-        panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
-        panGesture.maximumNumberOfTouches = 1
-        panGesture.cancelsTouchesInView = false
-        panGesture.delegate = self
-
-        contentView.addGestureRecognizer(panGesture)
+        swipeInteractionController.wire(to: self, contentView: contentView)
 
     }
 
@@ -207,7 +202,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
     }
 
-    func bottomSpacingForCurrentLayout() -> CGFloat {
+    private func bottomSpacingForCurrentLayout() -> CGFloat {
 
         let bottomInset: CGFloat
 
@@ -226,9 +221,9 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         containerBottomConstraint.constant = bottomSpacingForCurrentLayout()
     }
     
-    /// dismisses the presnted BulletinViewController if isDissmisable is set to true
+    /// Dismisses the presnted BulletinViewController if `isDissmisable` is set to `true`.
     @discardableResult
-    private func dismissIfPossible() -> Bool {
+    func dismissIfPossible() -> Bool {
     
         guard isDismissable else {
             return false
@@ -251,67 +246,26 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         return dismissIfPossible()
     }
 
-    // MARK: - Pan Gesture
+}
 
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        return !(touch.view is UIControl)
-    }
+// MARK: - Interactions
 
-    @objc private func handlePanGesture(gestureRecognizer: UIPanGestureRecognizer) {
-
-        switch gestureRecognizer.state {
-        case .began:
-            gestureRecognizer.setTranslation(.zero, in: contentView)
-
-        case .changed:
-            let translation = gestureRecognizer.translation(in: contentView)
-            updateContentView(forVerticalTranslation: translation.y)
-
-        case .ended:
-
-            let translation = gestureRecognizer.translation(in: contentView)
-            let dismissThreshold = 1/2 * contentView.frame.height
-
-            guard translation.y >= dismissThreshold && isDismissable else {
-
-                UIView.animate(withDuration: 0.25) {
-                    self.contentView.transform = .identity
-                }
-
-                return
-
-            }
-
-            dismissIfPossible()
-
-        default:
-            break
-
-        }
-
-    }
-
-    private func updateContentView(forVerticalTranslation translation: CGFloat) {
-
-        let translationFactor: CGFloat = translation < 0 ? 1/2 : 2/3
-
-        let contentViewTranslation: CGFloat
-
-        if translation < 0 || !(isDismissable) {
-
-            let frictionTranslation = 30 * atan(translation/120) + translation/10
-            contentViewTranslation = frictionTranslation * translationFactor
-
-        } else {
-            contentViewTranslation = translation * translationFactor
-        }
-
-        contentView.transform = CGAffineTransform(translationX: 0, y: contentViewTranslation)
-
-    }
+extension BulletinViewController: UIViewControllerTransitioningDelegate {
 
     func resetContentView() {
         contentView.transform = .identity
+    }
+
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return BulletinPresentationAnimationController(style: manager?.backgroundViewStyle ?? .dimmed)
+    }
+
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return BulletinDismissAnimationController()
+    }
+
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return swipeInteractionController.isInteractionInProgress ? swipeInteractionController : nil
     }
 
 }

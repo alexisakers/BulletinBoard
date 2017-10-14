@@ -8,6 +8,7 @@ import BulletinBoard
 func BackgroundStyles() -> [(name: String, style: BulletinBackgroundViewStyle)] {
 
     var styles: [(name: String, style: BulletinBackgroundViewStyle)] = [
+        ("None", .none),
         ("Dimmed", .dimmed),
         ("Extra Light", .blurredExtraLight),
         ("Light", .blurredLight),

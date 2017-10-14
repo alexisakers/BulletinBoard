@@ -19,14 +19,15 @@ import UIKit
  * `BulletinManager` must be used on the main thread only.
  */
 
-public final class BulletinManager: NSObject, UIViewControllerTransitioningDelegate {
+public final class BulletinManager {
 
     /// The view controller displaying the bulletin.
     private let viewController: BulletinViewController
 
-    // MARK: - Private Properties
+    /// The style of the view covering the content. Default to `.dimmed` .
+    public var backgroundViewStyle: BulletinBackgroundViewStyle = .dimmed
 
-    private var backgroundViewStyle: BulletinBackgroundViewStyle?
+    // MARK: - Private Properties
     
     private let rootItem: BulletinItem
 
@@ -68,8 +69,8 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
         precondition(Thread.isMainThread)
 
         viewController.modalPresentationStyle = .custom
-        viewController.transitioningDelegate = self
         viewController.manager = self
+        viewController.transitioningDelegate = viewController
 
         isPrepared = true
         isPreparing = true
@@ -167,19 +168,16 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
      *
      * - parameter presentingVC: The view controller to use to present the bulletin.
      * - parameter animated: Whether to animate presentation. Defaults to `true`.
-     * - parameter backgroundStyle: Style which applies to the dimming view. Default to `.dimmed` .
      * - parameter completion: An optional block to execute after presentation. Default to `nil`.
      */
 
     public func presentBulletin(above presentingVC: UIViewController,
                                 animated: Bool = true,
-                                backgroundStyle: BulletinBackgroundViewStyle = .dimmed,
                                 completion: (() -> Void)? = nil) {
 
         precondition(Thread.isMainThread)
         precondition(isPrepared, "You must call the `prepare` function before interacting with the bulletin.")
 
-        self.backgroundViewStyle = backgroundStyle
         presentingVC.present(viewController, animated: animated, completion: completion)
 
     }
@@ -224,22 +222,7 @@ public final class BulletinManager: NSObject, UIViewControllerTransitioningDeleg
 
     }
 
-    /// Returns the presentation controller for the bulletin view controller.
-    public func presentationController(forPresented presented: UIViewController,
-                                presenting: UIViewController?,
-                                source: UIViewController) -> UIPresentationController? {
-
-        precondition(Thread.isMainThread)
-
-        if presented is BulletinViewController {
-            return DimmingPresentationController(presentedViewController: presented, presenting: presenting, style: backgroundViewStyle)
-        }
-
-        return nil
-
-    }
-
-    // MARK: - Management
+    // MARK: - Transitions
 
     private func displayCurrentItem() {
 
