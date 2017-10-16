@@ -12,6 +12,12 @@ import UIKit
 final class BulletinViewController: UIViewController, UIGestureRecognizerDelegate {
 
     /**
+     * The subview that contains the contents of the card.
+     */
+
+    let contentView = UIView()
+
+    /**
      * The stack view displaying the content of the card.
      *
      * - warning: You should not customize the distribution, axis and alignment of the stack, as this
@@ -21,39 +27,20 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     let contentStackView = UIStackView()
 
     /**
+     * The view covering the content. Generated in `loadBackgroundView`.
+     */
+
+    var backgroundView: BulletinBackgroundView!
+
+    /**
      * Indicates whether the bulletin can be dismissed by a tap outside the card.
      */
 
     var isDismissable: Bool = false
 
-    // MARK: - Activity Indicator
-
-    func displayActivityIndicator() {
-
-        activityIndicator.startAnimating()
-
-        let animations = {
-            self.activityIndicator.alpha = 1
-            self.contentStackView.alpha = 0
-        }
-
-        UIView.animate(withDuration: 0.25, animations: animations) { _ in
-            UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self.activityIndicator)
-        }
-
-    }
-
-    func hideActivityIndicator() {
-        activityIndicator.stopAnimating()
-        activityIndicator.alpha = 0
-    }
-
     // MARK: - Private Interface Elements
 
-    fileprivate let contentView = UIView()
     fileprivate let activityIndicator = ActivityIndicator()
-
-    private var containerBottomConstraint: NSLayoutConstraint!
 
     private var leadingConstraint: NSLayoutConstraint!
     private var trailingConstraint: NSLayoutConstraint!
@@ -61,11 +48,23 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     private var minWidthConstraint: NSLayoutConstraint!
     private var contentLeadingConstraint: NSLayoutConstraint!
     private var contentTrailingConstraint: NSLayoutConstraint!
-    private var contentBottomConstraint: NSLayoutConstraint!
+
+    private var presentation_containerTopConstraint: NSLayoutConstraint!
+    private var presentation_containerBottomConstraint: NSLayoutConstraint!
+    private var presentation_contentOriginConstraint: NSLayoutConstraint!
+
+    private var dismissal_containerTopConstraint: NSLayoutConstraint!
+    private var dismissal_containerBottomConstraint: NSLayoutConstraint!
+    private var dismissal_contentOriginConstraint: NSLayoutConstraint!
 
     // MARK: - Private Controllers
 
-    fileprivate lazy var swipeInteractionController = BulletinSwipeInteractionController()
+    fileprivate var swipeInteractionController: BulletinSwipeInteractionController!
+
+    func refreshSwipeInteractionController() {
+        swipeInteractionController = BulletinSwipeInteractionController()
+        swipeInteractionController.wire(to: self)
+    }
 
     // MARK: - Lifecycle
 
@@ -100,9 +99,23 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         maxWidthConstraint.priority = UILayoutPriorityRequired
         maxWidthConstraint.isActive = true
 
-        containerBottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        containerBottomConstraint.isActive = true
-        containerBottomConstraint.constant = bottomSpacingForCurrentLayout()
+        // Adaptative Constraints
+
+        presentation_containerTopConstraint = contentView.topAnchor.constraint(equalTo: contentStackView.topAnchor)
+        presentation_contentOriginConstraint = contentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        presentation_containerBottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+
+        presentation_containerTopConstraint.priority = UILayoutPriorityDefaultHigh
+        presentation_contentOriginConstraint.priority = UILayoutPriorityDefaultHigh
+        presentation_containerBottomConstraint.priority = UILayoutPriorityDefaultHigh
+
+        dismissal_containerTopConstraint = contentView.topAnchor.constraint(equalTo: view.bottomAnchor)
+        dismissal_contentOriginConstraint = contentStackView.topAnchor.constraint(equalTo: contentView.topAnchor)
+        dismissal_containerBottomConstraint = contentView.bottomAnchor.constraint(equalTo: contentStackView.bottomAnchor)
+
+        dismissal_containerTopConstraint.priority = UILayoutPriorityRequired
+        dismissal_contentOriginConstraint.priority = UILayoutPriorityRequired
+        dismissal_containerBottomConstraint.priority = UILayoutPriorityRequired
 
         // Content Stack View
 
@@ -113,13 +126,6 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
         contentTrailingConstraint = contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -36)
         contentTrailingConstraint.isActive = true
-
-        contentBottomConstraint = contentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24)
-        contentBottomConstraint.isActive = true
-
-        let topConstraint = contentView.topAnchor.constraint(equalTo: contentStackView.topAnchor, constant: -24)
-        topConstraint.isActive = true
-        topConstraint.priority = UILayoutPriorityDefaultHigh
 
         let minYConstraint = contentView.topAnchor.constraint(greaterThanOrEqualTo: topLayoutGuide.bottomAnchor)
         minYConstraint.isActive = true
@@ -147,8 +153,6 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
         contentView.backgroundColor = #colorLiteral(red: 0.9921568627, green: 1, blue: 1, alpha: 1)
         setUpLayout(with: traitCollection)
-
-        swipeInteractionController.wire(to: self, contentView: contentView)
 
     }
 
@@ -187,16 +191,26 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         case (.regular, .regular):
             contentLeadingConstraint.constant = 32
             contentTrailingConstraint.constant = -32
-            contentBottomConstraint.constant = -24
-
             contentStackView.spacing = 32
+
+            presentation_contentOriginConstraint.constant = -32
+            presentation_containerTopConstraint.constant = -32
+            presentation_containerBottomConstraint.constant = bottomSpacingForCurrentLayout()
+
+            dismissal_contentOriginConstraint.constant = 32
+            dismissal_containerBottomConstraint.constant = 32
 
         default:
             contentLeadingConstraint.constant = 24
             contentTrailingConstraint.constant = -24
-            contentBottomConstraint.constant = -16
-
             contentStackView.spacing = 24
+
+            presentation_contentOriginConstraint.constant = -24
+            presentation_containerTopConstraint.constant = -24
+            presentation_containerBottomConstraint.constant = bottomSpacingForCurrentLayout()
+
+            dismissal_contentOriginConstraint.constant = 24
+            dismissal_containerBottomConstraint.constant = 24
 
         }
 
@@ -218,9 +232,46 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     }
 
     override func viewSafeAreaInsetsDidChange() {
-        containerBottomConstraint.constant = bottomSpacingForCurrentLayout()
+        presentation_containerBottomConstraint.constant = bottomSpacingForCurrentLayout()
     }
-    
+
+    // MARK: - Transition Adaptivity
+
+    func layoutForPresentation() {
+
+        dismissal_containerTopConstraint.isActive = false
+        dismissal_containerBottomConstraint.isActive = false
+        dismissal_contentOriginConstraint.isActive = false
+
+        presentation_containerTopConstraint.isActive = true
+        presentation_containerBottomConstraint.isActive = true
+        presentation_contentOriginConstraint.isActive = true
+
+        view.layoutIfNeeded()
+        contentView.layoutIfNeeded()
+        backgroundView.layoutIfNeeded()
+
+    }
+
+    func layoutForDismissal() {
+
+        presentation_containerBottomConstraint.isActive = false
+
+        dismissal_containerTopConstraint.isActive = true
+        dismissal_contentOriginConstraint.isActive = true
+
+        view.layoutIfNeeded()
+        contentView.layoutIfNeeded()
+        backgroundView.layoutIfNeeded()
+
+    }
+
+    // MARK: - Presentation/Dismissal
+
+    func loadBackgroundView() {
+        backgroundView = BulletinBackgroundView(style: manager?.backgroundViewStyle ?? .dimmed)
+    }
+
     /// Dismisses the presnted BulletinViewController if `isDissmisable` is set to `true`.
     @discardableResult
     func dismissIfPossible() -> Bool {
@@ -252,6 +303,26 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
 extension BulletinViewController: UIViewControllerTransitioningDelegate {
 
+    func displayActivityIndicator() {
+
+        activityIndicator.startAnimating()
+
+        let animations = {
+            self.activityIndicator.alpha = 1
+            self.contentStackView.alpha = 0
+        }
+
+        UIView.animate(withDuration: 0.25, animations: animations) { _ in
+            UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self.activityIndicator)
+        }
+
+    }
+
+    func hideActivityIndicator() {
+        activityIndicator.stopAnimating()
+        activityIndicator.alpha = 0
+    }
+
     func resetContentView() {
         contentView.transform = .identity
     }
@@ -275,4 +346,5 @@ extension BulletinViewController: UIViewControllerTransitioningDelegate {
 #if swift(>=4.0)
 private let UILayoutPriorityRequired = UILayoutPriority.required
 private let UILayoutPriorityDefaultHigh = UILayoutPriority.defaultHigh
+private let UILayoutPriorityDefaultLow = UILayoutPriority.defaultLow
 #endif

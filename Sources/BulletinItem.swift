@@ -28,7 +28,7 @@ public protocol BulletinItem: class {
      * Whether the page can be dismissed.
      *
      * If you set this value to `true`, the user will be able to dismiss the bulletin by tapping outside
-     * the card.
+     * of the card or by swiping down.
      *
      * You should set it to `true` for the last item you want to display.
      */
@@ -38,23 +38,24 @@ public protocol BulletinItem: class {
     /**
      * The item to display after this one.
      *
-     * If you set this value, you'll be able to call `displayNextItem()` to present the next item to
+     * If you set this value, you'll be able to call `displayNextItem()` to push the next item to
      * the stack.
      */
 
     var nextItem: BulletinItem? { get set }
 
     /**
-     * Creates the list of views to display on the bulletin.
+     * Creates the list of views to display in the bulletin.
      *
-     * The views will be arranged vertically in the order they are stored in the array.
+     * The views will be arranged vertically in the order they are stored in the array returned by
+     * this function.
      */
 
     func makeArrangedSubviews() -> [UIView]
 
     /**
-     * Called by the manager when the item was removed from the bulletin view. Use this function
-     * to remove any button target or gesture recognizers from your managed views.
+     * Called by the manager when the item was removed from the bulletin. Use this function to
+     * remove any button target or gesture recognizers from your managed views.
      */
 
     func tearDown()
@@ -64,7 +65,8 @@ public protocol BulletinItem: class {
 extension BulletinItem {
 
     /**
-     * Displays the next item if it was set.
+     * A convenience method to display the next bulletin item. If the `nextItem` property contains
+     * a bulletin item, this method will push it to the stack and display it.
      */
 
     public func displayNextItem() {

@@ -1,3 +1,8 @@
+/**
+ *  BulletinBoard
+ *  Copyright (c) 2017 Alexis Aubry. Licensed under the MIT license.
+ */
+
 import UIKit
 
 /**
@@ -12,10 +17,10 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
     // MARK: - State
 
     private var isFinished = false
-    private var viewController: BulletinViewController!
     private var contentView: UIView!
-
     private var currentPercentage: CGFloat = -1
+
+    private weak var viewController: BulletinViewController!
 
     // MARK: - Preparation
 
@@ -23,9 +28,9 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
      * Sets up the interaction recognizer for the given view controller and content view.
      */
 
-    func wire(to viewController: BulletinViewController, contentView: UIView) {
+    func wire(to viewController: BulletinViewController) {
         self.viewController = viewController
-        self.contentView = contentView
+        self.contentView = viewController.contentView
         prepareGestureRecognizer()
     }
 
@@ -58,6 +63,8 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
 
             isFinished = false
 
+            gestureRecognizer.setTranslation(.zero, in: contentView)
+
             guard viewController.isDismissable else {
                 isInteractionInProgress = false
                 return
@@ -74,13 +81,10 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
                 return
             }
 
+            isFinished = false
+
             guard (translation > 0) && isInteractionInProgress else {
-                isFinished = false
-
-                if currentPercentage == -1 {
-                    update(0)
-                }
-
+                update(0)
                 updateContentView(forVerticalTranslation: translation)
                 return
             }
@@ -94,13 +98,11 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
                 return
             }
 
-            isFinished = false
-
             let adaptativeTranslation = self.adaptativeTranslation(for: translation, elasticThreshold: elasticThreshold)
             let trackScreenPercentage = dismissThreshold / viewController.view.bounds.height
-            let newPercentage = (adaptativeTranslation / dismissThreshold) * trackScreenPercentage
+            let newPercentage = (adaptativeTranslation / dismissThreshold) * (2.2 * trackScreenPercentage)
 
-            guard newPercentage != currentPercentage else {
+            guard currentPercentage != newPercentage else {
                 return
             }
 
@@ -112,13 +114,11 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
 
             if !isFinished {
                 resetContentView()
-                cancel()
             }
 
         case .ended:
 
             isInteractionInProgress = false
-            resetContentView()
 
             if !isFinished {
                 resetContentView()
@@ -133,9 +133,9 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
 
     // MARK: - Math
 
-    let elasticCurve = { (translation: CGFloat, translationFactor: CGFloat) -> CGFloat in
-        let frictionTranslation = 30 * atan(translation/120) + translation/10
-        return frictionTranslation * translationFactor
+    // Source: https://github.com/HarshilShah/DeckTransition
+    let elasticTranslationCurve = { (translation: CGFloat, translationFactor: CGFloat) -> CGFloat in
+        return 30 * atan(translation/120) + translation/10
     }
 
     private func adaptativeTranslation(for translation: CGFloat, elasticThreshold: CGFloat) -> CGFloat {
@@ -144,7 +144,7 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
 
         if translation >= elasticThreshold {
             let frictionLength = translation - elasticThreshold
-            let frictionTranslation = 30 * atan(frictionLength/120) + frictionLength/10
+            let frictionTranslation = elasticTranslationCurve(frictionLength, translationFactor)
             return frictionTranslation + (elasticThreshold * translationFactor)
         } else {
             return translation * translationFactor
@@ -155,14 +155,17 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
     private func transform(forVerticalTranslation translation: CGFloat) -> CGFloat {
 
         let translationFactor: CGFloat = 1/2
+        var adaptedTranslation = translation
 
         if translation < 0 || !(viewController.isDismissable) {
-            return elasticCurve(translation, translationFactor)
-        } else {
-            return translation * translationFactor
+            adaptedTranslation = elasticTranslationCurve(translation, translationFactor)
         }
 
+        return adaptedTranslation * translationFactor
+
     }
+
+    // MARK: - Position Management
 
     private func updateContentView(forVerticalTranslation translation: CGFloat) {
         let yTransform = transform(forVerticalTranslation: translation)
@@ -171,15 +174,17 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
 
     private func resetContentView() {
 
-        guard contentView.transform != .identity else {
-            return
-        }
+        let options: UIViewAnimationOptions = [.allowAnimatedContent, .curveLinear]
 
         let animations = {
             self.contentView.transform = .identity
         }
 
-        UIView.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions(rawValue: 7 << 16), animations: animations, completion: nil)
+        self.viewController.backgroundView.show()
+
+        UIView.animate(withDuration: 0.15, delay: 0, options: options, animations: animations) { _ in
+            self.cancel()
+        }
 
     }
 

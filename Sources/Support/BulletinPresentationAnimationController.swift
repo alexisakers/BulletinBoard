@@ -27,47 +27,59 @@ class BulletinPresentationAnimationController: NSObject, UIViewControllerAnimate
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
 
-        guard let toVC = transitionContext.viewController(forKey: .to) else {
-                return
+        guard let toVC = transitionContext.viewController(forKey: .to) as? BulletinViewController else {
+            return
         }
 
+        let rootView = toVC.view!
+        let contentView = toVC.contentView
+        let backgroundView = toVC.backgroundView!
         let containerView = transitionContext.containerView
 
-        // Prepare the background view
+        // Add root view
 
-        let backgroundView = BulletinBackgroundView(style: style)
+        rootView.frame = containerView.frame
+        rootView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(rootView)
 
-        containerView.insertSubview(backgroundView, at: 0)
+        NSLayoutConstraint.activate(
+            NSLayoutConstraint.constraints(withVisualFormat: "V:|[rootView]|",
+                                           options: [], metrics: nil, views: ["rootView": rootView])
+        )
+
+        NSLayoutConstraint.activate(
+            NSLayoutConstraint.constraints(withVisualFormat: "H:|[rootView]|",
+                                           options: [], metrics: nil, views: ["rootView": rootView])
+        )
+
+        // Prepare background view
+
+        rootView.insertSubview(backgroundView, at: 0)
 
         NSLayoutConstraint.activate(
             NSLayoutConstraint.constraints(withVisualFormat: "V:|[backgroundView]|",
-                                           options: [], metrics: nil, views: ["backgroundView": backgroundView]))
-        NSLayoutConstraint.activate(
+                                           options: [], metrics: nil, views: ["backgroundView": backgroundView])
+        )
+
+         NSLayoutConstraint.activate(
             NSLayoutConstraint.constraints(withVisualFormat: "H:|[backgroundView]|",
-                                           options: [], metrics: nil, views: ["backgroundView": backgroundView]))
+                                           options: [], metrics: nil, views: ["backgroundView": backgroundView])
+        )
+
+        rootView.layoutIfNeeded()
+        contentView.layoutIfNeeded()
+        backgroundView.layoutIfNeeded()
 
         // Animate presentation
-
-        let origin = containerView.frame.height
-        toVC.view.frame.origin.y = origin
-
-        containerView.addSubview(toVC.view)
 
         let duration = transitionDuration(using: transitionContext)
         let options = UIViewAnimationOptions(rawValue: 7 << 16)
 
+        toVC.layoutForDismissal()
+
         let animations = {
-
-            toVC.view.frame.origin.y = 0
-
-            switch backgroundView.contentView! {
-            case .dim(let dimmingView, let maxAlpha):
-                dimmingView.alpha = maxAlpha
-
-            case .blur(let blurView, let blurEffect):
-                blurView.effect = blurEffect
-            }
-
+            toVC.layoutForPresentation()
+            backgroundView.show()
         }
 
         UIView.animate(withDuration: duration, delay: 0, options: options, animations: animations) { _ in

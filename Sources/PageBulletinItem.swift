@@ -9,8 +9,9 @@ import UIKit
  * A standard bulletin item with a title and optional additional informations. It can display a large
  * action button and a smaller button for alternative options.
  *
- * You can override this class to add custom button handling. Override the `actionButtonTapped(sender:)`
- * and `alternativeButtonTapped(sender:)` to handle tap events. Make sure to call `super` if you do.
+ * You can override this class to perform custom button handling. Override the `actionButtonTapped(sender:)`
+ * and `alternativeButtonTapped(sender:)` to handle tap events. Make sure to call `super` in your
+ * implementation if you do.
  */
 
 open class PageBulletinItem: BulletinItem {
@@ -19,7 +20,6 @@ open class PageBulletinItem: BulletinItem {
 
     /**
      * Creates a bulletin page with the specified title.
-     *
      * - parameter title: The title of the page.
      */
 
@@ -33,7 +33,7 @@ open class PageBulletinItem: BulletinItem {
     /// The title of the page.
     public let title: String
 
-    /// An image to display below the title. Should be less than or equal to 128x128px.
+    /// An image to display below the title. It should have a size of 128 pixels by 128 pixels.
     public var image: UIImage?
     
     /// An accessibility label which gets announced to VoiceOver users if the image gets focused.
@@ -52,10 +52,10 @@ open class PageBulletinItem: BulletinItem {
     // MARK: - BulletinItem
 
     /**
-     * The current object managing the item.
+     * The object managing the item.
      *
      * This property is set when the item is currently being displayed. It will be set to `nil` when
-     * the item is removed from view.
+     * the item is removed from bulletin.
      */
 
     public weak var manager: BulletinManager?
@@ -64,7 +64,7 @@ open class PageBulletinItem: BulletinItem {
      * Whether the page can be dismissed.
      *
      * If you set this value to `true`, the user will be able to dismiss the bulletin by tapping outside
-     * the card.
+     * of the card or by swiping down.
      *
      * You should set it to `true` for the last item you want to display.
      */
@@ -74,7 +74,7 @@ open class PageBulletinItem: BulletinItem {
     /**
      * The item to display after this one.
      *
-     * If you set this value, you'll be able to call `displayNextItem()` to present the next item to
+     * If you set this value, you'll be able to call `displayNextItem()` to push the next item to
      * the stack.
      */
 
@@ -106,13 +106,13 @@ open class PageBulletinItem: BulletinItem {
     fileprivate var alternativeButton: UIButton? = nil
 
     /**
-     * The code to execute when the action button is pressed.
+     * The code to execute when the action button is tapped.
      */
 
     public var actionHandler: ((PageBulletinItem) -> Void)? = nil
 
     /**
-     * The code to execute when the alternative button is pressed.
+     * The code to execute when the alternative button is tapped.
      */
 
     public var alternativeHandler: ((PageBulletinItem) -> Void)? = nil
@@ -165,8 +165,10 @@ open class PageBulletinItem: BulletinItem {
             let imageView = UIImageView()
             imageView.image = image
             imageView.contentMode = .scaleAspectFit
+
             imageView.heightAnchor.constraint(lessThanOrEqualToConstant: 128).isActive = true
-            
+            imageView.heightAnchor.constraint(greaterThanOrEqualToConstant: 64).isActive = true
+
             if let imageAccessibilityLabel = imageAccessibilityLabel {
                 imageView.isAccessibilityElement = true
                 imageView.accessibilityLabel = imageAccessibilityLabel
@@ -216,8 +218,7 @@ open class PageBulletinItem: BulletinItem {
     }
 
     /**
-     * Called by the manager when the item was removed from the bulletin view. Use this function
-     * to remove any button target or gesture recognizers from your managed views.
+     * Called by the manager when the item was removed from the bulletin view.
      *
      * This is an implementation detail of `BulletinItem` and you should not call it directly.
      */

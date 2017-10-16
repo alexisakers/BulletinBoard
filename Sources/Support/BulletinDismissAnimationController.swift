@@ -15,50 +15,39 @@ class BulletinDismissAnimationController: NSObject, UIViewControllerAnimatedTran
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
 
-        guard let fromVC = transitionContext.viewController(forKey: .from) else {
+        guard let fromVC = transitionContext.viewController(forKey: .from) as? BulletinViewController else {
             return
         }
 
-        guard let backgroundView = transitionContext.containerView.subviews.first(where: { $0 is BulletinBackgroundView }) as? BulletinBackgroundView else {
-            return
-        }
+        let rootView = fromVC.view!
+        let contentView = fromVC.contentView
+        let backgroundView = fromVC.backgroundView!
+
+        // Animate dismissal
 
         let duration = transitionDuration(using: transitionContext)
-        let options: UIViewAnimationOptions = [UIViewAnimationOptions.allowAnimatedContent, .beginFromCurrentState, .curveLinear]
+        let options = UIViewAnimationOptions(rawValue: 6 << 16)
+
+        rootView.layoutIfNeeded()
+        contentView.layoutIfNeeded()
+        backgroundView.layoutIfNeeded()
 
         let animations = {
-
-            fromVC.view.frame.origin.y = fromVC.view.frame.maxY
-
-            switch backgroundView.contentView! {
-            case .dim(let dimmingView, _):
-                dimmingView.alpha = 0
-
-            case .blur(let blurView, _):
-                blurView.effect = nil
-            }
-
+            fromVC.layoutForDismissal()
+            backgroundView.hide()
         }
 
         UIView.animate(withDuration: duration, delay: 0, options: options, animations: animations) { finished in
 
-            let cancelled = transitionContext.transitionWasCancelled
+            let isCancelled = transitionContext.transitionWasCancelled
 
-            if !cancelled {
-                backgroundView.removeFromSuperview()
+            if !isCancelled {
+                fromVC.view.removeFromSuperview()
             } else {
-
-                switch backgroundView.contentView! {
-                case .dim(let dimmingView, _):
-                    dimmingView.alpha = 1
-
-                case .blur(let blurView, let effect):
-                    blurView.effect = effect
-                }
-
+                fromVC.layoutForPresentation()
             }
 
-            transitionContext.completeTransition(!cancelled)
+            transitionContext.completeTransition(!isCancelled)
 
         }
 

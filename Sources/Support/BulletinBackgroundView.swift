@@ -103,4 +103,30 @@ class BulletinBackgroundView: UIView {
 
     }
 
+    // MARK: - Interactions
+
+    func show() {
+
+        switch contentView! {
+        case .dim(let dimmingView, let maxAlpha):
+            dimmingView.alpha = maxAlpha
+
+        case .blur(let blurView, let blurEffect):
+            blurView.effect = blurEffect
+        }
+
+    }
+
+    func hide() {
+
+        switch contentView! {
+        case .dim(let dimmingView, _):
+            dimmingView.alpha = 0
+
+        case .blur(let blurView, _):
+            blurView.effect = nil
+        }
+
+    }
+
 }
