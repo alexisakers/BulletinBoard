@@ -17,10 +17,16 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
     // MARK: - State
 
     private var isFinished = false
-    private var contentView: UIView!
     private var currentPercentage: CGFloat = -1
-
     private weak var viewController: BulletinViewController!
+
+    private var snapshotView: UIView? {
+        return viewController.activeSnapshotView
+    }
+
+    private var contentView: UIView {
+        return viewController.contentView
+    }
 
     // MARK: - Preparation
 
@@ -30,7 +36,6 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
 
     func wire(to viewController: BulletinViewController) {
         self.viewController = viewController
-        self.contentView = viewController.contentView
         prepareGestureRecognizer()
     }
 
@@ -94,11 +99,11 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
 
             guard (translation > 0) && isInteractionInProgress else {
                 update(0)
-                updateContentView(forVerticalTranslation: translation)
+                updateSnapshotView(forVerticalTranslation: translation)
                 return
             }
 
-            contentView.transform = .identity
+            snapshotView?.transform = .identity
 
             guard translation <= dismissThreshold else {
                 isFinished = true
@@ -109,15 +114,13 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
 
             let adaptativeTranslation = self.adaptativeTranslation(for: translation, elasticThreshold: elasticThreshold)
             let trackScreenPercentage = dismissThreshold / viewController.view.bounds.height
-            let newPercentage = (adaptativeTranslation / dismissThreshold) * (2.2 * trackScreenPercentage)
+            let newPercentage = 2 * (adaptativeTranslation / dismissThreshold) * trackScreenPercentage
 
             guard currentPercentage != newPercentage else {
                 return
             }
 
             currentPercentage = newPercentage
-
-            print("Current percentage: \(currentPercentage * 100)%")
             update(currentPercentage)
 
         case .cancelled, .failed:
@@ -180,17 +183,18 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
 
     // MARK: - Position Management
 
-    private func updateContentView(forVerticalTranslation translation: CGFloat) {
+    private func updateSnapshotView(forVerticalTranslation translation: CGFloat) {
         let yTransform = transform(forVerticalTranslation: translation)
-        contentView.transform = CGAffineTransform(translationX: 0, y: yTransform)
+        snapshotView?.transform = CGAffineTransform(translationX: 0, y: yTransform)
     }
 
     private func resetContentView() {
 
-        let options: UIViewAnimationOptions = [.allowAnimatedContent, .curveLinear]
+        let options: UIViewAnimationOptions = UIViewAnimationOptions(rawValue: 6 << 7)
 
         let animations = {
-            self.contentView.transform = .identity
+            self.snapshotView?.transform = .identity
+            return
         }
 
         self.viewController.backgroundView.show()

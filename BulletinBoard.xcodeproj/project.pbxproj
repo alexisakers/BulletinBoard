@@ -19,6 +19,7 @@
 		558A12331F7D73CD005EC97C /* HighlightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122D1F7D73CD005EC97C /* HighlightButton.swift */; };
 		558A12351F7D73CD005EC97C /* PageBulletinItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122F1F7D73CD005EC97C /* PageBulletinItem.swift */; };
 		558A12371F7D73E6005EC97C /* BulletinItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A12361F7D73E5005EC97C /* BulletinItem.swift */; };
+		55BF9C021F962FD700347D45 /* UIView+SafeAnchors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BF9C011F962FD700347D45 /* UIView+SafeAnchors.swift */; };
 		55DADE7A1F7D9428001B11A2 /* BulletinInterfaceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DADE791F7D9428001B11A2 /* BulletinInterfaceFactory.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,7 @@
 		558A122D1F7D73CD005EC97C /* HighlightButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighlightButton.swift; sourceTree = "<group>"; };
 		558A122F1F7D73CD005EC97C /* PageBulletinItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageBulletinItem.swift; sourceTree = "<group>"; };
 		558A12361F7D73E5005EC97C /* BulletinItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinItem.swift; sourceTree = "<group>"; };
+		55BF9C011F962FD700347D45 /* UIView+SafeAnchors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+SafeAnchors.swift"; sourceTree = "<group>"; };
 		55DADE791F7D9428001B11A2 /* BulletinInterfaceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinInterfaceFactory.swift; sourceTree = "<group>"; };
 		AD2FAA261CD0B6D800659CF4 /* BulletinBoard.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BulletinBoard.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,6 +88,7 @@
 				5543848A1F91FAC500AFFBCD /* BulletinPresentationAnimationController.swift */,
 				5543848E1F92050300AFFBCD /* BulletinDismissAnimationController.swift */,
 				5569CB7E1F920B72000F31EB /* BulletinSwipeInteractionController.swift */,
+				55BF9C011F962FD700347D45 /* UIView+SafeAnchors.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 				558A12311F7D73CD005EC97C /* ContainerView.swift in Sources */,
 				5543848D1F92026200AFFBCD /* BulletinBackgroundView.swift in Sources */,
 				558A12301F7D73CD005EC97C /* BulletinManager.swift in Sources */,
+				55BF9C021F962FD700347D45 /* UIView+SafeAnchors.swift in Sources */,
 				550675691F90A0A500874D8B /* BulletinBackgroundViewStyle.swift in Sources */,
 				5569CB7F1F920B72000F31EB /* BulletinSwipeInteractionController.swift in Sources */,
 				558A12351F7D73CD005EC97C /* PageBulletinItem.swift in Sources */,

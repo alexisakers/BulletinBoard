@@ -33,6 +33,12 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     var backgroundView: BulletinBackgroundView!
 
     /**
+     * The snapshot view of the content used during dismissal.
+     */
+
+    var activeSnapshotView: UIView?
+
+    /**
      * Indicates whether the bulletin can be dismissed by a tap outside the card.
      */
 
@@ -46,16 +52,13 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     private var trailingConstraint: NSLayoutConstraint!
     private var centerXConstraint: NSLayoutConstraint!
     private var minWidthConstraint: NSLayoutConstraint!
-    private var contentLeadingConstraint: NSLayoutConstraint!
-    private var contentTrailingConstraint: NSLayoutConstraint!
 
-    private var presentation_containerTopConstraint: NSLayoutConstraint!
-    private var presentation_containerBottomConstraint: NSLayoutConstraint!
-    private var presentation_contentOriginConstraint: NSLayoutConstraint!
+    private var stackLeadingConstraint: NSLayoutConstraint!
+    private var stackTrailingConstraint: NSLayoutConstraint!
+    private var stackBottomConstraint: NSLayoutConstraint!
+    private var contentTopConstraint: NSLayoutConstraint!
 
-    private var dismissal_containerTopConstraint: NSLayoutConstraint!
-    private var dismissal_containerBottomConstraint: NSLayoutConstraint!
-    private var dismissal_contentOriginConstraint: NSLayoutConstraint!
+    private var contentBottomConstraint: NSLayoutConstraint!
 
     // MARK: - Private Controllers
 
@@ -65,6 +68,8 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         swipeInteractionController = BulletinSwipeInteractionController()
         swipeInteractionController.wire(to: self)
     }
+
+    var observer: NSKeyValueObservation!
 
     // MARK: - Lifecycle
 
@@ -78,8 +83,8 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
         view.addGestureRecognizer(recognizer)
 
-        contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.accessibilityViewIsModal = true
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(contentView)
@@ -88,46 +93,28 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
         contentView.layer.cornerRadius = 12
 
-        leadingConstraint = contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12)
-        trailingConstraint = contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12)
-        centerXConstraint = contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        leadingConstraint = contentView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor, constant: 12)
+        trailingConstraint = contentView.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor, constant: -12)
+        centerXConstraint = contentView.centerXAnchor.constraint(equalTo: view.safeCenterXAnchor)
 
         minWidthConstraint = contentView.widthAnchor.constraint(equalToConstant: 444)
         minWidthConstraint.priority = UILayoutPriorityDefaultHigh
 
-        let maxWidthConstraint = contentView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, constant: -24)
+        let maxWidthConstraint = contentView.widthAnchor.constraint(lessThanOrEqualTo: view.safeWidthAnchor, constant: -24)
         maxWidthConstraint.priority = UILayoutPriorityRequired
         maxWidthConstraint.isActive = true
-
-        // Adaptative Constraints
-
-        presentation_containerTopConstraint = contentView.topAnchor.constraint(equalTo: contentStackView.topAnchor)
-        presentation_contentOriginConstraint = contentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        presentation_containerBottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-
-        presentation_containerTopConstraint.priority = UILayoutPriorityDefaultHigh
-        presentation_contentOriginConstraint.priority = UILayoutPriorityDefaultHigh
-        presentation_containerBottomConstraint.priority = UILayoutPriorityDefaultHigh
-
-        dismissal_containerTopConstraint = contentView.topAnchor.constraint(equalTo: view.bottomAnchor)
-        dismissal_contentOriginConstraint = contentStackView.topAnchor.constraint(equalTo: contentView.topAnchor)
-        dismissal_containerBottomConstraint = contentView.bottomAnchor.constraint(equalTo: contentStackView.bottomAnchor)
-
-        dismissal_containerTopConstraint.priority = UILayoutPriorityRequired
-        dismissal_contentOriginConstraint.priority = UILayoutPriorityRequired
-        dismissal_containerBottomConstraint.priority = UILayoutPriorityRequired
 
         // Content Stack View
 
         contentView.addSubview(contentStackView)
 
-        contentLeadingConstraint = contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 36)
-        contentLeadingConstraint.isActive = true
+        stackLeadingConstraint = contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 36)
+        stackLeadingConstraint.isActive = true
 
-        contentTrailingConstraint = contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -36)
-        contentTrailingConstraint.isActive = true
+        stackTrailingConstraint = contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -36)
+        stackTrailingConstraint.isActive = true
 
-        let minYConstraint = contentView.topAnchor.constraint(greaterThanOrEqualTo: topLayoutGuide.bottomAnchor)
+        let minYConstraint = contentView.topAnchor.constraint(greaterThanOrEqualTo: view.safeTopAnchor)
         minYConstraint.isActive = true
         minYConstraint.priority = UILayoutPriorityRequired
 
@@ -150,6 +137,20 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         activityIndicator.isUserInteractionEnabled = true
 
         activityIndicator.alpha = 0
+
+        // Vertical Position
+
+        stackBottomConstraint = contentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        contentTopConstraint = contentView.topAnchor.constraint(equalTo: contentStackView.topAnchor)
+
+        stackBottomConstraint.isActive = true
+        contentTopConstraint.isActive = true
+
+        contentBottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.safeBottomAnchor)
+        contentBottomConstraint.constant = 1000
+        contentBottomConstraint.isActive = true
+
+        // Configuration
 
         contentView.backgroundColor = #colorLiteral(red: 0.9921568627, green: 1, blue: 1, alpha: 1)
         setUpLayout(with: traitCollection)
@@ -189,76 +190,28 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
         switch (traitCollection.verticalSizeClass, traitCollection.horizontalSizeClass) {
         case (.regular, .regular):
-            contentLeadingConstraint.constant = 32
-            contentTrailingConstraint.constant = -32
+            stackLeadingConstraint.constant = 32
+            stackTrailingConstraint.constant = -32
+            stackBottomConstraint.constant = -32
+            contentTopConstraint.constant = -32
             contentStackView.spacing = 32
 
-            presentation_contentOriginConstraint.constant = -32
-            presentation_containerTopConstraint.constant = -32
-            presentation_containerBottomConstraint.constant = bottomSpacingForCurrentLayout()
-
-            dismissal_contentOriginConstraint.constant = 32
-            dismissal_containerBottomConstraint.constant = 32
-
         default:
-            contentLeadingConstraint.constant = 24
-            contentTrailingConstraint.constant = -24
+            stackLeadingConstraint.constant = 24
+            stackTrailingConstraint.constant = -24
+            stackBottomConstraint.constant = -24
+            contentTopConstraint.constant = -24
             contentStackView.spacing = 24
 
-            presentation_contentOriginConstraint.constant = -24
-            presentation_containerTopConstraint.constant = -24
-            presentation_containerBottomConstraint.constant = bottomSpacingForCurrentLayout()
-
-            dismissal_contentOriginConstraint.constant = 24
-            dismissal_containerBottomConstraint.constant = 24
-
         }
 
-    }
-
-    private func bottomSpacingForCurrentLayout() -> CGFloat {
-
-        let bottomInset: CGFloat
-
-        if #available(iOS 11.0, *) {
-            let safeBottomInset = view.safeAreaInsets.bottom
-            bottomInset = safeBottomInset > 0 ? safeBottomInset : 12
-        } else {
-            bottomInset = 12
-        }
-
-        return -bottomInset
-
-    }
-
-    override func viewSafeAreaInsetsDidChange() {
-        presentation_containerBottomConstraint.constant = bottomSpacingForCurrentLayout()
     }
 
     // MARK: - Transition Adaptivity
 
-    func layoutForPresentation() {
+    func moveIntoPlace() {
 
-        dismissal_containerTopConstraint.isActive = false
-        dismissal_containerBottomConstraint.isActive = false
-        dismissal_contentOriginConstraint.isActive = false
-
-        presentation_containerTopConstraint.isActive = true
-        presentation_containerBottomConstraint.isActive = true
-        presentation_contentOriginConstraint.isActive = true
-
-        view.layoutIfNeeded()
-        contentView.layoutIfNeeded()
-        backgroundView.layoutIfNeeded()
-
-    }
-
-    func layoutForDismissal() {
-
-        presentation_containerBottomConstraint.isActive = false
-
-        dismissal_containerTopConstraint.isActive = true
-        dismissal_contentOriginConstraint.isActive = true
+        contentBottomConstraint.constant = -12
 
         view.layoutIfNeeded()
         contentView.layoutIfNeeded()

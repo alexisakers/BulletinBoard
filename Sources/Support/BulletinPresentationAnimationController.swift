@@ -75,10 +75,8 @@ class BulletinPresentationAnimationController: NSObject, UIViewControllerAnimate
         let duration = transitionDuration(using: transitionContext)
         let options = UIViewAnimationOptions(rawValue: 7 << 16)
 
-        toVC.layoutForDismissal()
-
         let animations = {
-            toVC.layoutForPresentation()
+            toVC.moveIntoPlace()
             backgroundView.show()
         }
 

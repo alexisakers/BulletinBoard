@@ -16,12 +16,26 @@ class BulletinDismissAnimationController: NSObject, UIViewControllerAnimatedTran
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
 
         guard let fromVC = transitionContext.viewController(forKey: .from) as? BulletinViewController else {
+            transitionContext.completeTransition(false)
             return
         }
 
         let rootView = fromVC.view!
         let contentView = fromVC.contentView
         let backgroundView = fromVC.backgroundView!
+
+        // Take Snapshot
+
+        guard let snapshot = contentView.snapshotView(afterScreenUpdates: true) else {
+            transitionContext.completeTransition(false)
+            return
+        }
+
+        rootView.addSubview(snapshot)
+        snapshot.frame = contentView.frame
+        contentView.isHidden = true
+
+        fromVC.activeSnapshotView = snapshot
 
         // Animate dismissal
 
@@ -33,7 +47,7 @@ class BulletinDismissAnimationController: NSObject, UIViewControllerAnimatedTran
         backgroundView.layoutIfNeeded()
 
         let animations = {
-            fromVC.layoutForDismissal()
+            snapshot.frame.origin.y = rootView.frame.maxY + 12
             backgroundView.hide()
         }
 
@@ -44,7 +58,8 @@ class BulletinDismissAnimationController: NSObject, UIViewControllerAnimatedTran
             if !isCancelled {
                 fromVC.view.removeFromSuperview()
             } else {
-                fromVC.layoutForPresentation()
+                contentView.isHidden = false
+                snapshot.removeFromSuperview()
             }
 
             transitionContext.completeTransition(!isCancelled)
