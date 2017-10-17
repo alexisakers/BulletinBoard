@@ -71,7 +71,16 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
             }
 
             isInteractionInProgress = true
-            viewController.dismiss(animated: true, completion: nil)
+
+            viewController.dismiss(animated: true) {
+
+                guard self.isFinished else {
+                    return
+                }
+
+                self.viewController.manager?.completeDismissal()
+
+            }
 
         case .changed:
 
@@ -107,6 +116,8 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
             }
 
             currentPercentage = newPercentage
+
+            print("Current percentage: \(currentPercentage * 100)%")
             update(currentPercentage)
 
         case .cancelled, .failed:
@@ -124,6 +135,8 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
                 resetContentView()
                 cancel()
             }
+
+            isFinished = false
  
         default:
             break
@@ -183,6 +196,7 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
         self.viewController.backgroundView.show()
 
         UIView.animate(withDuration: 0.15, delay: 0, options: options, animations: animations) { _ in
+            self.update(0)
             self.cancel()
         }
 

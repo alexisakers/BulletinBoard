@@ -72,6 +72,18 @@ open class PageBulletinItem: BulletinItem {
     public var isDismissable: Bool = false
 
     /**
+     * The block of code to execute when the bulletin item is dismissed. This is called when the bulletin
+     * is moved out of view.
+     *
+     * You can leave it `nil` if `isDismissable` is set to false.
+     *
+     * - parameter item: The item that is being dismissed. When calling `dismissalHandler`, the manager
+     * passes a reference to `self` so you don't have to manage weak references yourself.
+     */
+
+    public var dismissalHandler: ((_ item: BulletinItem) -> Void)?
+
+    /**
      * The item to display after this one.
      *
      * If you set this value, you'll be able to call `displayNextItem()` to push the next item to

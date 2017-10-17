@@ -35,6 +35,18 @@ class PetSelectorBulletinPage: BulletinItem {
     var isDismissable: Bool = false
 
     /**
+     * The block of code to execute when the bulletin item is dismissed. This is called when the bulletin
+     * is moved out of view.
+     *
+     * You can leave it `nil` if `isDismissable` is set to false.
+     *
+     * - parameter item: The item that is being dismissed. When calling `dismissalHandler`, the manager
+     * passes a reference to `self` so you don't have to manage weak references yourself.
+     */
+
+    public var dismissalHandler: ((_ item: BulletinItem) -> Void)? = nil
+
+    /**
      * The item to display after this one. You can modify it at runtime based on user selection for
      * instance.
      *
@@ -262,7 +274,9 @@ class PetSelectorValidationBulletinPage: BulletinItem {
 
     weak var manager: BulletinManager? = nil
     var isDismissable: Bool = false
+    var dismissalHandler: ((BulletinItem) -> Void)? = nil
     var nextItem: BulletinItem?
+    
 
     let interfaceFactory = BulletinInterfaceFactory()
 

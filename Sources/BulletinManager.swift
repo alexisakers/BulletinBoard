@@ -194,11 +194,9 @@ public final class BulletinManager {
      * presenting the bulletin again.
      *
      * - parameter animated: Whether to animate dismissal. Defaults to `true`.
-     * - parameter completion: An optional block to execute after dismissal. Default to `nil`.
      */
 
-    public func dismissBulletin(animated: Bool = true,
-                                completion: (() -> Void)? = nil) {
+    public func dismissBulletin(animated: Bool = true) {
 
         precondition(Thread.isMainThread)
         precondition(isPrepared, "You must call the `prepare` function before interacting with the bulletin.")
@@ -207,31 +205,37 @@ public final class BulletinManager {
         currentItem.manager = nil
 
         viewController.dismiss(animated: animated) {
-
-            print("completion called")
-
-            for arrangedSubview in self.viewController.contentStackView.arrangedSubviews {
-                self.viewController.contentStackView.removeArrangedSubview(arrangedSubview)
-                arrangedSubview.removeFromSuperview()
-            }
-
-            self.viewController.resetContentView()
-
-            self.viewController.backgroundView = nil
-            self.viewController.manager = nil
-            self.viewController.transitioningDelegate = nil
-
-            self.viewController = nil
-
-            self.currentItem = self.rootItem
-            self.tearDownItemsChain(startingAt: self.rootItem)
-            self.itemsStack.removeAll()
-
-            completion?()
-
+            self.completeDismissal()
         }
 
         isPrepared = false
+
+    }
+
+    /**
+     * Tears down the view controller after dismissal is finished.
+     */
+
+    func completeDismissal() {
+
+        currentItem.dismissalHandler?(currentItem)
+
+        for arrangedSubview in viewController.contentStackView.arrangedSubviews {
+            viewController.contentStackView.removeArrangedSubview(arrangedSubview)
+            arrangedSubview.removeFromSuperview()
+        }
+
+        viewController.resetContentView()
+
+        viewController.backgroundView = nil
+        viewController.manager = nil
+        viewController.transitioningDelegate = nil
+
+        viewController = nil
+
+        currentItem = self.rootItem
+        tearDownItemsChain(startingAt: self.rootItem)
+        itemsStack.removeAll()
 
     }
 
