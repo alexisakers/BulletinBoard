@@ -212,7 +212,7 @@ This creates the following interaction:
 
 ![Next Item](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_segue.png)
 
-##
+## Displaying an Activity Indicator
 
 If you need to perform a task between the moment the user taps a button and the moment you'll be able to change the presented item, you can call `displayActivityIndicator()` method on the item manager to hide the current card and display an activity indicator.
 
@@ -235,6 +235,27 @@ page.actionHandler = { (item: PageBulletinItem) in
 This creates the following interaction:
 
 ![Activity Indicator](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_activity.png)
+
+## Customizing the Background View
+
+By default, the content behind the card is covered with a semi-opaque view, as shown here:
+
+![Dimming View](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_dimming.png)
+
+You can customize the background view by changing the `backgroundViewStyle` property of the manager before calling `prepare()`.
+
+**Example**:
+
+~~~swift
+manager.backgroundViewStyle = .blurredExtraLight
+manager.prepare()
+~~~
+
+Several styles are available:
+
+![Dimming View](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_background_styles.png)
+
+> Note: blurred backgrounds are available in iOS 10.0 and later.
 
 ## Dismissal
 
@@ -266,7 +287,7 @@ Even though you are creating a custom card, you may still want to display some s
 
 To generate standard elements, use the methods of `BulletinInterfaceFactory`:
 
-- `makeTitleLabel()` to create a title label
+- `makeTitleLabel(reading:)` to create a title label with the given title
 - `makeDescriptionLabel(isCompact:)` to create a description label
 - `makeActionButton(title:)` to create an action button
 - `makeAlternativeButton(title:)` to create an alternative button
