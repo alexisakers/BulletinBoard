@@ -1,5 +1,14 @@
 # _BulletinBoard_ Changelog
 
+## 🔖 v1.3.0
+
+- Add customizable bulletin backgrounds
+- Refactor swipe-to-dismiss: use animation controllers
+- Add interactive dismissal (animated background blur radius / opacity)
+- Improve iPhone X support: display a blurred bar at the bottom of the safe area to highlight the home indicator
+- Simplify layout
+- Various documentation and codebase improvements
+
 ## 🔖 v1.2.0
 
 - Dismiss the bulletin by swiping down
