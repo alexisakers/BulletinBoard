@@ -35,7 +35,7 @@ Build and run the `Instanimal` scheme to use it.
 
 Here's a video showing it in action:
 
-[![Watch Demo on YouTube](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_thumbnail.png)](https://youtu.be/36pFHov7MTE)
+[![Watch Demo on YouTube](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_thumbnail.png)](https://youtu.be/DT58Lz7qpTA)
 
 ## Installation
 
@@ -46,7 +46,7 @@ BulletinBoard is available via CocoaPods and Carthage.
 To install BulletinBoard using [CocoaPods](https://cocoapods.org), add this line to your `Podfile`:
 
 ~~~ruby
-pod "BulletinBoard"
+pod 'BulletinBoard'
 ~~~
 
 ### Carthage
