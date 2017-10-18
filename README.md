@@ -238,9 +238,7 @@ This creates the following interaction:
 
 ## Customizing the Background View
 
-By default, the content behind the card is covered with a semi-opaque view, as shown here:
-
-![Dimming View](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_dimming.png)
+By default, the content behind the card is covered with a semi-opaque view (known as the `.dimming` style).
 
 You can customize the background view by changing the `backgroundViewStyle` property of the manager before calling `prepare()`.
 
@@ -251,7 +249,7 @@ manager.backgroundViewStyle = .blurredExtraLight
 manager.prepare()
 ~~~
 
-Several styles are available:
+Several styles are available in the `BulletinBackgroundViewStyle` enum:
 
 ![Dimming View](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_background_styles.png)
 
