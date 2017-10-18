@@ -6,7 +6,7 @@
 import UIKit
 
 /**
- * Generates interface elements for bulletins. Use this class to create custom bulletin items witg
+ * Generates interface elements for bulletins. Use this class to create custom bulletin items with
  * standard components.
  */
 
@@ -17,6 +17,7 @@ public class BulletinInterfaceFactory {
      */
 
     public init() {}
+
 
     // MARK: - Customization
 
@@ -57,7 +58,7 @@ public class BulletinInterfaceFactory {
      * Creates a standard title label.
      */
 
-    public func makeTitleLabel() -> UILabel {
+    public func makeTitleLabel(reading title: String) -> UILabel {
 
         let titleLabel = UILabel()
         titleLabel.textAlignment = .center
@@ -67,6 +68,7 @@ public class BulletinInterfaceFactory {
         titleLabel.adjustsFontSizeToFitWidth = true
 
         titleLabel.font = UIFont.systemFont(ofSize: titleFontSize, weight: UIFontWeightMedium)
+        titleLabel.text = title
 
         return titleLabel
 

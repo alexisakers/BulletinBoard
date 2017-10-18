@@ -12,13 +12,11 @@ func BackgroundStyles() -> [(name: String, style: BulletinBackgroundViewStyle)] 
         ("Dimmed", .dimmed)
     ]
 
-    if #available(iOS 10.0, *) {
+    if #available(iOS 10, *) {
         styles.append(("Extra Light", .blurredExtraLight))
         styles.append(("Light", .blurredLight))
         styles.append(("Dark", .blurredDark))
-        styles.append(("Extra Dark", .blurred(style: UIBlurEffectStyle(rawValue: 3)!)))
-        styles.append(("Prominent", .blurred(style: .prominent)))
-        styles.append(("Regular", .blurred(style: .regular)))
+        styles.append(("Extra Dark", .blurred(style: UIBlurEffectStyle(rawValue: 3)!, isDark: true)))
     }
 
     return styles

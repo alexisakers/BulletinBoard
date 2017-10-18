@@ -37,14 +37,17 @@ class ActivityIndicator: UIView {
 
     // MARK: - Activity Indicator
 
+    /// Starts the animation of the activity indicator.
     func startAnimating() {
         activityIndicatorView.startAnimating()
     }
 
+    /// Stops the animation of the activity indicator.
     func stopAnimating() {
         activityIndicatorView.stopAnimating()
     }
 
+    /// The color of the activity indicator.
     var color: UIColor? {
         get {
             return activityIndicatorView.color
@@ -54,6 +57,7 @@ class ActivityIndicator: UIView {
         }
     }
 
+    /// The style of the activity indicator.
     var activityIndicatorViewStyle: UIActivityIndicatorViewStyle {
         get {
             return activityIndicatorView.activityIndicatorViewStyle
@@ -64,4 +68,3 @@ class ActivityIndicator: UIView {
     }
 
 }
-

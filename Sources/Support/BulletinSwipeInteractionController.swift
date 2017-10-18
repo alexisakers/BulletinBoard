@@ -28,6 +28,7 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
         return viewController.contentView
     }
 
+
     // MARK: - Preparation
 
     /**
@@ -39,7 +40,7 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
         prepareGestureRecognizer()
     }
 
-    func prepareGestureRecognizer() {
+    private func prepareGestureRecognizer() {
 
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
         panGesture.maximumNumberOfTouches = 1
@@ -49,6 +50,7 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
         contentView.addGestureRecognizer(panGesture)
 
     }
+
 
     // MARK: - Gesture Recognizer
 

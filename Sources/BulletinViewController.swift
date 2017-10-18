@@ -11,11 +11,17 @@ import UIKit
 
 final class BulletinViewController: UIViewController, UIGestureRecognizerDelegate {
 
-    /**
-     * The subview that contains the contents of the card.
-     */
-
+    /// The subview that contains the contents of the card.
     let contentView = UIView()
+
+    /// The view covering the content. Generated in `loadBackgroundView`.
+    var backgroundView: BulletinBackgroundView!
+
+    /// The snapshot view of the content used during dismissal.
+    var activeSnapshotView: UIView?
+
+    /// Indicates whether the bulletin can be dismissed by a tap outside the card.
+    var isDismissable: Bool = false
 
     /**
      * The stack view displaying the content of the card.
@@ -26,27 +32,12 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
     let contentStackView = UIStackView()
 
-    /**
-     * The view covering the content. Generated in `loadBackgroundView`.
-     */
-
-    var backgroundView: BulletinBackgroundView!
-
-    /**
-     * The snapshot view of the content used during dismissal.
-     */
-
-    var activeSnapshotView: UIView?
-
-    /**
-     * Indicates whether the bulletin can be dismissed by a tap outside the card.
-     */
-
-    var isDismissable: Bool = false
 
     // MARK: - Private Interface Elements
 
     fileprivate let activityIndicator = ActivityIndicator()
+    fileprivate let bottomSafeAreaCoverView = UIVisualEffectView()
+    fileprivate var swipeInteractionController: BulletinSwipeInteractionController!
 
     private var leadingConstraint: NSLayoutConstraint!
     private var trailingConstraint: NSLayoutConstraint!
@@ -60,16 +51,6 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
     private var contentBottomConstraint: NSLayoutConstraint!
 
-    // MARK: - Private Controllers
-
-    fileprivate var swipeInteractionController: BulletinSwipeInteractionController!
-
-    func refreshSwipeInteractionController() {
-        swipeInteractionController = BulletinSwipeInteractionController()
-        swipeInteractionController.wire(to: self)
-    }
-
-    var observer: NSKeyValueObservation!
 
     // MARK: - Lifecycle
 
@@ -137,6 +118,17 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         activityIndicator.isUserInteractionEnabled = true
 
         activityIndicator.alpha = 0
+
+        // Safe Area Cover View
+
+        bottomSafeAreaCoverView.effect = nil
+        bottomSafeAreaCoverView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bottomSafeAreaCoverView)
+
+        bottomSafeAreaCoverView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor).isActive = true
+        bottomSafeAreaCoverView.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor).isActive = true
+        bottomSafeAreaCoverView.topAnchor.constraint(equalTo: view.safeBottomAnchor).isActive = true
+        bottomSafeAreaCoverView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 
         // Vertical Position
 
@@ -209,6 +201,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
     // MARK: - Transition Adaptivity
 
+    /// Moves the content view to its final location on the screen. Use during presentation.
     func moveIntoPlace() {
 
         contentBottomConstraint.constant = -12
@@ -220,10 +213,6 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     }
 
     // MARK: - Presentation/Dismissal
-
-    func loadBackgroundView() {
-        backgroundView = BulletinBackgroundView(style: manager?.backgroundViewStyle ?? .dimmed)
-    }
 
     /// Dismisses the presnted BulletinViewController if `isDissmisable` is set to `true`.
     @discardableResult
@@ -250,12 +239,53 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         return dismissIfPossible()
     }
 
+    // MARK: - Background Accomodations
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+
+        if let isDark = manager?.backgroundViewStyle.isDark {
+            return isDark ? .lightContent : .default
+        }
+
+        return .default
+        
+    }
+
 }
 
-// MARK: - Interactions
+// MARK: - Background
 
-extension BulletinViewController: UIViewControllerTransitioningDelegate {
+extension BulletinViewController {
 
+    /// Creates a new background view for the bulletin.
+    func loadBackgroundView() {
+        backgroundView = BulletinBackgroundView(style: manager?.backgroundViewStyle ?? .dimmed)
+    }
+
+    /// Displays the cover view at the bottom of the safe area. Animatable.
+    func showBottomSafeAreaCover() {
+
+        guard let isDark = manager?.backgroundViewStyle.isDark else {
+            return
+        }
+
+        let blurStyle: UIBlurEffectStyle = isDark ? .dark : .extraLight
+        bottomSafeAreaCoverView.effect = UIBlurEffect(style: blurStyle)
+
+    }
+
+    /// Hides the cover view at the bottom of the safe area. Animatable.
+    func hideBottomSafeAreaCover() {
+        bottomSafeAreaCoverView.effect = nil
+    }
+
+}
+
+// MARK: - Activity Indicator
+
+extension BulletinViewController {
+
+    /// Displays the activity indicator.
     func displayActivityIndicator() {
 
         activityIndicator.startAnimating()
@@ -271,14 +301,17 @@ extension BulletinViewController: UIViewControllerTransitioningDelegate {
 
     }
 
+    /// Hides the activity indicator.
     func hideActivityIndicator() {
         activityIndicator.stopAnimating()
         activityIndicator.alpha = 0
     }
 
-    func resetContentView() {
-        contentView.transform = .identity
-    }
+}
+
+// MARK: - Transitions
+
+extension BulletinViewController: UIViewControllerTransitioningDelegate {
 
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return BulletinPresentationAnimationController(style: manager?.backgroundViewStyle ?? .dimmed)
@@ -290,6 +323,18 @@ extension BulletinViewController: UIViewControllerTransitioningDelegate {
 
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         return swipeInteractionController.isInteractionInProgress ? swipeInteractionController : nil
+    }
+
+    /// Creates a new view swipe interaction controller and wires it to the content view.
+    func refreshSwipeInteractionController() {
+        swipeInteractionController = BulletinSwipeInteractionController()
+        swipeInteractionController.wire(to: self)
+    }
+
+    /// Prepares the view controller for dismissal.
+    func prepareForDismissal(displaying snapshot: UIView) {
+        view.bringSubview(toFront: bottomSafeAreaCoverView)
+        activeSnapshotView = snapshot
     }
 
 }

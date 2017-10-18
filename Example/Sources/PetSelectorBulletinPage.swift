@@ -102,8 +102,8 @@ class PetSelectorBulletinPage: BulletinItem {
 
         // Title Label
 
-        let titleLabel = interfaceFactory.makeTitleLabel()
-        titleLabel.text = "Choose your Favorite"
+        let title = "Choose your Favorite"
+        let titleLabel = interfaceFactory.makeTitleLabel(reading: title)
         arrangedSubviews.append(titleLabel)
 
         // Description Label
@@ -306,8 +306,8 @@ class PetSelectorValidationBulletinPage: BulletinItem {
 
         // Title Label
 
-        let titleLabel = interfaceFactory.makeTitleLabel()
-        titleLabel.text = "Choose your Favorite"
+        let title = "Choose your Favorite"
+        let titleLabel = interfaceFactory.makeTitleLabel(reading: title)
         arrangedSubviews.append(titleLabel)
 
         // Emoji

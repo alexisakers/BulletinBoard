@@ -83,9 +83,9 @@ class BulletinBackgroundView: UIView {
             addSubview(dimmingView)
             contentView = .dim(dimmingView, 1.0)
 
-        case .blurred(let style):
+        case .blurred(let blurredBackground):
 
-            let blurEffect = UIBlurEffect(style: style)
+            let blurEffect = UIBlurEffect(style: blurredBackground.style)
             let blurEffectView = UIVisualEffectView(effect: nil)
             blurEffectView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -105,6 +105,7 @@ class BulletinBackgroundView: UIView {
 
     // MARK: - Interactions
 
+    /// Shows the background view. Animatable.
     func show() {
 
         switch contentView! {
@@ -117,6 +118,7 @@ class BulletinBackgroundView: UIView {
 
     }
 
+    /// Hides the background view. Animatable.
     func hide() {
 
         switch contentView! {

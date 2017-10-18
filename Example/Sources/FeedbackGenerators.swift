@@ -15,7 +15,7 @@ class SelectionFeedbackGenerator {
 
     init() {
 
-        if #available(iOS 10.0, *) {
+        if #available(iOS 10, *) {
             anyObject = UISelectionFeedbackGenerator()
         } else {
             anyObject = nil
@@ -51,7 +51,7 @@ class SuccessFeedbackGenerator {
 
     init() {
 
-        if #available(iOS 10.0, *) {
+        if #available(iOS 10, *) {
             anyObject = UINotificationFeedbackGenerator()
         } else {
             anyObject = nil

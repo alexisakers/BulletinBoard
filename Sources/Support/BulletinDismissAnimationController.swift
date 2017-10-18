@@ -35,20 +35,17 @@ class BulletinDismissAnimationController: NSObject, UIViewControllerAnimatedTran
         snapshot.frame = contentView.frame
         contentView.isHidden = true
 
-        fromVC.activeSnapshotView = snapshot
+        fromVC.prepareForDismissal(displaying: snapshot)
 
         // Animate dismissal
 
         let duration = transitionDuration(using: transitionContext)
         let options = UIViewAnimationOptions(rawValue: 6 << 16)
 
-        rootView.layoutIfNeeded()
-        contentView.layoutIfNeeded()
-        backgroundView.layoutIfNeeded()
-
         let animations = {
             snapshot.frame.origin.y = rootView.frame.maxY + 12
             backgroundView.hide()
+            fromVC.hideBottomSafeAreaCover()
         }
 
         UIView.animate(withDuration: duration, delay: 0, options: options, animations: animations) { finished in

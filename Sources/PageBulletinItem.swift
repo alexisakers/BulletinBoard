@@ -9,9 +9,9 @@ import UIKit
  * A standard bulletin item with a title and optional additional informations. It can display a large
  * action button and a smaller button for alternative options.
  *
- * You can override this class to perform custom button handling. Override the `actionButtonTapped(sender:)`
- * and `alternativeButtonTapped(sender:)` to handle tap events. Make sure to call `super` in your
- * implementation if you do.
+ * You can override this class to customize button tap handling. Override the `actionButtonTapped(sender:)`
+ * and `alternativeButtonTapped(sender:)` methods to handle tap events. Make sure to call `super` in your
+ * implementations if you do.
  */
 
 open class PageBulletinItem: BulletinItem {
@@ -166,8 +166,7 @@ open class PageBulletinItem: BulletinItem {
 
         // Title Label
 
-        let titleLabel = interfaceFactory.makeTitleLabel()
-        titleLabel.text = title
+        let titleLabel = interfaceFactory.makeTitleLabel(reading: title)
         arrangedSubviews.append(titleLabel)
 
         // Image View
