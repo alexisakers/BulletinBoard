@@ -43,6 +43,14 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/BulletinBackgroundViewStyle.html">BulletinBackgroundViewStyle</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -95,14 +103,14 @@
 
 <p>Here&rsquo;s a video showing it in action:</p>
 
-<p><a href="https://youtu.be/36pFHov7MTE"><img src="https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_thumbnail.png" alt="Watch Demo on YouTube"></a></p>
+<p><a href="https://youtu.be/DT58Lz7qpTA"><img src="https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_thumbnail.png" alt="Watch Demo on YouTube"></a></p>
 <h2 id='installation' class='heading'>Installation</h2>
 
 <p>BulletinBoard is available via CocoaPods and Carthage.</p>
 <h3 id='cocoapods' class='heading'>CocoaPods</h3>
 
 <p>To install BulletinBoard using <a href="https://cocoapods.org">CocoaPods</a>, add this line to your <code>Podfile</code>:</p>
-<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s2">"BulletinBoard"</span>
+<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'BulletinBoard'</span>
 </code></pre>
 <h3 id='carthage' class='heading'>Carthage</h3>
 
@@ -249,6 +257,7 @@
 <p>This creates the following interaction:</p>
 
 <p><img src="https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_segue.png" alt="Next Item"></p>
+<h2 id='displaying-an-activity-indicator' class='heading'>Displaying an Activity Indicator</h2>
 
 <p>If you need to perform a task between the moment the user taps a button and the moment you&rsquo;ll be able to change the presented item, you can call <code>displayActivityIndicator()</code> method on the item manager to hide the current card and display an activity indicator.</p>
 
@@ -269,6 +278,24 @@
 <p>This creates the following interaction:</p>
 
 <p><img src="https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_activity.png" alt="Activity Indicator"></p>
+<h2 id='customizing-the-background-view' class='heading'>Customizing the Background View</h2>
+
+<p>By default, the content behind the card is covered with a semi-opaque view (known as the <code>.dimming</code> style).</p>
+
+<p>You can customize the background view by changing the <code>backgroundViewStyle</code> property of the manager before calling <code>prepare()</code>.</p>
+
+<p><strong>Example</strong>:</p>
+<pre class="highlight swift"><code><span class="n">manager</span><span class="o">.</span><span class="n">backgroundViewStyle</span> <span class="o">=</span> <span class="o">.</span><span class="n">blurredExtraLight</span>
+<span class="n">manager</span><span class="o">.</span><span class="nf">prepare</span><span class="p">()</span>
+</code></pre>
+
+<p>Several styles are available in the <code><a href="Enums/BulletinBackgroundViewStyle.html">BulletinBackgroundViewStyle</a></code> enum:</p>
+
+<p><img src="https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_background_styles.png" alt="Dimming View"></p>
+
+<blockquote>
+<p>Note: blurred backgrounds are available in iOS 10.0 and later.</p>
+</blockquote>
 <h2 id='dismissal' class='heading'>Dismissal</h2>
 
 <p>If you set the <code>isDismissable</code> property to <code>true</code>, the user will be able to dismiss the bulletin by tapping outside of the card or by swiping the card down.</p>
@@ -295,7 +322,7 @@
 <p>To generate standard elements, use the methods of <code><a href="Classes/BulletinInterfaceFactory.html">BulletinInterfaceFactory</a></code>:</p>
 
 <ul>
-<li><code>makeTitleLabel()</code> to create a title label</li>
+<li><code>makeTitleLabel(reading:)</code> to create a title label with the given title</li>
 <li><code>makeDescriptionLabel(isCompact:)</code> to create a description label</li>
 <li><code>makeActionButton(title:)</code> to create an action button</li>
 <li><code>makeAlternativeButton(title:)</code> to create an alternative button</li>

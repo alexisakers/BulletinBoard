@@ -44,6 +44,14 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/BulletinBackgroundViewStyle.html">BulletinBackgroundViewStyle</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -94,7 +102,7 @@
 <p>This property is set when the item is currently being displayed. It will be set to <code>nil</code> when
  the item is removed from view.</p>
 
-<p>When implementing <code>BulletinItem</code>, you should make this property <code>weak</code> to avoid retain cycles.</p>
+<p>When implementing <code>BulletinItem</code>, you should mark this property <code>weak</code> to avoid retain cycles.</p>
 
                       </div>
                       <div class="declaration">
@@ -127,7 +135,7 @@
                         <p>Whether the page can be dismissed.</p>
 
 <p>If you set this value to <code>true</code>, the user will be able to dismiss the bulletin by tapping outside
- the card.</p>
+ of the card or by swiping down.</p>
 
 <p>You should set it to <code>true</code> for the last item you want to display.</p>
 
@@ -149,6 +157,59 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:13BulletinBoard0A4ItemP16dismissalHandleryAaB_pcSgv"></a>
+                    <a name="//apple_ref/swift/Property/dismissalHandler" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard0A4ItemP16dismissalHandleryAaB_pcSgv">dismissalHandler</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The block of code to execute when the bulletin item is dismissed. This is called when the bulletin
+ is moved out of view.</p>
+
+<p>You can set it to <code>nil</code> if <code><a href="../Protocols/BulletinItem.html#/s:13BulletinBoard0A4ItemP13isDismissableSbv">isDismissable</a></code> is set to false.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">dismissalHandler</span><span class="p">:</span> <span class="p">((</span><span class="n">_</span> <span class="nv">item</span><span class="p">:</span> <span class="kt">BulletinItem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>item</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The item that is being dismissed. When calling <code>dismissalHandler</code>, the manager
+passes a reference to <code>self</code> so you don&rsquo;t have to manage weak references yourself.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinItem.swift#L48">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:13BulletinBoard0A4ItemP04nextC0AaB_pSgv"></a>
                     <a name="//apple_ref/swift/Property/nextItem" class="dashAnchor"></a>
                     <a class="token" href="#/s:13BulletinBoard0A4ItemP04nextC0AaB_pSgv">nextItem</a>
@@ -161,7 +222,7 @@
                       <div class="abstract">
                         <p>The item to display after this one.</p>
 
-<p>If you set this value, you&rsquo;ll be able to call <code><a href="../Protocols/BulletinItem.html#/s:13BulletinBoard0A4ItemPAAE011displayNextC0yyF">displayNextItem()</a></code> to present the next item to
+<p>If you set this value, you&rsquo;ll be able to call <code><a href="../Protocols/BulletinItem.html#/s:13BulletinBoard0A4ItemPAAE011displayNextC0yyF">displayNextItem()</a></code> to push the next item to
  the stack.</p>
 
                       </div>
@@ -174,7 +235,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinItem.swift#L45">Show on GitHub</a>
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinItem.swift#L57">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -192,9 +253,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Creates the list of views to display on the bulletin.</p>
+                        <p>Creates the list of views to display in the bulletin.</p>
 
-<p>The views will be arranged vertically in the order they are stored in the array.</p>
+<p>The views will be arranged vertically in the order they are stored in the array returned by
+ this function.</p>
 
                       </div>
                       <div class="declaration">
@@ -206,7 +268,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinItem.swift#L53">Show on GitHub</a>
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinItem.swift#L66">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -224,8 +286,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Called by the manager when the item was removed from the bulletin view. Use this function
-to remove any button target or gesture recognizers from your managed views.</p>
+                        <p>Called by the manager when the item was removed from the bulletin. Use this function to
+remove any button target or gesture recognizers from your managed views.</p>
 
                       </div>
                       <div class="declaration">
@@ -237,7 +299,7 @@ to remove any button target or gesture recognizers from your managed views.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinItem.swift#L60">Show on GitHub</a>
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinItem.swift#L73">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -262,7 +324,8 @@ to remove any button target or gesture recognizers from your managed views.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Displays the next item if it was set.</p>
+                        <p>A convenience method to display the next bulletin item. If the <code><a href="../Protocols/BulletinItem.html#/s:13BulletinBoard0A4ItemP04nextC0AaB_pSgv">nextItem</a></code> property contains
+a bulletin item, this method will push it to the stack and display it.</p>
 
                       </div>
                       <div class="declaration">
@@ -274,7 +337,7 @@ to remove any button target or gesture recognizers from your managed views.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinItem.swift#L70-L78">Show on GitHub</a>
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinItem.swift#L84-L92">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

@@ -43,6 +43,14 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/BulletinBackgroundViewStyle.html">BulletinBackgroundViewStyle</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -75,7 +83,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Generates interface elements for bulletins. Use this class to create custom bulletin items witg
+                        <p>Generates interface elements for bulletins. Use this class to create custom bulletin items with
 standard components.</p>
 
                         <a href="Classes/BulletinInterfaceFactory.html" class="slightly-smaller">See more</a>
@@ -89,7 +97,7 @@ standard components.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinInterfaceFactory.swift#L13-L163">Show on GitHub</a>
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinInterfaceFactory.swift#L13-L165">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -101,9 +109,9 @@ standard components.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@BulletinBoard@objc(cs)BulletinManager"></a>
+                    <a name="/s:13BulletinBoard0A7ManagerC"></a>
                     <a name="//apple_ref/swift/Class/BulletinManager" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@BulletinBoard@objc(cs)BulletinManager">BulletinManager</a>
+                    <a class="token" href="#/s:13BulletinBoard0A7ManagerC">BulletinManager</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -113,15 +121,15 @@ standard components.</p>
                       <div class="abstract">
                         <p>An object that manages the presentation of a bulletin.</p>
 
-<p>You create a bulletin manager by passing a root <code><a href="Protocols/BulletinItem.html">BulletinItem</a></code>, that contains the data to display.</p>
+<p>You create a bulletin manager using the <code>init(rootItem:)</code> initializer, where <code>rootItem</code> is the
+ first bulletin item to display.</p>
 
-<p>The manager works similar to a navigation controller. You can push new items to display them and
- pop existing ones to go back.</p>
+<p>The manager works like a navigation controller. You can push new items to the stack to display them
+ and pop existing ones to go back.</p>
 
-<p>You must call the <code>prepare</code> function before displaying the view controller or changing the current
- item.</p>
+<p>You must call the <code>prepare</code> method before displaying the view controller.</p>
 
-<p><code>BulletinManager</code> must be used on the main thread only.</p>
+<p><code>BulletinManager</code> must only be used from the main thread.</p>
 
                         <a href="Classes/BulletinManager.html" class="slightly-smaller">See more</a>
                       </div>
@@ -129,12 +137,12 @@ standard components.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">BulletinManager</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">UIViewControllerTransitioningDelegate</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">BulletinManager</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinManager.swift#L22-L342">Show on GitHub</a>
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/BulletinManager.swift#L22-L375">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -159,8 +167,9 @@ standard components.</p>
                         <p>A standard bulletin item with a title and optional additional informations. It can display a large
  action button and a smaller button for alternative options.</p>
 
-<p>You can override this class to add custom button handling. Override the <code>actionButtonTapped(sender:)</code>
- and <code>alternativeButtonTapped(sender:)</code> to handle tap events. Make sure to call <code>super</code> if you do.</p>
+<p>You can override this class to customize button tap handling. Override the <code>actionButtonTapped(sender:)</code>
+ and <code>alternativeButtonTapped(sender:)</code> methods to handle tap events. Make sure to call <code>super</code> in your
+ implementations if you do.</p>
 
                         <a href="Classes/PageBulletinItem.html" class="slightly-smaller">See more</a>
                       </div>
@@ -173,7 +182,7 @@ standard components.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L16-L232">Show on GitHub</a>
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L17-L244">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

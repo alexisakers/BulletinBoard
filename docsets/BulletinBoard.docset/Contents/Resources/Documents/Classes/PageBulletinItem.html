@@ -44,6 +44,14 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/BulletinBackgroundViewStyle.html">BulletinBackgroundViewStyle</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -66,8 +74,9 @@
             <p>A standard bulletin item with a title and optional additional informations. It can display a large
  action button and a smaller button for alternative options.</p>
 
-<p>You can override this class to add custom button handling. Override the <code>actionButtonTapped(sender:)</code>
- and <code>alternativeButtonTapped(sender:)</code> to handle tap events. Make sure to call <code>super</code> if you do.</p>
+<p>You can override this class to customize button tap handling. Override the <code>actionButtonTapped(sender:)</code>
+ and <code>alternativeButtonTapped(sender:)</code> methods to handle tap events. Make sure to call <code>super</code> in your
+ implementations if you do.</p>
 
           </section>
           <section class="section task-group-section">
@@ -183,7 +192,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An image to display below the title. Should be less than or equal to 128x128px.</p>
+                        <p>An image to display below the title. It should have a size of 128 pixels by 128 pixels.</p>
 
                       </div>
                       <div class="declaration">
@@ -344,10 +353,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The current object managing the item.</p>
+                        <p>The object managing the item.</p>
 
 <p>This property is set when the item is currently being displayed. It will be set to <code>nil</code> when
- the item is removed from view.</p>
+ the item is removed from bulletin.</p>
 
                       </div>
                       <div class="declaration">
@@ -380,7 +389,7 @@
                         <p>Whether the page can be dismissed.</p>
 
 <p>If you set this value to <code>true</code>, the user will be able to dismiss the bulletin by tapping outside
- the card.</p>
+ of the card or by swiping down.</p>
 
 <p>You should set it to <code>true</code> for the last item you want to display.</p>
 
@@ -402,6 +411,59 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:13BulletinBoard04PageA4ItemC16dismissalHandleryAA0aD0_pcSgv"></a>
+                    <a name="//apple_ref/swift/Property/dismissalHandler" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13BulletinBoard04PageA4ItemC16dismissalHandleryAA0aD0_pcSgv">dismissalHandler</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The block of code to execute when the bulletin item is dismissed. This is called when the bulletin
+ is moved out of view.</p>
+
+<p>You can leave it <code>nil</code> if <code><a href="../Classes/PageBulletinItem.html#/s:13BulletinBoard04PageA4ItemC13isDismissableSbv">isDismissable</a></code> is set to false.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">dismissalHandler</span><span class="p">:</span> <span class="p">((</span><span class="n">_</span> <span class="nv">item</span><span class="p">:</span> <span class="kt"><a href="../Protocols/BulletinItem.html">BulletinItem</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>item</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The item that is being dismissed. When calling <code>dismissalHandler</code>, the manager
+passes a reference to <code>self</code> so you don&rsquo;t have to manage weak references yourself.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L84">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:13BulletinBoard04PageA4ItemC04nextD0AA0aD0_pSgv"></a>
                     <a name="//apple_ref/swift/Property/nextItem" class="dashAnchor"></a>
                     <a class="token" href="#/s:13BulletinBoard04PageA4ItemC04nextD0AA0aD0_pSgv">nextItem</a>
@@ -414,7 +476,7 @@
                       <div class="abstract">
                         <p>The item to display after this one.</p>
 
-<p>If you set this value, you&rsquo;ll be able to call <code>displayNextItem()</code> to present the next item to
+<p>If you set this value, you&rsquo;ll be able to call <code>displayNextItem()</code> to push the next item to
  the stack.</p>
 
                       </div>
@@ -427,7 +489,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L81">Show on GitHub</a>
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L93">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -470,7 +532,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L92">Show on GitHub</a>
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L104">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -502,7 +564,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L100">Show on GitHub</a>
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L112">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -531,7 +593,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The code to execute when the action button is pressed.</p>
+                        <p>The code to execute when the action button is tapped.</p>
 
                       </div>
                       <div class="declaration">
@@ -543,7 +605,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L112">Show on GitHub</a>
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L124">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -561,7 +623,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The code to execute when the alternative button is pressed.</p>
+                        <p>The code to execute when the alternative button is tapped.</p>
 
                       </div>
                       <div class="declaration">
@@ -573,7 +635,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L118">Show on GitHub</a>
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L130">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -606,7 +668,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L127-L129">Show on GitHub</a>
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L139-L141">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -639,7 +701,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L138-L140">Show on GitHub</a>
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L150-L152">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -682,7 +744,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L151-L216">Show on GitHub</a>
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L163-L229">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -700,8 +762,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Called by the manager when the item was removed from the bulletin view. Use this function
- to remove any button target or gesture recognizers from your managed views.</p>
+                        <p>Called by the manager when the item was removed from the bulletin view.</p>
 
 <p>This is an implementation detail of <code><a href="../Protocols/BulletinItem.html">BulletinItem</a></code> and you should not call it directly.</p>
 
@@ -715,7 +776,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L225-L230">Show on GitHub</a>
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/PageBulletinItem.swift#L237-L242">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
