@@ -101,7 +101,7 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
 
             guard (translation > 0) && isInteractionInProgress else {
                 update(0)
-                updateSnapshotView(forVerticalTranslation: translation)
+                updateCardViews(forVerticalTranslation: translation)
                 return
             }
 
@@ -129,7 +129,7 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
             isInteractionInProgress = false
 
             if !isFinished {
-                resetContentView()
+                resetCardViews()
             }
 
         case .ended:
@@ -137,7 +137,7 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
             isInteractionInProgress = false
 
             if !isFinished {
-                resetContentView()
+                resetCardViews()
                 cancel()
             }
 
@@ -170,7 +170,7 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
 
     }
 
-    private func transform(forVerticalTranslation translation: CGFloat) -> CGFloat {
+    private func transform(forVerticalTranslation translation: CGFloat) -> CGAffineTransform {
 
         let translationFactor: CGFloat = 1/2
         var adaptedTranslation = translation
@@ -179,27 +179,33 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
             adaptedTranslation = elasticTranslationCurve(translation, translationFactor)
         }
 
-        return adaptedTranslation * translationFactor
+        let yTransform = adaptedTranslation * translationFactor
+        return CGAffineTransform(translationX: 0, y: yTransform)
 
     }
 
     // MARK: - Position Management
 
-    private func updateSnapshotView(forVerticalTranslation translation: CGFloat) {
-        let yTransform = transform(forVerticalTranslation: translation)
-        snapshotView?.transform = CGAffineTransform(translationX: 0, y: yTransform)
+    private func updateCardViews(forVerticalTranslation translation: CGFloat) {
+
+        let transform = self.transform(forVerticalTranslation: translation)
+
+        snapshotView?.transform = transform
+        contentView.transform = transform
+
     }
 
-    private func resetContentView() {
+    private func resetCardViews() {
 
         let options: UIViewAnimationOptions = UIViewAnimationOptions(rawValue: 6 << 7)
 
         let animations = {
             self.snapshotView?.transform = .identity
-            return
+            self.contentView.transform = .identity
         }
 
-        self.viewController.backgroundView.show()
+        viewController.backgroundView.show()
+        viewController.showBottomSafeAreaCover()
 
         UIView.animate(withDuration: 0.15, delay: 0, options: options, animations: animations) { _ in
             self.update(0)
