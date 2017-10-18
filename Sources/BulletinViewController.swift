@@ -165,14 +165,12 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         case .regular:
             leadingConstraint.isActive = false
             trailingConstraint.isActive = false
-
             centerXConstraint.isActive = true
             minWidthConstraint.isActive = true
 
         case .compact:
             leadingConstraint.isActive = true
             trailingConstraint.isActive = true
-
             centerXConstraint.isActive = false
             minWidthConstraint.isActive = false
 

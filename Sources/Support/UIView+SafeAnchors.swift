@@ -4,26 +4,23 @@ import UIKit
 
 extension UIView {
 
-    var safeTopAnchor: NSLayoutYAxisAnchor { return safeAreaLayoutGuideWithFallback.topAnchor }
-    var safeBottomAnchor: NSLayoutYAxisAnchor { return safeAreaLayoutGuideWithFallback.bottomAnchor }
+    var safeTopAnchor: NSLayoutYAxisAnchor { return safeAreaLayoutGuideWithFallback?.topAnchor ?? topAnchor }
+    var safeBottomAnchor: NSLayoutYAxisAnchor { return safeAreaLayoutGuideWithFallback?.bottomAnchor ?? bottomAnchor }
 
-    var safeLeftAnchor: NSLayoutXAxisAnchor { return safeAreaLayoutGuideWithFallback.leftAnchor }
-    var safeRightAnchor: NSLayoutXAxisAnchor { return safeAreaLayoutGuideWithFallback.rightAnchor }
+    var safeLeadingAnchor: NSLayoutXAxisAnchor { return safeAreaLayoutGuideWithFallback?.leadingAnchor ?? leadingAnchor }
+    var safeTrailingAnchor: NSLayoutXAxisAnchor { return safeAreaLayoutGuideWithFallback?.trailingAnchor ?? trailingAnchor }
 
-    var safeLeadingAnchor: NSLayoutXAxisAnchor { return safeAreaLayoutGuideWithFallback.leadingAnchor }
-    var safeTrailingAnchor: NSLayoutXAxisAnchor { return safeAreaLayoutGuideWithFallback.trailingAnchor }
+    var safeCenterXAnchor: NSLayoutXAxisAnchor { return safeAreaLayoutGuideWithFallback?.centerXAnchor ?? centerXAnchor }
+    var safeCenterYAnchor: NSLayoutYAxisAnchor { return safeAreaLayoutGuideWithFallback?.centerYAnchor ?? centerYAnchor }
 
-    var safeCenterXAnchor: NSLayoutXAxisAnchor { return safeAreaLayoutGuideWithFallback.centerXAnchor }
-    var safeCenterYAnchor: NSLayoutYAxisAnchor { return safeAreaLayoutGuideWithFallback.centerYAnchor }
+    var safeWidthAnchor: NSLayoutDimension { return safeAreaLayoutGuideWithFallback?.widthAnchor ?? widthAnchor }
+    var safeHeightAnchor: NSLayoutDimension { return safeAreaLayoutGuideWithFallback?.heightAnchor ?? heightAnchor }
 
-    var safeWidthAnchor: NSLayoutDimension { return safeAreaLayoutGuideWithFallback.widthAnchor }
-    var safeHeightAnchor: NSLayoutDimension { return safeAreaLayoutGuideWithFallback.heightAnchor }
-
-    private var safeAreaLayoutGuideWithFallback: UILayoutGuide {
+    private var safeAreaLayoutGuideWithFallback: UILayoutGuide? {
         if #available(iOS 11, *) {
             return safeAreaLayoutGuide
         } else {
-            return layoutMarginsGuide
+            return nil
         }
     }
 
