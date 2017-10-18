@@ -145,6 +145,7 @@ class ViewController: UIViewController {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         styleSelectorSheet.addAction(cancelAction)
 
+        styleSelectorSheet.popoverPresentationController?.barButtonItem = styleButtonItem
         present(styleSelectorSheet, animated: true)
 
     }
