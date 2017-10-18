@@ -62,8 +62,12 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
 
         /// Constants
 
-        let dismissThreshold: CGFloat = 240
-        let elasticThreshold: CGFloat = 120
+        let screenHeight = viewController.view.bounds.height
+        let distanceFactor: CGFloat = screenHeight >= 500 ? 3/4 : 2/3
+
+        let dismissThreshold: CGFloat = 256 * distanceFactor
+        let elasticThreshold: CGFloat = 128 * distanceFactor
+        let trackScreenPercentage = dismissThreshold / contentView.bounds.height
 
         switch gestureRecognizer.state {
         case .began:
@@ -115,8 +119,7 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
             }
 
             let adaptativeTranslation = self.adaptativeTranslation(for: translation, elasticThreshold: elasticThreshold)
-            let trackScreenPercentage = dismissThreshold / viewController.view.bounds.height
-            let newPercentage = 2 * (adaptativeTranslation / dismissThreshold) * trackScreenPercentage
+            let newPercentage = (adaptativeTranslation / dismissThreshold) * trackScreenPercentage
 
             guard currentPercentage != newPercentage else {
                 return
@@ -158,7 +161,7 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
 
     private func adaptativeTranslation(for translation: CGFloat, elasticThreshold: CGFloat) -> CGFloat {
 
-        let translationFactor: CGFloat = 1/2
+        let translationFactor: CGFloat = 2/3
 
         if translation >= elasticThreshold {
             let frictionLength = translation - elasticThreshold
@@ -172,7 +175,7 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
 
     private func transform(forVerticalTranslation translation: CGFloat) -> CGAffineTransform {
 
-        let translationFactor: CGFloat = 1/2
+        let translationFactor: CGFloat = 1/3
         var adaptedTranslation = translation
 
         if translation < 0 || !(viewController.isDismissable) {
