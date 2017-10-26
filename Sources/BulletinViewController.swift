@@ -49,7 +49,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     private var stackBottomConstraint: NSLayoutConstraint!
     private var contentTopConstraint: NSLayoutConstraint!
 
-    private var contentBottomConstraint: NSLayoutConstraint!
+    fileprivate var contentBottomConstraint: NSLayoutConstraint!
 
 
     // MARK: - Lifecycle
@@ -147,6 +147,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         contentView.backgroundColor = #colorLiteral(red: 0.9921568627, green: 1, blue: 1, alpha: 1)
         setUpLayout(with: traitCollection)
 
+        setUpKeyboardLogic()
     }
 
     // MARK: - Layout
@@ -335,6 +336,58 @@ extension BulletinViewController: UIViewControllerTransitioningDelegate {
         activeSnapshotView = snapshot
     }
 
+}
+
+// MARK: - Keyboard
+
+extension BulletinViewController {
+    func setUpKeyboardLogic() {
+        NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardShow), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardHide), name: .UIKeyboardWillHide, object: nil)
+    }
+
+    @objc func onKeyboardShow(_ notification: Notification) {
+        if let userInfo = notification.userInfo {
+            if let keyboardFrameFinal = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect,
+                let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double,
+                let curveInt = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? Int {
+
+                var animationCurve = UIViewAnimationCurve(rawValue: curveInt)
+                if animationCurve == nil {
+                    animationCurve = UIViewAnimationCurve.linear
+                }
+
+                UIView.animate(withDuration: duration, delay: 0, options: animationCurve!.toOptions(), animations: {
+                    self.contentBottomConstraint.constant = -(keyboardFrameFinal.size.height + 12) // same value as in moveIntoPlace()
+                    self.contentView.superview?.layoutIfNeeded()
+                }, completion: nil)
+            }
+        }
+    }
+
+    @objc func onKeyboardHide(_ notification: Notification) {
+        if let userInfo = notification.userInfo {
+            if let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double,
+                let curveInt = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? Int {
+
+                var animationCurve = UIViewAnimationCurve(rawValue: curveInt)
+                if animationCurve == nil {
+                    animationCurve = UIViewAnimationCurve.linear
+                }
+
+                UIView.animate(withDuration: duration, delay: 0, options: animationCurve!.toOptions(), animations: {
+                    self.contentBottomConstraint.constant = -12 // same value as in moveIntoPlace()
+                    self.contentView.superview?.layoutIfNeeded()
+                }, completion: nil)
+            }
+        }
+    }
+}
+
+extension UIViewAnimationCurve {
+    func toOptions() -> UIViewAnimationOptions {
+        return UIViewAnimationOptions(rawValue: UInt(rawValue << 16))
+    }
 }
 
 // MARK: - Swift Compatibility
