@@ -150,6 +150,10 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         setUpKeyboardLogic()
     }
 
+    deinit {
+        cleanUpKeyboardLogic()
+    }
+
     // MARK: - Layout
 
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -346,47 +350,50 @@ extension BulletinViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardHide), name: .UIKeyboardWillHide, object: nil)
     }
 
+    func cleanUpKeyboardLogic() {
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+    }
+
     @objc func onKeyboardShow(_ notification: Notification) {
-        if let userInfo = notification.userInfo {
-            if let keyboardFrameFinal = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect,
-                let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double,
-                let curveInt = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? Int {
-
-                var animationCurve = UIViewAnimationCurve(rawValue: curveInt)
-                if animationCurve == nil {
-                    animationCurve = UIViewAnimationCurve.linear
-                }
-
-                UIView.animate(withDuration: duration, delay: 0, options: animationCurve!.toOptions(), animations: {
-                    self.contentBottomConstraint.constant = -(keyboardFrameFinal.size.height + 12) // same value as in moveIntoPlace()
-                    self.contentView.superview?.layoutIfNeeded()
-                }, completion: nil)
-            }
+        guard let userInfo = notification.userInfo,
+            let keyboardFrameFinal = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect,
+            let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double,
+            let curveInt = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? Int
+        else {
+            return
         }
+
+        let animationCurve = UIViewAnimationCurve(rawValue: curveInt) ?? .linear
+        let animationOptions = UIViewAnimationOptions(curve: animationCurve)
+
+        UIView.animate(withDuration: duration, delay: 0, options: animationOptions, animations: {
+            self.contentBottomConstraint.constant = -(keyboardFrameFinal.size.height + 12) // same value as in moveIntoPlace()
+            self.contentView.superview?.layoutIfNeeded()
+        }, completion: nil)
     }
 
     @objc func onKeyboardHide(_ notification: Notification) {
-        if let userInfo = notification.userInfo {
-            if let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double,
-                let curveInt = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? Int {
-
-                var animationCurve = UIViewAnimationCurve(rawValue: curveInt)
-                if animationCurve == nil {
-                    animationCurve = UIViewAnimationCurve.linear
-                }
-
-                UIView.animate(withDuration: duration, delay: 0, options: animationCurve!.toOptions(), animations: {
-                    self.contentBottomConstraint.constant = -12 // same value as in moveIntoPlace()
-                    self.contentView.superview?.layoutIfNeeded()
-                }, completion: nil)
-            }
+        guard let userInfo = notification.userInfo,
+            let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double,
+            let curveInt = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? Int
+        else {
+            return
         }
+
+        let animationCurve = UIViewAnimationCurve(rawValue: curveInt) ?? .linear
+        let animationOptions = UIViewAnimationOptions(curve: animationCurve)
+
+        UIView.animate(withDuration: duration, delay: 0, options: animationOptions, animations: {
+            self.contentBottomConstraint.constant = -12 // same value as in moveIntoPlace()
+            self.contentView.superview?.layoutIfNeeded()
+        }, completion: nil)
     }
 }
 
-extension UIViewAnimationCurve {
-    func toOptions() -> UIViewAnimationOptions {
-        return UIViewAnimationOptions(rawValue: UInt(rawValue << 16))
+extension UIViewAnimationOptions {
+    init(curve: UIViewAnimationCurve) {
+        self = UIViewAnimationOptions(rawValue: UInt(curve.rawValue << 16))
     }
 }
 

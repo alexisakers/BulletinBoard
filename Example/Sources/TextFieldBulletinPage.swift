@@ -1,13 +1,16 @@
-//
-//  TextFieldBulletinPage.swift
-//  Example
-//
-//  Created by Junaid Younus on 26/10/2017.
-//  Copyright © 2017 Alexis Aubry. All rights reserved.
-//
+/**
+ *  BulletinBoard
+ *  Copyright (c) 2017 Alexis Aubry. Licensed under the MIT license.
+ */
 
 import UIKit
 import BulletinBoard
+
+/**
+ * An item that displays a textfield.
+ *
+ * This item demonstrates how to create a bulletin item with a textfield and how it will behave when the keyboard is visible.
+ */
 
 class TextFieldBulletinPage: NSObject, BulletinItem {
     var manager: BulletinManager?
