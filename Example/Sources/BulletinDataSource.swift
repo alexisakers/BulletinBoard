@@ -145,7 +145,8 @@ enum BulletinDataSource {
         let page = PageBulletinItem(title: "Setup Completed")
         page.image = #imageLiteral(resourceName: "IntroCompletion")
         page.imageAccessibilityLabel = "Checkmark"
-        page.interfaceFactory.tintColor = #colorLiteral(red: 0.2941176471, green: 0.8509803922, blue: 0.3921568627, alpha: 1)
+        page.interfaceFactory.tintColor = #colorLiteral(red: 0.2980392157, green: 0.8509803922, blue: 0.3921568627, alpha: 1)
+        page.interfaceFactory.imageViewTintColor = #colorLiteral(red: 0.2980392157, green: 0.8509803922, blue: 0.3921568627, alpha: 1)
         page.interfaceFactory.actionButtonTitleColor = .white
 
         page.descriptionText = "Instanimal is ready for you to use. Happy browsing!"
