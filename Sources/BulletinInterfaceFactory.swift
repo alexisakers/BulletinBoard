@@ -24,6 +24,9 @@ public class BulletinInterfaceFactory {
     /// The tint color to apply to button elements.
     public var tintColor: UIColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
 
+    /// The tint color to apply to the imageView (if image rendered in template mode).
+    public var imageViewTintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+
     /// The title color to apply to action button.
     public var actionButtonTitleColor = UIColor.white
 
