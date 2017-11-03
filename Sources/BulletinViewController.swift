@@ -62,6 +62,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         view.backgroundColor = .clear
 
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
+        recognizer.delegate = self
         view.addGestureRecognizer(recognizer)
 
         contentView.accessibilityViewIsModal = true
@@ -147,6 +148,16 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         contentView.backgroundColor = #colorLiteral(red: 0.9921568627, green: 1, blue: 1, alpha: 1)
         setUpLayout(with: traitCollection)
 
+    }
+    
+    // MARK: - Gesture Recognizer
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view?.isDescendant(of: contentView) == true {
+            return false
+        }
+        
+        return true
     }
 
     // MARK: - Layout
