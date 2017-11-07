@@ -22,7 +22,7 @@ enum BulletinDataSource {
      * This creates a `FeedbackPageBulletinItem` with: a title, an image, a description text and
      * and action button.
      *
-     * The action button presents the next item (the notification page).
+     * The action button presents the next item (the textfield page).
      */
 
     static func makeIntroPage() -> FeedbackPageBulletinItem {
@@ -40,10 +40,28 @@ enum BulletinDataSource {
             item.displayNextItem()
         }
 
-        page.nextItem = makeNotitificationsPage()
+        page.nextItem = makeTextFieldPage()
 
         return page
 
+    }
+
+    /**
+     * Create the textfield page.
+     *
+     * This creates a `TextFieldBulletinPage` with: a title, an error label and a textfield.
+     *
+     * The keyboard return button presents the next item (the notification page).
+     */
+    static func makeTextFieldPage() -> TextFieldBulletinPage {
+        let page = TextFieldBulletinPage()
+        page.nextItem = makeNotitificationsPage()
+
+        page.actionHandler = { item in
+            item.displayNextItem()
+        }
+
+        return page
     }
 
     /**
@@ -66,7 +84,7 @@ enum BulletinDataSource {
         page.actionButtonTitle = "Subscribe"
         page.alternativeButtonTitle = "Not now"
 
-        page.isDismissable = false
+        page.isDismissable = true
 
         page.actionHandler = { item in
             PermissionsManager.shared.requestLocalNotifications()

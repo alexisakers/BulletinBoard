@@ -21,6 +21,7 @@
 		55DADE851F7E592F001B11A2 /* CollectionUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DADE841F7E592F001B11A2 /* CollectionUtilities.swift */; };
 		55DADE911F7ED65E001B11A2 /* BulletinBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DADE901F7ED65E001B11A2 /* BulletinBoard.framework */; };
 		55DADE921F7ED65E001B11A2 /* BulletinBoard.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55DADE901F7ED65E001B11A2 /* BulletinBoard.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		652A87ED1FA24C8B006CDCF6 /* TextFieldBulletinPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652A87EC1FA24C8B006CDCF6 /* TextFieldBulletinPage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -53,6 +54,7 @@
 		55DADE821F7E4204001B11A2 /* PermissionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsManager.swift; sourceTree = "<group>"; };
 		55DADE841F7E592F001B11A2 /* CollectionUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionUtilities.swift; sourceTree = "<group>"; };
 		55DADE901F7ED65E001B11A2 /* BulletinBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BulletinBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		652A87EC1FA24C8B006CDCF6 /* TextFieldBulletinPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBulletinPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				55DADE771F7D8B29001B11A2 /* PetSelectorBulletinPage.swift */,
 				55DADE801F7E3C0B001B11A2 /* FeedbackPageBulletinItem.swift */,
 				5506756A1F90ADEF00874D8B /* BackgroundStyles.swift */,
+				652A87EC1FA24C8B006CDCF6 /* TextFieldBulletinPage.swift */,
 			);
 			name = Bulletin;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 				558A12451F7D7865005EC97C /* AppDelegate.swift in Sources */,
 				55DADE761F7D7AEA001B11A2 /* BulletinDataSource.swift in Sources */,
 				55DADE811F7E3C0B001B11A2 /* FeedbackPageBulletinItem.swift in Sources */,
+				652A87ED1FA24C8B006CDCF6 /* TextFieldBulletinPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
