@@ -42,7 +42,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     private var leadingConstraint: NSLayoutConstraint!
     private var trailingConstraint: NSLayoutConstraint!
     private var centerXConstraint: NSLayoutConstraint!
-    private var minWidthConstraint: NSLayoutConstraint!
+    private var widthConstraint: NSLayoutConstraint!
 
     private var stackLeadingConstraint: NSLayoutConstraint!
     private var stackTrailingConstraint: NSLayoutConstraint!
@@ -79,8 +79,8 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         trailingConstraint = contentView.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor, constant: -12)
         centerXConstraint = contentView.centerXAnchor.constraint(equalTo: view.safeCenterXAnchor)
 
-        minWidthConstraint = contentView.widthAnchor.constraint(equalToConstant: 444)
-        minWidthConstraint.priority = UILayoutPriorityDefaultHigh
+        widthConstraint = contentView.widthAnchor.constraint(equalToConstant: 444)
+        widthConstraint.priority = UILayoutPriorityRequired
 
         let maxWidthConstraint = contentView.widthAnchor.constraint(lessThanOrEqualTo: view.safeWidthAnchor, constant: -24)
         maxWidthConstraint.priority = UILayoutPriorityRequired
@@ -182,13 +182,13 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
             leadingConstraint.isActive = false
             trailingConstraint.isActive = false
             centerXConstraint.isActive = true
-            minWidthConstraint.isActive = true
+            widthConstraint.isActive = true
 
         case .compact:
             leadingConstraint.isActive = true
             trailingConstraint.isActive = true
             centerXConstraint.isActive = false
-            minWidthConstraint.isActive = false
+            widthConstraint.isActive = false
 
         default:
             break
