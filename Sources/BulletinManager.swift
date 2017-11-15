@@ -19,7 +19,7 @@ import UIKit
  * `BulletinManager` must only be used from the main thread.
  */
 
-public final class BulletinManager {
+@objc public final class BulletinManager: NSObject {
 
     private var viewController: BulletinViewController!
 
@@ -31,7 +31,7 @@ public final class BulletinManager {
      * Set this value before calling `prepare`. Changing it after will have no effect.
      */
 
-    public var backgroundViewStyle: BulletinBackgroundViewStyle = .dimmed
+    @objc public var backgroundViewStyle: BulletinBackgroundViewStyle = .dimmed
 
 
     // MARK: - Private Properties
@@ -52,10 +52,10 @@ public final class BulletinManager {
      * Creates a bulletin manager with the first item to display. An item represents the contents
      * displayed on a single card.
      *
-     * - parameter items: The items to display.
+     * - parameter rootItem: The first item to display.
      */
 
-    public init(rootItem: BulletinItem) {
+    @objc public init(rootItem: BulletinItem) {
 
         self.rootItem = rootItem
         self.itemsStack = []
@@ -63,14 +63,20 @@ public final class BulletinManager {
 
     }
 
+    @available(*, unavailable, message: "BulletinManager.init is unavailable. Use init(rootItem:) instead.")
+    override init() {
+        fatalError("BulletinManager.init is unavailable. Use init(rootItem:) instead.")
+    }
 
     // MARK: - Interacting with the Bulletin
 
     /**
      * Prepares the bulletin interface and displays the root item.
+     *
+     * This method must be called before any other interaction with the bulletin.
      */
 
-    public func prepare() {
+    @objc public func prepare() {
 
         assertIsMainThread()
 
@@ -99,7 +105,7 @@ public final class BulletinManager {
      * Call one of `push(item:)`, `popItem` or `popToRootItem` to hide the activity indicator and change the current item.
      */
 
-    public func displayActivityIndicator() {
+    @objc public func displayActivityIndicator() {
 
         assertIsPrepared()
         assertIsMainThread()
@@ -116,7 +122,7 @@ public final class BulletinManager {
      * - parameter item: The item to display.
      */
 
-    public func push(item: BulletinItem) {
+    @objc public func push(item: BulletinItem) {
 
         assertIsPrepared()
         assertIsMainThread()
@@ -133,7 +139,7 @@ public final class BulletinManager {
      * Removes the current item from the stack and displays the previous item.
      */
 
-    public func popItem() {
+    @objc public func popItem() {
 
         assertIsPrepared()
         assertIsMainThread()
@@ -159,7 +165,7 @@ public final class BulletinManager {
      * Removes all the items from the stack and displays the root item.
      */
 
-    public func popToRootItem() {
+    @objc public func popToRootItem() {
 
         assertIsPrepared()
         assertIsMainThread()
@@ -177,6 +183,22 @@ public final class BulletinManager {
 
     }
 
+    /**
+     * Displays the next item, if the `nextItem` property of the current item is set.
+     *
+     * - warning: If you call this method but `nextItem` is `nil`, this will crash your app.
+     */
+
+    @objc public func displayNextItem() {
+
+        guard let nextItem = currentItem.nextItem else {
+            preconditionFailure("Calling BulletinManager.displayNextItem, but the current item has no nextItem.")
+        }
+
+        push(item: nextItem)
+
+    }
+
     // MARK: - Presentation / Dismissal
 
     /**
@@ -187,9 +209,9 @@ public final class BulletinManager {
      * - parameter completion: An optional block to execute after presentation. Default to `nil`.
      */
 
-    public func presentBulletin(above presentingVC: UIViewController,
-                                animated: Bool = true,
-                                completion: (() -> Void)? = nil) {
+    @objc public func presentBulletin(above presentingVC: UIViewController,
+                                      animated: Bool = true,
+                                      completion: (() -> Void)? = nil) {
 
         assertIsPrepared()
         assertIsMainThread()
@@ -208,7 +230,7 @@ public final class BulletinManager {
      * - parameter animated: Whether to animate dismissal. Defaults to `true`.
      */
 
-    public func dismissBulletin(animated: Bool = true) {
+    @objc public func dismissBulletin(animated: Bool = true) {
 
         assertIsPrepared()
         assertIsMainThread()
@@ -228,7 +250,7 @@ public final class BulletinManager {
      * Tears down the view controller and item stack after dismissal is finished.
      */
 
-    func completeDismissal() {
+    @nonobjc func completeDismissal() {
 
         currentItem.dismissalHandler?(currentItem)
 

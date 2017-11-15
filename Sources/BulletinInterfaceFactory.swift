@@ -10,49 +10,49 @@ import UIKit
  * standard components.
  */
 
-public class BulletinInterfaceFactory {
+@objc public class BulletinInterfaceFactory: NSObject {
 
     /**
      * Creates a new interface factory with the default configuration.
      */
 
-    public init() {}
+    public override init() {}
 
 
     // MARK: - Customization
 
     /// The tint color to apply to button elements.
-    public var tintColor: UIColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+    @objc public var tintColor: UIColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
 
     /// The tint color to apply to the imageView (if image rendered in template mode).
-    public var imageViewTintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+    @objc public var imageViewTintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
 
     /// The title color to apply to action button.
-    public var actionButtonTitleColor = UIColor.white
+    @objc public var actionButtonTitleColor = UIColor.white
 
 
     // MARK: - Fonts
 
     /// The font size of title elements.
-    public let titleFontSize: CGFloat = 30
+    @objc public let titleFontSize: CGFloat = 30
 
     /// The font size of description labels.
-    public let descriptionFontSize: CGFloat = 20
+    @objc public let descriptionFontSize: CGFloat = 20
 
     /// The font size of compact description labels.
-    public let compactDescriptionFontSize: CGFloat = 15
+    @objc public let compactDescriptionFontSize: CGFloat = 15
 
     /// The font size of action buttons.
-    public let actionButtonFontSize: CGFloat = 17
+    @objc public let actionButtonFontSize: CGFloat = 17
 
 
     // MARK: - Colors
 
     /// The color of title text labels.
-    public let titleTextColor = #colorLiteral(red: 0.568627451, green: 0.5647058824, blue: 0.5725490196, alpha: 1)
+    @objc public let titleTextColor = #colorLiteral(red: 0.568627451, green: 0.5647058824, blue: 0.5725490196, alpha: 1)
 
     /// The color of description text labels.
-    public let descriptionTextColor = UIColor.black
+    @objc public let descriptionTextColor = UIColor.black
 
     
     // MARK: - Factories
@@ -61,7 +61,7 @@ public class BulletinInterfaceFactory {
      * Creates a standard title label.
      */
 
-    public func makeTitleLabel(reading title: String) -> UILabel {
+    @objc public func makeTitleLabel(reading title: String) -> UILabel {
 
         let titleLabel = UILabel()
         titleLabel.textAlignment = .center
@@ -83,7 +83,7 @@ public class BulletinInterfaceFactory {
      * - parameter isCompact: If `true`, a smaller font size will be used.
      */
 
-    public func makeDescriptionLabel(isCompact: Bool) -> UILabel {
+    @objc public func makeDescriptionLabel(isCompact: Bool) -> UILabel {
 
         let descriptionLabel = UILabel()
         descriptionLabel.textAlignment = .center
@@ -106,15 +106,12 @@ public class BulletinInterfaceFactory {
      * - parameter title: The title of the button.
      */
 
-    public func makeActionButton(title: String) -> ContainerView<HighlightButton> {
+    @objc public func makeActionButton(title: String) -> HighlightButton {
 
         let actionButton = HighlightButton(type: .custom)
-
         actionButton.setBackgroundColor(tintColor, forState: .normal)
         actionButton.setTitleColor(actionButtonTitleColor, for: .normal)
-
         actionButton.contentHorizontalAlignment = .center
-        actionButton.autoresizingMask = .flexibleWidth
 
         actionButton.setTitle(title, for: .normal)
         actionButton.titleLabel?.font = UIFont.systemFont(ofSize: actionButtonFontSize, weight: UIFontWeightSemibold)
@@ -122,10 +119,10 @@ public class BulletinInterfaceFactory {
         actionButton.layer.cornerRadius = 12
         actionButton.clipsToBounds = true
 
-        let actionContainer = ContainerView<HighlightButton>(actionButton)
-        actionContainer.heightAnchor.constraint(equalToConstant: 55).isActive = true
+        actionButton.setContentHuggingPriority(UILayoutPriorityDefaultLow, for: .horizontal)
+        actionButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
 
-        return actionContainer
+        return actionButton
 
     }
 
@@ -137,7 +134,7 @@ public class BulletinInterfaceFactory {
      * - parameter title: The title of the button.
      */
 
-    public func makeAlternativeButton(title: String) -> UIButton {
+    @objc public func makeAlternativeButton(title: String) -> UIButton {
 
         let alternativeButton = UIButton(type: .system)
         alternativeButton.setTitle(title, for: .normal)
@@ -153,7 +150,7 @@ public class BulletinInterfaceFactory {
      * - parameter spacing: The spacing between elements. Defaults to `10`.
      */
 
-    public func makeGroupStack(spacing: CGFloat = 10) -> UIStackView {
+    @objc public func makeGroupStack(spacing: CGFloat = 10) -> UIStackView {
 
         let buttonsStack = UIStackView()
         buttonsStack.axis = .vertical

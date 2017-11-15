@@ -257,7 +257,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
 
-        if let isDark = manager?.backgroundViewStyle.isDark {
+        if let isDark = manager?.backgroundViewStyle.rawValue.isDark {
             return isDark ? .lightContent : .default
         }
 
@@ -279,7 +279,7 @@ extension BulletinViewController {
     /// Displays the cover view at the bottom of the safe area. Animatable.
     func showBottomSafeAreaCover() {
 
-        guard let isDark = manager?.backgroundViewStyle.isDark else {
+        guard let isDark = manager?.backgroundViewStyle.rawValue.isDark else {
             return
         }
 

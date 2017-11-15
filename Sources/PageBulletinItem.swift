@@ -14,7 +14,7 @@ import UIKit
  * implementations if you do.
  */
 
-open class PageBulletinItem: BulletinItem {
+@objc open class PageBulletinItem: NSObject, BulletinItem {
 
     // MARK: Initialization
 
@@ -23,30 +23,35 @@ open class PageBulletinItem: BulletinItem {
      * - parameter title: The title of the page.
      */
 
-    public init(title: String) {
+    @objc public init(title: String) {
         self.title = title
+    }
+
+    @available(*, unavailable, message: "PageBulletinItem.init is unavailable. Use init(title:) instead.")
+    override init() {
+        fatalError("PageBulletinItem.init is unavailable. Use init(title:) instead.")
     }
 
 
     // MARK: - Page Contents
 
     /// The title of the page.
-    public let title: String
+    @objc public let title: String
 
     /// An image to display below the title. It should have a size of 128 pixels by 128 pixels.
-    public var image: UIImage?
+    @objc public var image: UIImage?
     
     /// An accessibility label which gets announced to VoiceOver users if the image gets focused.
-    public var imageAccessibilityLabel: String?
+    @objc public var imageAccessibilityLabel: String?
 
     /// A description text to display below the image.
-    public var descriptionText: String?
+    @objc public var descriptionText: String?
 
     /// The title of the action button.
-    public var actionButtonTitle: String?
+    @objc public var actionButtonTitle: String?
 
     /// The title of the alternative button.
-    public var alternativeButtonTitle: String?
+    @objc public var alternativeButtonTitle: String?
 
 
     // MARK: - BulletinItem
@@ -58,7 +63,7 @@ open class PageBulletinItem: BulletinItem {
      * the item is removed from bulletin.
      */
 
-    public weak var manager: BulletinManager?
+    @objc public weak var manager: BulletinManager?
 
     /**
      * Whether the page can be dismissed.
@@ -69,7 +74,7 @@ open class PageBulletinItem: BulletinItem {
      * You should set it to `true` for the last item you want to display.
      */
 
-    public var isDismissable: Bool = false
+    @objc public var isDismissable: Bool = false
 
     /**
      * The block of code to execute when the bulletin item is dismissed. This is called when the bulletin
@@ -81,7 +86,7 @@ open class PageBulletinItem: BulletinItem {
      * passes a reference to `self` so you don't have to manage weak references yourself.
      */
 
-    public var dismissalHandler: ((_ item: BulletinItem) -> Void)?
+    @objc public var dismissalHandler: ((_ item: BulletinItem) -> Void)?
 
     /**
      * The item to display after this one.
@@ -90,7 +95,7 @@ open class PageBulletinItem: BulletinItem {
      * the stack.
      */
 
-    public var nextItem: BulletinItem? = nil
+    @objc public var nextItem: BulletinItem? = nil
 
     
     // MARK: - Customization
@@ -101,7 +106,7 @@ open class PageBulletinItem: BulletinItem {
      * Use this property to customize the appearance of the generated elements.
      */
 
-    public let interfaceFactory = BulletinInterfaceFactory()
+    @objc public let interfaceFactory = BulletinInterfaceFactory()
 
     /**
      * Whether the description text should be displayed with a smaller font.
@@ -109,25 +114,25 @@ open class PageBulletinItem: BulletinItem {
      * You should set this to `true` if your text is long (more that two sentences).
      */
 
-    public var shouldCompactDescriptionText: Bool = false
+    @objc public var shouldCompactDescriptionText: Bool = false
 
 
     // MARK: - Buttons
 
-    fileprivate var actionButton: ContainerView<HighlightButton>? = nil
+    fileprivate var actionButton: HighlightButton? = nil
     fileprivate var alternativeButton: UIButton? = nil
 
     /**
      * The code to execute when the action button is tapped.
      */
 
-    public var actionHandler: ((PageBulletinItem) -> Void)? = nil
+    @objc public var actionHandler: ((PageBulletinItem) -> Void)? = nil
 
     /**
      * The code to execute when the alternative button is tapped.
      */
 
-    public var alternativeHandler: ((PageBulletinItem) -> Void)? = nil
+    @objc public var alternativeHandler: ((PageBulletinItem) -> Void)? = nil
 
     /**
      * Handles a tap on the action button.
@@ -208,7 +213,7 @@ open class PageBulletinItem: BulletinItem {
 
             let actionButton = interfaceFactory.makeActionButton(title: actionButtonTitle)
             buttonsStack.addArrangedSubview(actionButton)
-            actionButton.contentView.addTarget(self, action: #selector(actionButtonTapped(sender:)), for: .touchUpInside)
+            actionButton.addTarget(self, action: #selector(actionButtonTapped(sender:)), for: .touchUpInside)
 
             self.actionButton = actionButton
 
@@ -236,7 +241,7 @@ open class PageBulletinItem: BulletinItem {
      */
 
     public func tearDown() {
-        actionButton?.contentView.removeTarget(self, action: nil, for: .touchUpInside)
+        actionButton?.removeTarget(self, action: nil, for: .touchUpInside)
         alternativeButton?.removeTarget(self, action: nil, for: .touchUpInside)
         actionButton = nil
         alternativeButton = nil

@@ -9,7 +9,7 @@ import UIKit
  * An item that can be displayed inside a bulletin card.
  */
 
-public protocol BulletinItem: class {
+@objc public protocol BulletinItem: class {
 
     // MARK: - Configuration
 
@@ -71,24 +71,5 @@ public protocol BulletinItem: class {
      */
 
     func tearDown()
-
-}
-
-extension BulletinItem {
-
-    /**
-     * A convenience method to display the next bulletin item. If the `nextItem` property contains
-     * a bulletin item, this method will push it to the stack and display it.
-     */
-
-    public func displayNextItem() {
-
-        guard let nextItem = self.nextItem else {
-            return
-        }
-
-        manager?.push(item: nextItem)
-
-    }
 
 }
