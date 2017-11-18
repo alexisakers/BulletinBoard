@@ -20,7 +20,7 @@ class TextFieldBulletinPage: NSObject, BulletinItem {
     var dismissalHandler: ((BulletinItem) -> Void)?
     var nextItem: BulletinItem?
 
-    let interfaceFactory = BulletinInterfaceFactory()
+    let appearance = BulletinAppearance()
     var actionHandler: ((BulletinItem) -> Void)? = nil
 
     fileprivate var descriptionLabel: UILabel?
@@ -28,12 +28,14 @@ class TextFieldBulletinPage: NSObject, BulletinItem {
     fileprivate var doneButton: HighlightButtonWrapper?
 
     func makeArrangedSubviews() -> [UIView] {
-        var arrangedSubviews = [UIView]()
 
-        let titleLabel = interfaceFactory.makeTitleLabel(text: "Enter your Name")
+        var arrangedSubviews = [UIView]()
+        let interfaceBuilder = BulletinInterfaceBuilder(appearance: appearance)
+
+        let titleLabel = interfaceBuilder.makeTitleLabel(text: "Enter your Name")
         arrangedSubviews.append(titleLabel)
 
-        descriptionLabel = interfaceFactory.makeDescriptionLabel(isCompact: false)
+        descriptionLabel = interfaceBuilder.makeDescriptionLabel()
         descriptionLabel!.text = "To create your profile, please tell us your name. We will use it to customize your feed."
         arrangedSubviews.append(descriptionLabel!)
 
@@ -44,7 +46,7 @@ class TextFieldBulletinPage: NSObject, BulletinItem {
         textField!.placeholder = "First and Last Name"
         arrangedSubviews.append(textField!)
 
-        doneButton = interfaceFactory.makeActionButton(title: "Done")
+        doneButton = interfaceBuilder.makeActionButton(title: "Done")
         doneButton!.button.addTarget(self, action: #selector(doneButtonTapped(sender:)), for: .touchUpInside)
         arrangedSubviews.append(doneButton!)
 

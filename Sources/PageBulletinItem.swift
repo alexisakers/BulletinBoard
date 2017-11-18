@@ -12,6 +12,9 @@ import UIKit
  * You can override this class to customize button tap handling. Override the `actionButtonTapped(sender:)`
  * and `alternativeButtonTapped(sender:)` methods to handle tap events. Make sure to call `super` in your
  * implementations if you do.
+ *
+ * Use the `appearance` property to customize the appearance of the page. If you want to use a different interface
+ * builder type, change the `InterfaceBuilderType` property.
  */
 
 @objc open class PageBulletinItem: NSObject, BulletinItem {
@@ -101,21 +104,24 @@ import UIKit
     // MARK: - Customization
 
     /**
-     * The interface factory used to generate the interface of the page.
+     * The appearance manager used to generate the interface of the page.
      *
      * Use this property to customize the appearance of the generated elements.
+     *
+     * Make sure to customize the appearance before presenting the page. Changing the appearance properties
+     * after the bulletin page was presented has no effect.
      */
 
-    @objc public let interfaceFactory = BulletinInterfaceFactory()
+    @objc public var appearance = BulletinAppearance()
 
     /**
-     * Whether the description text should be displayed with a smaller font.
+     * The type of interface builder to use to generate the components.
      *
-     * You should set this to `true` if your text is long (more that two sentences).
+     * Make sure to customize this property before presenting the page. Changing the interface builder type
+     * after the bulletin page was presented has no effect.
      */
 
-    @objc public var shouldCompactDescriptionText: Bool = false
-
+    @objc public var InterfaceBuilderType: BulletinInterfaceBuilder.Type = BulletinInterfaceBuilder.self
 
     // MARK: - Buttons
 
@@ -168,10 +174,11 @@ import UIKit
     public func makeArrangedSubviews() -> [UIView] {
 
         var arrangedSubviews = [UIView]()
+        let interfaceBuilder = InterfaceBuilderType.init(appearance: appearance)
 
         // Title Label
 
-        let titleLabel = interfaceFactory.makeTitleLabel(text: title)
+        let titleLabel = interfaceBuilder.makeTitleLabel(text: title)
         arrangedSubviews.append(titleLabel)
 
         // Image View
@@ -181,7 +188,7 @@ import UIKit
             let imageView = UIImageView()
             imageView.image = image
             imageView.contentMode = .scaleAspectFit
-            imageView.tintColor = interfaceFactory.imageViewTintColor
+            imageView.tintColor = appearance.imageViewTintColor
 
             imageView.heightAnchor.constraint(lessThanOrEqualToConstant: 128).isActive = true
             imageView.heightAnchor.constraint(greaterThanOrEqualToConstant: 64).isActive = true
@@ -199,7 +206,7 @@ import UIKit
 
         if let descriptionText = self.descriptionText {
 
-            let descriptionLabel = interfaceFactory.makeDescriptionLabel(isCompact: shouldCompactDescriptionText)
+            let descriptionLabel = interfaceBuilder.makeDescriptionLabel()
             descriptionLabel.text = descriptionText
             arrangedSubviews.append(descriptionLabel)
 
@@ -207,11 +214,11 @@ import UIKit
 
         // Buttons Stack
 
-        let buttonsStack = interfaceFactory.makeGroupStack()
+        let buttonsStack = interfaceBuilder.makeGroupStack()
 
         if let actionButtonTitle = self.actionButtonTitle {
 
-            let actionButton = interfaceFactory.makeActionButton(title: actionButtonTitle)
+            let actionButton = interfaceBuilder.makeActionButton(title: actionButtonTitle)
             buttonsStack.addArrangedSubview(actionButton)
             actionButton.button.addTarget(self, action: #selector(actionButtonTapped(sender:)), for: .touchUpInside)
 
@@ -221,7 +228,7 @@ import UIKit
 
         if let alternativeButtonTitle = self.alternativeButtonTitle {
 
-            let alternativeButton = interfaceFactory.makeAlternativeButton(title: alternativeButtonTitle)
+            let alternativeButton = interfaceBuilder.makeAlternativeButton(title: alternativeButtonTitle)
             buttonsStack.addArrangedSubview(alternativeButton)
             alternativeButton.addTarget(self, action: #selector(alternativeButtonTapped(sender:)), for: .touchUpInside)
 

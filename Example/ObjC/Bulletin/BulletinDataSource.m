@@ -82,7 +82,7 @@
     [page setActionButtonTitle:@"Send location data"];
     [page setAlternativeButtonTitle:@"No thanks"];
 
-    [page setShouldCompactDescriptionText:YES];
+    [[page appearance] setShouldUseCompactDescriptionText:YES];
     [page setIsDismissable:NO];
 
     [page setActionHandler:^(PageBulletinItem * _Nonnull _item) {
@@ -116,9 +116,9 @@
     [page setImage:[UIImage imageNamed:@"IntroCompletion"]];
     [page setImageAccessibilityLabel:@"Checkmark"];
 
-    [[page interfaceFactory] setTintColor:greenColor];
-    [[page interfaceFactory] setImageViewTintColor:greenColor];
-    [[page interfaceFactory] setActionButtonTitleColor:[UIColor whiteColor]];
+    [[page appearance] setActionButtonColor:greenColor];
+    [[page appearance] setImageViewTintColor:greenColor];
+    [[page appearance] setActionButtonTitleColor:[UIColor whiteColor]];
 
     [page setDescriptionText:@"PetBoard is ready for you to use. Happy browsing!."];
     [page setActionButtonTitle:@"Get started"];
