@@ -87,7 +87,7 @@ enum BulletinDataSource {
         page.actionButtonTitle = "Subscribe"
         page.alternativeButtonTitle = "Not now"
 
-        page.isDismissable = true
+        page.isDismissable = false
 
         page.actionHandler = { item in
             PermissionsManager.shared.requestLocalNotifications()

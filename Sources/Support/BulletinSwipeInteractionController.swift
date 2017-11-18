@@ -95,12 +95,11 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
 
         case .changed:
 
-            let translation = gestureRecognizer.translation(in: contentView).y
-
             guard !isFinished else {
                 return
             }
 
+            let translation = gestureRecognizer.translation(in: contentView).y
             isFinished = false
 
             guard (translation > 0) && isInteractionInProgress else {
@@ -110,13 +109,6 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
             }
 
             snapshotView?.transform = .identity
-
-            guard translation <= dismissThreshold else {
-                isFinished = true
-                isInteractionInProgress = false
-                finish()
-                return
-            }
 
             let adaptativeTranslation = self.adaptativeTranslation(for: translation, elasticThreshold: elasticThreshold)
             let newPercentage = (adaptativeTranslation / dismissThreshold) * trackScreenPercentage
@@ -129,6 +121,7 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
             update(currentPercentage)
 
         case .cancelled, .failed:
+
             isInteractionInProgress = false
 
             if !isFinished {
@@ -137,15 +130,18 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
 
         case .ended:
 
-            isInteractionInProgress = false
+            let translation = gestureRecognizer.translation(in: contentView).y
 
-            if !isFinished {
+            if translation >= dismissThreshold {
+                isFinished = true
+                isInteractionInProgress = false
+                finish()
+            } else {
                 resetCardViews()
                 cancel()
+                isFinished = false
             }
 
-            isFinished = false
- 
         default:
             break
         }
