@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13770" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kIy-bs-cUt">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13770"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Root View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="RootViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YHu-o9-ydd">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uVx-ca-Gdt">
+                                    <size key="itemSize" width="317" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="Grl-fD-wP8" customClass="ImageCollectionViewCell" customModule="BBObjC" customModuleProvider="target">
+                                        <rect key="frame" x="29" y="0.0" width="317" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="317" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3gY-KD-wbB">
+                                <rect key="frame" x="0.0" y="778" width="375" height="34"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Mct-EW-Ciz">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="34"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="extraLight"/>
+                            </visualEffectView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="3gY-KD-wbB" secondAttribute="bottom" id="6Of-AL-yEb"/>
+                            <constraint firstItem="3gY-KD-wbB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Abc-Ck-iNE"/>
+                            <constraint firstItem="YHu-o9-ydd" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="COi-uq-R31"/>
+                            <constraint firstItem="YHu-o9-ydd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" placeholder="YES" id="Gbv-6i-ERY"/>
+                            <constraint firstAttribute="trailing" secondItem="3gY-KD-wbB" secondAttribute="trailing" id="X6j-EF-e4G"/>
+                            <constraint firstItem="YHu-o9-ydd" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" placeholder="YES" id="cKx-O3-0Oe"/>
+                            <constraint firstItem="YHu-o9-ydd" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" placeholder="YES" id="xcv-aq-u79"/>
+                            <constraint firstItem="3gY-KD-wbB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="yDj-pm-IMM"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="cae-YT-ehs">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" title="%@STYLE%@" id="euD-bA-1s9">
+                            <connections>
+                                <action selector="styleButtonTapped:" destination="BYZ-38-t0r" id="Ejd-dk-yu0"/>
+                            </connections>
+                        </barButtonItem>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="nJY-e8-Bxo">
+                            <rect key="frame" x="141" y="7" width="93" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Cats"/>
+                                <segment title="Dogs"/>
+                            </segments>
+                            <connections>
+                                <action selector="tabIndexChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="Rl0-ay-EPF"/>
+                            </connections>
+                        </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" title="Show Intro" id="EpR-v7-nqd">
+                            <connections>
+                                <action selector="showIntroButtonTapped:" destination="BYZ-38-t0r" id="t6e-d2-X0n"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="collectionView" destination="YHu-o9-ydd" id="P5n-AW-tQg"/>
+                        <outlet property="segmentedControl" destination="nJY-e8-Bxo" id="94S-lH-1fj"/>
+                        <outlet property="showIntoButtonItem" destination="EpR-v7-nqd" id="zg1-5r-A4W"/>
+                        <outlet property="styleButtonItem" destination="euD-bA-1s9" id="iSL-Us-LsK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="476" y="124.13793103448276"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="TcW-Yb-SIo">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kIy-bs-cUt" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2Vs-Zt-4R5">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="6eY-ke-dwm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eKO-UP-Hyw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-287" y="125"/>
+        </scene>
+    </scenes>
+</document>

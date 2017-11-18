@@ -209,7 +209,8 @@ import UIKit
      * - parameter completion: An optional block to execute after presentation. Default to `nil`.
      */
 
-    @objc public func presentBulletin(above presentingVC: UIViewController,
+    @objc(presentBulletinAboveViewController:animated:completion:)
+    public func presentBulletin(above presentingVC: UIViewController,
                                       animated: Bool = true,
                                       completion: (() -> Void)? = nil) {
 
@@ -230,7 +231,8 @@ import UIKit
      * - parameter animated: Whether to animate dismissal. Defaults to `true`.
      */
 
-    @objc public func dismissBulletin(animated: Bool = true) {
+    @objc(dismissBulletinAnimated:)
+    public func dismissBulletin(animated: Bool = true) {
 
         assertIsPrepared()
         assertIsMainThread()

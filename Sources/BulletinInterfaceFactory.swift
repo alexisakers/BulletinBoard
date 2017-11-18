@@ -61,7 +61,7 @@ import UIKit
      * Creates a standard title label.
      */
 
-    @objc public func makeTitleLabel(reading title: String) -> UILabel {
+    @objc public func makeTitleLabel(text: String) -> UILabel {
 
         let titleLabel = UILabel()
         titleLabel.textAlignment = .center
@@ -71,7 +71,7 @@ import UIKit
         titleLabel.adjustsFontSizeToFitWidth = true
 
         titleLabel.font = UIFont.systemFont(ofSize: titleFontSize, weight: UIFontWeightMedium)
-        titleLabel.text = title
+        titleLabel.text = text
 
         return titleLabel
 
@@ -83,7 +83,8 @@ import UIKit
      * - parameter isCompact: If `true`, a smaller font size will be used.
      */
 
-    @objc public func makeDescriptionLabel(isCompact: Bool) -> UILabel {
+    @objc(makeDescriptionLabelWithCompactFont:)
+    public func makeDescriptionLabel(isCompact: Bool) -> UILabel {
 
         let descriptionLabel = UILabel()
         descriptionLabel.textAlignment = .center
@@ -120,7 +121,10 @@ import UIKit
         actionButton.clipsToBounds = true
 
         actionButton.setContentHuggingPriority(UILayoutPriorityDefaultLow, for: .horizontal)
-        actionButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
+
+        let actionButtonHeight = actionButton.heightAnchor.constraint(equalToConstant: 55)
+        actionButtonHeight.isActive = true
+        actionButtonHeight.priority = UILayoutPriorityDefaultHigh
 
         return actionButton
 

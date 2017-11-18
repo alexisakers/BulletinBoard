@@ -411,7 +411,7 @@ extension UIViewAnimationOptions {
 // MARK: - Swift Compatibility
 
 #if swift(>=4.0)
-private let UILayoutPriorityRequired = UILayoutPriority.required
-private let UILayoutPriorityDefaultHigh = UILayoutPriority.defaultHigh
-private let UILayoutPriorityDefaultLow = UILayoutPriority.defaultLow
+let UILayoutPriorityRequired = UILayoutPriority.required
+let UILayoutPriorityDefaultHigh = UILayoutPriority.defaultHigh
+let UILayoutPriorityDefaultLow = UILayoutPriority.defaultLow
 #endif

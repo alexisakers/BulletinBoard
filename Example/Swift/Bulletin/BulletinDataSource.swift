@@ -27,17 +27,17 @@ enum BulletinDataSource {
 
     static func makeIntroPage() -> FeedbackPageBulletinItem {
 
-        let page = FeedbackPageBulletinItem(title: "Welcome to Instanimal")
+        let page = FeedbackPageBulletinItem(title: "Welcome to PetBoard")
         page.image = #imageLiteral(resourceName: "RoundedIcon")
         page.imageAccessibilityLabel = "😻"
 
         page.descriptionText = "Discover curated images of the best pets in the world."
         page.actionButtonTitle = "Configure"
 
-        page.isDismissable = true
+        page.isDismissable = false
 
         page.actionHandler = { item in
-            item.displayNextItem()
+            item.manager?.displayNextItem()
         }
 
         page.nextItem = makeTextFieldPage()
@@ -54,14 +54,17 @@ enum BulletinDataSource {
      * The keyboard return button presents the next item (the notification page).
      */
     static func makeTextFieldPage() -> TextFieldBulletinPage {
+
         let page = TextFieldBulletinPage()
-        page.nextItem = makeNotitificationsPage()
 
         page.actionHandler = { item in
-            item.displayNextItem()
+            item.manager?.displayNextItem()
         }
 
+        page.nextItem = makeNotitificationsPage()
+
         return page
+
     }
 
     /**
@@ -88,11 +91,11 @@ enum BulletinDataSource {
 
         page.actionHandler = { item in
             PermissionsManager.shared.requestLocalNotifications()
-            item.displayNextItem()
+            item.manager?.displayNextItem()
         }
 
         page.alternativeHandler = { item in
-            item.displayNextItem()
+            item.manager?.displayNextItem()
         }
 
         page.nextItem = makeLocationPage()
@@ -126,11 +129,11 @@ enum BulletinDataSource {
 
         page.actionHandler = { item in
             PermissionsManager.shared.requestWhenInUseLocation()
-            item.displayNextItem()
+            item.manager?.displayNextItem()
         }
 
         page.alternativeHandler = { item in
-            item.displayNextItem()
+            item.manager?.displayNextItem()
         }
 
         page.nextItem = makeChoicePage()
@@ -167,7 +170,7 @@ enum BulletinDataSource {
         page.interfaceFactory.imageViewTintColor = #colorLiteral(red: 0.2980392157, green: 0.8509803922, blue: 0.3921568627, alpha: 1)
         page.interfaceFactory.actionButtonTitleColor = .white
 
-        page.descriptionText = "Instanimal is ready for you to use. Happy browsing!"
+        page.descriptionText = "PetBoard is ready for you to use. Happy browsing!"
         page.actionButtonTitle = "Get started"
         page.alternativeButtonTitle = "Replay"
 
@@ -194,20 +197,20 @@ enum BulletinDataSource {
     /// The current favorite tab index.
     static var favoriteTabIndex: Int {
         get {
-            return UserDefaults.standard.integer(forKey: "HelloPetFavoriteTabIndex")
+            return UserDefaults.standard.integer(forKey: "PetBoardFavoriteTabIndex")
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "HelloPetFavoriteTabIndex")
+            UserDefaults.standard.set(newValue, forKey: "PetBoardFavoriteTabIndex")
         }
     }
 
     /// Whether user completed setup.
     static var userDidCompleteSetup: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: "HelloPetUserDidCompleteSetup")
+            return UserDefaults.standard.bool(forKey: "PetBoardUserDidCompleteSetup")
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "HelloPetUserDidCompleteSetup")
+            UserDefaults.standard.set(newValue, forKey: "PetBoardUserDidCompleteSetup")
         }
     }
 
@@ -225,7 +228,7 @@ extension Notification.Name {
      * - `"Index"` = an integer with the new favorite tab index.
      */
 
-    static let FavoriteTabIndexDidChange = Notification.Name("HelloPetFavoriteTabIndexDidChangeNotification")
+    static let FavoriteTabIndexDidChange = Notification.Name("PetBoardFavoriteTabIndexDidChangeNotification")
 
     /**
      * The setup did complete.
@@ -233,6 +236,6 @@ extension Notification.Name {
      * The user info dictionary is empty.
      */
 
-    static let SetupDidComplete = Notification.Name("HelloPetSetupDidCompleteNotification")
+    static let SetupDidComplete = Notification.Name("PetBoardSetupDidCompleteNotification")
 
 }

@@ -171,7 +171,7 @@ import UIKit
 
         // Title Label
 
-        let titleLabel = interfaceFactory.makeTitleLabel(reading: title)
+        let titleLabel = interfaceFactory.makeTitleLabel(text: title)
         arrangedSubviews.append(titleLabel)
 
         // Image View
