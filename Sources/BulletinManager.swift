@@ -71,6 +71,22 @@ import UIKit
     // MARK: - Interacting with the Bulletin
 
     /**
+     * Performs an operation with the bulletin content view and returns the result.
+     *
+     * Use this as an opportunity to customize the behavior of the content view (e.g. add motion effects).
+     *
+     * You must not store a reference to the view, or modify its layout (add subviews, add contraints, ...) as this
+     * could break the bulletin.
+     *
+     * Use this feature sparingly.
+     */
+
+    @discardableResult
+    public func withContentView<Result>(_ transform: (UIView) throws -> Result) rethrows -> Result {
+        return try transform(viewController.contentView)
+    }
+
+    /**
      * Prepares the bulletin interface and displays the root item.
      *
      * This method must be called before any other interaction with the bulletin.
