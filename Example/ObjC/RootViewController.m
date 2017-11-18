@@ -26,9 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    PageBulletinItem *introPage = [BulletinDataSource makeIntroPage];
-    _bulletinManager = [[BulletinManager alloc] initWithRootItem:introPage];
-
+    [self reloadManager];
     _backgroundStyles = [BackgroundViewStyle allStyles];
     _currentBackground = [BackgroundViewStyle defaultStyle];
 
@@ -87,6 +85,15 @@
                                              selector:@selector(favoriteIndexDidChangeWithNotification:) name:FavoriteTabIndexDidChangeNotificationName
                                                object:NULL];
 
+    // Add toolbar items
+
+    [[self navigationController] setToolbarHidden:NO];
+
+    UIBarButtonItem *fontItem = [[UIBarButtonItem alloc] initWithTitle:[BulletinDataSource currentFontName]
+                                                                 style:UIBarButtonItemStylePlain target:self action:@selector(fontButtonTapped:)];
+
+    [self setToolbarItems:@[fontItem]];
+
     // If the user did not complete the setup, present the bulletin automatically
 
     if ([BulletinDataSource userDidCompleteSetup] == NO) {
@@ -102,6 +109,13 @@
     [_bulletinManager presentBulletinAboveViewController:self
                                                 animated:YES
                                               completion:NULL];
+
+};
+
+-(void)reloadManager {
+
+    PageBulletinItem *introPage = [BulletinDataSource makeIntroPage];
+    _bulletinManager = [[BulletinManager alloc] initWithRootItem:introPage];
 
 };
 
@@ -181,6 +195,12 @@
 -(IBAction)tabIndexChanged:(UISegmentedControl *)sender {
     [self updateTabWithNewIndex:[NSNumber numberWithInteger:sender.selectedSegmentIndex]];
 };
+
+-(void)fontButtonTapped:(UIBarButtonItem *)sender {
+    [BulletinDataSource setUseAvenirFont:![BulletinDataSource useAvenirFont]];
+    [sender setTitle:[BulletinDataSource currentFontName]];
+    [self reloadManager];
+}
 
 #pragma mark Collection View
 

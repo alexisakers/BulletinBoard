@@ -9,7 +9,7 @@
     UILabel *_descriptionLabel;
     UITextField *_textField;
     HighlightButtonWrapper *_doneButton;
-    BulletinInterfaceFactory *_interfaceFactory;
+    BulletinAppearance *_appearance;
 }
 
 @synthesize nextItem;
@@ -21,7 +21,7 @@
 {
     self = [super init];
     if (self) {
-        _interfaceFactory = [[BulletinInterfaceFactory alloc] init];
+        _appearance = [[BulletinAppearance alloc] init];
     }
     return self;
 }
@@ -29,15 +29,16 @@
 -(NSArray<UIView *> * _Nonnull)makeArrangedSubviews {
 
     NSMutableArray<UIView *> *arrangedSubviews = [NSMutableArray array];
+    BulletinInterfaceBuilder *interfaceBuilder = [[BulletinInterfaceBuilder alloc] initWithAppearance:_appearance];
 
     // Title Label
 
-    UILabel *titleLabel = [_interfaceFactory makeTitleLabelWithText:@"Enter Your Name"];
+    UILabel *titleLabel = [interfaceBuilder makeTitleLabelWithText:@"Enter Your Name"];
     [arrangedSubviews addObject:titleLabel];
 
     // Description Label
 
-    _descriptionLabel = [_interfaceFactory makeDescriptionLabelWithCompactFont:NO];
+    _descriptionLabel = [interfaceBuilder makeDescriptionLabel];
     [_descriptionLabel setText:@"To create your profile, please tell us your name. We will use it to customize your feed."];
     [arrangedSubviews addObject:_descriptionLabel];
 
@@ -52,7 +53,7 @@
 
     // Done Button
 
-    _doneButton = [_interfaceFactory makeActionButtonWithTitle:@"Done"];
+    _doneButton = [interfaceBuilder makeActionButtonWithTitle:@"Done"];
     [_doneButton.button addTarget:self action:@selector(doneButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [arrangedSubviews addObject:_doneButton];
     
