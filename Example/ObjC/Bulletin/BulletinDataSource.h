@@ -52,6 +52,15 @@
 /// Whether user completed setup.
 +(void)setUserDidCompleteSetup:(BOOL)newValue;
 
+/// Whether to use the Avenir font.
++(BOOL)useAvenirFont;
+
+/// Whether to use the Avenir font.
++(void)setUseAvenirFont:(BOOL)newValue;
+
+/// The name of the current font.
++(NSString *)currentFontName;
+
 @end
 
 #pragma mark Notifications

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13526" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kIy-bs-cUt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13770" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kIy-bs-cUt">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13770"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="BB_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -28,7 +28,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="Grl-fD-wP8" customClass="ImageCollectionViewCell" customModule="Example" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="Grl-fD-wP8" customClass="ImageCollectionViewCell" customModule="BB_Swift" customModuleProvider="target">
                                         <rect key="frame" x="29" y="0.0" width="317" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -38,25 +38,13 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3gY-KD-wbB">
-                                <rect key="frame" x="0.0" y="778" width="375" height="34"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Mct-EW-Ciz">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="34"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                                <blurEffect style="extraLight"/>
-                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="3gY-KD-wbB" secondAttribute="bottom" id="6Of-AL-yEb"/>
-                            <constraint firstItem="3gY-KD-wbB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Abc-Ck-iNE"/>
                             <constraint firstItem="YHu-o9-ydd" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="COi-uq-R31"/>
                             <constraint firstItem="YHu-o9-ydd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" placeholder="YES" id="Gbv-6i-ERY"/>
-                            <constraint firstAttribute="trailing" secondItem="3gY-KD-wbB" secondAttribute="trailing" id="X6j-EF-e4G"/>
                             <constraint firstItem="YHu-o9-ydd" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" placeholder="YES" id="cKx-O3-0Oe"/>
                             <constraint firstItem="YHu-o9-ydd" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" placeholder="YES" id="xcv-aq-u79"/>
-                            <constraint firstItem="3gY-KD-wbB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="yDj-pm-IMM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

@@ -30,11 +30,12 @@ enum BulletinDataSource {
         let page = FeedbackPageBulletinItem(title: "Welcome to PetBoard")
         page.image = #imageLiteral(resourceName: "RoundedIcon")
         page.imageAccessibilityLabel = "😻"
+        page.appearance = makeLightAppearance()
 
         page.descriptionText = "Discover curated images of the best pets in the world."
         page.actionButtonTitle = "Configure"
 
-        page.isDismissable = false
+        page.isDismissable = true
 
         page.actionHandler = { item in
             item.manager?.displayNextItem()
@@ -212,6 +213,42 @@ enum BulletinDataSource {
         set {
             UserDefaults.standard.set(newValue, forKey: "PetBoardUserDidCompleteSetup")
         }
+    }
+
+    /// Whether to use the Avenir font instead of San Francisco.
+    static var useAvenirFont: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: "UseAvenirFont")
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "UseAvenirFont")
+        }
+    }
+
+}
+
+// MARK: - Appearance
+
+extension BulletinDataSource {
+
+    static func makeLightAppearance() -> BulletinAppearance {
+
+        let appearance = BulletinAppearance()
+
+        if useAvenirFont {
+
+            appearance.titleFontDescriptor = UIFontDescriptor(name: "AvenirNext-Medium", matrix: .identity)
+            appearance.descriptionFontDescriptor = UIFontDescriptor(name: "AvenirNext-Regular", matrix: .identity)
+            appearance.buttonFontDescriptor = UIFontDescriptor(name: "AvenirNext-DemiBold", matrix: .identity)
+
+        }
+
+        return appearance
+
+    }
+
+    static func currentFontName() -> String {
+        return useAvenirFont ? "Avenir Next" : "San Francisco"
     }
 
 }

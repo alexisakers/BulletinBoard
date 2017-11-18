@@ -102,6 +102,19 @@ class ViewController: UIViewController {
                                                name: .FavoriteTabIndexDidChange,
                                                object: nil)
 
+        // Add toolbar items
+
+        let fontItem = UIBarButtonItem(title: BulletinDataSource.useAvenirFont ? "Avenir" : "San Francisco",
+                                       style: .plain,
+                                       target: self,
+                                       action: #selector(fontButtonItemTapped))
+
+        navigationController?.isToolbarHidden = false
+
+        toolbarItems = [
+            fontItem
+        ]
+
         // If the user did not complete the setup, present the bulletin automatically
 
         if !BulletinDataSource.userDidCompleteSetup {
@@ -118,6 +131,11 @@ class ViewController: UIViewController {
         bulletinManager.backgroundViewStyle = currentBackground.style
         bulletinManager.prepare()
         bulletinManager.presentBulletin(above: self)
+    }
+
+    func reloadManager() {
+        let introPage = BulletinDataSource.makeIntroPage()
+        bulletinManager = BulletinManager(rootItem: introPage)
     }
 
     // MARK: - Actions
@@ -150,13 +168,18 @@ class ViewController: UIViewController {
 
     }
 
-
     @IBAction func showIntroButtonTapped(_ sender: UIBarButtonItem) {
         showBulletin()
     }
 
     @IBAction func tabIndexChanged(_ sender: UISegmentedControl) {
         updateTab(sender.selectedSegmentIndex)
+    }
+
+    @objc func fontButtonItemTapped(sender: UIBarButtonItem) {
+        BulletinDataSource.useAvenirFont = !BulletinDataSource.useAvenirFont
+        sender.title = BulletinDataSource.currentFontName()
+        reloadManager()
     }
 
     // MARK: - Notifications

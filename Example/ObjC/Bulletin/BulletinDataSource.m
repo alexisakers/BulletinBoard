@@ -19,7 +19,8 @@
     [page setDescriptionText:@"Discover curated images of the best pets in the world."];
     [page setActionButtonTitle:@"Configure"];
 
-    [page setIsDismissable:NO];
+    [page setAppearance:[BulletinDataSource makeLightAppearance]];
+    [page setIsDismissable:YES];
 
     [page setActionHandler:^(PageBulletinItem * _Nonnull _item) {
         [[_item manager] displayNextItem];
@@ -48,8 +49,7 @@
 +(PageBulletinItem *)makeNotificationsPage {
 
     PageBulletinItem* page = [[PageBulletinItem alloc] initWithTitle:@"Push Notifications"];
-    [page setImage:[UIImage imageNamed:@"NotificationPrompt"]];
-    [page setImageAccessibilityLabel:@"Notifications Icon"];
+    [page setAppearance:[BulletinDataSource makeLightAppearance]];
 
     [page setDescriptionText:@"Receive push notifications when new photos of pets are available."];
     [page setActionButtonTitle:@"Subscribe"];
@@ -154,11 +154,43 @@
 
 +(BOOL)userDidCompleteSetup {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"PetBoardUserDidCompleteSetup"];
-}
+};
 
 +(void)setUserDidCompleteSetup:(BOOL)newValue {
-    return [[NSUserDefaults standardUserDefaults] setBool:newValue forKey:@"PetBoardUserDidCompleteSetup"];
+    [[NSUserDefaults standardUserDefaults] setBool:newValue forKey:@"PetBoardUserDidCompleteSetup"];
+};
+
++(BOOL)useAvenirFont {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"UseAvenirFont"];
+};
+
++(void)setUseAvenirFont:(BOOL)newValue {
+    [[NSUserDefaults standardUserDefaults] setBool:newValue forKey:@"UseAvenirFont"];
+};
+
++(NSString *)currentFontName {
+    return [self useAvenirFont] ? @"Avenir Next" : @"San Francisco";
 }
+
+#pragma mark Font
+
++(BulletinAppearance *)makeLightAppearance {
+
+    BulletinAppearance *appearance = [[BulletinAppearance alloc] init];
+
+    if ([BulletinDataSource useAvenirFont]) {
+
+        [appearance setTitleFontDescriptor:[UIFontDescriptor fontDescriptorWithName:@"AvenitNext-Medium" matrix:CGAffineTransformIdentity]];
+
+        [appearance setDescriptionFontDescriptor:[UIFontDescriptor fontDescriptorWithName:@"AvenirNext-Regular" matrix:CGAffineTransformIdentity]];
+
+        [appearance setButtonFontDescriptor:[UIFontDescriptor fontDescriptorWithName:@"AvenirNext-DemiBold" matrix:CGAffineTransformIdentity]];
+
+    }
+
+    return appearance;
+
+};
 
 @end
 
