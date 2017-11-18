@@ -12,13 +12,13 @@ import UIKit
  * function on `UIButton` to set one.
  */
 
-public class HighlightButton: UIButton {
+class HighlightButton: UIButton {
 
     // MARK: - Hit Area
 
     private var _cachedHitArea: CGRect!
 
-    public override var bounds: CGRect {
+    override var bounds: CGRect {
         didSet {
             _cachedHitArea = makeHitArea()
         }
@@ -38,11 +38,11 @@ public class HighlightButton: UIButton {
 
     // MARK: - Touch Handling
 
-    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         highlight()
     }
 
-    public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
 
         guard let mainTouch = touches.first else {
             return
@@ -65,7 +65,7 @@ public class HighlightButton: UIButton {
 
     }
 
-    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
 
         guard let mainTouch = touches.first else {
             return
@@ -120,6 +120,47 @@ extension UIButton {
         UIGraphicsEndImageContext()
         setBackgroundImage(colorImage, for: controlState)
 
+    }
+
+}
+
+/**
+ * A view that wraps a HighlightButton.
+ *
+ * A wrapper is required to avoid alpha animation issues when unhighlighting the button and performing
+ * a bulletin transition.
+ */
+
+public class HighlightButtonWrapper: UIView {
+
+    public let button: UIButton
+
+    @available(*, unavailable)
+    public override init(frame: CGRect) {
+        fatalError("init(frame:) is unavailable. Use init(button:) instead.")
+    }
+
+    @available(*, unavailable)
+    public required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) is unavailable. Use init(button:) instead.")
+    }
+
+    init(button: HighlightButton) {
+
+        self.button = button
+        super.init(frame: .zero)
+
+        addSubview(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        button.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        button.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        button.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+
+    }
+
+    public override var intrinsicContentSize: CGSize {
+        return button.intrinsicContentSize
     }
 
 }

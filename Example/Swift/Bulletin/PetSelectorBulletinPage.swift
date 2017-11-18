@@ -69,7 +69,7 @@ class PetSelectorBulletinPage: BulletinItem {
 
     private var catButtonContainer: UIButton!
     private var dogButtonContainer: UIButton!
-    private var saveButtonContainer: HighlightButton!
+    private var saveButtonContainer: UIButton!
 
     private var selectionFeedbackGenerator = SelectionFeedbackGenerator()
 
@@ -138,7 +138,7 @@ class PetSelectorBulletinPage: BulletinItem {
         // Save Button
 
         let saveButtonContainer = interfaceFactory.makeActionButton(title: "Save")
-        saveButtonContainer.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+        saveButtonContainer.button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         arrangedSubviews.append(saveButtonContainer)
 
         return arrangedSubviews
@@ -295,7 +295,7 @@ class PetSelectorValidationBulletinPage: BulletinItem {
 
     // MARK: - Interface Elements
 
-    private var validateButton: HighlightButton?
+    private var validateButton: UIButton?
     private var backButton: UIButton?
 
     // MARK: - BulletinItem
@@ -334,8 +334,8 @@ class PetSelectorValidationBulletinPage: BulletinItem {
         arrangedSubviews.append(buttonsStack)
 
         let validateButton = interfaceFactory.makeActionButton(title: "Validate")
-        validateButton.addTarget(self, action: #selector(validateButtonTapped), for: .touchUpInside)
-        self.validateButton = validateButton
+        validateButton.button.addTarget(self, action: #selector(validateButtonTapped), for: .touchUpInside)
+        self.validateButton = validateButton.button
         buttonsStack.addArrangedSubview(validateButton)
 
         // Back Button

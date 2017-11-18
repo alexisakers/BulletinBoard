@@ -119,7 +119,7 @@ import UIKit
 
     // MARK: - Buttons
 
-    fileprivate var actionButton: HighlightButton? = nil
+    fileprivate var actionButton: UIButton? = nil
     fileprivate var alternativeButton: UIButton? = nil
 
     /**
@@ -213,9 +213,9 @@ import UIKit
 
             let actionButton = interfaceFactory.makeActionButton(title: actionButtonTitle)
             buttonsStack.addArrangedSubview(actionButton)
-            actionButton.addTarget(self, action: #selector(actionButtonTapped(sender:)), for: .touchUpInside)
+            actionButton.button.addTarget(self, action: #selector(actionButtonTapped(sender:)), for: .touchUpInside)
 
-            self.actionButton = actionButton
+            self.actionButton = actionButton.button
 
         }
 
