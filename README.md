@@ -32,7 +32,7 @@ A demo project is included in the `BulletinBoard` workspace. It demonstrates how
 - create custom page subclasses to add features
 - create custom cards from scratch
 
-Two demo target are available:
+Two demo targets are available:
 
 - `BB-Swift` (demo written in Swift)
 - `BB-ObjC` (demo written in Objective-C)
@@ -62,6 +62,22 @@ To install BulletinBoard using [Carthage](https://github.com/Carthage/Carthage),
 ~~~
 github "alexaubry/BulletinBoard"
 ~~~
+
+## 🦕 Objective-C Integration
+
+BulletinBoard is fully compatible with Objective-C.
+
+To import it in your Objective-C app, just add this line at the top of your files:
+
+~~~objc
+@import BulletinBoard; 
+~~~
+
+### Limitations
+
+`PageBulletinItem` subclasses must be written in Swift, as Swift classes cannot be overriden in Objective-C.
+
+You can use [Mix and Match](https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html#//apple_ref/doc/uid/TP40014216-CH10-ID126) to write your subclass in Swift and import it into your Objective-C code, as demonstrated in the example project.
 
 ## Usage
 
@@ -297,22 +313,6 @@ To generate standard elements, use the methods of `BulletinInterfaceFactory`:
 - `makeActionButton(title:)` to create an action button
 - `makeAlternativeButton(title:)` to create an alternative button
 - `makeGroupStack(spacing:)` to create a vertical stack view with the given spacing
-
-## 🦕 Objective-C
-
-BulletinBoard is fully compatible with Objective-C.
-
-To import it in your Objective-C app, just add this line at the top of your files:
-
-~~~objc
-@import BulletinBoard; 
-~~~
-
-### Limitations
-
-`PageBulletinItem` subclasses must be written in Swift, as Swift classes cannot be overriden in Objective-C.
-
-You can use [Mix and Match](https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html#//apple_ref/doc/uid/TP40014216-CH10-ID126) to write your subclass in Swift and import it into your Objective-C code, as demonstrated in the example project.
 
 ## Internals
 
