@@ -131,9 +131,9 @@ extension UIButton {
  * a bulletin transition.
  */
 
-public class HighlightButtonWrapper: UIView {
+@objc public class HighlightButtonWrapper: UIView {
 
-    public let button: UIButton
+    @objc public let button: UIButton
 
     @available(*, unavailable)
     public override init(frame: CGRect) {

@@ -8,6 +8,7 @@
 @implementation TextFieldBulletinPage {
     UILabel *_descriptionLabel;
     UITextField *_textField;
+    HighlightButtonWrapper *_doneButton;
     BulletinInterfaceFactory *_interfaceFactory;
 }
 
@@ -37,7 +38,7 @@
     // Description Label
 
     _descriptionLabel = [_interfaceFactory makeDescriptionLabelWithCompactFont:NO];
-    [_descriptionLabel setText:@"We will use it to customize your feed. Press the Done key on your keyboard when you are finished."];
+    [_descriptionLabel setText:@"To create your profile, please tell us your name. We will use it to customize your feed."];
     [arrangedSubviews addObject:_descriptionLabel];
 
     // Text Field
@@ -46,7 +47,14 @@
     [_textField setDelegate:self];
     [_textField setBorderStyle:UITextBorderStyleRoundedRect];
     [_textField setReturnKeyType:UIReturnKeyDone];
+    [_textField setPlaceholder:@"First and Last Name"];
     [arrangedSubviews addObject:_textField];
+
+    // Done Button
+
+    _doneButton = [_interfaceFactory makeActionButtonWithTitle:@"Done"];
+    [_doneButton.button addTarget:self action:@selector(doneButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [arrangedSubviews addObject:_doneButton];
     
     return arrangedSubviews;
 
@@ -54,9 +62,14 @@
 
 -(void)tearDown {
     [_textField setDelegate:NULL];
+    [_doneButton.button removeTarget:self action:NULL forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark UITextFieldDelegate
+
+-(void)doneButtonTapped:(UIButton *)sender {
+    [self textFieldShouldReturn:_textField];
+};
 
 -(BOOL)isInputValid:(NSString *)text {
 

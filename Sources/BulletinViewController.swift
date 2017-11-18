@@ -49,6 +49,8 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     private var stackBottomConstraint: NSLayoutConstraint!
     private var contentTopConstraint: NSLayoutConstraint!
 
+    fileprivate var minYConstraint: NSLayoutConstraint!
+
     fileprivate var contentBottomConstraint: NSLayoutConstraint!
 
 
@@ -96,7 +98,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         stackTrailingConstraint = contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -36)
         stackTrailingConstraint.isActive = true
 
-        let minYConstraint = contentView.topAnchor.constraint(greaterThanOrEqualTo: view.safeTopAnchor)
+        minYConstraint = contentView.topAnchor.constraint(greaterThanOrEqualTo: view.safeTopAnchor)
         minYConstraint.isActive = true
         minYConstraint.priority = UILayoutPriorityRequired
 
@@ -367,6 +369,7 @@ extension BulletinViewController {
     }
 
     @objc func onKeyboardShow(_ notification: Notification) {
+
         guard let userInfo = notification.userInfo,
             let keyboardFrameFinal = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect,
             let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double,
@@ -379,7 +382,12 @@ extension BulletinViewController {
         let animationOptions = UIViewAnimationOptions(curve: animationCurve)
 
         UIView.animate(withDuration: duration, delay: 0, options: animationOptions, animations: {
-            self.contentBottomConstraint.constant = -(keyboardFrameFinal.size.height + 12) // same value as in moveIntoPlace()
+            var bottomSpacing = -(keyboardFrameFinal.size.height + 12)
+            if #available(iOS 11, *) {
+                bottomSpacing += self.view.safeAreaInsets.bottom
+            }
+            self.minYConstraint.isActive = false
+            self.contentBottomConstraint.constant = bottomSpacing
             self.contentView.superview?.layoutIfNeeded()
         }, completion: nil)
     }
@@ -396,6 +404,7 @@ extension BulletinViewController {
         let animationOptions = UIViewAnimationOptions(curve: animationCurve)
 
         UIView.animate(withDuration: duration, delay: 0, options: animationOptions, animations: {
+            self.minYConstraint.isActive = true
             self.contentBottomConstraint.constant = -12 // same value as in moveIntoPlace()
             self.contentView.superview?.layoutIfNeeded()
         }, completion: nil)

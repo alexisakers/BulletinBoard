@@ -25,11 +25,7 @@ class TextFieldBulletinPage: NSObject, BulletinItem {
 
     fileprivate var descriptionLabel: UILabel?
     fileprivate var textField: UITextField?
-
-    func tearDown() {
-        descriptionLabel = nil
-        textField = nil
-    }
+    fileprivate var doneButton: HighlightButtonWrapper?
 
     func makeArrangedSubviews() -> [UIView] {
         var arrangedSubviews = [UIView]()
@@ -38,17 +34,27 @@ class TextFieldBulletinPage: NSObject, BulletinItem {
         arrangedSubviews.append(titleLabel)
 
         descriptionLabel = interfaceFactory.makeDescriptionLabel(isCompact: false)
-        descriptionLabel!.text = "We will use it to customize your feed. Press the Done key on your keyboard when you are finished."
+        descriptionLabel!.text = "To create your profile, please tell us your name. We will use it to customize your feed."
         arrangedSubviews.append(descriptionLabel!)
 
         textField = UITextField()
         textField!.delegate = self
         textField!.borderStyle = .roundedRect
         textField!.returnKeyType = .done
+        textField!.placeholder = "First and Last Name"
         arrangedSubviews.append(textField!)
+
+        doneButton = interfaceFactory.makeActionButton(title: "Done")
+        doneButton!.button.addTarget(self, action: #selector(doneButtonTapped(sender:)), for: .touchUpInside)
+        arrangedSubviews.append(doneButton!)
 
         return arrangedSubviews
 
+    }
+
+    func tearDown() {
+        textField?.delegate = nil
+        doneButton?.button.removeTarget(self, action: nil, for: .touchUpInside)
     }
 
 }
@@ -56,6 +62,10 @@ class TextFieldBulletinPage: NSObject, BulletinItem {
 // MARK: - UITextFieldDelegate
 
 extension TextFieldBulletinPage: UITextFieldDelegate {
+
+    @objc func doneButtonTapped(sender: UIButton) {
+        _ = textFieldShouldReturn(textField!)
+    }
 
     func isInputValid(text: String?) -> Bool {
 
