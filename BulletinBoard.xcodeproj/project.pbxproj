@@ -14,7 +14,6 @@
 		5568227E1F864B270038E8DD /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568227D1F864B270038E8DD /* ActivityIndicator.swift */; };
 		5569CB7F1F920B72000F31EB /* BulletinSwipeInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5569CB7E1F920B72000F31EB /* BulletinSwipeInteractionController.swift */; };
 		558A12301F7D73CD005EC97C /* BulletinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122A1F7D73CD005EC97C /* BulletinManager.swift */; };
-		558A12311F7D73CD005EC97C /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122B1F7D73CD005EC97C /* ContainerView.swift */; };
 		558A12321F7D73CD005EC97C /* BulletinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122C1F7D73CD005EC97C /* BulletinViewController.swift */; };
 		558A12331F7D73CD005EC97C /* HighlightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122D1F7D73CD005EC97C /* HighlightButton.swift */; };
 		558A12351F7D73CD005EC97C /* PageBulletinItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122F1F7D73CD005EC97C /* PageBulletinItem.swift */; };
@@ -32,7 +31,6 @@
 		5568227D1F864B270038E8DD /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		5569CB7E1F920B72000F31EB /* BulletinSwipeInteractionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinSwipeInteractionController.swift; sourceTree = "<group>"; };
 		558A122A1F7D73CD005EC97C /* BulletinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletinManager.swift; sourceTree = "<group>"; };
-		558A122B1F7D73CD005EC97C /* ContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
 		558A122C1F7D73CD005EC97C /* BulletinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletinViewController.swift; sourceTree = "<group>"; };
 		558A122D1F7D73CD005EC97C /* HighlightButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighlightButton.swift; sourceTree = "<group>"; };
 		558A122F1F7D73CD005EC97C /* PageBulletinItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageBulletinItem.swift; sourceTree = "<group>"; };
@@ -81,7 +79,6 @@
 		55DADEB81F8153B3001B11A2 /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				558A122B1F7D73CD005EC97C /* ContainerView.swift */,
 				558A122D1F7D73CD005EC97C /* HighlightButton.swift */,
 				5568227D1F864B270038E8DD /* ActivityIndicator.swift */,
 				5543848C1F92026200AFFBCD /* BulletinBackgroundView.swift */,
@@ -150,7 +147,7 @@
 				TargetAttributes = {
 					52D6D97B1BEFF229002C0205 = {
 						CreatedOnToolsVersion = 7.1;
-						LastSwiftMigration = 0910;
+						LastSwiftMigration = 0920;
 					};
 				};
 			};
@@ -191,7 +188,6 @@
 				558A12371F7D73E6005EC97C /* BulletinItem.swift in Sources */,
 				5543848F1F92050300AFFBCD /* BulletinDismissAnimationController.swift in Sources */,
 				5543848B1F91FAC500AFFBCD /* BulletinPresentationAnimationController.swift in Sources */,
-				558A12311F7D73CD005EC97C /* ContainerView.swift in Sources */,
 				5543848D1F92026200AFFBCD /* BulletinBackgroundView.swift in Sources */,
 				558A12301F7D73CD005EC97C /* BulletinManager.swift in Sources */,
 				55BF9C021F962FD700347D45 /* UIView+SafeAnchors.swift in Sources */,
@@ -335,6 +331,7 @@
 				PRODUCT_NAME = BulletinBoard;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -356,6 +353,7 @@
 				PRODUCT_NAME = BulletinBoard;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

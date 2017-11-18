@@ -19,19 +19,25 @@ Here are some screenshots showing what you can build with BulletinBoard:
 
 ## Requirements
 
+- Xcode 9 and later
 - iOS 9 and later
 - Swift 3.2 and later
 
 ## Demo
 
-A demo application is included in the `BulletinBoard` workspace. It demonstrates how to: 
+A demo project is included in the `BulletinBoard` workspace. It demonstrates how to: 
 
 - integrate the library (setup, data flow)
 - create standard page cards
 - create custom page subclasses to add features
 - create custom cards from scratch
 
-Build and run the `Instanimal` scheme to use it.
+Two demo targets are available:
+
+- `BB-Swift` (demo written in Swift)
+- `BB-ObjC` (demo written in Objective-C)
+
+Build and run the scheme for your favorite language to open the demo app.
 
 Here's a video showing it in action:
 
@@ -56,6 +62,22 @@ To install BulletinBoard using [Carthage](https://github.com/Carthage/Carthage),
 ~~~
 github "alexaubry/BulletinBoard"
 ~~~
+
+## 🦕 Objective-C Integration
+
+BulletinBoard is fully compatible with Objective-C.
+
+To import it in your Objective-C app, just add this line at the top of your files:
+
+~~~objc
+@import BulletinBoard; 
+~~~
+
+### Limitations
+
+`PageBulletinItem` subclasses must be written in Swift, as Swift classes cannot be overriden in Objective-C.
+
+You can use [Mix and Match](https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html#//apple_ref/doc/uid/TP40014216-CH10-ID126) to write your subclass in Swift and import it into your Objective-C code, as demonstrated in the example project.
 
 ## Usage
 
@@ -193,6 +215,7 @@ You can use it to interact with the presented bulletin. Call:
 - `manager?.popToRootItem()` to go back to the first item
 - `manager?.push(item:)` with a `BulletinItem` to present a new item
 - `manager?.dismissBulletin(animated:)` to dismiss the bulletin
+- `manager?.displayNextItem()` to display the next item (see below)
 
 You need to call these methods from the main thread. Never force unwrap `manager`, as this property will be unset as soon as the item is removed from the bulletin.
 
@@ -204,7 +227,7 @@ For instance, to present a new card when the user taps the action button:
 page.nextItem = makeLocationPage() // Creates a new PageBulletinItem
 
 page.actionHandler = { (item: PageBulletinItem) in
-    item.displayNextItem()
+    item.manager?.displayNextItem()
 }
 ~~~
 
@@ -285,7 +308,7 @@ Even though you are creating a custom card, you may still want to display some s
 
 To generate standard elements, use the methods of `BulletinInterfaceFactory`:
 
-- `makeTitleLabel(reading:)` to create a title label with the given title
+- `makeTitleLabel(text:)` to create a title label with the given title
 - `makeDescriptionLabel(isCompact:)` to create a description label
 - `makeActionButton(title:)` to create an action button
 - `makeAlternativeButton(title:)` to create an alternative button

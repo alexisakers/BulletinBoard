@@ -159,6 +159,8 @@ class ViewController: UIViewController {
         updateTab(sender.selectedSegmentIndex)
     }
 
+    // MARK: - Notifications
+
     @objc func setupDidComplete() {
         BulletinDataSource.userDidCompleteSetup = true
     }

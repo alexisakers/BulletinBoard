@@ -68,7 +68,7 @@ class BulletinBackgroundView: UIView {
 
         }
 
-        switch style {
+        switch style.rawValue {
         case .none:
 
             let dimmingView = makeDimmingView()

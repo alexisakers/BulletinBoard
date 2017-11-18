@@ -13,7 +13,7 @@ import BulletinBoard
  * next item based on user interaction.
  */
 
-class PetSelectorBulletinPage: BulletinItem {
+@objc class PetSelectorBulletinPage: NSObject, BulletinItem {
 
     /**
      * The object managing the item. Required by the `BulletinItem` protocol.
@@ -67,9 +67,9 @@ class PetSelectorBulletinPage: BulletinItem {
 
     // MARK: - Interface Elements
 
-    private var catButtonContainer: ContainerView<UIButton>!
-    private var dogButtonContainer: ContainerView<UIButton>!
-    private var saveButtonContainer: ContainerView<HighlightButton>!
+    private var catButtonContainer: UIButton!
+    private var dogButtonContainer: UIButton!
+    private var saveButtonContainer: HighlightButton!
 
     private var selectionFeedbackGenerator = SelectionFeedbackGenerator()
 
@@ -83,9 +83,9 @@ class PetSelectorBulletinPage: BulletinItem {
      */
 
     func tearDown() {
-        catButtonContainer?.contentView.removeTarget(self, action: nil, for: .touchUpInside)
-        dogButtonContainer?.contentView.removeTarget(self, action: nil, for: .touchUpInside)
-        saveButtonContainer?.contentView.removeTarget(self, action: nil, for: .touchUpInside)
+        catButtonContainer?.removeTarget(self, action: nil, for: .touchUpInside)
+        dogButtonContainer?.removeTarget(self, action: nil, for: .touchUpInside)
+        saveButtonContainer?.removeTarget(self, action: nil, for: .touchUpInside)
     }
 
     /**
@@ -98,12 +98,12 @@ class PetSelectorBulletinPage: BulletinItem {
     func makeArrangedSubviews() -> [UIView] {
 
         var arrangedSubviews = [UIView]()
-        let favoriteTabIndex = BulletinDataSource.favoriteTabIndex
+        let favoriteTabIndex = BulletinDataSource.favoriteTabIndex()
 
         // Title Label
 
         let title = "Choose your Favorite"
-        let titleLabel = interfaceFactory.makeTitleLabel(reading: title)
+        let titleLabel = interfaceFactory.makeTitleLabel(text: title)
         arrangedSubviews.append(titleLabel)
 
         // Description Label
@@ -122,7 +122,7 @@ class PetSelectorBulletinPage: BulletinItem {
         // Cat Button
 
         let catButtonContainer = createChoiceCell(emoji: "🐱", title: "Cats", isSelected: favoriteTabIndex == 0)
-        catButtonContainer.contentView.addTarget(self, action: #selector(catButtonTapped), for: .touchUpInside)
+        catButtonContainer.addTarget(self, action: #selector(catButtonTapped), for: .touchUpInside)
         petsStack.addArrangedSubview(catButtonContainer)
 
         self.catButtonContainer = catButtonContainer
@@ -130,7 +130,7 @@ class PetSelectorBulletinPage: BulletinItem {
         // Dog Button
 
         let dogButtonContainer = createChoiceCell(emoji: "🐶", title: "Dogs", isSelected: favoriteTabIndex == 1)
-        dogButtonContainer.contentView.addTarget(self, action: #selector(dogButtonTapped), for: .touchUpInside)
+        dogButtonContainer.addTarget(self, action: #selector(dogButtonTapped), for: .touchUpInside)
         petsStack.addArrangedSubview(dogButtonContainer)
 
         self.dogButtonContainer = dogButtonContainer
@@ -138,7 +138,7 @@ class PetSelectorBulletinPage: BulletinItem {
         // Save Button
 
         let saveButtonContainer = interfaceFactory.makeActionButton(title: "Save")
-        saveButtonContainer.contentView.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+        saveButtonContainer.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         arrangedSubviews.append(saveButtonContainer)
 
         return arrangedSubviews
@@ -151,7 +151,7 @@ class PetSelectorBulletinPage: BulletinItem {
      * Creates a custom choice cell.
      */
 
-    func createChoiceCell(emoji: String, title: String, isSelected: Bool) -> ContainerView<UIButton> {
+    func createChoiceCell(emoji: String, title: String, isSelected: Bool) -> UIButton {
 
         let button = UIButton(type: .system)
         button.setTitle(emoji + " " + title, for: .normal)
@@ -165,22 +165,22 @@ class PetSelectorBulletinPage: BulletinItem {
             button.accessibilityTraits &= ~UIAccessibilityTraitSelected
         }
 
-        let buttonContainer = ContainerView(button)
-        buttonContainer.layer.cornerRadius = 12
-        buttonContainer.layer.borderWidth = 2
+        button.layer.cornerRadius = 12
+        button.layer.borderWidth = 2
 
-        buttonContainer.heightAnchor.constraint(equalToConstant: 55).isActive = true
+        button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        button.heightAnchor.constraint(equalToConstant: 55).isActive = true
 
         let buttonColor = isSelected ? interfaceFactory.tintColor : .lightGray
-        buttonContainer.layer.borderColor = buttonColor.cgColor
-        buttonContainer.contentView.setTitleColor(buttonColor, for: .normal)
-        buttonContainer.layer.borderColor = buttonColor.cgColor
+        button.layer.borderColor = buttonColor.cgColor
+        button.setTitleColor(buttonColor, for: .normal)
+        button.layer.borderColor = buttonColor.cgColor
 
         if isSelected {
             nextItem = PetSelectorValidationBulletinPage(animalName: title.lowercased(), animalEmoji: emoji)
         }
 
-        return buttonContainer
+        return button
 
     }
 
@@ -198,17 +198,17 @@ class PetSelectorBulletinPage: BulletinItem {
 
         let catButtonColor = interfaceFactory.tintColor
         catButtonContainer?.layer.borderColor = catButtonColor.cgColor
-        catButtonContainer?.contentView.setTitleColor(catButtonColor, for: .normal)
-        catButtonContainer?.contentView.accessibilityTraits |= UIAccessibilityTraitSelected
+        catButtonContainer?.setTitleColor(catButtonColor, for: .normal)
+        catButtonContainer?.accessibilityTraits |= UIAccessibilityTraitSelected
 
         let dogButtonColor = UIColor.lightGray
         dogButtonContainer?.layer.borderColor = dogButtonColor.cgColor
-        dogButtonContainer?.contentView.setTitleColor(dogButtonColor, for: .normal)
-        dogButtonContainer?.contentView.accessibilityTraits &= ~UIAccessibilityTraitSelected
+        dogButtonContainer?.setTitleColor(dogButtonColor, for: .normal)
+        dogButtonContainer?.accessibilityTraits &= ~UIAccessibilityTraitSelected
 
         // Send a notification to inform observers of the change
 
-        NotificationCenter.default.post(name: .FavoriteTabIndexDidChange,
+        NotificationCenter.default.post(name: NSNotification.Name(FavoriteTabIndexDidChangeNotificationName),
                                         object: self,
                                         userInfo: ["Index": 0])
 
@@ -230,17 +230,17 @@ class PetSelectorBulletinPage: BulletinItem {
 
         let catButtonColor = UIColor.lightGray
         catButtonContainer?.layer.borderColor = catButtonColor.cgColor
-        catButtonContainer?.contentView.setTitleColor(catButtonColor, for: .normal)
-        catButtonContainer?.contentView.accessibilityTraits &= ~UIAccessibilityTraitSelected
+        catButtonContainer?.setTitleColor(catButtonColor, for: .normal)
+        catButtonContainer?.accessibilityTraits &= ~UIAccessibilityTraitSelected
 
         let dogButtonColor = interfaceFactory.tintColor
         dogButtonContainer?.layer.borderColor = dogButtonColor.cgColor
-        dogButtonContainer?.contentView.setTitleColor(dogButtonColor, for: .normal)
-        dogButtonContainer?.contentView.accessibilityTraits |= UIAccessibilityTraitSelected
+        dogButtonContainer?.setTitleColor(dogButtonColor, for: .normal)
+        dogButtonContainer?.accessibilityTraits |= UIAccessibilityTraitSelected
 
         // Send a notification to inform observers of the change
 
-        NotificationCenter.default.post(name: .FavoriteTabIndexDidChange,
+        NotificationCenter.default.post(name: NSNotification.Name(FavoriteTabIndexDidChangeNotificationName),
                                         object: self,
                                         userInfo: ["Index": 1])
 
@@ -258,7 +258,7 @@ class PetSelectorBulletinPage: BulletinItem {
         selectionFeedbackGenerator.selectionChanged()
 
         // Ask the manager to present the next item.
-        displayNextItem()
+        manager?.displayNextItem()
 
     }
 
@@ -276,7 +276,7 @@ class PetSelectorValidationBulletinPage: BulletinItem {
     var isDismissable: Bool = false
     var dismissalHandler: ((BulletinItem) -> Void)? = nil
     var nextItem: BulletinItem?
-    
+
 
     let interfaceFactory = BulletinInterfaceFactory()
 
@@ -295,7 +295,7 @@ class PetSelectorValidationBulletinPage: BulletinItem {
 
     // MARK: - Interface Elements
 
-    private var validateButton: ContainerView<HighlightButton>?
+    private var validateButton: HighlightButton?
     private var backButton: UIButton?
 
     // MARK: - BulletinItem
@@ -307,7 +307,7 @@ class PetSelectorValidationBulletinPage: BulletinItem {
         // Title Label
 
         let title = "Choose your Favorite"
-        let titleLabel = interfaceFactory.makeTitleLabel(reading: title)
+        let titleLabel = interfaceFactory.makeTitleLabel(text: title)
         arrangedSubviews.append(titleLabel)
 
         // Emoji
@@ -334,9 +334,8 @@ class PetSelectorValidationBulletinPage: BulletinItem {
         arrangedSubviews.append(buttonsStack)
 
         let validateButton = interfaceFactory.makeActionButton(title: "Validate")
+        validateButton.addTarget(self, action: #selector(validateButtonTapped), for: .touchUpInside)
         buttonsStack.addArrangedSubview(validateButton)
-
-        validateButton.contentView.addTarget(self, action: #selector(validateButtonTapped), for: .touchUpInside)
         self.validateButton = validateButton
 
         // Back Button
@@ -373,19 +372,19 @@ class PetSelectorValidationBulletinPage: BulletinItem {
             // Play success haptic feedback
 
             self.successFeedbackGenerator.prepare()
-            self.successFeedbackGenerator.success()
+            self.successFeedbackGenerator.notifySuccess()
 
             // Display next item
 
             self.nextItem = BulletinDataSource.makeCompletionPage()
-            self.displayNextItem()
+            self.manager?.displayNextItem()
 
         }
 
     }
 
     func tearDown() {
-        validateButton?.contentView.removeTarget(self, action: nil, for: .touchUpInside)
+        validateButton?.removeTarget(self, action: nil, for: .touchUpInside)
         backButton?.removeTarget(self, action: nil, for: .touchUpInside)
         validateButton = nil
         backButton = nil
@@ -405,4 +404,3 @@ class PetSelectorValidationBulletinPage: BulletinItem {
     }
 
 }
-
