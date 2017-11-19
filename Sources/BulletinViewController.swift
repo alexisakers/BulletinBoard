@@ -65,6 +65,9 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
         recognizer.delegate = self
+        recognizer.cancelsTouchesInView = false
+        recognizer.delaysTouchesEnded = false
+
         view.addGestureRecognizer(recognizer)
 
         contentView.accessibilityViewIsModal = true
