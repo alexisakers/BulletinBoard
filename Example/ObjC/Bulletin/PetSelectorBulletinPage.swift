@@ -13,7 +13,7 @@ import BulletinBoard
  * next item based on user interaction.
  */
 
-@objc class PetSelectorBulletinPage: NSObject, BulletinItem {
+@objc @objcMembers class PetSelectorBulletinPage: NSObject, BulletinItem {
 
     /**
      * The object managing the item. Required by the `BulletinItem` protocol.
@@ -57,12 +57,9 @@ import BulletinBoard
 
     /**
      * An object that creates standard inteface components.
-     *
-     * You should use it to create views whenever possible. It also allows to customize the tint color
-     * of the buttons.
      */
 
-    let interfaceFactory = BulletinInterfaceFactory()
+    let appearance = BulletinAppearance()
 
 
     // MARK: - Interface Elements
@@ -100,23 +97,35 @@ import BulletinBoard
         var arrangedSubviews = [UIView]()
         let favoriteTabIndex = BulletinDataSource.favoriteTabIndex()
 
+        // Create the interface builder
+
+        /**
+         * An interface builder allows you to create standard interface components using a customized
+         * appearance.
+         *
+         * You should always use it to generate title and description labels, and action and alternative
+         * buttons.
+         */
+
+        let interfaceBuilder = BulletinInterfaceBuilder(appearance: appearance)
+
         // Title Label
 
         let title = "Choose your Favorite"
-        let titleLabel = interfaceFactory.makeTitleLabel(text: title)
+        let titleLabel = interfaceBuilder.makeTitleLabel(text: title)
         arrangedSubviews.append(titleLabel)
 
         // Description Label
 
-        let isDescriptionCompact = false // The text is short, so we don't need to display it with a smaller font
-        let descriptionLabel = interfaceFactory.makeDescriptionLabel(isCompact: isDescriptionCompact)
+        appearance.shouldUseCompactDescriptionText = false // The text is short, so we don't need to display it with a smaller font
+        let descriptionLabel = interfaceBuilder.makeDescriptionLabel()
         descriptionLabel.text = "Your favorite pets will appear when you open the app."
         arrangedSubviews.append(descriptionLabel)
 
         // Pets Stack
 
         // We add choice cells to a group stack because they need less spacing
-        let petsStack = interfaceFactory.makeGroupStack(spacing: 16)
+        let petsStack = interfaceBuilder.makeGroupStack(spacing: 16)
         arrangedSubviews.append(petsStack)
 
         // Cat Button
@@ -137,7 +146,7 @@ import BulletinBoard
 
         // Save Button
 
-        let saveButtonContainer = interfaceFactory.makeActionButton(title: "Save")
+        let saveButtonContainer = interfaceBuilder.makeActionButton(title: "Save")
         saveButtonContainer.button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         arrangedSubviews.append(saveButtonContainer)
 
@@ -171,7 +180,7 @@ import BulletinBoard
         button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         button.heightAnchor.constraint(equalToConstant: 55).isActive = true
 
-        let buttonColor = isSelected ? interfaceFactory.tintColor : .lightGray
+        let buttonColor = isSelected ? appearance.actionButtonColor : .lightGray
         button.layer.borderColor = buttonColor.cgColor
         button.setTitleColor(buttonColor, for: .normal)
         button.layer.borderColor = buttonColor.cgColor
@@ -196,7 +205,7 @@ import BulletinBoard
 
         // Update UI
 
-        let catButtonColor = interfaceFactory.tintColor
+        let catButtonColor = appearance.actionButtonColor
         catButtonContainer?.layer.borderColor = catButtonColor.cgColor
         catButtonContainer?.setTitleColor(catButtonColor, for: .normal)
         catButtonContainer?.accessibilityTraits |= UIAccessibilityTraitSelected
@@ -208,7 +217,7 @@ import BulletinBoard
 
         // Send a notification to inform observers of the change
 
-        NotificationCenter.default.post(name: NSNotification.Name(FavoriteTabIndexDidChangeNotificationName),
+        NotificationCenter.default.post(name: Notification.Name(FavoriteTabIndexDidChangeNotificationName),
                                         object: self,
                                         userInfo: ["Index": 0])
 
@@ -233,14 +242,14 @@ import BulletinBoard
         catButtonContainer?.setTitleColor(catButtonColor, for: .normal)
         catButtonContainer?.accessibilityTraits &= ~UIAccessibilityTraitSelected
 
-        let dogButtonColor = interfaceFactory.tintColor
+        let dogButtonColor = appearance.actionButtonColor
         dogButtonContainer?.layer.borderColor = dogButtonColor.cgColor
         dogButtonContainer?.setTitleColor(dogButtonColor, for: .normal)
         dogButtonContainer?.accessibilityTraits |= UIAccessibilityTraitSelected
 
         // Send a notification to inform observers of the change
 
-        NotificationCenter.default.post(name: NSNotification.Name(FavoriteTabIndexDidChangeNotificationName),
+        NotificationCenter.default.post(name: Notification.Name(FavoriteTabIndexDidChangeNotificationName),
                                         object: self,
                                         userInfo: ["Index": 1])
 
@@ -270,15 +279,14 @@ import BulletinBoard
  * This item demonstrates popping to the previous item.
  */
 
-class PetSelectorValidationBulletinPage: BulletinItem {
+@objc @objcMembers class PetSelectorValidationBulletinPage: NSObject, BulletinItem {
 
     weak var manager: BulletinManager? = nil
     var isDismissable: Bool = false
     var dismissalHandler: ((BulletinItem) -> Void)? = nil
     var nextItem: BulletinItem?
 
-
-    let interfaceFactory = BulletinInterfaceFactory()
+    let appearance = BulletinAppearance()
 
     // MARK: - Configuration
 
@@ -303,11 +311,12 @@ class PetSelectorValidationBulletinPage: BulletinItem {
     func makeArrangedSubviews() -> [UIView] {
 
         var arrangedSubviews = [UIView]()
+        let interfaceBuilder = BulletinInterfaceBuilder(appearance: appearance)
 
         // Title Label
 
         let title = "Choose your Favorite"
-        let titleLabel = interfaceFactory.makeTitleLabel(text: title)
+        let titleLabel = interfaceBuilder.makeTitleLabel(text: title)
         arrangedSubviews.append(titleLabel)
 
         // Emoji
@@ -324,23 +333,23 @@ class PetSelectorValidationBulletinPage: BulletinItem {
 
         // Description Label
 
-        let descriptionLabel = interfaceFactory.makeDescriptionLabel(isCompact: false)
+        let descriptionLabel = interfaceBuilder.makeDescriptionLabel()
         descriptionLabel.text = "You chose \(animalName) as your favorite animal type. Are you sure?"
         arrangedSubviews.append(descriptionLabel)
 
         // Validate Button
 
-        let buttonsStack = interfaceFactory.makeGroupStack()
+        let buttonsStack = interfaceBuilder.makeGroupStack()
         arrangedSubviews.append(buttonsStack)
 
-        let validateButton = interfaceFactory.makeActionButton(title: "Validate")
+        let validateButton = interfaceBuilder.makeActionButton(title: "Validate")
         validateButton.button.addTarget(self, action: #selector(validateButtonTapped), for: .touchUpInside)
-        buttonsStack.addArrangedSubview(validateButton)
         self.validateButton = validateButton.button
+        buttonsStack.addArrangedSubview(validateButton)
 
         // Back Button
 
-        let backButton = interfaceFactory.makeAlternativeButton(title: "Change")
+        let backButton = interfaceBuilder.makeAlternativeButton(title: "Change")
         buttonsStack.addArrangedSubview(backButton)
 
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
