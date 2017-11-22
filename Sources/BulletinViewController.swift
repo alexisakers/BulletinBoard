@@ -151,9 +151,13 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         // Configuration
 
         contentView.backgroundColor = #colorLiteral(red: 0.9921568627, green: 1, blue: 1, alpha: 1)
-        setUpLayout(with: traitCollection)
-
         setUpKeyboardLogic()
+
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setUpLayout(with: traitCollection)
     }
 
     deinit {
@@ -173,6 +177,8 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     // MARK: - Layout
 
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+
+        print("will transition")
 
         coordinator.animate(alongsideTransition: { _ in
             self.setUpLayout(with: newCollection)

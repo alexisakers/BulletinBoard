@@ -99,7 +99,7 @@ import UIKit
         viewController = BulletinViewController()
         viewController.manager = self
 
-        viewController.modalPresentationStyle = .overCurrentContext
+        viewController.modalPresentationStyle = .overFullScreen
         viewController.transitioningDelegate = viewController
         viewController.loadBackgroundView()
 

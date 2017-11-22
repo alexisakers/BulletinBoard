@@ -39,32 +39,24 @@ class BulletinPresentationAnimationController: NSObject, UIViewControllerAnimate
         // Add root view
 
         rootView.frame = containerView.frame
-        rootView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(rootView)
 
-        NSLayoutConstraint.activate(
-            NSLayoutConstraint.constraints(withVisualFormat: "V:|[rootView]|",
-                                           options: [], metrics: nil, views: ["rootView": rootView])
-        )
-
-        NSLayoutConstraint.activate(
-            NSLayoutConstraint.constraints(withVisualFormat: "H:|[rootView]|",
-                                           options: [], metrics: nil, views: ["rootView": rootView])
-        )
+        rootView.translatesAutoresizingMaskIntoConstraints = false
+        rootView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
+        rootView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        rootView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+        rootView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
 
         // Prepare background view
 
         rootView.insertSubview(backgroundView, at: 0)
+        backgroundView.leadingAnchor.constraint(equalTo: rootView.leadingAnchor).isActive = true
+        backgroundView.trailingAnchor.constraint(equalTo: rootView.trailingAnchor).isActive = true
+        backgroundView.topAnchor.constraint(equalTo: rootView.topAnchor).isActive = true
+        backgroundView.bottomAnchor.constraint(equalTo: rootView.bottomAnchor).isActive = true
 
-        NSLayoutConstraint.activate(
-            NSLayoutConstraint.constraints(withVisualFormat: "V:|[backgroundView]|",
-                                           options: [], metrics: nil, views: ["backgroundView": backgroundView])
-        )
-
-         NSLayoutConstraint.activate(
-            NSLayoutConstraint.constraints(withVisualFormat: "H:|[backgroundView]|",
-                                           options: [], metrics: nil, views: ["backgroundView": backgroundView])
-        )
+        rootView.setNeedsLayout()
+        contentView.setNeedsLayout()
 
         rootView.layoutIfNeeded()
         contentView.layoutIfNeeded()
