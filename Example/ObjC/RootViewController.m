@@ -14,6 +14,7 @@
     BulletinManager *_bulletinManager;
     NSArray<BackgroundViewStyle *> *_backgroundStyles;
     BackgroundViewStyle *_currentBackground;
+    BOOL _shouldHideStatusBar;
 }
 
 @synthesize styleButtonItem;
@@ -29,6 +30,7 @@
     [self reloadManager];
     _backgroundStyles = [BackgroundViewStyle allStyles];
     _currentBackground = [BackgroundViewStyle defaultStyle];
+    _shouldHideStatusBar = NO;
 
     // Finish Initialization
 
@@ -90,9 +92,15 @@
     [[self navigationController] setToolbarHidden:NO];
 
     UIBarButtonItem *fontItem = [[UIBarButtonItem alloc] initWithTitle:[BulletinDataSource currentFontName]
-                                                                 style:UIBarButtonItemStylePlain target:self action:@selector(fontButtonTapped:)];
+                                                                 style:UIBarButtonItemStylePlain
+                                                                target:self
+                                                                action:@selector(fontButtonTapped:)];
 
-    [self setToolbarItems:@[fontItem]];
+    UIBarButtonItem *statusBarItem = [[UIBarButtonItem alloc] initWithTitle:_shouldHideStatusBar ? @"Status Bar: OFF" : @"Status Bar: ON"
+                                                                      style:UIBarButtonItemStylePlain
+                                                                     target:self
+                                                                     action:@selector(fullScreenButtonTapped:)];
+    [self setToolbarItems:@[fontItem, statusBarItem]];
 
     // If the user did not complete the setup, present the bulletin automatically
 
@@ -105,6 +113,13 @@
 -(void)showBulletin {
 
     [_bulletinManager setBackgroundViewStyle:[_currentBackground style]];
+
+    if (_shouldHideStatusBar == YES) {
+        [_bulletinManager setStatusBarAppearance:BulletinStatusBarAppearanceHidden];
+    } else {
+        [_bulletinManager setStatusBarAppearance:BulletinStatusBarAppearanceAutomatic];
+    }
+
     [_bulletinManager prepare];
     [_bulletinManager presentBulletinAboveViewController:self
                                                 animated:YES
@@ -199,6 +214,13 @@
 -(void)fontButtonTapped:(UIBarButtonItem *)sender {
     [BulletinDataSource setUseAvenirFont:![BulletinDataSource useAvenirFont]];
     [sender setTitle:[BulletinDataSource currentFontName]];
+    [self reloadManager];
+}
+
+-(void)fullScreenButtonTapped:(UIBarButtonItem *)sender {
+    _shouldHideStatusBar = !(_shouldHideStatusBar);
+    NSString *newTitle = _shouldHideStatusBar ? @"Status Bar: OFF" : @"Status Bar: On";
+    [sender setTitle:newTitle];
     [self reloadManager];
 }
 

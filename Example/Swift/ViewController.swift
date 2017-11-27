@@ -22,6 +22,9 @@ class ViewController: UIViewController {
     /// The data provider for the collection view.
     private var dataSource: CollectionDataSource!
 
+    /// Whether the status bar should be hidden.
+    private var shouldHideStatusBar: Bool = false
+
     // MARK: - Customization
 
     /// The available background styles.
@@ -109,11 +112,13 @@ class ViewController: UIViewController {
                                        target: self,
                                        action: #selector(fontButtonItemTapped))
 
-        navigationController?.isToolbarHidden = false
+        let statusBarItem = UIBarButtonItem(title: shouldHideStatusBar ? "Status Bar: OFF" : "Status Bar: ON",
+                                            style: .plain,
+                                            target: self,
+                                            action: #selector(fullScreenButtonTapped))
 
-        toolbarItems = [
-            fontItem
-        ]
+        navigationController?.isToolbarHidden = false
+        toolbarItems = [fontItem, statusBarItem]
 
         // If the user did not complete the setup, present the bulletin automatically
 
@@ -129,6 +134,7 @@ class ViewController: UIViewController {
 
     func showBulletin() {
         bulletinManager.backgroundViewStyle = currentBackground.style
+        bulletinManager.statusBarAppearance = shouldHideStatusBar ? .hidden : .automatic
         bulletinManager.prepare()
         bulletinManager.presentBulletin(above: self)
     }
@@ -179,6 +185,12 @@ class ViewController: UIViewController {
     @objc func fontButtonItemTapped(sender: UIBarButtonItem) {
         BulletinDataSource.useAvenirFont = !BulletinDataSource.useAvenirFont
         sender.title = BulletinDataSource.currentFontName()
+        reloadManager()
+    }
+
+    @objc func fullScreenButtonTapped(sender: UIBarButtonItem) {
+        shouldHideStatusBar = !shouldHideStatusBar
+        sender.title = shouldHideStatusBar ? "Status Bar: OFF" : "Status Bar: ON"
         reloadManager()
     }
 

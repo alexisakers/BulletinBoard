@@ -33,6 +33,13 @@ import UIKit
 
     @objc public var backgroundViewStyle: BulletinBackgroundViewStyle = .dimmed
 
+    /**
+     * The style of status bar to use with the bulltin. Defaults to `.automatic`.
+     *
+     * Set this value before calling `prepare`. Changing it after will have no effect.
+     */
+
+    @objc public var statusBarAppearance: BulletinStatusBarAppearance = .automatic
 
     // MARK: - Private Properties
     
@@ -102,6 +109,7 @@ import UIKit
         viewController.modalPresentationStyle = .overFullScreen
         viewController.transitioningDelegate = viewController
         viewController.loadBackgroundView()
+        viewController.setNeedsStatusBarAppearanceUpdate()
 
         isPrepared = true
         isPreparing = true

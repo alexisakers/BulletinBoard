@@ -268,12 +268,26 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
 
-        if let isDark = manager?.backgroundViewStyle.rawValue.isDark {
-            return isDark ? .lightContent : .default
-        }
+        switch manager?.statusBarAppearance {
+        case .lightContent?:
+            return .lightContent
 
-        return .default
+        case .automatic?:
+
+            if let isDark = manager?.backgroundViewStyle.rawValue.isDark {
+                return isDark ? .lightContent : .default
+            } else {
+                fallthrough
+            }
+
+        default:
+            return .default
+        }
         
+    }
+
+    override var prefersStatusBarHidden: Bool {
+        return manager?.statusBarAppearance == .hidden
     }
 
 }

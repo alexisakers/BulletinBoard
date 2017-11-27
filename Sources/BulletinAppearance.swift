@@ -142,6 +142,28 @@ extension BulletinAppearance {
 
 }
 
+// MARK: - Status Bar
+
+/**
+ * Styles of status bar to use with bulletin items.
+ */
+
+@objc public enum BulletinStatusBarAppearance: Int {
+
+    /// The status bar is hidden.
+    case hidden
+
+    /// The color of the status bar is determined automatically. This is the efault style.
+    case automatic
+
+    /// Style to use with dark backgrounds.
+    case lightContent
+
+    /// Style to use with light backgrounds.
+    case darkContent
+
+}
+
 // MARK: - Swift Compatibility
 
 #if swift(>=4.0)
