@@ -119,7 +119,10 @@ class PetSelectorBulletinPage: ActionBulletinItem {
         button.layer.borderColor = buttonColor.cgColor
 
         if isSelected {
-            nextItem = PetSelectorValidationBulletinPage(animalName: title.lowercased(), animalEmoji: emoji)
+            let nextPage = PetSelectorValidationBulletinPage(animalName: title.lowercased(), animalEmoji: emoji)
+            nextPage.actionButtonTitle = "Validate"
+            nextPage.alternativeButtonTitle = "Change"
+            self.nextItem = nextPage
         }
 
         return button
