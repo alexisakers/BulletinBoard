@@ -79,7 +79,6 @@ import UIKit
             imageView.tintColor = appearance.imageViewTintColor
 
             imageView.heightAnchor.constraint(lessThanOrEqualToConstant: 128).isActive = true
-            imageView.heightAnchor.constraint(greaterThanOrEqualToConstant: 64).isActive = true
 
             if let imageAccessibilityLabel = imageAccessibilityLabel {
                 imageView.isAccessibilityElement = true

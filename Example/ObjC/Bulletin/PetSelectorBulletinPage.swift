@@ -108,15 +108,21 @@ class PetSelectorBulletinPage: ActionBulletinItem {
         button.layer.borderWidth = 2
 
         button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        button.heightAnchor.constraint(equalToConstant: 55).isActive = true
 
+        let heightConstraint = button.heightAnchor.constraint(equalToConstant: 55)
+        heightConstraint.priority = .defaultHigh
+        heightConstraint.isActive = true
+        
         let buttonColor = isSelected ? appearance.actionButtonColor : .lightGray
         button.layer.borderColor = buttonColor.cgColor
         button.setTitleColor(buttonColor, for: .normal)
         button.layer.borderColor = buttonColor.cgColor
 
         if isSelected {
-            nextItem = PetSelectorValidationBulletinPage(animalName: title.lowercased(), animalEmoji: emoji)
+            let nextPage = PetSelectorValidationBulletinPage(animalName: title.lowercased(), animalEmoji: emoji)
+            nextPage.actionButtonTitle = "Validate"
+            nextPage.alternativeButtonTitle = "Change"
+            self.nextItem = nextPage
         }
 
         return button

@@ -210,10 +210,12 @@ import UIKit
      */
 
     open func tearDown() {
+
         actionButton?.removeTarget(self, action: nil, for: .touchUpInside)
         alternativeButton?.removeTarget(self, action: nil, for: .touchUpInside)
         actionButton = nil
         alternativeButton = nil
+
     }
 
 }
