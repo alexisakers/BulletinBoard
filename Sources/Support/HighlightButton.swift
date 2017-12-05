@@ -136,11 +136,11 @@ extension UIButton {
     @objc public let button: UIButton
 
     @available(*, unavailable)
-    public override init(frame: CGRect) {
-        fatalError("init(frame:) is unavailable. Use init(button:) instead.")
+
+    public override convenience init(frame: CGRect) {
+        self.init(button: HighlightButton())
     }
 
-    @available(*, unavailable)
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) is unavailable. Use init(button:) instead.")
     }
