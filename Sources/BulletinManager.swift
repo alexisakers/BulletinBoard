@@ -313,6 +313,7 @@ import UIKit
         // Tear down old item
 
         let oldArrangedSubviews = viewController.contentStackView.arrangedSubviews
+        let oldHideableArrangedSubviews = recursiveArrangedSubviews(in: oldArrangedSubviews)
 
         previousItem?.tearDown()
         previousItem?.manager = nil
@@ -323,9 +324,13 @@ import UIKit
         // Create new views
 
         let newArrangedSubviews = currentItem.makeArrangedSubviews()
+        let newHideableArrangedSubviews = recursiveArrangedSubviews(in: newArrangedSubviews)
+
+        for arrangedSubview in newHideableArrangedSubviews {
+            arrangedSubview.isHidden = isPreparing ? false : true
+        }
 
         for arrangedSubview in newArrangedSubviews {
-            arrangedSubview.isHidden = isPreparing ? false : true
             viewController.contentStackView.addArrangedSubview(arrangedSubview)
         }
 
@@ -353,11 +358,11 @@ import UIKit
 
         let transitionAnimation = {
 
-            for arrangedSubview in oldArrangedSubviews {
+            for arrangedSubview in oldHideableArrangedSubviews {
                 arrangedSubview.isHidden = true
             }
 
-            for arrangedSubview in newArrangedSubviews {
+            for arrangedSubview in newHideableArrangedSubviews {
                 arrangedSubview.isHidden = false
             }
 
@@ -407,6 +412,26 @@ import UIKit
         if let nextItem = item.nextItem {
             tearDownItemsChain(startingAt: nextItem)
         }
+
+    }
+
+    private func recursiveArrangedSubviews(in views: [UIView]) -> [UIView] {
+
+        var arrangedSubviews: [UIView] = []
+
+        for view in views {
+
+            if let stack = view as? UIStackView {
+                arrangedSubviews.append(stack)
+                let recursiveViews = self.recursiveArrangedSubviews(in: stack.arrangedSubviews)
+                arrangedSubviews.append(contentsOf: recursiveViews)
+            } else {
+                arrangedSubviews.append(view)
+            }
+
+        }
+
+        return arrangedSubviews
 
     }
 

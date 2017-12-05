@@ -80,7 +80,10 @@ import UIKit
 
         let wrapper = HighlightButtonWrapper(button: actionButton)
         wrapper.setContentHuggingPriority(UILayoutPriorityDefaultLow, for: .horizontal)
-        wrapper.heightAnchor.constraint(equalToConstant: 55).isActive = true
+
+        let heightConstraint = wrapper.heightAnchor.constraint(equalToConstant: 55)
+        heightConstraint.priority = UILayoutPriorityDefaultHigh
+        heightConstraint.isActive = true
 
         return wrapper
 

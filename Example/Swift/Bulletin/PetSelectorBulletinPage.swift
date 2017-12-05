@@ -108,7 +108,10 @@ class PetSelectorBulletinPage: ActionBulletinItem {
         button.layer.borderWidth = 2
 
         button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        button.heightAnchor.constraint(equalToConstant: 55).isActive = true
+
+        let heightConstraint = button.heightAnchor.constraint(equalToConstant: 55)
+        heightConstraint.priority = .defaultHigh
+        heightConstraint.isActive = true
 
         let buttonColor = isSelected ? appearance.actionButtonColor : .lightGray
         button.layer.borderColor = buttonColor.cgColor
