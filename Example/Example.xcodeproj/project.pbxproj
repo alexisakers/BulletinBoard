@@ -106,10 +106,10 @@
 		55D7BA831FBC786B0008A602 /* BulletinBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BulletinBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55DADE751F7D7AEA001B11A2 /* BulletinDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinDataSource.swift; sourceTree = "<group>"; };
 		55DADE771F7D8B29001B11A2 /* PetSelectorBulletinPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSelectorBulletinPage.swift; sourceTree = "<group>"; };
-		55DADE7B1F7E3A53001B11A2 /* FeedbackGenerators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FeedbackGenerators.swift; path = "Supporting Files/FeedbackGenerators.swift"; sourceTree = "<group>"; };
+		55DADE7B1F7E3A53001B11A2 /* FeedbackGenerators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackGenerators.swift; sourceTree = "<group>"; };
 		55DADE801F7E3C0B001B11A2 /* FeedbackPageBulletinItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackPageBulletinItem.swift; sourceTree = "<group>"; };
-		55DADE821F7E4204001B11A2 /* PermissionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PermissionsManager.swift; path = "Supporting Files/PermissionsManager.swift"; sourceTree = "<group>"; };
-		55DADE841F7E592F001B11A2 /* CollectionUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CollectionUtilities.swift; path = "Supporting Files/CollectionUtilities.swift"; sourceTree = "<group>"; };
+		55DADE821F7E4204001B11A2 /* PermissionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsManager.swift; sourceTree = "<group>"; };
+		55DADE841F7E592F001B11A2 /* CollectionUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionUtilities.swift; sourceTree = "<group>"; };
 		55DADE901F7ED65E001B11A2 /* BulletinBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BulletinBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		652A87EC1FA24C8B006CDCF6 /* TextFieldBulletinPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBulletinPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -253,7 +253,7 @@
 				55DADE7B1F7E3A53001B11A2 /* FeedbackGenerators.swift */,
 				55DADE821F7E4204001B11A2 /* PermissionsManager.swift */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

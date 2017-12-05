@@ -13,61 +13,10 @@ import BulletinBoard
  * next item based on user interaction.
  */
 
-@objc @objcMembers class PetSelectorBulletinPage: NSObject, BulletinItem {
-
-    /**
-     * The object managing the item. Required by the `BulletinItem` protocol.
-     *
-     * You can use it to switch to the previous/next item or dismiss the bulletin.
-     *
-     * Always check if it is nil, as the manager will unset this value when the current item changes.
-     */
-
-    weak var manager: BulletinManager?
-
-    /**
-     * Whether the item can be dismissed. If you set this value to `true`, the user will be able
-     * to dimiss the bulletin by tapping outside the card.
-     *
-     * You should set it to true for optional items or if it is the last in a configuration sequence.
-     */
-
-    var isDismissable: Bool = false
-
-    /**
-     * The block of code to execute when the bulletin item is dismissed. This is called when the bulletin
-     * is moved out of view.
-     *
-     * You can leave it `nil` if `isDismissable` is set to false.
-     *
-     * - parameter item: The item that is being dismissed. When calling `dismissalHandler`, the manager
-     * passes a reference to `self` so you don't have to manage weak references yourself.
-     */
-
-    public var dismissalHandler: ((_ item: BulletinItem) -> Void)? = nil
-
-    /**
-     * The item to display after this one. You can modify it at runtime based on user selection for
-     * instance.
-     *
-     * Here, we will change the time based on the pet chosen by the user.
-     */
-
-    var nextItem: BulletinItem?
-
-    /**
-     * An object that creates standard inteface components.
-     */
-
-    let appearance = BulletinAppearance()
-
-
-    // MARK: - Interface Elements
+class PetSelectorBulletinPage: ActionBulletinItem {
 
     private var catButtonContainer: UIButton!
     private var dogButtonContainer: UIButton!
-    private var saveButtonContainer: UIButton!
-
     private var selectionFeedbackGenerator = SelectionFeedbackGenerator()
 
     // MARK: - BulletinItem
@@ -79,10 +28,9 @@ import BulletinBoard
      * button targets from your views to avoid retain cycles.
      */
 
-    func tearDown() {
+    override func tearDown() {
         catButtonContainer?.removeTarget(self, action: nil, for: .touchUpInside)
         dogButtonContainer?.removeTarget(self, action: nil, for: .touchUpInside)
-        saveButtonContainer?.removeTarget(self, action: nil, for: .touchUpInside)
     }
 
     /**
@@ -92,41 +40,29 @@ import BulletinBoard
      * `BulletinInterfaceFactory` to generate standard views, such as title labels and buttons.
      */
 
-    func makeArrangedSubviews() -> [UIView] {
+    override func makeContentViews(interfaceBuilder: BulletinInterfaceBuilder) -> [UIView] {
 
-        var arrangedSubviews = [UIView]()
+        var contentViews = [UIView]()
         let favoriteTabIndex = BulletinDataSource.favoriteTabIndex()
-
-        // Create the interface builder
-
-        /**
-         * An interface builder allows you to create standard interface components using a customized
-         * appearance.
-         *
-         * You should always use it to generate title and description labels, and action and alternative
-         * buttons.
-         */
-
-        let interfaceBuilder = BulletinInterfaceBuilder(appearance: appearance)
 
         // Title Label
 
         let title = "Choose your Favorite"
         let titleLabel = interfaceBuilder.makeTitleLabel(text: title)
-        arrangedSubviews.append(titleLabel)
+        contentViews.append(titleLabel)
 
         // Description Label
 
         appearance.shouldUseCompactDescriptionText = false // The text is short, so we don't need to display it with a smaller font
         let descriptionLabel = interfaceBuilder.makeDescriptionLabel()
         descriptionLabel.text = "Your favorite pets will appear when you open the app."
-        arrangedSubviews.append(descriptionLabel)
+        contentViews.append(descriptionLabel)
 
         // Pets Stack
 
         // We add choice cells to a group stack because they need less spacing
         let petsStack = interfaceBuilder.makeGroupStack(spacing: 16)
-        arrangedSubviews.append(petsStack)
+        contentViews.append(petsStack)
 
         // Cat Button
 
@@ -144,13 +80,7 @@ import BulletinBoard
 
         self.dogButtonContainer = dogButtonContainer
 
-        // Save Button
-
-        let saveButtonContainer = interfaceBuilder.makeActionButton(title: "Save")
-        saveButtonContainer.button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
-        arrangedSubviews.append(saveButtonContainer)
-
-        return arrangedSubviews
+        return contentViews
 
     }
 
@@ -217,13 +147,18 @@ import BulletinBoard
 
         // Send a notification to inform observers of the change
 
-        NotificationCenter.default.post(name: Notification.Name(FavoriteTabIndexDidChangeNotificationName),
+        NotificationCenter.default.post(name: NSNotification.Name(FavoriteTabIndexDidChangeNotificationName),
                                         object: self,
                                         userInfo: ["Index": 0])
 
         // Set the next item
 
-        nextItem = PetSelectorValidationBulletinPage(animalName: "cats", animalEmoji: "🐱")
+        let nextPage = PetSelectorValidationBulletinPage(animalName: "cats", animalEmoji: "🐱")
+        nextPage.actionButtonTitle = "Validate"
+        nextPage.alternativeButtonTitle = "Change"
+
+        nextItem = nextPage
+
 
     }
 
@@ -249,18 +184,21 @@ import BulletinBoard
 
         // Send a notification to inform observers of the change
 
-        NotificationCenter.default.post(name: Notification.Name(FavoriteTabIndexDidChangeNotificationName),
+        NotificationCenter.default.post(name: NSNotification.Name(FavoriteTabIndexDidChangeNotificationName),
                                         object: self,
                                         userInfo: ["Index": 1])
 
         // Set the next item
 
-        nextItem = PetSelectorValidationBulletinPage(animalName: "dogs", animalEmoji: "🐶")
+        let nextPage = PetSelectorValidationBulletinPage(animalName: "dogs", animalEmoji: "🐶")
+        nextPage.actionButtonTitle = "Validate"
+        nextPage.alternativeButtonTitle = "Change"
+
+        nextItem = nextPage
 
     }
 
-    /// Called when the save button is tapped.
-    @objc func saveButtonTapped() {
+    override func actionButtonTapped(sender: UIButton) {
 
         // Play haptic feedback
         selectionFeedbackGenerator.prepare()
@@ -279,16 +217,7 @@ import BulletinBoard
  * This item demonstrates popping to the previous item.
  */
 
-@objc @objcMembers class PetSelectorValidationBulletinPage: NSObject, BulletinItem {
-
-    weak var manager: BulletinManager? = nil
-    var isDismissable: Bool = false
-    var dismissalHandler: ((BulletinItem) -> Void)? = nil
-    var nextItem: BulletinItem?
-
-    let appearance = BulletinAppearance()
-
-    // MARK: - Configuration
+class PetSelectorValidationBulletinPage: ActionBulletinItem {
 
     let animalName: String
     let animalEmoji: String
@@ -301,23 +230,17 @@ import BulletinBoard
     private var selectionFeedbackGenerator = SelectionFeedbackGenerator()
     private var successFeedbackGenerator = SuccessFeedbackGenerator()
 
-    // MARK: - Interface Elements
-
-    private var validateButton: UIButton?
-    private var backButton: UIButton?
-
     // MARK: - BulletinItem
 
-    func makeArrangedSubviews() -> [UIView] {
+    override func makeContentViews(interfaceBuilder: BulletinInterfaceBuilder) -> [UIView] {
 
-        var arrangedSubviews = [UIView]()
-        let interfaceBuilder = BulletinInterfaceBuilder(appearance: appearance)
+        var contentViews = [UIView]()
 
         // Title Label
 
         let title = "Choose your Favorite"
         let titleLabel = interfaceBuilder.makeTitleLabel(text: title)
-        arrangedSubviews.append(titleLabel)
+        contentViews.append(titleLabel)
 
         // Emoji
 
@@ -329,39 +252,21 @@ import BulletinBoard
         emojiLabel.text = animalEmoji
         emojiLabel.isAccessibilityElement = false
 
-        arrangedSubviews.append(emojiLabel)
+        contentViews.append(emojiLabel)
 
         // Description Label
 
         let descriptionLabel = interfaceBuilder.makeDescriptionLabel()
         descriptionLabel.text = "You chose \(animalName) as your favorite animal type. Are you sure?"
-        arrangedSubviews.append(descriptionLabel)
+        contentViews.append(descriptionLabel)
 
-        // Validate Button
-
-        let buttonsStack = interfaceBuilder.makeGroupStack()
-        arrangedSubviews.append(buttonsStack)
-
-        let validateButton = interfaceBuilder.makeActionButton(title: "Validate")
-        validateButton.button.addTarget(self, action: #selector(validateButtonTapped), for: .touchUpInside)
-        self.validateButton = validateButton.button
-        buttonsStack.addArrangedSubview(validateButton)
-
-        // Back Button
-
-        let backButton = interfaceBuilder.makeAlternativeButton(title: "Change")
-        buttonsStack.addArrangedSubview(backButton)
-
-        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        self.backButton = backButton
-
-        return arrangedSubviews
+        return contentViews
 
     }
 
     // MARK: - Touch Events
 
-    @objc private func validateButtonTapped() {
+    override func actionButtonTapped(sender: UIButton) {
 
         // > Play Haptic Feedback
 
@@ -392,14 +297,7 @@ import BulletinBoard
 
     }
 
-    func tearDown() {
-        validateButton?.removeTarget(self, action: nil, for: .touchUpInside)
-        backButton?.removeTarget(self, action: nil, for: .touchUpInside)
-        validateButton = nil
-        backButton = nil
-    }
-
-    @objc private func backButtonTapped() {
+    override func alternativeButtonTapped(sender: UIButton) {
 
         // Play selection haptic feedback
 

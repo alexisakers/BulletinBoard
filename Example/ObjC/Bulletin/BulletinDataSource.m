@@ -22,7 +22,7 @@
     [page setAppearance:[BulletinDataSource makeLightAppearance]];
     [page setIsDismissable:YES];
 
-    [page setActionHandler:^(PageBulletinItem * _Nonnull _item) {
+    [page setActionHandler:^(ActionBulletinItem * _Nonnull _item) {
         [[_item manager] displayNextItem];
     }];
 
@@ -54,15 +54,16 @@
     [page setDescriptionText:@"Receive push notifications when new photos of pets are available."];
     [page setActionButtonTitle:@"Subscribe"];
     [page setAlternativeButtonTitle:@"Not now"];
+    [page setImage:[UIImage imageNamed:@"NotificationPrompt"]];
 
     [page setIsDismissable:NO];
 
-    [page setActionHandler:^(PageBulletinItem * _Nonnull _item) {
+    [page setActionHandler:^(ActionBulletinItem * _Nonnull _item) {
         [[PermissionsManager sharedManager] requestLocalNotifications];
         [[_item manager] displayNextItem];
     }];
 
-    [page setAlternativeHandler:^(PageBulletinItem * _Nonnull _item) {
+    [page setAlternativeHandler:^(ActionBulletinItem * _Nonnull _item) {
         [[_item manager] displayNextItem];
     }];
 
@@ -85,12 +86,12 @@
     [[page appearance] setShouldUseCompactDescriptionText:YES];
     [page setIsDismissable:NO];
 
-    [page setActionHandler:^(PageBulletinItem * _Nonnull _item) {
+    [page setActionHandler:^(ActionBulletinItem * _Nonnull _item) {
         [[PermissionsManager sharedManager] requestWhenInUseLocation];
         [[_item manager] displayNextItem];
     }];
 
-    [page setAlternativeHandler:^(PageBulletinItem * _Nonnull _item) {
+    [page setAlternativeHandler:^(ActionBulletinItem * _Nonnull _item) {
         [[_item manager] displayNextItem];
     }];
 
@@ -101,7 +102,12 @@
 };
 
 +(PetSelectorBulletinPage *)makeChoicePage {
-    return [PetSelectorBulletinPage new];
+
+    PetSelectorBulletinPage* page = [PetSelectorBulletinPage new];
+    [page setActionButtonTitle:@"Select"];
+
+    return page;
+
 };
 
 +(PageBulletinItem *)makeCompletionPage {
@@ -130,11 +136,11 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:SetupDidCompleteNotificationName object:_item];
     }];
 
-    [page setActionHandler:^(PageBulletinItem * _Nonnull _item) {
+    [page setActionHandler:^(ActionBulletinItem * _Nonnull _item) {
         [[_item manager] dismissBulletinAnimated:YES];
     }];
 
-    [page setAlternativeHandler:^(PageBulletinItem * _Nonnull _item) {
+    [page setAlternativeHandler:^(ActionBulletinItem * _Nonnull _item) {
         [[_item manager] popToRootItem];
     }];
 

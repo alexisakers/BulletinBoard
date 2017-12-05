@@ -150,7 +150,12 @@ enum BulletinDataSource {
      */
 
     static func makeChoicePage() -> PetSelectorBulletinPage {
-        return PetSelectorBulletinPage()
+
+        let page = PetSelectorBulletinPage()
+        page.actionButtonTitle = "Select"
+
+        return page
+
     }
 
     /**
