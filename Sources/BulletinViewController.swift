@@ -178,8 +178,6 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
 
-        print("will transition")
-
         coordinator.animate(alongsideTransition: { _ in
             self.setUpLayout(with: newCollection)
         })
