@@ -373,12 +373,8 @@ extension BulletinViewController: UIViewControllerTransitioningDelegate {
 
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning)
         -> UIViewControllerInteractiveTransitioning? {
-
-            let isEligible = swipeInteractionController.isInteractionInProgress &&
-                traitCollection.horizontalSizeClass == .compact
-
+            let isEligible = swipeInteractionController.isInteractionInProgress
             return isEligible ? swipeInteractionController : nil
-
     }
 
     /// Creates a new view swipe interaction controller and wires it to the content view.
