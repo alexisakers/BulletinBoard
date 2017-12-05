@@ -66,7 +66,7 @@ class PetSelectorBulletinPage: ActionBulletinItem {
 
         // Cat Button
 
-        let catButtonContainer = createChoiceCell(emoji: "🐱", title: "Cats", isSelected: favoriteTabIndex == 0)
+        let catButtonContainer = createChoiceCell(dataSource: CatCollectionDataSource(), isSelected: favoriteTabIndex == 0)
         catButtonContainer.addTarget(self, action: #selector(catButtonTapped), for: .touchUpInside)
         petsStack.addArrangedSubview(catButtonContainer)
 
@@ -74,7 +74,7 @@ class PetSelectorBulletinPage: ActionBulletinItem {
 
         // Dog Button
 
-        let dogButtonContainer = createChoiceCell(emoji: "🐶", title: "Dogs", isSelected: favoriteTabIndex == 1)
+        let dogButtonContainer = createChoiceCell(dataSource: DogCollectionDataSource(), isSelected: favoriteTabIndex == 1)
         dogButtonContainer.addTarget(self, action: #selector(dogButtonTapped), for: .touchUpInside)
         petsStack.addArrangedSubview(dogButtonContainer)
 
@@ -90,13 +90,28 @@ class PetSelectorBulletinPage: ActionBulletinItem {
      * Creates a custom choice cell.
      */
 
-    func createChoiceCell(emoji: String, title: String, isSelected: Bool) -> UIButton {
+    func createChoiceCell(dataSource: CollectionDataSource, isSelected: Bool) -> UIButton {
+
+        let emoji: String
+        let animalType: String
+
+        if dataSource is CatCollectionDataSource {
+            emoji = "🐱"
+            animalType = "Cats"
+
+        } else if dataSource is DogCollectionDataSource {
+            emoji = "🐶"
+            animalType = "Dogs"
+
+        } else {
+            fatalError("Unknown animal")
+        }
 
         let button = UIButton(type: .system)
-        button.setTitle(emoji + " " + title, for: .normal)
+        button.setTitle(emoji + " " + animalType, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         button.contentHorizontalAlignment = .center
-        button.accessibilityLabel = title
+        button.accessibilityLabel = animalType
 
         if isSelected {
             button.accessibilityTraits |= UIAccessibilityTraitSelected
@@ -119,10 +134,7 @@ class PetSelectorBulletinPage: ActionBulletinItem {
         button.layer.borderColor = buttonColor.cgColor
 
         if isSelected {
-            let nextPage = PetSelectorValidationBulletinPage(animalName: title.lowercased(), animalEmoji: emoji)
-            nextPage.actionButtonTitle = "Validate"
-            nextPage.alternativeButtonTitle = "Change"
-            self.nextItem = nextPage
+            nextItem = PetValidationBulletinItem(dataSource: dataSource, animalType: animalType.lowercased())
         }
 
         return button
@@ -159,12 +171,7 @@ class PetSelectorBulletinPage: ActionBulletinItem {
 
         // Set the next item
 
-        let nextPage = PetSelectorValidationBulletinPage(animalName: "cats", animalEmoji: "🐱")
-        nextPage.actionButtonTitle = "Validate"
-        nextPage.alternativeButtonTitle = "Change"
-
-        nextItem = nextPage
-
+        nextItem = PetValidationBulletinItem(dataSource: CatCollectionDataSource(), animalType: "cats")
 
     }
 
@@ -196,11 +203,7 @@ class PetSelectorBulletinPage: ActionBulletinItem {
 
         // Set the next item
 
-        let nextPage = PetSelectorValidationBulletinPage(animalName: "dogs", animalEmoji: "🐶")
-        nextPage.actionButtonTitle = "Validate"
-        nextPage.alternativeButtonTitle = "Change"
-
-        nextItem = nextPage
+        nextItem = PetValidationBulletinItem(dataSource: DogCollectionDataSource(), animalType: "dogs")
 
     }
 
@@ -212,107 +215,6 @@ class PetSelectorBulletinPage: ActionBulletinItem {
 
         // Ask the manager to present the next item.
         manager?.displayNextItem()
-
-    }
-
-}
-
-/**
- * A bulletin page that allows the user to validate its selection
- *
- * This item demonstrates popping to the previous item.
- */
-
-class PetSelectorValidationBulletinPage: ActionBulletinItem {
-
-    let animalName: String
-    let animalEmoji: String
-
-    init(animalName: String, animalEmoji: String) {
-        self.animalName = animalName
-        self.animalEmoji = animalEmoji
-    }
-
-    private var selectionFeedbackGenerator = SelectionFeedbackGenerator()
-    private var successFeedbackGenerator = SuccessFeedbackGenerator()
-
-    // MARK: - BulletinItem
-
-    override func makeContentViews(interfaceBuilder: BulletinInterfaceBuilder) -> [UIView] {
-
-        var contentViews = [UIView]()
-
-        // Title Label
-
-        let title = "Choose your Favorite"
-        let titleLabel = interfaceBuilder.makeTitleLabel(text: title)
-        contentViews.append(titleLabel)
-
-        // Emoji
-
-        let emojiLabel = UILabel()
-        emojiLabel.numberOfLines = 1
-        emojiLabel.textAlignment = .center
-        emojiLabel.adjustsFontSizeToFitWidth = true
-        emojiLabel.font = UIFont.systemFont(ofSize: 66)
-        emojiLabel.text = animalEmoji
-        emojiLabel.isAccessibilityElement = false
-
-        contentViews.append(emojiLabel)
-
-        // Description Label
-
-        let descriptionLabel = interfaceBuilder.makeDescriptionLabel()
-        descriptionLabel.text = "You chose \(animalName) as your favorite animal type. Are you sure?"
-        contentViews.append(descriptionLabel)
-
-        return contentViews
-
-    }
-
-    // MARK: - Touch Events
-
-    override func actionButtonTapped(sender: UIButton) {
-
-        // > Play Haptic Feedback
-
-        selectionFeedbackGenerator.prepare()
-        selectionFeedbackGenerator.selectionChanged()
-
-        // > Display the loading indicator
-
-        manager?.displayActivityIndicator()
-
-        // > Wait for a "task" to complete before displaying the next item
-
-        let delay = DispatchTime.now() + .seconds(2)
-
-        DispatchQueue.main.asyncAfter(deadline: delay) {
-
-            // Play success haptic feedback
-
-            self.successFeedbackGenerator.prepare()
-            self.successFeedbackGenerator.notifySuccess()
-
-            // Display next item
-
-            self.nextItem = BulletinDataSource.makeCompletionPage()
-            self.manager?.displayNextItem()
-
-        }
-
-    }
-
-    override func alternativeButtonTapped(sender: UIButton) {
-
-        // Play selection haptic feedback
-
-        selectionFeedbackGenerator.prepare()
-        selectionFeedbackGenerator.selectionChanged()
-
-        // Display previous item
-
-        manager?.popItem()
 
     }
 
