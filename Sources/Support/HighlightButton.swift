@@ -135,8 +135,6 @@ extension UIButton {
 
     @objc public let button: UIButton
 
-    @available(*, unavailable)
-
     public override convenience init(frame: CGRect) {
         self.init(button: HighlightButton())
     }
