@@ -44,15 +44,33 @@ import UIKit
      * Creates a standard description label.
      */
 
-    @objc open func makeDescriptionLabel() -> UILabel {
+    @objc open func makeDescriptionLabel(text: String? = nil) -> UILabel {
 
         let descriptionLabel = UILabel()
         descriptionLabel.textAlignment = .center
         descriptionLabel.textColor = appearance.descriptionTextColor
         descriptionLabel.numberOfLines = 0
         descriptionLabel.font = appearance.makeDescriptionFont()
+        descriptionLabel.text = text
 
         return descriptionLabel
+
+    }
+
+    /**
+     * Creates a standard text field with optional delegate
+     */
+
+    @objc open func makeTextField(placeholder: String? = nil, returnKey: UIReturnKeyType = .default, delegate: UITextFieldDelegate? = nil) -> UITextField {
+
+        let textField = UITextField()
+        textField.delegate = delegate
+        textField.textAlignment = .left
+        textField.placeholder = placeholder
+        textField.borderStyle = .roundedRect
+        textField.returnKeyType = .default
+
+        return textField
 
     }
 
