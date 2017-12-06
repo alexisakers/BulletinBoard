@@ -117,7 +117,6 @@ import UIKit
         viewController.transitioningDelegate = viewController
         viewController.loadBackgroundView()
         viewController.setNeedsStatusBarAppearanceUpdate()
-        viewController.contentView.backgroundColor = backgroundColor
 
         isPrepared = true
         isPreparing = true
