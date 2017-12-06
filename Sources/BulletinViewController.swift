@@ -31,11 +31,12 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
      */
 
     let contentStackView = UIStackView()
+    
+    let activityIndicator = ActivityIndicator()
 
 
     // MARK: - Private Interface Elements
 
-    fileprivate let activityIndicator = ActivityIndicator()
     fileprivate let bottomSafeAreaCoverView = UIVisualEffectView()
     fileprivate var swipeInteractionController: BulletinSwipeInteractionController!
 
@@ -129,7 +130,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
         activityIndicator.activityIndicatorViewStyle = .whiteLarge
         activityIndicator.color = .black
-        activityIndicator.isUserInteractionEnabled = true
+        activityIndicator.isUserInteractionEnabled = false
 
         activityIndicator.alpha = 0
 
