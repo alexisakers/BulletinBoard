@@ -28,6 +28,9 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
         return viewController.contentView
     }
 
+    private var activityIndicatorView: UIView {
+        return viewController.activityIndicator
+    }
 
     // MARK: - Preparation
 
@@ -212,6 +215,7 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
 
         snapshotView?.transform = transform
         contentView.transform = transform
+        activityIndicatorView.transform = transform
 
     }
 
@@ -222,6 +226,7 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
         let animations = {
             self.snapshotView?.transform = .identity
             self.contentView.transform = .identity
+            self.activityIndicatorView.transform = .identity
         }
 
         viewController.backgroundView.show()
