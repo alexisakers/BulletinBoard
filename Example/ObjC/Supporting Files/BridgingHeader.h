@@ -4,5 +4,7 @@
  */
 
 #include "BulletinDataSource.h"
+#include "CollectionDataSource.h"
+#include "ImageCollectionViewCell.h"
 #include "SelectionFeedbackGenerator.h"
 #include "SuccessFeedbackGenerator.h"

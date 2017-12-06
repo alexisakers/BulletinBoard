@@ -39,18 +39,23 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     fileprivate let bottomSafeAreaCoverView = UIVisualEffectView()
     fileprivate var swipeInteractionController: BulletinSwipeInteractionController!
 
+    // Compact constraints
     private var leadingConstraint: NSLayoutConstraint!
     private var trailingConstraint: NSLayoutConstraint!
     private var centerXConstraint: NSLayoutConstraint!
-    private var widthConstraint: NSLayoutConstraint!
 
+    // Regular constraints
+    private var widthConstraint: NSLayoutConstraint!
+    fileprivate var centerYConstraint: NSLayoutConstraint!
+
+    // Stack view constraints
     private var stackLeadingConstraint: NSLayoutConstraint!
     private var stackTrailingConstraint: NSLayoutConstraint!
     private var stackBottomConstraint: NSLayoutConstraint!
-    private var contentTopConstraint: NSLayoutConstraint!
 
+    // Position constraints
     fileprivate var minYConstraint: NSLayoutConstraint!
-
+    private var contentTopConstraint: NSLayoutConstraint!
     fileprivate var contentBottomConstraint: NSLayoutConstraint!
 
 
@@ -83,6 +88,9 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         leadingConstraint = contentView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor, constant: 12)
         trailingConstraint = contentView.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor, constant: -12)
         centerXConstraint = contentView.centerXAnchor.constraint(equalTo: view.safeCenterXAnchor)
+
+        centerYConstraint = contentView.centerYAnchor.constraint(equalTo: view.safeCenterYAnchor)
+        centerYConstraint.constant = 2500
 
         widthConstraint = contentView.widthAnchor.constraint(equalToConstant: 444)
         widthConstraint.priority = UILayoutPriorityRequired
@@ -178,8 +186,6 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
 
-        print("will transition")
-
         coordinator.animate(alongsideTransition: { _ in
             self.setUpLayout(with: newCollection)
         })
@@ -192,13 +198,17 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         case .regular:
             leadingConstraint.isActive = false
             trailingConstraint.isActive = false
+            contentBottomConstraint.isActive = false
             centerXConstraint.isActive = true
+            centerYConstraint.isActive = true
             widthConstraint.isActive = true
 
         case .compact:
             leadingConstraint.isActive = true
             trailingConstraint.isActive = true
+            contentBottomConstraint.isActive = true
             centerXConstraint.isActive = false
+            centerYConstraint.isActive = false
             widthConstraint.isActive = false
 
         default:
@@ -230,6 +240,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     func moveIntoPlace() {
 
         contentBottomConstraint.constant = -12
+        centerYConstraint.constant = 0
 
         view.layoutIfNeeded()
         contentView.layoutIfNeeded()
@@ -362,8 +373,10 @@ extension BulletinViewController: UIViewControllerTransitioningDelegate {
         return BulletinDismissAnimationController()
     }
 
-    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return swipeInteractionController.isInteractionInProgress ? swipeInteractionController : nil
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning)
+        -> UIViewControllerInteractiveTransitioning? {
+            let isEligible = swipeInteractionController.isInteractionInProgress
+            return isEligible ? swipeInteractionController : nil
     }
 
     /// Creates a new view swipe interaction controller and wires it to the content view.
@@ -413,6 +426,7 @@ extension BulletinViewController {
             }
             self.minYConstraint.isActive = false
             self.contentBottomConstraint.constant = bottomSpacing
+            self.centerYConstraint.constant = -(keyboardFrameFinal.size.height + 12) / 2
             self.contentView.superview?.layoutIfNeeded()
         }, completion: nil)
     }
@@ -431,6 +445,7 @@ extension BulletinViewController {
         UIView.animate(withDuration: duration, delay: 0, options: animationOptions, animations: {
             self.minYConstraint.isActive = true
             self.contentBottomConstraint.constant = -12 // same value as in moveIntoPlace()
+            self.centerYConstraint.constant = 0
             self.contentView.superview?.layoutIfNeeded()
         }, completion: nil)
     }
