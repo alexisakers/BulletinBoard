@@ -12,7 +12,7 @@ import BulletinBoard
  * This item demonstrates popping to the previous item, and including a collection view inside the card.
  */
 
-class PetValidationBulletinItem: ActionBulletinItem {
+class PetValidationBulletinItem: FeedbackPageBulletinItem {
 
     let dataSource: CollectionDataSource
     let animalType: String
@@ -21,30 +21,22 @@ class PetValidationBulletinItem: ActionBulletinItem {
     let successFeedbackGenerator = SuccessFeedbackGenerator()
 
     init(dataSource: CollectionDataSource, animalType: String) {
+
         self.dataSource = dataSource
         self.animalType = animalType
+        super.init(title: "Choose your Favorite")
+
+        descriptionText = "You chose \(animalType) as your favorite animal type. Here are a few examples of posts in this category."
+        actionButtonTitle = "Validate"
+        alternativeButtonTitle = "Change"
+
     }
 
     // MARK: - Interface
 
     var collectionView: UICollectionView?
 
-    override func makeContentViews(interfaceBuilder: BulletinInterfaceBuilder) -> [UIView] {
-        
-        var arrangedSubviews: [UIView] = []
-
-        // Title Label
-
-        let titleLabel = interfaceBuilder.makeTitleLabel(text: "Choose your Favorite")
-        arrangedSubviews.append(titleLabel)
-
-        // Description Label
-
-        let descriptionLabel = interfaceBuilder.makeDescriptionLabel()
-        descriptionLabel.text = "You chose \(animalType) as your favorite animal type. Here are a few examples of posts in this category."
-        arrangedSubviews.append(descriptionLabel)
-
-        // Collection View
+    override func viewsUnderDescription(_ interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
 
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
@@ -60,14 +52,7 @@ class PetValidationBulletinItem: ActionBulletinItem {
         collectionView.dataSource = self
         collectionView.delegate = self
 
-        arrangedSubviews.append(collectionWrapper)
-
-        // Action Button
-
-        actionButtonTitle = "Validate"
-        alternativeButtonTitle = "Change"
-
-        return arrangedSubviews
+        return [collectionWrapper]
 
     }
 

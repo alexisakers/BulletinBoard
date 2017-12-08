@@ -52,7 +52,29 @@ import UIKit
     /// A description text to display below the image.
     @objc public var descriptionText: String?
 
+    // MARK: - Customization
+
+    open func headerViews(_ interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
+        return nil
+    }
+
+    open func viewsUnderTitle(_ interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
+        return nil
+    }
+
+    open func viewsUnderImage(_ interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
+        return nil
+    }
+
+    open func viewsUnderDescription(_ interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
+        return nil
+    }
+
     // MARK: - View Management
+
+    @objc public private(set) var titleLabel: UILabel!
+    @objc public private(set) var descriptionLabel: UILabel?
+    @objc public private(set) var imageView: UIImageView?
 
     /**
      * Creates the content views of the page.
@@ -64,10 +86,22 @@ import UIKit
 
         var contentViews = [UIView]()
 
+        func insertComplementaryViews(_ builder: (BulletinInterfaceBuilder) -> [UIView]?) {
+
+            if let complementaryViews = builder(interfaceBuilder) {
+                contentViews.append(contentsOf: complementaryViews)
+            }
+
+        }
+
+        insertComplementaryViews(headerViews)
+
         // Title Label
 
-        let titleLabel = interfaceBuilder.makeTitleLabel(text: title)
+        titleLabel = interfaceBuilder.makeTitleLabel(text: title)
         contentViews.append(titleLabel)
+
+        insertComplementaryViews(viewsUnderTitle)
 
         // Image View
 
@@ -85,19 +119,24 @@ import UIKit
                 imageView.accessibilityLabel = imageAccessibilityLabel
             }
 
+            self.imageView = imageView
             contentViews.append(imageView)
 
         }
+
+        insertComplementaryViews(viewsUnderImage)
 
         // Description Label
 
         if let descriptionText = self.descriptionText {
 
-            let descriptionLabel = interfaceBuilder.makeDescriptionLabel()
-            descriptionLabel.text = descriptionText
-            contentViews.append(descriptionLabel)
+            descriptionLabel = interfaceBuilder.makeDescriptionLabel()
+            descriptionLabel!.text = descriptionText
+            contentViews.append(descriptionLabel!)
 
         }
+
+        insertComplementaryViews(viewsUnderDescription)
 
         return contentViews
 

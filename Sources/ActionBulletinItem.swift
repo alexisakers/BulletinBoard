@@ -102,8 +102,8 @@ import UIKit
 
     // MARK: - Buttons
 
-    fileprivate var actionButton: UIButton? = nil
-    fileprivate var alternativeButton: UIButton? = nil
+    @objc public private(set) var actionButton: UIButton? = nil
+    @objc public private(set) var alternativeButton: UIButton? = nil
 
     /**
      * The code to execute when the action button is tapped.
@@ -141,6 +141,10 @@ import UIKit
 
 
     // MARK: - View Management
+
+    open func footerViews(_ interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
+        return nil
+    }
 
     /**
      * Creates the content views of the page.
@@ -196,6 +200,13 @@ import UIKit
         }
 
         arrangedSubviews.append(buttonsStack)
+
+        // Footer
+
+        if let footerViews = footerViews(interfaceBuilder) {
+            arrangedSubviews.append(contentsOf: footerViews)
+        }
+
         return arrangedSubviews
 
     }
