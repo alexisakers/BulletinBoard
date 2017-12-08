@@ -38,8 +38,8 @@
 
     // Description Label
 
-    _descriptionLabel = [interfaceBuilder makeDescriptionLabel];
-    [_descriptionLabel setText:@"To create your profile, please tell us your name. We will use it to customize your feed."];
+    NSString *description = @"To create your profile, please tell us your name. We will use it to customize your feed.";
+    _descriptionLabel = [interfaceBuilder makeDescriptionLabelWithText:description];
     [arrangedSubviews addObject:_descriptionLabel];
 
     // Text Field

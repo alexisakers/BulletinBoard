@@ -58,7 +58,10 @@ enum BulletinDataSource {
 
         let page = TextFieldBulletinPage()
 
-        page.actionHandler = { item in
+        page.textInputHandler = { (item, text) in
+            if let text = text {
+                print("You entered: \(text)")
+            }
             item.manager?.displayNextItem()
         }
 
