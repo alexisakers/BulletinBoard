@@ -11,7 +11,7 @@ import UIKit
  * You create a bulletin manager using the `init(rootItem:)` initializer, where `rootItem` is the
  * first bulletin item to display.
  *
- * The manager works like a navigation controller. You can push new items to the stack to display them
+ * The manager works like a navigation controller. You can push new items to the stack to display them,
  * and pop existing ones to go back.
  *
  * You must call the `prepare` method before displaying the view controller.
@@ -21,7 +21,7 @@ import UIKit
 
 @objc public final class BulletinManager: NSObject {
 
-    private var viewController: BulletinViewController!
+    fileprivate var viewController: BulletinViewController!
 
     // MARK: - Configuration
 
@@ -50,15 +50,14 @@ import UIKit
 
     // MARK: - Private Properties
     
-    private let rootItem: BulletinItem
+    fileprivate let rootItem: BulletinItem
 
-    private var itemsStack: [BulletinItem]
-    private var currentItem: BulletinItem
-    private var previousItem: BulletinItem?
+    fileprivate var itemsStack: [BulletinItem]
+    fileprivate var currentItem: BulletinItem
+    fileprivate var previousItem: BulletinItem?
 
-    private var isPrepared: Bool = false
-    private var isPreparing: Bool = false
-
+    fileprivate var isPrepared: Bool = false
+    fileprivate var isPreparing: Bool = false
 
     // MARK: - Initialization
 
@@ -82,23 +81,11 @@ import UIKit
         fatalError("BulletinManager.init is unavailable. Use init(rootItem:) instead.")
     }
 
-    // MARK: - Interacting with the Bulletin
+}
 
-    /**
-     * Performs an operation with the bulletin content view and returns the result.
-     *
-     * Use this as an opportunity to customize the behavior of the content view (e.g. add motion effects).
-     *
-     * You must not store a reference to the view, or modify its layout (add subviews, add contraints, ...) as this
-     * could break the bulletin.
-     *
-     * Use this feature sparingly.
-     */
+// MARK: - Interacting with the Bulletin
 
-    @discardableResult
-    public func withContentView<Result>(_ transform: (UIView) throws -> Result) rethrows -> Result {
-        return try transform(viewController.contentView)
-    }
+extension BulletinManager {
 
     /**
      * Prepares the bulletin interface and displays the root item.
@@ -121,8 +108,29 @@ import UIKit
         isPrepared = true
         isPreparing = true
 
-        displayCurrentItem()
+        refreshCurrentItemInterface()
         isPreparing = false
+
+    }
+
+    /**
+     * Performs an operation with the bulletin content view and returns the result.
+     *
+     * Use this as an opportunity to customize the behavior of the content view (e.g. add motion effects).
+     *
+     * You must not store a reference to the view, or modify its layout (add subviews, add contraints, ...) as this
+     * could break the bulletin.
+     *
+     * Use this feature sparingly.
+     */
+
+    @discardableResult
+    public func withContentView<Result>(_ transform: (UIView) throws -> Result) rethrows -> Result {
+
+        assertIsPrepared()
+        assertIsMainThread()
+
+        return try transform(viewController.contentView)
 
     }
 
@@ -140,9 +148,6 @@ import UIKit
 
         assertIsPrepared()
         assertIsMainThread()
-
-        precondition(Thread.isMainThread, "BulletinManager must only be used from the main thread.")
-        precondition(isPrepared, "You must call the `prepare` function before interacting with the bulletin.")
 
         viewController.displayActivityIndicator(color: color)
 
@@ -162,7 +167,7 @@ import UIKit
         itemsStack.append(item)
 
         currentItem = item
-        displayCurrentItem()
+        refreshCurrentItemInterface()
 
     }
 
@@ -188,7 +193,7 @@ import UIKit
         }
 
         self.currentItem = currentItem
-        displayCurrentItem()
+        refreshCurrentItemInterface()
 
     }
 
@@ -210,7 +215,7 @@ import UIKit
 
         itemsStack = []
 
-        displayCurrentItem()
+        refreshCurrentItemInterface()
 
     }
 
@@ -230,7 +235,11 @@ import UIKit
 
     }
 
-    // MARK: - Presentation / Dismissal
+}
+
+// MARK: - Presentation / Dismissal
+
+extension BulletinManager {
 
     /**
      * Presents the bulletin above the specified view controller.
@@ -309,10 +318,14 @@ import UIKit
 
     }
 
-    // MARK: - Transitions
+}
 
-    /// Displays the current item.
-    private func displayCurrentItem() {
+// MARK: - Transitions
+
+extension BulletinManager {
+
+    /// Refreshes the interface for the current item.
+    fileprivate func refreshCurrentItemInterface() {
 
         viewController.isDismissable = false
         viewController.refreshSwipeInteractionController()
@@ -343,11 +356,12 @@ import UIKit
 
         // Animate transition
 
-        let animationDurationFactor: Double = isPreparing ? 0 : 1
+        let animationDuration = isPreparing ? 0 : 0.75
+        let transitionAnimationChain = AnimationChain(duration: animationDuration)
 
-        let initialAlphaAnimationDuration = 0.25 * animationDurationFactor
+        let hideSubviewsAnimationPhase = AnimationPhase(relativeDuration: 1/3, curve: .linear)
 
-        let initialAlphaAnimations = {
+        hideSubviewsAnimationPhase.block = {
 
             self.viewController.hideActivityIndicator()
 
@@ -361,9 +375,9 @@ import UIKit
 
         }
 
-        let transitionAnimationDuration = 0.25 * animationDurationFactor
+        let displayNewItemsAnimationPhase = AnimationPhase(relativeDuration: 1/3, curve: .linear)
 
-        let transitionAnimation = {
+        displayNewItemsAnimationPhase.block = {
 
             for arrangedSubview in oldHideableArrangedSubviews {
                 arrangedSubview.isHidden = true
@@ -375,9 +389,13 @@ import UIKit
 
         }
 
-        let finalAlphaAnimationDuration = 0.25 * animationDurationFactor
+        displayNewItemsAnimationPhase.completionHandler = {
+            self.viewController.contentStackView.alpha = 1
+        }
 
-        let finalAlphaAnimation = {
+        let finalAnimationPhase = AnimationPhase(relativeDuration: 1/3, curve: .linear)
+
+        finalAnimationPhase.block = {
 
             for arrangedSubview in newArrangedSubviews {
                 arrangedSubview.alpha = 1
@@ -385,43 +403,41 @@ import UIKit
 
         }
 
-        UIView.animate(withDuration: initialAlphaAnimationDuration, animations: initialAlphaAnimations) { _ in
+        finalAnimationPhase.completionHandler = {
 
-            UIView.animate(withDuration: transitionAnimationDuration, animations: transitionAnimation) { _ in
+            self.viewController.isDismissable = self.currentItem.isDismissable
 
-                self.viewController.contentStackView.alpha = 1
-
-                UIView.animate(withDuration: finalAlphaAnimationDuration, animations: finalAlphaAnimation) { _ in
-
-                    self.viewController.isDismissable = self.currentItem.isDismissable
-
-                    for arrangedSubview in oldArrangedSubviews {
-                        self.viewController.contentStackView.removeArrangedSubview(arrangedSubview)
-                        arrangedSubview.removeFromSuperview()
-                    }
-
-                    UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, newArrangedSubviews.first)
-                    
-                }
-
+            for arrangedSubview in oldArrangedSubviews {
+                self.viewController.contentStackView.removeArrangedSubview(arrangedSubview)
+                arrangedSubview.removeFromSuperview()
             }
 
+            UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, newArrangedSubviews.first)
+
         }
+
+        transitionAnimationChain.add(hideSubviewsAnimationPhase)
+        transitionAnimationChain.add(displayNewItemsAnimationPhase)
+        transitionAnimationChain.add(finalAnimationPhase)
+
+        transitionAnimationChain.start()
 
     }
 
     /// Tears down every item on the stack starting from the specified item.
-    private func tearDownItemsChain(startingAt item: BulletinItem) {
+    fileprivate func tearDownItemsChain(startingAt item: BulletinItem) {
 
         item.tearDown()
         item.manager = nil
 
         if let nextItem = item.nextItem {
             tearDownItemsChain(startingAt: nextItem)
+            item.nextItem = nil
         }
 
     }
 
+    /// Returns all the arranged subviews.
     private func recursiveArrangedSubviews(in views: [UIView]) -> [UIView] {
 
         var arrangedSubviews: [UIView] = []
@@ -442,13 +458,17 @@ import UIKit
 
     }
 
-    // MARK: - Utilities
+}
 
-    private func assertIsMainThread() {
+// MARK: - Utilities
+
+extension BulletinManager {
+
+    fileprivate func assertIsMainThread() {
         precondition(Thread.isMainThread, "BulletinManager must only be used from the main thread.")
     }
 
-    private func assertIsPrepared() {
+    fileprivate func assertIsPrepared() {
         precondition(isPrepared, "You must call the `prepare` function before interacting with the bulletin.")
     }
 

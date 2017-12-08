@@ -56,6 +56,8 @@ import UIKit
 
     var nextItem: BulletinItem? { get set }
 
+    // MARK: - Interface
+
     /**
      * Creates the list of views to display in the bulletin.
      *
