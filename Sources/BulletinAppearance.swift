@@ -17,10 +17,22 @@ import UIKit
     @objc public var actionButtonColor: UIColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
 
     /// The title color to apply to action button.
-    @objc public var actionButtonTitleColor = UIColor.white
+    @objc public var actionButtonTitleColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+
+    /// The border color to apply to action button
+    @objc public var actionButtonBorderColor: UIColor? = nil
+
+    /// The border width to apply to action button
+    @objc public var actionButtonBorderWidth: CGFloat = 1.0
 
     /// The tint color to apply to the alternative button.
     @objc public var alternativeButtonColor: UIColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+
+    /// The border color to apply to the alternative button
+    @objc public var alternativeButtonBorderColor: UIColor? = nil
+
+    /// The border width to apply to the alternative button
+    @objc public var alternativeButtonBorderWidth: CGFloat = 1.0
 
     /// The tint color to apply to the imageView (if image rendered in template mode).
     @objc public var imageViewTintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
@@ -29,7 +41,7 @@ import UIKit
     @objc public var titleTextColor = #colorLiteral(red: 0.568627451, green: 0.5647058824, blue: 0.5725490196, alpha: 1)
 
     /// The color of description text labels.
-    @objc public var descriptionTextColor = UIColor.black
+    @objc public var descriptionTextColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
 
     // MARK: - Font Customization
 

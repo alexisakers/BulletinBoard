@@ -158,7 +158,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
         // Configuration
 
-        contentView.backgroundColor = #colorLiteral(red: 0.9921568627, green: 1, blue: 1, alpha: 1)
+        contentView.backgroundColor = manager?.backgroundColor ?? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         setUpKeyboardLogic()
 
     }
@@ -336,7 +336,9 @@ extension BulletinViewController {
 extension BulletinViewController {
 
     /// Displays the activity indicator.
-    func displayActivityIndicator() {
+    func displayActivityIndicator(color: UIColor) {
+
+        activityIndicator.color = color
 
         activityIndicator.startAnimating()
 

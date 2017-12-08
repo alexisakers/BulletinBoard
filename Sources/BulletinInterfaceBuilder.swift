@@ -78,6 +78,11 @@ import UIKit
         actionButton.layer.cornerRadius = 12
         actionButton.clipsToBounds = true
 
+        if let color = appearance.actionButtonBorderColor {
+          actionButton.layer.borderColor = color.cgColor
+          actionButton.layer.borderWidth = appearance.actionButtonBorderWidth
+        }
+
         let wrapper = HighlightButtonWrapper(button: actionButton)
         wrapper.setContentHuggingPriority(UILayoutPriorityDefaultLow, for: .horizontal)
 
@@ -103,6 +108,13 @@ import UIKit
         alternativeButton.setTitle(title, for: .normal)
         alternativeButton.setTitleColor(appearance.alternativeButtonColor, for: .normal)
         alternativeButton.titleLabel?.font = appearance.makeAlternativeButtonFont()
+
+        if let color = appearance.alternativeButtonBorderColor {
+          alternativeButton.layer.cornerRadius = 12
+          alternativeButton.clipsToBounds = true
+          alternativeButton.layer.borderColor = color.cgColor
+          alternativeButton.layer.borderWidth = appearance.alternativeButtonBorderWidth
+        }
 
         return alternativeButton
 

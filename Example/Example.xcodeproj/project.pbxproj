@@ -92,7 +92,7 @@
 		551CF5FA1FBF849A007DFEEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Main-ObjC.storyboard"; sourceTree = "<group>"; };
 		551CF5FD1FBF86F2007DFEEA /* Info-ObjC.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-ObjC.plist"; sourceTree = "<group>"; };
 		551CF5FE1FBF86F2007DFEEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		553CDD4C1FD6F44B00E18C82 /* PetValidationBulletinItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PetValidationBulletinItem.swift; path = /Users/aleks/Developer/OSS/BulletinBoard/Example/Swift/Bulletin/PetValidationBulletinItem.swift; sourceTree = "<absolute>"; };
+		553CDD4C1FD6F44B00E18C82 /* PetValidationBulletinItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetValidationBulletinItem.swift; sourceTree = "<group>"; };
 		553CDD4E1FD6F91600E18C82 /* CollectionViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewWrapper.swift; sourceTree = "<group>"; };
 		553CDD501FD6F93000E18C82 /* PetValidationBulletinItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetValidationBulletinItem.swift; sourceTree = "<group>"; };
 		558A12411F7D7865005EC97C /* BB-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BB-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };

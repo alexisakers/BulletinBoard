@@ -41,6 +41,13 @@ import UIKit
 
     @objc public var statusBarAppearance: BulletinStatusBarAppearance = .automatic
 
+    /**
+     * The background color to use with the bulletin. Defaults to `.white`
+     *
+     * Set this value before calling `prepare`. Changing it after will have no effect.
+     */
+    @objc public var backgroundColor: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+
     // MARK: - Private Properties
     
     private let rootItem: BulletinItem
@@ -129,7 +136,7 @@ import UIKit
      * Call one of `push(item:)`, `popItem` or `popToRootItem` to hide the activity indicator and change the current item.
      */
 
-    @objc public func displayActivityIndicator() {
+    @objc public func displayActivityIndicator(color: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)) {
 
         assertIsPrepared()
         assertIsMainThread()
@@ -137,7 +144,7 @@ import UIKit
         precondition(Thread.isMainThread, "BulletinManager must only be used from the main thread.")
         precondition(isPrepared, "You must call the `prepare` function before interacting with the bulletin.")
 
-        viewController.displayActivityIndicator()
+        viewController.displayActivityIndicator(color: color)
 
     }
 
