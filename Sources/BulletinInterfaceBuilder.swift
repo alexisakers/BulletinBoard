@@ -24,7 +24,7 @@ import UIKit
      * Creates a standard title label.
      */
 
-    @objc open func makeTitleLabel(text: String) -> UILabel {
+    @objc open func makeTitleLabel() -> UILabel {
 
         let titleLabel = UILabel()
         titleLabel.textAlignment = .center
@@ -34,7 +34,6 @@ import UIKit
         titleLabel.adjustsFontSizeToFitWidth = true
 
         titleLabel.font = appearance.makeTitleFont()
-        titleLabel.text = text
 
         return titleLabel
 
@@ -44,24 +43,29 @@ import UIKit
      * Creates a standard description label.
      */
 
-    @objc open func makeDescriptionLabel(text: String? = nil) -> UILabel {
+    @objc open func makeDescriptionLabel() -> UILabel {
 
         let descriptionLabel = UILabel()
         descriptionLabel.textAlignment = .center
         descriptionLabel.textColor = appearance.descriptionTextColor
         descriptionLabel.numberOfLines = 0
         descriptionLabel.font = appearance.makeDescriptionFont()
-        descriptionLabel.text = text
 
         return descriptionLabel
 
     }
 
     /**
-     * Creates a standard text field with optional delegate
+     * Creates a standard text field with an optional delegate.
+     *
+     * - parameter placeholder: The placeholder text.
+     * - parameter returnKey: The type of return key to apply to the text field.
+     * - parameter delegate: The delegate for the text field.
      */
 
-    @objc open func makeTextField(placeholder: String? = nil, returnKey: UIReturnKeyType = .default, delegate: UITextFieldDelegate? = nil) -> UITextField {
+    @objc open func makeTextField(placeholder: String? = nil,
+                                  returnKey: UIReturnKeyType = .default,
+                                  delegate: UITextFieldDelegate? = nil) -> UITextField {
 
         let textField = UITextField()
         textField.delegate = delegate

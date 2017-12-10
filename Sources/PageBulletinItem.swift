@@ -43,28 +43,88 @@ import UIKit
     /// The title of the page.
     @objc public let title: String
 
-    /// An image to display below the title. It should have a size of 128 pixels by 128 pixels.
+    /**
+     * An image to display below the title.
+     *
+     * If you set this property to `nil`, no image will be displayed (this is the default).
+     *
+     * The image should have a size of 128x128 pixels (@1x).
+     */
+
     @objc public var image: UIImage?
-    
+
     /// An accessibility label which gets announced to VoiceOver users if the image gets focused.
     @objc public var imageAccessibilityLabel: String?
 
-    /// A description text to display below the image.
+    /**
+     * An description text to display below the image.
+     *
+     * If you set this property to `nil`, no label will be displayed (this is the default).
+     */
+
     @objc public var descriptionText: String?
 
     // MARK: - Customization
+
+    /**
+     * The views to display above the title.
+     *
+     * You can override this method to insert custom views before the title. The default implementation returns `nil` and
+     * does not append header elements.
+     *
+     * This method is called inside `makeArrangedSubviews` before the title is created.
+     *
+     * - parameter interfaceBuilder: The interface builder used to create the title.
+     * - returns: The header views for the item, or `nil` if no header views should be added.
+     */
 
     open func headerViews(_ interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
         return nil
     }
 
+    /**
+     * The views to display below the title.
+     *
+     * You can override this method to insert custom views after the title. The default implementation returns `nil` and
+     * does not append elements after the title.
+     *
+     * This method is called inside `makeArrangedSubviews` after the title is created.
+     *
+     * - parameter interfaceBuilder: The interface builder used to create the title.
+     * - returns: The views to display after the title, or `nil` if no views should be added.
+     */
+
     open func viewsUnderTitle(_ interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
         return nil
     }
 
+    /**
+     * The views to display below the image.
+     *
+     * You can override this method to insert custom views after the image. The default implementation returns `nil` and
+     * does not append elements after the image.
+     *
+     * This method is called inside `makeArrangedSubviews` after the image is created.
+     *
+     * - parameter interfaceBuilder: The interface builder used to create the image.
+     * - returns: The views to display after the image, or `nil` if no views should be added.
+     */
+
     open func viewsUnderImage(_ interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
         return nil
     }
+
+    /**
+     * The views to display below the description.
+     *
+     * You can override this method to insert custom views after the description. The default implementation
+     * returns `nil` and does not append elements after the description.
+     *
+     * This method is called inside `makeArrangedSubviews` after the description is created.
+     *
+     * - parameter interfaceBuilder: The interface builder used to create the description.
+     * - returns: The views to display after the description, or `nil` if no views should be added.
+     */
 
     open func viewsUnderDescription(_ interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
         return nil
@@ -79,10 +139,11 @@ import UIKit
     /**
      * Creates the content views of the page.
      *
-     * You can override this method to customize the elements displayed above the buttons.
+     * It creates the standard elements and appends the additional customized elements returned by the
+     * `viewsUnder` hooks.
      */
 
-    open override func makeContentViews(interfaceBuilder: BulletinInterfaceBuilder) -> [UIView] {
+    public final override func makeContentViews(interfaceBuilder: BulletinInterfaceBuilder) -> [UIView] {
 
         var contentViews = [UIView]()
 
@@ -98,7 +159,9 @@ import UIKit
 
         // Title Label
 
-        titleLabel = interfaceBuilder.makeTitleLabel(text: title)
+        titleLabel = interfaceBuilder.makeTitleLabel()
+        titleLabel.text = title
+
         contentViews.append(titleLabel)
 
         insertComplementaryViews(viewsUnderTitle)

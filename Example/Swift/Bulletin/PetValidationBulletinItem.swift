@@ -7,9 +7,9 @@ import UIKit
 import BulletinBoard
 
 /**
- * A bulletin page that allows the user to validate its selection
+ * A bulletin page that allows the user to validate its selection.
  *
- * This item demonstrates popping to the previous item, and including a collection view inside the card.
+ * This item demonstrates popping to the previous item, and including a collection view inside the page.
  */
 
 class PetValidationBulletinItem: FeedbackPageBulletinItem {

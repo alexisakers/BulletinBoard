@@ -9,7 +9,7 @@ import UIKit
  * An object that manages the presentation of a bulletin.
  *
  * You create a bulletin manager using the `init(rootItem:)` initializer, where `rootItem` is the
- * first bulletin item to display.
+ * first bulletin item to display. An item represents the contents displayed on a single card.
  *
  * The manager works like a navigation controller. You can push new items to the stack to display them,
  * and pop existing ones to go back.
@@ -42,10 +42,11 @@ import UIKit
     @objc public var statusBarAppearance: BulletinStatusBarAppearance = .automatic
 
     /**
-     * The background color to use with the bulletin. Defaults to `.white`
+     * The background color of the bulletin card. Defaults to white.
      *
      * Set this value before calling `prepare`. Changing it after will have no effect.
      */
+
     @objc public var backgroundColor: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
 
     // MARK: - Private Properties
@@ -62,8 +63,7 @@ import UIKit
     // MARK: - Initialization
 
     /**
-     * Creates a bulletin manager with the first item to display. An item represents the contents
-     * displayed on a single card.
+     * Creates a bulletin manager and sets the first item to display.s
      *
      * - parameter rootItem: The first item to display.
      */
@@ -76,7 +76,7 @@ import UIKit
 
     }
 
-    @available(*, unavailable, message: "BulletinManager.init is unavailable. Use init(rootItem:) instead.")
+    @available(*, unavailable, message: "Use init(rootItem:) instead.")
     override init() {
         fatalError("BulletinManager.init is unavailable. Use init(rootItem:) instead.")
     }
@@ -122,6 +122,8 @@ extension BulletinManager {
      * could break the bulletin.
      *
      * Use this feature sparingly.
+     *
+     * - parameter transform: The transform to apply to the content view.
      */
 
     @discardableResult
@@ -135,13 +137,16 @@ extension BulletinManager {
     }
 
     /**
-     * Hides the contents of the stack and displays a black activity indicator view.
+     * Hides the contents of the stack and displays an activity indicator view.
      *
      * Use this method if you need to perform a long task or fetch some data before changing the item.
      *
-     * Displaying the loading indicator does not change the height of the page or the current item.
+     * Displaying the loading indicator does not change the height of the page or the current item. It will disable
+     * dismissal by tapping and swiping to allow the task to complete and avoid resource deallocation.
      *
      * Call one of `push(item:)`, `popItem` or `popToRootItem` to hide the activity indicator and change the current item.
+     *
+     * - parameter color: The color of the activity indicator to display. Defaults to black.
      */
 
     @objc public func displayActivityIndicator(color: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)) {
@@ -222,7 +227,7 @@ extension BulletinManager {
     /**
      * Displays the next item, if the `nextItem` property of the current item is set.
      *
-     * - warning: If you call this method but `nextItem` is `nil`, this will crash your app.
+     * - warning: If you call this method but `nextItem` is `nil`, an exception will be raised.
      */
 
     @objc public func displayNextItem() {

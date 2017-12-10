@@ -9,7 +9,7 @@ import BulletinBoard
 /**
  * An item that displays a choice with two buttons.
  *
- * This item demonstrates how to create a bulletin item with a custom interface, and changing the
+ * This item demonstrates how to create a page bulletin item with a custom interface, and changing the
  * next item based on user interaction.
  */
 

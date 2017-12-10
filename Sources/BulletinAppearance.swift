@@ -6,7 +6,7 @@
 import UIKit
 
 /**
- * A class that provides appearance customization for bulletin items.
+ * An object that defines the appearance of bulletin items.
  */
 
 @objc open class BulletinAppearance: NSObject {
@@ -165,7 +165,7 @@ extension BulletinAppearance {
     /// The status bar is hidden.
     case hidden
 
-    /// The color of the status bar is determined automatically. This is the efault style.
+    /// The color of the status bar is determined automatically. This is the default style.
     case automatic
 
     /// Style to use with dark backgrounds.

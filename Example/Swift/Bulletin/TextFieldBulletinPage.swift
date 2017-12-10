@@ -26,7 +26,7 @@ class TextFieldBulletinPage: FeedbackPageBulletinItem {
 
     override func tearDown() {
         super.tearDown()
-        textField.delegate = nil
+        textField?.delegate = nil
     }
 
 }
