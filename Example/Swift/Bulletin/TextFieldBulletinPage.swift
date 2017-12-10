@@ -29,15 +29,20 @@ class TextFieldBulletinPage: FeedbackPageBulletinItem {
         textField?.delegate = nil
     }
 
+    override func actionButtonTapped(sender: UIButton) {
+
+        if textFieldShouldReturn(self.textField) {
+            textInputHandler?(self, textField.text)
+            super.actionButtonTapped(sender: sender)
+        }
+
+    }
+
 }
 
 // MARK: - UITextFieldDelegate
 
 extension TextFieldBulletinPage: UITextFieldDelegate {
-
-    @objc func doneButtonTapped(sender: UIButton) {
-        _ = self.textFieldShouldReturn(self.textField)
-    }
 
     @objc open func isInputValid(text: String?) -> Bool {
 
