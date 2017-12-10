@@ -82,17 +82,54 @@
 			path = Configs;
 			sourceTree = "<group>";
 		};
-		55DADEB81F8153B3001B11A2 /* Support */ = {
+		55B3D1D01FDD643B00737791 /* Appearance */ = {
+			isa = PBXGroup;
+			children = (
+				551D2D9B1FC060E90078DB21 /* BulletinAppearance.swift */,
+				55DADE791F7D9428001B11A2 /* BulletinInterfaceBuilder.swift */,
+				550675681F90A0A500874D8B /* BulletinBackgroundViewStyle.swift */,
+			);
+			path = Appearance;
+			sourceTree = "<group>";
+		};
+		55B3D1D11FDD644300737791 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				558A12361F7D73E5005EC97C /* BulletinItem.swift */,
+				55E0F3751FD6AFA100C45CE2 /* ActionBulletinItem.swift */,
+				558A122F1F7D73CD005EC97C /* PageBulletinItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		55B3D1D21FDD645900737791 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				558A122D1F7D73CD005EC97C /* HighlightButton.swift */,
 				5568227D1F864B270038E8DD /* ActivityIndicator.swift */,
 				5543848C1F92026200AFFBCD /* BulletinBackgroundView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		55B3D1D31FDD646400737791 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
 				5543848A1F91FAC500AFFBCD /* BulletinPresentationAnimationController.swift */,
 				5543848E1F92050300AFFBCD /* BulletinDismissAnimationController.swift */,
 				5569CB7E1F920B72000F31EB /* BulletinSwipeInteractionController.swift */,
 				55B3D1CE1FDADA8E00737791 /* AnimationChain.swift */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
+		55DADEB81F8153B3001B11A2 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				558A122C1F7D73CD005EC97C /* BulletinViewController.swift */,
 				55BF9C011F962FD700347D45 /* UIView+SafeAnchors.swift */,
+				55B3D1D21FDD645900737791 /* Views */,
+				55B3D1D31FDD646400737791 /* Animations */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -100,14 +137,9 @@
 		8933C7811EB5B7E0000D00A4 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				558A12361F7D73E5005EC97C /* BulletinItem.swift */,
 				558A122A1F7D73CD005EC97C /* BulletinManager.swift */,
-				55E0F3751FD6AFA100C45CE2 /* ActionBulletinItem.swift */,
-				558A122F1F7D73CD005EC97C /* PageBulletinItem.swift */,
-				551D2D9B1FC060E90078DB21 /* BulletinAppearance.swift */,
-				55DADE791F7D9428001B11A2 /* BulletinInterfaceBuilder.swift */,
-				558A122C1F7D73CD005EC97C /* BulletinViewController.swift */,
-				550675681F90A0A500874D8B /* BulletinBackgroundViewStyle.swift */,
+				55B3D1D11FDD644300737791 /* Models */,
+				55B3D1D01FDD643B00737791 /* Appearance */,
 				55DADEB81F8153B3001B11A2 /* Support */,
 			);
 			path = Sources;
