@@ -72,7 +72,7 @@ import UIKit
         textField.textAlignment = .left
         textField.placeholder = placeholder
         textField.borderStyle = .roundedRect
-        textField.returnKeyType = .default
+        textField.returnKeyType = returnKey
 
         return textField
 
