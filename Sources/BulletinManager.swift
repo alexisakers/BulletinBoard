@@ -123,7 +123,8 @@ extension BulletinManager {
      *
      * Use this feature sparingly.
      *
-     * - parameter transform: The transform to apply to the content view.
+     * - parameter transform: The code to execute with the content view.
+     * - warning: If you save the content view outside of the `transform` closure, an exception will be raised.
      */
 
     @discardableResult
@@ -132,7 +133,16 @@ extension BulletinManager {
         assertIsPrepared()
         assertIsMainThread()
 
-        return try transform(viewController.contentView)
+        let contentView = viewController.contentView
+        let initialRetainCount = CFGetRetainCount(contentView)
+
+        let result = try transform(viewController.contentView)
+        let finalRetainCount = CFGetRetainCount(contentView)
+
+        precondition(initialRetainCount == finalRetainCount,
+                     "The content view was saved outside of the transform closure. This is not allowed.")
+
+        return result
 
     }
 
