@@ -24,6 +24,7 @@
 		553CDD511FD6F93000E18C82 /* PetValidationBulletinItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553CDD501FD6F93000E18C82 /* PetValidationBulletinItem.swift */; };
 		558A12451F7D7865005EC97C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A12441F7D7865005EC97C /* AppDelegate.swift */; };
 		558A12471F7D7865005EC97C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A12461F7D7865005EC97C /* ViewController.swift */; };
+		55A7B1DB1FE3D858000F80DE /* DatePickerBulletinItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A7B1DA1FE3D858000F80DE /* DatePickerBulletinItem.swift */; };
 		55B25EFF1FC02AEC003DC295 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D7BA701FBC783E0008A602 /* RootViewController.m */; };
 		55D702061FBCA4A300835D8A /* BulletinDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D702051FBCA4A300835D8A /* BulletinDataSource.m */; };
 		55D702131FBCC02F00835D8A /* PermissionsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D702121FBCC02F00835D8A /* PermissionsManager.m */; };
@@ -98,6 +99,7 @@
 		558A12411F7D7865005EC97C /* BB-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BB-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		558A12441F7D7865005EC97C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		558A12461F7D7865005EC97C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		55A7B1DA1FE3D858000F80DE /* DatePickerBulletinItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerBulletinItem.swift; sourceTree = "<group>"; };
 		55D702041FBCA4A300835D8A /* BulletinDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BulletinDataSource.h; sourceTree = "<group>"; };
 		55D702051FBCA4A300835D8A /* BulletinDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BulletinDataSource.m; sourceTree = "<group>"; };
 		55D702111FBCC02F00835D8A /* PermissionsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PermissionsManager.h; path = "Supporting Files/PermissionsManager.h"; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				55DADE751F7D7AEA001B11A2 /* BulletinDataSource.swift */,
+				55A7B1DA1FE3D858000F80DE /* DatePickerBulletinItem.swift */,
 				55DADE771F7D8B29001B11A2 /* PetSelectorBulletinPage.swift */,
 				553CDD4C1FD6F44B00E18C82 /* PetValidationBulletinItem.swift */,
 				55DADE801F7E3C0B001B11A2 /* FeedbackPageBulletinItem.swift */,
@@ -380,6 +383,7 @@
 				5506756B1F90ADEF00874D8B /* BackgroundStyles.swift in Sources */,
 				55DADE831F7E4204001B11A2 /* PermissionsManager.swift in Sources */,
 				55DADE7C1F7E3A53001B11A2 /* FeedbackGenerators.swift in Sources */,
+				55A7B1DB1FE3D858000F80DE /* DatePickerBulletinItem.swift in Sources */,
 				55DADE781F7D8B29001B11A2 /* PetSelectorBulletinPage.swift in Sources */,
 				551837CD1FD6F40500B69CAE /* CollectionViewWrapper.swift in Sources */,
 				558A12451F7D7865005EC97C /* AppDelegate.swift in Sources */,
