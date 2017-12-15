@@ -1,5 +1,45 @@
 # _BulletinBoard_ Changelog
 
+## 🔖 v2.0.0
+
+### New Features
+
+- Make PageBulletinItem more open to customization: if you create custom pages, you no longer need to recreate the standard components yourself
+- Customize fonts and more colors
+- Customize status bar colors
+- Customize bulletin background color
+- Hide the activity indicator without changing the current item 
+- Annotate library to support Objective-C apps
+- Handle keyboard frame updates (support for text fields)
+- Support for tinting images with template rendering mode
+- Allow customization of the background view
+- Add text field as a standard control
+
+### User-Facing Changes
+
+- On iPad, the bulletin will be presented at the center of the screen and can only be dismissed by a tap (no swipe)
+- The item will not be dismissed on swipe unless the user lifts their finger from the screen
+
+### Bug fixes
+
+- Fix dismiss tap background gesture being called for touches inside the content view
+- Fix width contraint not being respected for regular layouts
+- Fix iTunes Connect rejection bug due to LLVM code coverage
+- Fix action button not being hidden when changing the item
+- Fix dismissal handler not being called
+- Fix controls inside the card not receiving `touchesEnded` events
+- Fix cropped bulletin when presenting above split view controller
+- Correctly reset non-dismissable cards position when swipe ends
+- Fix Auto Layout conflicts during transitions
+
+### Library
+
+- Split `BulletinInterfaceFactory` in two more open classes: `BulletinAppearance` for appearance customization, and `BulletinInterfaceBuilder` for interface components creation
+- Create `ActionBulletinItem` as a root bulletin item for items with buttons. Handles button creation and tap events. Views above and below buttons are customizable
+- Add example of a collection view bulletin item
+- Remove `HighlightButton` from public API
+- Various gardening operations to make comments and code more clear
+
 ## 🔖 v1.3.0
 
 - Add customizable bulletin backgrounds
