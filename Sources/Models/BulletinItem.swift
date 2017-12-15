@@ -37,6 +37,15 @@ import UIKit
     var isDismissable: Bool { get set }
 
     /**
+     * Whether the item should move with the keyboard.
+     *
+     * You must set it to `true` if the item displays a text field. Otherwise, you can set it to `false` if you
+     * don't want the bulletin to move when system alerts are displayed.
+     */
+
+    var shouldRespondToKeyboardChanges: Bool { get set }
+
+    /**
      * The block of code to execute when the bulletin item is dismissed. This is called after the bulletin
      * is moved out of view.
      *

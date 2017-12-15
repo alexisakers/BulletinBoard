@@ -419,6 +419,10 @@ extension BulletinViewController {
 
     @objc func onKeyboardShow(_ notification: Notification) {
 
+        guard manager?.currentItem.shouldRespondToKeyboardChanges == true else {
+            return
+        }
+
         guard let userInfo = notification.userInfo,
             let keyboardFrameFinal = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect,
             let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double,
@@ -440,9 +444,15 @@ extension BulletinViewController {
             self.centerYConstraint.constant = -(keyboardFrameFinal.size.height + 12) / 2
             self.contentView.superview?.layoutIfNeeded()
         }, completion: nil)
+
     }
 
     @objc func onKeyboardHide(_ notification: Notification) {
+
+        guard manager?.currentItem.shouldRespondToKeyboardChanges == true else {
+            return
+        }
+
         guard let userInfo = notification.userInfo,
             let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double,
             let curveInt = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? Int
@@ -459,6 +469,7 @@ extension BulletinViewController {
             self.centerYConstraint.constant = 0
             self.contentView.superview?.layoutIfNeeded()
         }, completion: nil)
+        
     }
 }
 

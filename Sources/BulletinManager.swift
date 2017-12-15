@@ -50,11 +50,11 @@ import UIKit
     @objc public var backgroundColor: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
 
     // MARK: - Private Properties
-    
-    fileprivate let rootItem: BulletinItem
 
+    var currentItem: BulletinItem
+
+    fileprivate let rootItem: BulletinItem
     fileprivate var itemsStack: [BulletinItem]
-    fileprivate var currentItem: BulletinItem
     fileprivate var previousItem: BulletinItem?
 
     fileprivate var isPrepared: Bool = false

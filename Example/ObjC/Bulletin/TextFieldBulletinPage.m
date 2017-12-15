@@ -16,6 +16,7 @@
 @synthesize manager;
 @synthesize isDismissable;
 @synthesize dismissalHandler;
+@synthesize shouldRespondToKeyboardChanges;
 
 - (instancetype)init
 {
