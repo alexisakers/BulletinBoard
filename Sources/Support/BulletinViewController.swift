@@ -123,10 +123,10 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(activityIndicator)
-        activityIndicator.leftAnchor.constraint(equalTo: contentStackView.leftAnchor).isActive = true
-        activityIndicator.rightAnchor.constraint(equalTo: contentStackView.rightAnchor).isActive = true
-        activityIndicator.topAnchor.constraint(equalTo: contentStackView.topAnchor).isActive = true
-        activityIndicator.bottomAnchor.constraint(equalTo: contentStackView.bottomAnchor).isActive = true
+        activityIndicator.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+        activityIndicator.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+        activityIndicator.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        activityIndicator.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
 
         activityIndicator.activityIndicatorViewStyle = .whiteLarge
         activityIndicator.color = .black
@@ -159,7 +159,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
         // Configuration
 
-        contentView.backgroundColor = #colorLiteral(red: 0.9921568627, green: 1, blue: 1, alpha: 1)
+        contentView.backgroundColor = manager?.backgroundColor ?? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         setUpKeyboardLogic()
 
     }
@@ -337,8 +337,9 @@ extension BulletinViewController {
 extension BulletinViewController {
 
     /// Displays the activity indicator.
-    func displayActivityIndicator() {
+    func displayActivityIndicator(color: UIColor) {
 
+        activityIndicator.color = color
         activityIndicator.startAnimating()
 
         let animations = {
@@ -353,9 +354,21 @@ extension BulletinViewController {
     }
 
     /// Hides the activity indicator.
-    func hideActivityIndicator() {
+    func hideActivityIndicator(showContentStack: Bool) {
+
         activityIndicator.stopAnimating()
         activityIndicator.alpha = 0
+
+        let animations = {
+            self.activityIndicator.alpha = 0
+
+            if showContentStack {
+                self.contentStackView.alpha = 1
+            }
+        }
+
+        UIView.animate(withDuration: 0.25, animations: animations)
+
     }
 
 }
@@ -407,6 +420,10 @@ extension BulletinViewController {
 
     @objc func onKeyboardShow(_ notification: Notification) {
 
+        guard manager?.currentItem.shouldRespondToKeyboardChanges == true else {
+            return
+        }
+
         guard let userInfo = notification.userInfo,
             let keyboardFrameFinal = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect,
             let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double,
@@ -428,9 +445,15 @@ extension BulletinViewController {
             self.centerYConstraint.constant = -(keyboardFrameFinal.size.height + 12) / 2
             self.contentView.superview?.layoutIfNeeded()
         }, completion: nil)
+
     }
 
     @objc func onKeyboardHide(_ notification: Notification) {
+
+        guard manager?.currentItem.shouldRespondToKeyboardChanges == true else {
+            return
+        }
+
         guard let userInfo = notification.userInfo,
             let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double,
             let curveInt = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? Int
@@ -447,6 +470,7 @@ extension BulletinViewController {
             self.centerYConstraint.constant = 0
             self.contentView.superview?.layoutIfNeeded()
         }, completion: nil)
+        
     }
 }
 

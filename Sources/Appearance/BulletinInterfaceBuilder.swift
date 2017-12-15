@@ -24,7 +24,7 @@ import UIKit
      * Creates a standard title label.
      */
 
-    @objc open func makeTitleLabel(text: String) -> UILabel {
+    @objc open func makeTitleLabel() -> UILabel {
 
         let titleLabel = UILabel()
         titleLabel.textAlignment = .center
@@ -34,7 +34,6 @@ import UIKit
         titleLabel.adjustsFontSizeToFitWidth = true
 
         titleLabel.font = appearance.makeTitleFont()
-        titleLabel.text = text
 
         return titleLabel
 
@@ -53,6 +52,29 @@ import UIKit
         descriptionLabel.font = appearance.makeDescriptionFont()
 
         return descriptionLabel
+
+    }
+
+    /**
+     * Creates a standard text field with an optional delegate.
+     *
+     * - parameter placeholder: The placeholder text.
+     * - parameter returnKey: The type of return key to apply to the text field.
+     * - parameter delegate: The delegate for the text field.
+     */
+
+    @objc open func makeTextField(placeholder: String? = nil,
+                                  returnKey: UIReturnKeyType = .default,
+                                  delegate: UITextFieldDelegate? = nil) -> UITextField {
+
+        let textField = UITextField()
+        textField.delegate = delegate
+        textField.textAlignment = .left
+        textField.placeholder = placeholder
+        textField.borderStyle = .roundedRect
+        textField.returnKeyType = returnKey
+
+        return textField
 
     }
 
@@ -77,6 +99,11 @@ import UIKit
 
         actionButton.layer.cornerRadius = 12
         actionButton.clipsToBounds = true
+
+        if let color = appearance.actionButtonBorderColor {
+          actionButton.layer.borderColor = color.cgColor
+          actionButton.layer.borderWidth = appearance.actionButtonBorderWidth
+        }
 
         let wrapper = HighlightButtonWrapper(button: actionButton)
         wrapper.setContentHuggingPriority(UILayoutPriorityDefaultLow, for: .horizontal)
@@ -103,6 +130,13 @@ import UIKit
         alternativeButton.setTitle(title, for: .normal)
         alternativeButton.setTitleColor(appearance.alternativeButtonColor, for: .normal)
         alternativeButton.titleLabel?.font = appearance.makeAlternativeButtonFont()
+
+        if let color = appearance.alternativeButtonBorderColor {
+          alternativeButton.layer.cornerRadius = 12
+          alternativeButton.clipsToBounds = true
+          alternativeButton.layer.borderColor = color.cgColor
+          alternativeButton.layer.borderWidth = appearance.alternativeButtonBorderWidth
+        }
 
         return alternativeButton
 

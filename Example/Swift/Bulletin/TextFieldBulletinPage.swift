@@ -13,50 +13,29 @@ import BulletinBoard
  * when the keyboard is visible.
  */
 
-class TextFieldBulletinPage: NSObject, BulletinItem {
+class TextFieldBulletinPage: FeedbackPageBulletinItem {
 
-    var manager: BulletinManager?
-    var isDismissable: Bool = false
-    var dismissalHandler: ((BulletinItem) -> Void)?
-    var nextItem: BulletinItem?
+    @objc public var textField: UITextField!
 
-    let appearance = BulletinAppearance()
-    var actionHandler: ((BulletinItem) -> Void)? = nil
+    @objc public var textInputHandler: ((ActionBulletinItem, String?) -> Void)? = nil
 
-    fileprivate var descriptionLabel: UILabel?
-    fileprivate var textField: UITextField?
-    fileprivate var doneButton: HighlightButtonWrapper?
-
-    func makeArrangedSubviews() -> [UIView] {
-
-        var arrangedSubviews = [UIView]()
-        let interfaceBuilder = BulletinInterfaceBuilder(appearance: appearance)
-
-        let titleLabel = interfaceBuilder.makeTitleLabel(text: "Enter your Name")
-        arrangedSubviews.append(titleLabel)
-
-        descriptionLabel = interfaceBuilder.makeDescriptionLabel()
-        descriptionLabel!.text = "To create your profile, please tell us your name. We will use it to customize your feed."
-        arrangedSubviews.append(descriptionLabel!)
-
-        textField = UITextField()
-        textField!.delegate = self
-        textField!.borderStyle = .roundedRect
-        textField!.returnKeyType = .done
-        textField!.placeholder = "First and Last Name"
-        arrangedSubviews.append(textField!)
-
-        doneButton = interfaceBuilder.makeActionButton(title: "Done")
-        doneButton!.button.addTarget(self, action: #selector(doneButtonTapped(sender:)), for: .touchUpInside)
-        arrangedSubviews.append(doneButton!)
-
-        return arrangedSubviews
-
+    override func viewsUnderDescription(_ interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
+        textField = interfaceBuilder.makeTextField(placeholder: "First and Last Name", returnKey: .done, delegate: self)
+        return [textField]
     }
 
-    func tearDown() {
+    override func tearDown() {
+        super.tearDown()
         textField?.delegate = nil
-        doneButton?.button.removeTarget(self, action: nil, for: .touchUpInside)
+    }
+
+    override func actionButtonTapped(sender: UIButton) {
+
+        if textFieldShouldReturn(self.textField) {
+            textInputHandler?(self, textField.text)
+            super.actionButtonTapped(sender: sender)
+        }
+
     }
 
 }
@@ -65,11 +44,7 @@ class TextFieldBulletinPage: NSObject, BulletinItem {
 
 extension TextFieldBulletinPage: UITextFieldDelegate {
 
-    @objc func doneButtonTapped(sender: UIButton) {
-        _ = textFieldShouldReturn(textField!)
-    }
-
-    func isInputValid(text: String?) -> Bool {
+    @objc open func isInputValid(text: String?) -> Bool {
 
         if text == nil || text!.isEmpty {
             return false
@@ -84,13 +59,13 @@ extension TextFieldBulletinPage: UITextFieldDelegate {
         if isInputValid(text: textField.text) {
 
             textField.resignFirstResponder()
-            actionHandler?(self)
+            textInputHandler?(self, textField.text)
             return true
 
         } else {
 
-            descriptionLabel?.textColor = .red
-            descriptionLabel?.text = "You must enter some text to continue."
+            descriptionLabel!.textColor = .red
+            descriptionLabel!.text = "You must enter some text to continue."
             textField.backgroundColor = UIColor.red.withAlphaComponent(0.3)
             return false
 

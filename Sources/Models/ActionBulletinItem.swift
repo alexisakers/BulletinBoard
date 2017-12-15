@@ -10,14 +10,18 @@ import UIKit
  *
  * You do not use this class directly:
  *
- * - If you do not need to customize the elements displayed, use `PageBulletinItem`
- * which provides a title and description label, and and image view.
- * - If you need to display custom elements with the standard buttons, subclass `ActionBulletinItem` and
- * implement the `makeArrangedSubviews` method to return the elements to display above the buttons.
+ * - If your custom item has a title and optional stock elements (description, image), use `PageBulletinItem`
+ * which provides these stock elements. You can also override this class to insert custom views between the stock
+ * views.
  *
- * You can also override this class to customize button tap handling. Override the `actionButtonTapped(sender:)`
- * and `alternativeButtonTapped(sender:)` methods to handle tap events. Make sure to call `super` in your
- * implementations if you do.
+ * - If you need to display custom elements with the standard buttons on a page without a title, subclass `ActionBulletinItem`
+ * and implement the `makeContentViews` method to return the elements to display above the buttons.
+ *
+ * Subclasses can override several methods to customize the UI:
+ *
+ * - In `footerViews`, return the views to display below the buttons.
+ * - In `actionButtonTapped(sender:)` and `alternativeButtonTapped(sender:)`, perform custom additional button handling
+ * (ex: haptic feedback).
  *
  * Use the `appearance` property to customize the appearance of the buttons. If you want to use a different interface
  * builder type, change the `InterfaceBuilderType` property.
@@ -27,10 +31,21 @@ import UIKit
 
     // MARK: - Page Contents
 
-    /// The title of the action button.
+    /**
+     * The title of the action button. The action button represents the main action for the item.
+     *
+     * If you set this property to `nil`, no action button will be added (this is the default).
+     */
+
     @objc public var actionButtonTitle: String?
 
-    /// The title of the alternative button.
+    /**
+     * The title of the alternative button. The alternative button represents a second option for
+     * the user.
+     *
+     * If you set this property to `nil`, no alternative button will be added (this is the default).
+     */
+
     @objc public var alternativeButtonTitle: String?
 
 
@@ -55,6 +70,17 @@ import UIKit
      */
 
     @objc public var isDismissable: Bool = false
+
+    /**
+     * Whether the item should move with the keyboard.
+     *
+     * You must set it to `true` if the item displays a text field. Otherwise, you can set it to `false` if you
+     * don't want the bulletin to move when system alerts are displayed.
+     *
+     * This value defaults to `true`.
+     */
+
+    @objc public var shouldRespondToKeyboardChanges: Bool = true
 
     /**
      * The block of code to execute when the bulletin item is dismissed. This is called when the bulletin
@@ -102,8 +128,17 @@ import UIKit
 
     // MARK: - Buttons
 
-    fileprivate var actionButton: UIButton? = nil
-    fileprivate var alternativeButton: UIButton? = nil
+    /**
+     * The action button managed by the item.
+     */
+
+    @objc public private(set) var actionButton: UIButton? = nil
+
+    /**
+     * The alternative button managed by the item.
+     */
+
+    @objc public private(set) var alternativeButton: UIButton? = nil
 
     /**
      * The code to execute when the action button is tapped.
@@ -143,14 +178,35 @@ import UIKit
     // MARK: - View Management
 
     /**
-     * Creates the content views of the page.
+     * The views to display below the buttons.
      *
-     * You override this method to customize the elements displayed above the buttons. The default
-     * implementation returns an empty list of views.
+     * You can override this method to insert custom views after the buttons. The default implementation returns `nil` and
+     * does not append footer elements.
+     *
+     * This method is called inside `makeArrangedSubviews` after the buttons are created.
+     *
+     * - parameter interfaceBuilder: The interface builder used to create the buttons.
+     * - returns: The footer views for the item, or `nil` if no footer views should be added.
+     */
+
+    open func footerViews(_ interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
+        return nil
+    }
+
+    /**
+     * Creates the content views of the page. Content views are displayed above the buttons.
+     *
+     * You must override this method to return the elements displayed above the buttons. Your implementation
+     * must not call `super`.
+     *
+     * If you do not implement this method, an exception will be raised.
+     *
+     * - parameter interfaceBuilder: The interface builder used to create the buttons.
+     * - returns: The views to display above the buttons.
      */
 
     open func makeContentViews(interfaceBuilder: BulletinInterfaceBuilder) -> [UIView] {
-        return []
+        preconditionFailure("Subclasses of ActionBulletinItem must implement the makeContentViews method. See documentation.")
     }
 
     /**
@@ -196,6 +252,13 @@ import UIKit
         }
 
         arrangedSubviews.append(buttonsStack)
+
+        // Footer
+
+        if let footerViews = footerViews(interfaceBuilder) {
+            arrangedSubviews.append(contentsOf: footerViews)
+        }
+
         return arrangedSubviews
 
     }

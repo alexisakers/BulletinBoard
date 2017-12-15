@@ -16,6 +16,7 @@
 @synthesize manager;
 @synthesize isDismissable;
 @synthesize dismissalHandler;
+@synthesize shouldRespondToKeyboardChanges;
 
 - (instancetype)init
 {
@@ -33,13 +34,14 @@
 
     // Title Label
 
-    UILabel *titleLabel = [interfaceBuilder makeTitleLabelWithText:@"Enter Your Name"];
+    UILabel *titleLabel = [interfaceBuilder makeTitleLabel];
+    titleLabel.text = @"Enter Your Name";
     [arrangedSubviews addObject:titleLabel];
 
     // Description Label
 
     _descriptionLabel = [interfaceBuilder makeDescriptionLabel];
-    [_descriptionLabel setText:@"To create your profile, please tell us your name. We will use it to customize your feed."];
+    _descriptionLabel.text = @"To create your profile, please tell us your name. We will use it to customize your feed.";
     [arrangedSubviews addObject:_descriptionLabel];
 
     // Text Field

@@ -56,9 +56,15 @@ enum BulletinDataSource {
      */
     static func makeTextFieldPage() -> TextFieldBulletinPage {
 
-        let page = TextFieldBulletinPage()
+        let page = TextFieldBulletinPage(title: "Enter your Name")
+        page.isDismissable = false
+        page.descriptionText = "To create your profile, please tell us your name. We will use it to customize your feed."
+        page.actionButtonTitle = "Done"
 
-        page.actionHandler = { item in
+        page.textInputHandler = { (item, text) in
+            if let text = text {
+                print("You entered: \(text)")
+            }
             item.manager?.displayNextItem()
         }
 
@@ -151,7 +157,9 @@ enum BulletinDataSource {
 
     static func makeChoicePage() -> PetSelectorBulletinPage {
 
-        let page = PetSelectorBulletinPage()
+        let page = PetSelectorBulletinPage(title: "Choose your Favorite")
+        page.isDismissable = false
+        page.descriptionText = "Your favorite pets will appear when you open the app."
         page.actionButtonTitle = "Select"
 
         return page

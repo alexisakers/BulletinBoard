@@ -12,6 +12,7 @@ import UIKit
 @objc public class BulletinBackgroundViewStyle: NSObject {
 
     enum Style {
+        
         case none
         case dimmed
         case blurred(style: UIBlurEffectStyle, isDark: Bool)

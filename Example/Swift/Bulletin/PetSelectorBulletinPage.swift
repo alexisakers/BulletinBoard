@@ -9,11 +9,11 @@ import BulletinBoard
 /**
  * An item that displays a choice with two buttons.
  *
- * This item demonstrates how to create a bulletin item with a custom interface, and changing the
+ * This item demonstrates how to create a page bulletin item with a custom interface, and changing the
  * next item based on user interaction.
  */
 
-class PetSelectorBulletinPage: ActionBulletinItem {
+class PetSelectorBulletinPage: FeedbackPageBulletinItem {
 
     private var catButtonContainer: UIButton!
     private var dogButtonContainer: UIButton!
@@ -40,29 +40,14 @@ class PetSelectorBulletinPage: ActionBulletinItem {
      * `BulletinInterfaceFactory` to generate standard views, such as title labels and buttons.
      */
 
-    override func makeContentViews(interfaceBuilder: BulletinInterfaceBuilder) -> [UIView] {
+    override func viewsUnderDescription(_ interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
 
-        var contentViews = [UIView]()
         let favoriteTabIndex = BulletinDataSource.favoriteTabIndex
-
-        // Title Label
-
-        let title = "Choose your Favorite"
-        let titleLabel = interfaceBuilder.makeTitleLabel(text: title)
-        contentViews.append(titleLabel)
-
-        // Description Label
-
-        appearance.shouldUseCompactDescriptionText = false // The text is short, so we don't need to display it with a smaller font
-        let descriptionLabel = interfaceBuilder.makeDescriptionLabel()
-        descriptionLabel.text = "Your favorite pets will appear when you open the app."
-        contentViews.append(descriptionLabel)
 
         // Pets Stack
 
         // We add choice cells to a group stack because they need less spacing
         let petsStack = interfaceBuilder.makeGroupStack(spacing: 16)
-        contentViews.append(petsStack)
 
         // Cat Button
 
@@ -80,7 +65,7 @@ class PetSelectorBulletinPage: ActionBulletinItem {
 
         self.dogButtonContainer = dogButtonContainer
 
-        return contentViews
+        return [petsStack]
 
     }
 
