@@ -38,7 +38,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     // MARK: - Private Interface Elements
 
     fileprivate let bottomSafeAreaCoverView = UIVisualEffectView()
-    fileprivate var swipeInteractionController: BulletinSwipeInteractionController!
+    var swipeInteractionController: BulletinSwipeInteractionController!
 
     // Compact constraints
     private var leadingConstraint: NSLayoutConstraint!

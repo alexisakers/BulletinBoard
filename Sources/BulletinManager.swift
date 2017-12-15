@@ -180,6 +180,7 @@ extension BulletinManager {
         assertIsPrepared()
         assertIsMainThread()
 
+        viewController.swipeInteractionController?.cancelIfNeeded()
         viewController.hideActivityIndicator(showContentStack: true)
 
     }
@@ -357,6 +358,8 @@ extension BulletinManager {
 
     /// Refreshes the interface for the current item.
     fileprivate func refreshCurrentItemInterface() {
+
+        viewController.swipeInteractionController?.cancelIfNeeded()
 
         viewController.isDismissable = false
         viewController.refreshSwipeInteractionController()

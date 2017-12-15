@@ -14,6 +14,8 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
     /// Whether a panning interaction is in progress.
     var isInteractionInProgress = false
 
+    var panGestureRecognizer: UIPanGestureRecognizer?
+
     // MARK: - State
 
     private var isFinished = false
@@ -50,6 +52,7 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
         panGesture.cancelsTouchesInView = false
         panGesture.delegate = self
 
+        self.panGestureRecognizer = panGesture
         contentView.addGestureRecognizer(panGesture)
 
     }
@@ -133,6 +136,8 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
             if !isFinished {
                 resetCardViews()
             }
+
+            panGestureRecognizer?.isEnabled = true
 
         case .ended:
 
@@ -235,6 +240,20 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
         UIView.animate(withDuration: 0.15, delay: 0, options: options, animations: animations) { _ in
             self.update(0)
             self.cancel()
+        }
+
+    }
+
+    // MARK: - Cancellation
+
+    /**
+     * Resets the view if needed.
+     */
+
+    func cancelIfNeeded() {
+
+        if panGestureRecognizer?.state == .changed {
+            panGestureRecognizer?.isEnabled = false
         }
 
     }
