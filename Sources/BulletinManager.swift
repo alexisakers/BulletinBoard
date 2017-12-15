@@ -152,8 +152,6 @@ extension BulletinManager {
      * Use this method if you need to perform a long task or fetch some data before changing the item.
      *
      * Displaying the loading indicator does not change the height of the page or the current item.
-     *
-     * Call one of `push(item:)`, `popItem` or `popToRootItem` to hide the activity indicator and change the current item.
      */
 
     @objc public func displayActivityIndicator(color: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)) {
@@ -162,6 +160,22 @@ extension BulletinManager {
         assertIsMainThread()
 
         viewController.displayActivityIndicator(color: color)
+
+    }
+
+    /**
+     * Hides the activity indicator and displays the current item.
+     *
+     * You can also call one of `popItem`, `popToRootItem` and `pushItem` if you need to hide the activity
+     * indicator and change the current item.
+     */
+
+    @objc public func hideActivityIndicator() {
+
+        assertIsPrepared()
+        assertIsMainThread()
+
+        viewController.hideActivityIndicator(showContentStack: true)
 
     }
 
@@ -375,7 +389,7 @@ extension BulletinManager {
 
         hideSubviewsAnimationPhase.block = {
 
-            self.viewController.hideActivityIndicator()
+            self.viewController.hideActivityIndicator(showContentStack: false)
 
             for arrangedSubview in oldArrangedSubviews {
                 arrangedSubview.alpha = 0

@@ -339,7 +339,6 @@ extension BulletinViewController {
     func displayActivityIndicator(color: UIColor) {
 
         activityIndicator.color = color
-
         activityIndicator.startAnimating()
 
         let animations = {
@@ -354,9 +353,21 @@ extension BulletinViewController {
     }
 
     /// Hides the activity indicator.
-    func hideActivityIndicator() {
+    func hideActivityIndicator(showContentStack: Bool) {
+
         activityIndicator.stopAnimating()
         activityIndicator.alpha = 0
+
+        let animations = {
+            self.activityIndicator.alpha = 0
+
+            if showContentStack {
+                self.contentStackView.alpha = 1
+            }
+        }
+
+        UIView.animate(withDuration: 0.25, animations: animations)
+
     }
 
 }
