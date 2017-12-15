@@ -122,10 +122,10 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(activityIndicator)
-        activityIndicator.leftAnchor.constraint(equalTo: contentStackView.leftAnchor).isActive = true
-        activityIndicator.rightAnchor.constraint(equalTo: contentStackView.rightAnchor).isActive = true
-        activityIndicator.topAnchor.constraint(equalTo: contentStackView.topAnchor).isActive = true
-        activityIndicator.bottomAnchor.constraint(equalTo: contentStackView.bottomAnchor).isActive = true
+        activityIndicator.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+        activityIndicator.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+        activityIndicator.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        activityIndicator.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
 
         activityIndicator.activityIndicatorViewStyle = .whiteLarge
         activityIndicator.color = .black
@@ -339,7 +339,6 @@ extension BulletinViewController {
     func displayActivityIndicator(color: UIColor) {
 
         activityIndicator.color = color
-
         activityIndicator.startAnimating()
 
         let animations = {
@@ -354,9 +353,21 @@ extension BulletinViewController {
     }
 
     /// Hides the activity indicator.
-    func hideActivityIndicator() {
+    func hideActivityIndicator(showContentStack: Bool) {
+
         activityIndicator.stopAnimating()
         activityIndicator.alpha = 0
+
+        let animations = {
+            self.activityIndicator.alpha = 0
+
+            if showContentStack {
+                self.contentStackView.alpha = 1
+            }
+        }
+
+        UIView.animate(withDuration: 0.25, animations: animations)
+
     }
 
 }

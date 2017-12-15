@@ -327,6 +327,8 @@ Make sure to read these guides before getting started:
 
 Feel free to submit a PR if you’re using this library in your apps.
 
+- [SpdrVision mobile](https://itunes.apple.com/it/app/spdrvision-mobile/id1260166539?mt=8) - A simple way to watch Italian television on macOS and iOS by Gianpiero Spinelli
+
 ## Author
 
 Written by Alexis Aubry. You can [find me on Twitter](https://twitter.com/_alexaubry).
