@@ -13,46 +13,29 @@ import BulletinBoard
  * when the keyboard is visible.
  */
 
-class TextFieldBulletinPage: ActionBulletinItem {
+class TextFieldBulletinPage: FeedbackPageBulletinItem {
 
     @objc public var textField: UITextField!
-    @objc public var descriptionLabel: UILabel!
 
     @objc public var textInputHandler: ((ActionBulletinItem, String?) -> Void)? = nil
 
-    override init() {
-
-        super.init()
-
-        self.isDismissable = false
-
-    }
-
-    override func makeContentViews(interfaceBuilder: BulletinInterfaceBuilder) -> [UIView] {
-
-        var contentViews = [UIView]()
-
-        let titleLabel = interfaceBuilder.makeTitleLabel(text: "Enter your Name")
-        contentViews.append(titleLabel)
-
-        let description = "To create your profile, please tell us your name. We will use it to customize your feed."
-        descriptionLabel = interfaceBuilder.makeDescriptionLabel(text: description)
-        contentViews.append(descriptionLabel)
-
+    override func viewsUnderDescription(_ interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
         textField = interfaceBuilder.makeTextField(placeholder: "First and Last Name", returnKey: .done, delegate: self)
-        contentViews.append(textField)
-
-        let doneButton = interfaceBuilder.makeActionButton(title: "Done")
-        doneButton.button.addTarget(self, action: #selector(doneButtonTapped(sender:)), for: .touchUpInside)
-        contentViews.append(doneButton)
-
-        return contentViews
-
+        return [textField]
     }
 
     override func tearDown() {
         super.tearDown()
-        textField.delegate = nil
+        textField?.delegate = nil
+    }
+
+    override func actionButtonTapped(sender: UIButton) {
+
+        if textFieldShouldReturn(self.textField) {
+            textInputHandler?(self, textField.text)
+            super.actionButtonTapped(sender: sender)
+        }
+
     }
 
 }
@@ -60,10 +43,6 @@ class TextFieldBulletinPage: ActionBulletinItem {
 // MARK: - UITextFieldDelegate
 
 extension TextFieldBulletinPage: UITextFieldDelegate {
-
-    @objc func doneButtonTapped(sender: UIButton) {
-        _ = self.textFieldShouldReturn(self.textField)
-    }
 
     @objc open func isInputValid(text: String?) -> Bool {
 
@@ -85,8 +64,8 @@ extension TextFieldBulletinPage: UITextFieldDelegate {
 
         } else {
 
-            descriptionLabel.textColor = .red
-            descriptionLabel.text = "You must enter some text to continue."
+            descriptionLabel!.textColor = .red
+            descriptionLabel!.text = "You must enter some text to continue."
             textField.backgroundColor = UIColor.red.withAlphaComponent(0.3)
             return false
 

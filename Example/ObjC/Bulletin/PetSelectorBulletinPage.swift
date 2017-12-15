@@ -47,8 +47,8 @@ class PetSelectorBulletinPage: ActionBulletinItem {
 
         // Title Label
 
-        let title = "Choose your Favorite"
-        let titleLabel = interfaceBuilder.makeTitleLabel(text: title)
+        let titleLabel = interfaceBuilder.makeTitleLabel()
+        titleLabel.text = "Choose your Favorite"
         contentViews.append(titleLabel)
 
         // Description Label

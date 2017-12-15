@@ -30,19 +30,20 @@ import UIKit
      * If you set this value to `true`, the user will be able to dismiss the bulletin by tapping outside
      * of the card or by swiping down.
      *
-     * You should set it to `true` for the last item you want to display.
+     * You should set it to `true` for the last item you want to display, or for items that start an optional flow
+     * (ex: a purchase).
      */
 
     var isDismissable: Bool { get set }
 
     /**
-     * The block of code to execute when the bulletin item is dismissed. This is called when the bulletin
+     * The block of code to execute when the bulletin item is dismissed. This is called after the bulletin
      * is moved out of view.
      *
-     * You can set it to `nil` if `isDismissable` is set to false.
-     *
-     * - parameter item: The item that is being dismissed. When calling `dismissalHandler`, the manager
-     * passes a reference to `self` so you don't have to manage weak references yourself.
+     * - parameter item: The item that is being dismissed.
+
+     * When calling `dismissalHandler`, the manager passes a reference to `self` so you don't have to retain a
+     * weak reference yourself.
      */
 
     var dismissalHandler: ((_ item: BulletinItem) -> Void)? { get set }
@@ -50,7 +51,7 @@ import UIKit
     /**
      * The item to display after this one.
      *
-     * If you set this value, you'll be able to call `displayNextItem()` to push the next item to
+     * If you set this value, you'll be able to call `manager?.displayNextItem()` to push the next item to
      * the stack.
      */
 
@@ -59,17 +60,18 @@ import UIKit
     // MARK: - Interface
 
     /**
-     * Creates the list of views to display in the bulletin.
+     * Creates the list of views to display inside the bulletin card.
      *
-     * The views will be arranged vertically in the order they are stored in the array returned by
-     * this function.
+     * The views will be arranged vertically, in the order they are stored in the return array.
      */
 
     func makeArrangedSubviews() -> [UIView]
 
     /**
-     * Called by the manager when the item was removed from the bulletin. Use this function to
-     * remove any button target or gesture recognizers from your managed views.
+     * Called by the manager when the item was removed from the bulletin.
+     *
+     * Use this function to remove any button target or gesture recognizers from your managed views, and
+     * deallocate any resources created for this item that are no longer needed.
      */
 
     func tearDown()

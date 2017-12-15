@@ -35,7 +35,8 @@ class PetValidationBulletinItem: ActionBulletinItem {
 
         // Title Label
 
-        let titleLabel = interfaceBuilder.makeTitleLabel(text: "Choose your Favorite")
+        let titleLabel = interfaceBuilder.makeTitleLabel()
+        titleLabel.text = "Choose your Favorite"
         arrangedSubviews.append(titleLabel)
 
         // Description Label
