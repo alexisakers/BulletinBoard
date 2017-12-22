@@ -18,13 +18,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var showIntoButtonItem: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView!
-
+    
     /// The data provider for the collection view.
     private var dataSource: CollectionDataSource!
 
     /// Whether the status bar should be hidden.
     private var shouldHideStatusBar: Bool = false
-
+    
     // MARK: - Customization
 
     /// The available background styles.
@@ -32,7 +32,6 @@ class ViewController: UIViewController {
 
     /// The current background style.
     var currentBackground = (name: "Dimmed", style: BulletinBackgroundViewStyle.dimmed)
-
 
     // MARK: - Bulletin Manager
 
@@ -116,7 +115,7 @@ class ViewController: UIViewController {
                                             style: .plain,
                                             target: self,
                                             action: #selector(fullScreenButtonTapped))
-
+        
         navigationController?.isToolbarHidden = false
         toolbarItems = [fontItem, statusBarItem]
 
@@ -133,8 +132,11 @@ class ViewController: UIViewController {
      */
 
     func showBulletin() {
-        bulletinManager.bulletinSize = .Full
-        bulletinManager.hidesHomeIndicator = true
+        // Uncomment to customize interface
+//        bulletinManager.bulletinSize = .Full
+//        bulletinManager.cardCornerRadius = 36
+//        bulletinManager.hidesHomeIndicator = true
+//        bulletinManager.hidesFooter = true
         bulletinManager.backgroundViewStyle = currentBackground.style
         bulletinManager.statusBarAppearance = shouldHideStatusBar ? .hidden : .automatic
         bulletinManager.prepare()

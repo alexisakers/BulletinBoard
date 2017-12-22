@@ -67,7 +67,16 @@ import UIKit
      *
      * Set this value before calling `prepare`. Changing it after will have no effect.
      */
+    
     @objc public var hidesHomeIndicator: Bool = false
+    
+    /**
+     * The footer for iPhone X should be hidden or not. Defaults to false.
+     *
+     * Set this value before calling `prepare`. Changing it after will have no effect.
+     */
+    
+    @objc public var hidesFooter: Bool = false
     
     /**
      * The background color of the bulletin card. Defaults to white.
@@ -86,7 +95,7 @@ import UIKit
     @objc public var bulletinSize: BulletinSize = .Regular
     
     /**
-     * The rounded corner radius of the bulletin card. Defaults to 12 and 34 in iPhone X.
+     * The rounded corner radius of the bulletin card. Defaults to 12 and 36 in iPhone X.
      *
      * Set this value before calling `prepare`. Changing it after will have no effect.
      */
@@ -94,7 +103,7 @@ import UIKit
     public var cardCornerRadius: CGFloat?
 
     /// The default corner radius for iPhone X.
-    fileprivate let defaultXCornerRadius: CGFloat = 34
+    fileprivate let defaultXCornerRadius: CGFloat = 36
     
     /// The default corner radius for other devices.
     fileprivate let defaultCornerRadius: CGFloat = 12

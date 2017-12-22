@@ -146,10 +146,6 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         stackBottomConstraint.isActive = true
         contentTopConstraint.isActive = true
 
-        contentBottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.safeBottomAnchor)
-        contentBottomConstraint.constant = 1000
-        contentBottomConstraint.isActive = true
-
         // Configuration
 
         configureContentView()
@@ -201,6 +197,15 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
             maxWidthConstraint = contentView.widthAnchor.constraint(lessThanOrEqualTo: view.safeWidthAnchor, constant: -(padding * 2))
             maxWidthConstraint.priority = UILayoutPriorityRequired
             maxWidthConstraint.isActive = true
+            
+            if manager.hidesFooter {
+                contentBottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+                bottomSafeAreaCoverView.removeFromSuperview()
+            } else {
+                contentBottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.safeBottomAnchor)
+            }
+            contentBottomConstraint.constant = 1000
+            contentBottomConstraint.isActive = true
         }
     }
     
@@ -271,7 +276,15 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     /// Moves the content view to its final location on the screen. Use during presentation.
     func moveIntoPlace() {
 
-        contentBottomConstraint.constant = -12
+        var bottomMargin: CGFloat = -12
+        
+        if let manager = manager {
+            if manager.hidesFooter {
+                bottomMargin = -6
+            }
+        }
+        
+        contentBottomConstraint.constant = bottomMargin
         centerYConstraint.constant = 0
 
         view.layoutIfNeeded()
