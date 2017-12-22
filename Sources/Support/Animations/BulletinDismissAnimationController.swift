@@ -33,19 +33,19 @@ class BulletinDismissAnimationController: NSObject, UIViewControllerAnimatedTran
             transitionContext.completeTransition(false)
             return
         }
-        
+
         snapshotActivityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        
+
         snapshot.addSubview(snapshotActivityIndicator)
         snapshotActivityIndicator.topAnchor.constraint(equalTo: snapshot.topAnchor).isActive = true
         snapshotActivityIndicator.leftAnchor.constraint(equalTo: snapshot.leftAnchor).isActive = true
         snapshotActivityIndicator.rightAnchor.constraint(equalTo: snapshot.rightAnchor).isActive = true
         snapshotActivityIndicator.bottomAnchor.constraint(equalTo: snapshot.bottomAnchor).isActive = true
-        
+
         snapshotActivityIndicator.activityIndicatorViewStyle = .whiteLarge
         snapshotActivityIndicator.color = .black
         snapshotActivityIndicator.isUserInteractionEnabled = false
-        
+
         snapshotActivityIndicator.alpha = activityIndicatorView.alpha
 
         rootView.insertSubview(snapshot, aboveSubview: contentView)

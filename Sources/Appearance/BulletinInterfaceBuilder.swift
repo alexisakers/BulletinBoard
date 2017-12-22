@@ -97,7 +97,7 @@ import UIKit
         actionButton.setTitle(title, for: .normal)
         actionButton.titleLabel?.font = appearance.makeActionButtonFont()
 
-        actionButton.layer.cornerRadius = 12
+        actionButton.layer.cornerRadius = appearance.actionButtonCornerRadius
         actionButton.clipsToBounds = true
 
         if let color = appearance.actionButtonBorderColor {
@@ -132,7 +132,7 @@ import UIKit
         alternativeButton.titleLabel?.font = appearance.makeAlternativeButtonFont()
 
         if let color = appearance.alternativeButtonBorderColor {
-          alternativeButton.layer.cornerRadius = 12
+          alternativeButton.layer.cornerRadius = appearance.alternativeButtonCornerRadius
           alternativeButton.clipsToBounds = true
           alternativeButton.layer.borderColor = color.cgColor
           alternativeButton.layer.borderWidth = appearance.alternativeButtonBorderWidth
