@@ -200,7 +200,7 @@ extension BulletinViewController {
         }
 
         contentView.backgroundColor = manager.backgroundColor
-        contentView.layer.cornerRadius = CGFloat(manager.cardCornerRadius ?? 12)
+        contentView.layer.cornerRadius = CGFloat((manager.cardCornerRadius ?? 12).doubleValue)
 
         let cardPadding = manager.cardPadding.rawValue
 
@@ -409,7 +409,9 @@ extension BulletinViewController {
             defaultRadius = screenHasRoundedCorners ? 36 : 12
         }
 
-        contentView.layer.cornerRadius = CGFloat(manager?.cardCornerRadius ?? defaultRadius)
+
+
+        contentView.layer.cornerRadius = CGFloat((manager?.cardCornerRadius ?? defaultRadius).doubleValue)
 
     }
 
