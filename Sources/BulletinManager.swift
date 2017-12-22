@@ -176,6 +176,15 @@ extension BulletinManager {
         isPreparing = false
 
     }
+    
+    /**
+     * Prepares the bulletin interface and present it.
+     */
+
+    @objc public func prepareAndPresent(above: UIViewController) {
+        prepare()
+        presentBulletin(above: above)
+    }
 
     /**
      * Performs an operation with the bulletin content view and returns the result.
