@@ -14,6 +14,8 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
     /// Whether a panning interaction is in progress.
     var isInteractionInProgress = false
 
+    var panGestureRecognizer: UIPanGestureRecognizer?
+
     // MARK: - State
 
     private var isFinished = false
@@ -28,6 +30,9 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
         return viewController.contentView
     }
 
+    private var activityIndicatorView: UIView {
+        return viewController.activityIndicator
+    }
 
     // MARK: - Preparation
 
@@ -47,6 +52,7 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
         panGesture.cancelsTouchesInView = false
         panGesture.delegate = self
 
+        self.panGestureRecognizer = panGesture
         contentView.addGestureRecognizer(panGesture)
 
     }
@@ -131,6 +137,8 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
                 resetCardViews()
             }
 
+            panGestureRecognizer?.isEnabled = true
+
         case .ended:
 
             guard isInteractionInProgress else {
@@ -212,6 +220,7 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
 
         snapshotView?.transform = transform
         contentView.transform = transform
+        activityIndicatorView.transform = transform
 
     }
 
@@ -222,6 +231,7 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
         let animations = {
             self.snapshotView?.transform = .identity
             self.contentView.transform = .identity
+            self.activityIndicatorView.transform = .identity
         }
 
         viewController.backgroundView.show()
@@ -230,6 +240,20 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
         UIView.animate(withDuration: 0.15, delay: 0, options: options, animations: animations) { _ in
             self.update(0)
             self.cancel()
+        }
+
+    }
+
+    // MARK: - Cancellation
+
+    /**
+     * Resets the view if needed.
+     */
+
+    func cancelIfNeeded() {
+
+        if panGestureRecognizer?.state == .changed {
+            panGestureRecognizer?.isEnabled = false
         }
 
     }

@@ -72,7 +72,7 @@ class BulletinPresentationAnimationController: NSObject, UIViewControllerAnimate
             toVC.moveIntoPlace()
             backgroundView.show()
             toVC.showBottomSafeAreaCover()
-            
+
         }
 
         UIView.animate(withDuration: duration, delay: 0, options: options, animations: animations) { _ in

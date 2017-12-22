@@ -33,7 +33,6 @@ class ViewController: UIViewController {
     /// The current background style.
     var currentBackground = (name: "Dimmed", style: BulletinBackgroundViewStyle.dimmed)
 
-
     // MARK: - Bulletin Manager
 
     /**
@@ -133,10 +132,18 @@ class ViewController: UIViewController {
      */
 
     func showBulletin() {
+
+//        Uncomment to customize interface
+//        bulletinManager.cardCornerRadius = 22
+//        bulletinManager.cardPadding = .none
+//        bulletinManager.allowsSwipeInteraction = false
+//        bulletinManager.hidesHomeIndicator = true
+//        bulletinManager.backgroundColor = .blue
+
         bulletinManager.backgroundViewStyle = currentBackground.style
         bulletinManager.statusBarAppearance = shouldHideStatusBar ? .hidden : .automatic
-        bulletinManager.prepare()
-        bulletinManager.presentBulletin(above: self)
+        bulletinManager.prepareAndPresent(above: self)
+
     }
 
     func reloadManager() {

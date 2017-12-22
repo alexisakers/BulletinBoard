@@ -62,9 +62,38 @@ enum BulletinDataSource {
         page.actionButtonTitle = "Done"
 
         page.textInputHandler = { (item, text) in
-            if let text = text {
-                print("You entered: \(text)")
+
+            let datePage = self.makeDatePage(userName: text)
+            item.manager?.push(item: datePage)
+        }
+
+        return page
+
+    }
+
+    static func makeDatePage(userName: String?) -> BulletinItem {
+
+        var greeting = userName ?? "Lone Ranger"
+
+        if let name = userName {
+
+            let formatter = PersonNameComponentsFormatter()
+
+            if #available(iOS 10.0, *) {
+                if let components = formatter.personNameComponents(from: name) {
+                    greeting = components.givenName ?? name
+                }
             }
+
+        }
+
+        let page = DatePickerBulletinItem(title: "Enter Birth Date")
+        page.descriptionText = "When were you born, \(greeting)?"
+        page.isDismissable = false
+        page.actionButtonTitle = "Done"
+
+        page.actionHandler = { item in
+            print(page.datePicker.date)
             item.manager?.displayNextItem()
         }
 

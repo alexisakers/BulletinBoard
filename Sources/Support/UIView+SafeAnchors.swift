@@ -4,20 +4,20 @@ import UIKit
 
 extension UIView {
 
-    var safeTopAnchor: NSLayoutYAxisAnchor { return safeAreaLayoutGuideWithFallback?.topAnchor ?? topAnchor }
-    var safeBottomAnchor: NSLayoutYAxisAnchor { return safeAreaLayoutGuideWithFallback?.bottomAnchor ?? bottomAnchor }
+    var safeTopAnchor: NSLayoutYAxisAnchor { return safeAreaLayoutGuideIfAvailable?.topAnchor ?? topAnchor }
+    var safeBottomAnchor: NSLayoutYAxisAnchor { return safeAreaLayoutGuideIfAvailable?.bottomAnchor ?? bottomAnchor }
 
-    var safeLeadingAnchor: NSLayoutXAxisAnchor { return safeAreaLayoutGuideWithFallback?.leadingAnchor ?? leadingAnchor }
-    var safeTrailingAnchor: NSLayoutXAxisAnchor { return safeAreaLayoutGuideWithFallback?.trailingAnchor ?? trailingAnchor }
+    var safeLeadingAnchor: NSLayoutXAxisAnchor { return safeAreaLayoutGuideIfAvailable?.leadingAnchor ?? leadingAnchor }
+    var safeTrailingAnchor: NSLayoutXAxisAnchor { return safeAreaLayoutGuideIfAvailable?.trailingAnchor ?? trailingAnchor }
 
-    var safeCenterXAnchor: NSLayoutXAxisAnchor { return safeAreaLayoutGuideWithFallback?.centerXAnchor ?? centerXAnchor }
-    var safeCenterYAnchor: NSLayoutYAxisAnchor { return safeAreaLayoutGuideWithFallback?.centerYAnchor ?? centerYAnchor }
+    var safeCenterXAnchor: NSLayoutXAxisAnchor { return safeAreaLayoutGuideIfAvailable?.centerXAnchor ?? centerXAnchor }
+    var safeCenterYAnchor: NSLayoutYAxisAnchor { return safeAreaLayoutGuideIfAvailable?.centerYAnchor ?? centerYAnchor }
 
-    var safeWidthAnchor: NSLayoutDimension { return safeAreaLayoutGuideWithFallback?.widthAnchor ?? widthAnchor }
-    var safeHeightAnchor: NSLayoutDimension { return safeAreaLayoutGuideWithFallback?.heightAnchor ?? heightAnchor }
+    var safeWidthAnchor: NSLayoutDimension { return safeAreaLayoutGuideIfAvailable?.widthAnchor ?? widthAnchor }
+    var safeHeightAnchor: NSLayoutDimension { return safeAreaLayoutGuideIfAvailable?.heightAnchor ?? heightAnchor }
 
-    private var safeAreaLayoutGuideWithFallback: UILayoutGuide? {
-        if #available(iOS 11, *) {
+    private var safeAreaLayoutGuideIfAvailable: UILayoutGuide? {
+        if #available(iOS 11.0, *) {
             return safeAreaLayoutGuide
         } else {
             return nil
