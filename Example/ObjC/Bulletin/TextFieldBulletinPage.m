@@ -58,7 +58,7 @@
     _doneButton = [interfaceBuilder makeActionButtonWithTitle:@"Done"];
     [_doneButton.button addTarget:self action:@selector(doneButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [arrangedSubviews addObject:_doneButton];
-    
+
     return arrangedSubviews;
 
 }

@@ -26,13 +26,13 @@ import UIKit
     /// - Compact: Compact, less space
     /// - Regular: Regular, normal space
     /// - Full: Full, more space
-    
+
     @objc public enum BulletinSize: Int {
         case Compact
         case Regular
         case Full
     }
-    
+
     /// Bulletin view controller.
     fileprivate var viewController: BulletinViewController!
 
@@ -59,25 +59,25 @@ import UIKit
      *
      * Set this value before calling `prepare`. Changing it after will have no effect.
      */
-    
+
     @objc public var statusBarAnimation: UIStatusBarAnimation = .fade
-    
+
     /**
      * The home indicator for iPhone X should be hidden or not. Defaults to false.
      *
      * Set this value before calling `prepare`. Changing it after will have no effect.
      */
-    
+
     @objc public var hidesHomeIndicator: Bool = false
-    
+
     /**
      * The footer for iPhone X should be hidden or not. Defaults to false.
      *
      * Set this value before calling `prepare`. Changing it after will have no effect.
      */
-    
+
     @objc public var hidesFooter: Bool = false
-    
+
     /**
      * The background color of the bulletin card. Defaults to white.
      *
@@ -85,30 +85,30 @@ import UIKit
      */
 
     @objc public var backgroundColor: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    
+
     /**
      * The bulletin size for card. Defaults to Regular.
      *
      * Set this value before calling `prepare`. Changing it after will have no effect.
      */
-    
+
     @objc public var bulletinSize: BulletinSize = .Regular
-    
+
     /**
      * The rounded corner radius of the bulletin card. Defaults to 12 and 36 in iPhone X.
      *
      * Set this value before calling `prepare`. Changing it after will have no effect.
      */
-    
+
     public var cardCornerRadius: CGFloat?
 
     /// The default corner radius for iPhone X.
     fileprivate let defaultXCornerRadius: CGFloat = 36
-    
+
     /// The default corner radius for other devices.
     fileprivate let defaultCornerRadius: CGFloat = 12
     
-    
+
     // MARK: - Private Properties
 
     var currentItem: BulletinItem
@@ -146,7 +146,7 @@ import UIKit
 // MARK: - Interacting with the Bulletin
 
 extension BulletinManager {
-    
+
     /**
      * Prepares the bulletin interface and displays the root item.
      *
@@ -163,7 +163,7 @@ extension BulletinManager {
         if cardCornerRadius == nil {
             cardCornerRadius = UIDevice.current.iPhoneX() ? defaultXCornerRadius : defaultCornerRadius
         }
-        
+
         viewController.modalPresentationStyle = .overFullScreen
         viewController.transitioningDelegate = viewController
         viewController.loadBackgroundView()
@@ -176,7 +176,7 @@ extension BulletinManager {
         isPreparing = false
 
     }
-    
+
     /**
      * Prepares the bulletin interface and present it.
      */

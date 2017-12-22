@@ -10,7 +10,7 @@ import UIKit
  */
 
 final class BulletinViewController: UIViewController, UIGestureRecognizerDelegate {
-    
+
     /// The subview that contains the contents of the card.
     let contentView = UIView()
 
@@ -22,7 +22,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
     /// Indicates whether the bulletin can be dismissed by a tap outside the card.
     var isDismissable: Bool = false
-    
+
     /**
      * The stack view displaying the content of the card.
      *
@@ -31,7 +31,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
      */
 
     let contentStackView = UIStackView()
-    
+
     let activityIndicator = ActivityIndicator()
 
 
@@ -45,7 +45,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     private var trailingConstraint: NSLayoutConstraint!
     private var centerXConstraint: NSLayoutConstraint!
     private var maxWidthConstraint: NSLayoutConstraint!
-    
+
     // Regular constraints
     private var widthConstraint: NSLayoutConstraint!
     fileprivate var centerYConstraint: NSLayoutConstraint!
@@ -157,10 +157,10 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         super.viewWillAppear(animated)
         setUpLayout(with: traitCollection)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+
         /// Animate status bar appearance when hiding
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
             self.setNeedsStatusBarAppearanceUpdate()
@@ -170,17 +170,17 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     deinit {
         cleanUpKeyboardLogic()
     }
-    
+
     /// Configure content view with customizations.
-    
+
     fileprivate func configureContentView() {
         if let manager = manager {
             contentView.backgroundColor = manager.backgroundColor
             contentView.layer.cornerRadius = manager.cardCornerRadius ?? 0
-            
+
             // Set padding according to width type
             var padding: CGFloat = 12
-            
+
             switch manager.bulletinSize {
             case .Compact:
                 padding += 6
@@ -189,7 +189,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
             case .Regular:
                 break
             }
-            
+
             // Set left and right padding
             leadingConstraint = contentView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor, constant: padding)
             trailingConstraint = contentView.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor, constant: -padding)
@@ -197,7 +197,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
             maxWidthConstraint = contentView.widthAnchor.constraint(lessThanOrEqualTo: view.safeWidthAnchor, constant: -(padding * 2))
             maxWidthConstraint.priority = UILayoutPriorityRequired
             maxWidthConstraint.isActive = true
-            
+
             if manager.hidesFooter {
                 contentBottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
                 bottomSafeAreaCoverView.removeFromSuperview()
@@ -208,14 +208,14 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
             contentBottomConstraint.isActive = true
         }
     }
-    
+
     // MARK: - Gesture Recognizer
-    
+
     internal func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if touch.view?.isDescendant(of: contentView) == true {
             return false
         }
-        
+
         return true
     }
 
@@ -277,13 +277,13 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     func moveIntoPlace() {
 
         var bottomMargin: CGFloat = -12
-        
+
         if let manager = manager {
             if manager.hidesFooter {
                 bottomMargin = -6
             }
         }
-        
+
         contentBottomConstraint.constant = bottomMargin
         centerYConstraint.constant = 0
 
@@ -298,11 +298,11 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     /// Dismisses the presnted BulletinViewController if `isDissmisable` is set to `true`.
     @discardableResult
     func dismissIfPossible() -> Bool {
-    
+
         guard isDismissable else {
             return false
         }
-    
+
         manager?.dismissBulletin(animated: true)
         return true
 
@@ -313,9 +313,9 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     @objc private func handleTap(recognizer: UITapGestureRecognizer) {
         dismissIfPossible()
     }
-    
+
     // MARK: - Accessibility
-    
+
     override func accessibilityPerformEscape() -> Bool {
         return dismissIfPossible()
     }
@@ -323,7 +323,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     // MARK: - Background Accomodations
 
     /// Status bar style.
-    
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if let manager = manager {
             switch manager.statusBarAppearance {
@@ -335,12 +335,12 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
                 break
             }
         }
-        
+
         return .default
     }
-    
+
     /// Status bar animation.
-    
+
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         return manager?.statusBarAnimation ?? .fade
     }
@@ -348,7 +348,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     override var prefersStatusBarHidden: Bool {
         return manager?.statusBarAppearance == .hidden
     }
-    
+
     /// Auto hide home indicator for iPhone X
     @available(iOS 11, *)
     override func prefersHomeIndicatorAutoHidden() -> Bool {
@@ -523,7 +523,7 @@ extension BulletinViewController {
             self.centerYConstraint.constant = 0
             self.contentView.superview?.layoutIfNeeded()
         }, completion: nil)
-        
+
     }
 }
 

@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIDevice {
-    
+
     /**
      * Get readable device name.
      *
@@ -24,14 +24,14 @@ extension UIDevice {
             guard let value = element.value as? Int8, value != 0 else { return identifier }
             return identifier + String(UnicodeScalar(UInt8(value)))
         }
-        
+
         return identifier
     }
-    
+
     /// Check if device is iPhone X.
     ///
     /// - Returns: Determine if device is iPhone X
-    
+
     public func iPhoneX() -> Bool {
         switch deviceName {
         case "iPhone10,3", "iPhone10,6":
@@ -39,7 +39,7 @@ extension UIDevice {
         default:
             break
         }
-        
+
         return false
     }
 }

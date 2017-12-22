@@ -42,12 +42,12 @@ import UIKit
 
     /// The color of description text labels (default black).
     @objc public var descriptionTextColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    
+
     // MARK: - Corner Radius Customization
-    
+
     /// The corner radius of the action button (default 12).
     @objc public var actionButtonCornerRadius: CGFloat = 12
-    
+
     /// The corner radius of the alternative button (default 12).
     @objc public var alternativeButtonCornerRadius: CGFloat = 12
 
@@ -70,7 +70,7 @@ import UIKit
 
     @objc public var shouldUseCompactDescriptionText: Bool = false
 
-    
+
     // MARK: - Font Constants
 
     /// The font size of title elements (default 30).
