@@ -31,7 +31,7 @@ enum BulletinDataSource {
         page.image = #imageLiteral(resourceName: "RoundedIcon")
         page.imageAccessibilityLabel = "😻"
         page.appearance = makeLightAppearance()
-
+        
         page.descriptionText = "Discover curated images of the best pets in the world."
         page.actionButtonTitle = "Configure"
 

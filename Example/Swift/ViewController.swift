@@ -133,6 +133,7 @@ class ViewController: UIViewController {
      */
 
     func showBulletin() {
+        bulletinManager.cardCornerRadius = 20
         bulletinManager.backgroundViewStyle = currentBackground.style
         bulletinManager.statusBarAppearance = shouldHideStatusBar ? .hidden : .automatic
         bulletinManager.prepare()

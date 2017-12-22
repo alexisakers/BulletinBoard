@@ -48,6 +48,14 @@ import UIKit
      */
 
     @objc public var backgroundColor: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    
+    /**
+     * The rounded corner radius of the bulletin card. Defaults to 12.
+     *
+     * Set this value before calling `prepare`. Changing it after will have no effect.
+     */
+    
+    @objc public var cardCornerRadius: CGFloat = 12
 
     // MARK: - Private Properties
 

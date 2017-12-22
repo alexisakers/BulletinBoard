@@ -84,8 +84,6 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
         // Content View
 
-        contentView.layer.cornerRadius = 12
-
         leadingConstraint = contentView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor, constant: 12)
         trailingConstraint = contentView.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor, constant: -12)
         centerXConstraint = contentView.centerXAnchor.constraint(equalTo: view.safeCenterXAnchor)
@@ -159,7 +157,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
         // Configuration
 
-        contentView.backgroundColor = manager?.backgroundColor ?? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        configureContentView()
         setUpKeyboardLogic()
 
     }
@@ -173,9 +171,16 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         cleanUpKeyboardLogic()
     }
     
+    fileprivate func configureContentView() {
+        if let manager = manager {
+            contentView.backgroundColor = manager.backgroundColor
+            contentView.layer.cornerRadius = manager.cardCornerRadius
+        }
+    }
+    
     // MARK: - Gesture Recognizer
     
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+    internal func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if touch.view?.isDescendant(of: contentView) == true {
             return false
         }
