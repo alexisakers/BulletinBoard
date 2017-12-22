@@ -98,6 +98,11 @@ import UIKit
 
     @objc public var allowsSwipeInteraction: Bool = true
 
+    /**
+     * The code to be executed when bulletin card appeared.
+     */
+    
+    @objc public var bulletinCardAppeared: ((BulletinItem) -> Void)? = nil
 
     // MARK: - Private Properties
 
@@ -421,7 +426,7 @@ extension BulletinManager {
 
     /// Refreshes the interface for the current item.
     fileprivate func refreshCurrentItemInterface() {
-
+        
         viewController.swipeInteractionController?.cancelIfNeeded()
 
         viewController.isDismissable = false
@@ -511,6 +516,7 @@ extension BulletinManager {
 
             UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, newArrangedSubviews.first)
 
+            self.viewController.bulletinAppeared()
         }
 
         transitionAnimationChain.add(hideSubviewsAnimationPhase)
@@ -518,7 +524,7 @@ extension BulletinManager {
         transitionAnimationChain.add(finalAnimationPhase)
 
         transitionAnimationChain.start()
-
+        
     }
 
     /// Tears down every item on the stack starting from the specified item.

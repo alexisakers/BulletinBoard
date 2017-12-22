@@ -95,6 +95,12 @@ extension BulletinViewController {
         })
 
     }
+    
+    public func bulletinAppeared() {
+        if let manager = manager, let bulletinCardAppeared = manager.bulletinCardAppeared {
+            bulletinCardAppeared(manager.currentItem)
+        }
+    }
 
     override func loadView() {
 
@@ -393,23 +399,24 @@ extension BulletinViewController {
     @available(iOS 11.0, *)
     fileprivate var screenHasRoundedCorners: Bool {
         let insets = view.safeAreaInsets
-        return (insets.top > 0) || (insets.left > 0) || (insets.right > 0) || (insets.bottom > 0)
+        return insets.bottom > 0
     }
 
     fileprivate func updateCornerRadius() {
 
+        let normalRadius = 12
+        let roundedRadius = normalRadius * 3
+        
         if manager?.cardPadding.rawValue == 0 {
             contentView.layer.cornerRadius = 0
             return
         }
 
-        var defaultRadius: NSNumber = 12
+        var defaultRadius: NSNumber = NSNumber(value: normalRadius)
 
         if #available(iOS 11.0, *) {
-            defaultRadius = screenHasRoundedCorners ? 36 : 12
+            defaultRadius = NSNumber(value: screenHasRoundedCorners ? roundedRadius : normalRadius)
         }
-
-
 
         contentView.layer.cornerRadius = CGFloat((manager?.cardCornerRadius ?? defaultRadius).doubleValue)
 
