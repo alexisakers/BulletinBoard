@@ -184,7 +184,7 @@ extension BulletinViewController {
 
     }
 
-    @available(iOSApplicationExtension 11.0, *)
+    @available(iOS 11.0, *)
     override func viewSafeAreaInsetsDidChange() {
         super.viewSafeAreaInsetsDidChange()
         updateCornerRadius()
