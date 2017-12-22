@@ -132,14 +132,18 @@ class ViewController: UIViewController {
      */
 
     func showBulletin() {
-        // Uncomment to customize interface
-//        bulletinManager.bulletinSize = .Full
-//        bulletinManager.cardCornerRadius = 36
+
+//        Uncomment to customize interface
+//        bulletinManager.cardCornerRadius = 22
+//        bulletinManager.cardPadding = .none
+//        bulletinManager.allowsSwipeInteraction = false
 //        bulletinManager.hidesHomeIndicator = true
-//        bulletinManager.hidesFooter = true
+//        bulletinManager.backgroundColor = .blue
+
         bulletinManager.backgroundViewStyle = currentBackground.style
         bulletinManager.statusBarAppearance = shouldHideStatusBar ? .hidden : .automatic
         bulletinManager.prepareAndPresent(above: self)
+
     }
 
     func reloadManager() {

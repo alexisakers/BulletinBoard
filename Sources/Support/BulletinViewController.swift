@@ -11,17 +11,13 @@ import UIKit
 
 final class BulletinViewController: UIViewController, UIGestureRecognizerDelegate {
 
+    /// The object managing the view controller.
+    weak var manager: BulletinManager?
+
+    // MARK: - UI Elements
+
     /// The subview that contains the contents of the card.
     let contentView = UIView()
-
-    /// The view covering the content. Generated in `loadBackgroundView`.
-    var backgroundView: BulletinBackgroundView!
-
-    /// The snapshot view of the content used during dismissal.
-    var activeSnapshotView: UIView?
-
-    /// Indicates whether the bulletin can be dismissed by a tap outside the card.
-    var isDismissable: Bool = false
 
     /**
      * The stack view displaying the content of the card.
@@ -32,38 +28,73 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
     let contentStackView = UIStackView()
 
+    /// The view covering the content. Generated in `loadBackgroundView`.
+    var backgroundView: BulletinBackgroundView!
+
+    /// The activity indicator.
     let activityIndicator = ActivityIndicator()
 
+    // MARK: - Dismissal Support Properties
+
+    /// Indicates whether the bulletin can be dismissed by a tap outside the card.
+    var isDismissable: Bool = false
+
+    /// The snapshot view of the content used during dismissal.
+    var activeSnapshotView: UIView?
+
+    /// The active swipe interaction controller.
+    var swipeInteractionController: BulletinSwipeInteractionController!
 
     // MARK: - Private Interface Elements
 
     fileprivate let bottomSafeAreaCoverView = UIVisualEffectView()
-    var swipeInteractionController: BulletinSwipeInteractionController!
 
     // Compact constraints
-    private var leadingConstraint: NSLayoutConstraint!
-    private var trailingConstraint: NSLayoutConstraint!
-    private var centerXConstraint: NSLayoutConstraint!
-    private var maxWidthConstraint: NSLayoutConstraint!
+    fileprivate var leadingConstraint: NSLayoutConstraint!
+    fileprivate var trailingConstraint: NSLayoutConstraint!
+    fileprivate var centerXConstraint: NSLayoutConstraint!
+    fileprivate var maxWidthConstraint: NSLayoutConstraint!
 
     // Regular constraints
-    private var widthConstraint: NSLayoutConstraint!
+    fileprivate var widthConstraint: NSLayoutConstraint!
     fileprivate var centerYConstraint: NSLayoutConstraint!
 
     // Stack view constraints
-    private var stackLeadingConstraint: NSLayoutConstraint!
-    private var stackTrailingConstraint: NSLayoutConstraint!
-    private var stackBottomConstraint: NSLayoutConstraint!
+    fileprivate var stackLeadingConstraint: NSLayoutConstraint!
+    fileprivate var stackTrailingConstraint: NSLayoutConstraint!
+    fileprivate var stackBottomConstraint: NSLayoutConstraint!
 
     // Position constraints
     fileprivate var minYConstraint: NSLayoutConstraint!
-    private var contentTopConstraint: NSLayoutConstraint!
+    fileprivate var contentTopConstraint: NSLayoutConstraint!
     fileprivate var contentBottomConstraint: NSLayoutConstraint!
 
+    // MARK: - Deinit
 
-    // MARK: - Lifecycle
+    deinit {
+        cleanUpKeyboardLogic()
+    }
 
-    weak var manager: BulletinManager?
+}
+
+// MARK: - Lifecycle
+
+extension BulletinViewController {
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setUpLayout(with: traitCollection)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        /// Animate status bar appearance when hiding
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+            self.setNeedsStatusBarAppearanceUpdate()
+        })
+
+    }
 
     override func loadView() {
 
@@ -97,10 +128,10 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
         contentView.addSubview(contentStackView)
 
-        stackLeadingConstraint = contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 36)
+        stackLeadingConstraint = contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
         stackLeadingConstraint.isActive = true
 
-        stackTrailingConstraint = contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -36)
+        stackTrailingConstraint = contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         stackTrailingConstraint.isActive = true
 
         minYConstraint = contentView.topAnchor.constraint(greaterThanOrEqualTo: view.safeTopAnchor)
@@ -153,60 +184,51 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    @available(iOSApplicationExtension 11.0, *)
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        updateCornerRadius()
         setUpLayout(with: traitCollection)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        /// Animate status bar appearance when hiding
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
-            self.setNeedsStatusBarAppearanceUpdate()
-        })
-    }
-
-    deinit {
-        cleanUpKeyboardLogic()
     }
 
     /// Configure content view with customizations.
 
     fileprivate func configureContentView() {
-        if let manager = manager {
-            contentView.backgroundColor = manager.backgroundColor
-            contentView.layer.cornerRadius = manager.cardCornerRadius ?? 0
 
-            // Set padding according to width type
-            var padding: CGFloat = 12
-
-            switch manager.bulletinSize {
-            case .Compact:
-                padding += 6
-            case .Full:
-                padding -= 6
-            case .Regular:
-                break
-            }
-
-            // Set left and right padding
-            leadingConstraint = contentView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor, constant: padding)
-            trailingConstraint = contentView.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor, constant: -padding)
-            // Set maximum width with padding
-            maxWidthConstraint = contentView.widthAnchor.constraint(lessThanOrEqualTo: view.safeWidthAnchor, constant: -(padding * 2))
-            maxWidthConstraint.priority = UILayoutPriorityRequired
-            maxWidthConstraint.isActive = true
-
-            if manager.hidesFooter {
-                contentBottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-                bottomSafeAreaCoverView.removeFromSuperview()
-            } else {
-                contentBottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.safeBottomAnchor)
-            }
-            contentBottomConstraint.constant = 1000
-            contentBottomConstraint.isActive = true
+        guard let manager = self.manager else {
+            fatalError("Trying to set up the content view, but the BulletinViewController is not managed.")
         }
+
+        contentView.backgroundColor = manager.backgroundColor
+        contentView.layer.cornerRadius = CGFloat(manager.cardCornerRadius ?? 12)
+
+        let cardPadding = manager.cardPadding.rawValue
+
+        // Set left and right padding
+        leadingConstraint = contentView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor,
+                                                                 constant: cardPadding)
+
+        trailingConstraint = contentView.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor,
+                                                                   constant: -cardPadding)
+
+        // Set maximum width with padding
+
+        maxWidthConstraint = contentView.widthAnchor.constraint(lessThanOrEqualTo: view.safeWidthAnchor,
+                                                                constant: -(cardPadding * 2))
+
+        maxWidthConstraint.priority = UILayoutPriorityRequired
+        maxWidthConstraint.isActive = true
+
+        if manager.hidesHomeIndicator {
+            contentBottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            bottomSafeAreaCoverView.removeFromSuperview()
+        } else {
+            contentBottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.safeBottomAnchor)
+        }
+
+        contentBottomConstraint.constant = 1000
+        contentBottomConstraint.isActive = true
+
     }
 
     // MARK: - Gesture Recognizer
@@ -219,7 +241,11 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         return true
     }
 
-    // MARK: - Layout
+}
+
+// MARK: - Layout
+
+extension BulletinViewController {
 
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
 
@@ -229,7 +255,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
     }
 
-    private func setUpLayout(with traitCollection: UITraitCollection) {
+    fileprivate func setUpLayout(with traitCollection: UITraitCollection) {
 
         switch traitCollection.horizontalSizeClass {
         case .regular:
@@ -273,18 +299,22 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
     // MARK: - Transition Adaptivity
 
+    func bottomMargin() -> CGFloat {
+
+        var bottomMargin: CGFloat = manager?.cardPadding.rawValue ?? 12
+
+        if manager?.hidesHomeIndicator == true {
+            bottomMargin = manager?.cardPadding.rawValue == 0 ? 0 : 6
+        }
+
+        return bottomMargin
+
+    }
+
     /// Moves the content view to its final location on the screen. Use during presentation.
     func moveIntoPlace() {
 
-        var bottomMargin: CGFloat = -12
-
-        if let manager = manager {
-            if manager.hidesFooter {
-                bottomMargin = -6
-            }
-        }
-
-        contentBottomConstraint.constant = bottomMargin
+        contentBottomConstraint.constant = -bottomMargin()
         centerYConstraint.constant = 0
 
         view.layoutIfNeeded()
@@ -310,7 +340,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
     // MARK: - Touch Events
 
-    @objc private func handleTap(recognizer: UITapGestureRecognizer) {
+    @objc fileprivate func handleTap(recognizer: UITapGestureRecognizer) {
         dismissIfPossible()
     }
 
@@ -320,9 +350,11 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         return dismissIfPossible()
     }
 
-    // MARK: - Background Accomodations
+}
 
-    /// Status bar style.
+// MARK: - System Elements
+
+extension BulletinViewController {
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if let manager = manager {
@@ -339,8 +371,6 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         return .default
     }
 
-    /// Status bar animation.
-
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         return manager?.statusBarAnimation ?? .fade
     }
@@ -349,10 +379,38 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         return manager?.statusBarAppearance == .hidden
     }
 
-    /// Auto hide home indicator for iPhone X
-    @available(iOS 11, *)
+    @available(iOS 11.0, *)
     override func prefersHomeIndicatorAutoHidden() -> Bool {
         return manager?.hidesHomeIndicator ?? false
+    }
+
+}
+
+// MARK: - Safe Area
+
+extension BulletinViewController {
+
+    @available(iOS 11.0, *)
+    fileprivate var screenHasRoundedCorners: Bool {
+        let insets = view.safeAreaInsets
+        return (insets.top > 0) || (insets.left > 0) || (insets.right > 0) || (insets.bottom > 0)
+    }
+
+    fileprivate func updateCornerRadius() {
+
+        if manager?.cardPadding.rawValue == 0 {
+            contentView.layer.cornerRadius = 0
+            return
+        }
+
+        var defaultRadius: NSNumber = 12
+
+        if #available(iOS 11.0, *) {
+            defaultRadius = screenHasRoundedCorners ? 36 : 12
+        }
+
+        contentView.layer.cornerRadius = CGFloat(manager?.cardCornerRadius ?? defaultRadius)
+
     }
 
 }
@@ -440,14 +498,26 @@ extension BulletinViewController: UIViewControllerTransitioningDelegate {
 
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning)
         -> UIViewControllerInteractiveTransitioning? {
+
+            guard manager?.allowsSwipeInteraction == true else {
+                return nil
+            }
+
             let isEligible = swipeInteractionController.isInteractionInProgress
             return isEligible ? swipeInteractionController : nil
+
     }
 
     /// Creates a new view swipe interaction controller and wires it to the content view.
     func refreshSwipeInteractionController() {
+
+        guard manager?.allowsSwipeInteraction == true else {
+            return
+        }
+
         swipeInteractionController = BulletinSwipeInteractionController()
         swipeInteractionController.wire(to: self)
+
     }
 
     /// Prepares the view controller for dismissal.
@@ -489,14 +559,21 @@ extension BulletinViewController {
         let animationOptions = UIViewAnimationOptions(curve: animationCurve)
 
         UIView.animate(withDuration: duration, delay: 0, options: animationOptions, animations: {
-            var bottomSpacing = -(keyboardFrameFinal.size.height + 12)
-            if #available(iOS 11, *) {
-                bottomSpacing += self.view.safeAreaInsets.bottom
+            var bottomSpacing = -(keyboardFrameFinal.size.height + self.bottomMargin())
+
+            if #available(iOS 11.0, *) {
+
+                if self.manager?.hidesHomeIndicator == false {
+                    bottomSpacing += self.view.safeAreaInsets.bottom
+                }
+
             }
+
             self.minYConstraint.isActive = false
             self.contentBottomConstraint.constant = bottomSpacing
             self.centerYConstraint.constant = -(keyboardFrameFinal.size.height + 12) / 2
             self.contentView.superview?.layoutIfNeeded()
+        
         }, completion: nil)
 
     }
@@ -519,7 +596,7 @@ extension BulletinViewController {
 
         UIView.animate(withDuration: duration, delay: 0, options: animationOptions, animations: {
             self.minYConstraint.isActive = true
-            self.contentBottomConstraint.constant = -12 // same value as in moveIntoPlace()
+            self.contentBottomConstraint.constant = -self.bottomMargin()
             self.centerYConstraint.constant = 0
             self.contentView.superview?.layoutIfNeeded()
         }, completion: nil)

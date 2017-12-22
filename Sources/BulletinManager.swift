@@ -21,22 +21,18 @@ import UIKit
 
 @objc public final class BulletinManager: NSObject {
 
-    /// Size Type for Bulletin Card.
-    ///
-    /// - Compact: Compact, less space
-    /// - Regular: Regular, normal space
-    /// - Full: Full, more space
-
-    @objc public enum BulletinSize: Int {
-        case Compact
-        case Regular
-        case Full
-    }
-
     /// Bulletin view controller.
     fileprivate var viewController: BulletinViewController!
 
-    // MARK: - Configuration
+    // MARK: - Background
+
+    /**
+     * The background color of the bulletin card. Defaults to white.
+     *
+     * Set this value before calling `prepare`. Changing it after will have no effect.
+     */
+
+    @objc public var backgroundColor: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
 
     /**
      * The style of the view covering the content. Defaults to `.dimmed`.
@@ -45,6 +41,8 @@ import UIKit
      */
 
     @objc public var backgroundViewStyle: BulletinBackgroundViewStyle = .dimmed
+
+    // MARK: - Status Bar
 
     /**
      * The style of status bar to use with the bulltin. Defaults to `.automatic`.
@@ -70,44 +68,36 @@ import UIKit
 
     @objc public var hidesHomeIndicator: Bool = false
 
+    // MARK: - Card Presentation
+
     /**
-     * The footer for iPhone X should be hidden or not. Defaults to false.
+     * The spacing between the edge of the screen and the edge of the card. Defaults to regular.
      *
      * Set this value before calling `prepare`. Changing it after will have no effect.
      */
 
-    @objc public var hidesFooter: Bool = false
+    @objc public var cardPadding: BulletinPadding = .regular
 
     /**
-     * The background color of the bulletin card. Defaults to white.
+     * The rounded corner radius of the bulletin card. Defaults to 12, and 36 on iPhone X.
      *
      * Set this value before calling `prepare`. Changing it after will have no effect.
      */
 
-    @objc public var backgroundColor: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    @objc public var cardCornerRadius: NSNumber?
 
     /**
-     * The bulletin size for card. Defaults to Regular.
+     * Whether swipe to dismiss should be allowed. Defaults to true.
      *
-     * Set this value before calling `prepare`. Changing it after will have no effect.
+     * If you set this value to true, the user will be able to drag the card, and swipe down to
+     * dismiss it (if allowed by the current item).
+     *
+     * If you set this value to false, no pan gesture will be recognized, and swipe to dismiss
+     * won't be available.
      */
 
-    @objc public var bulletinSize: BulletinSize = .Regular
+    @objc public var allowsSwipeInteraction: Bool = true
 
-    /**
-     * The rounded corner radius of the bulletin card. Defaults to 12 and 36 in iPhone X.
-     *
-     * Set this value before calling `prepare`. Changing it after will have no effect.
-     */
-
-    public var cardCornerRadius: CGFloat?
-
-    /// The default corner radius for iPhone X.
-    fileprivate let defaultXCornerRadius: CGFloat = 36
-
-    /// The default corner radius for other devices.
-    fileprivate let defaultCornerRadius: CGFloat = 12
-    
 
     // MARK: - Private Properties
 
@@ -160,14 +150,14 @@ extension BulletinManager {
         viewController = BulletinViewController()
         viewController.manager = self
 
-        if cardCornerRadius == nil {
-            cardCornerRadius = UIDevice.current.iPhoneX() ? defaultXCornerRadius : defaultCornerRadius
-        }
-
         viewController.modalPresentationStyle = .overFullScreen
         viewController.transitioningDelegate = viewController
         viewController.loadBackgroundView()
         viewController.setNeedsStatusBarAppearanceUpdate()
+
+        if #available(iOS 11.0, *) {
+            viewController.setNeedsUpdateOfHomeIndicatorAutoHidden()
+        }
 
         isPrepared = true
         isPreparing = true
