@@ -10,7 +10,7 @@ import UIKit
  */
 
 final class BulletinViewController: UIViewController, UIGestureRecognizerDelegate {
-
+    
     /// The subview that contains the contents of the card.
     let contentView = UIView()
 
@@ -22,7 +22,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
     /// Indicates whether the bulletin can be dismissed by a tap outside the card.
     var isDismissable: Bool = false
-
+    
     /**
      * The stack view displaying the content of the card.
      *
@@ -44,7 +44,8 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     private var leadingConstraint: NSLayoutConstraint!
     private var trailingConstraint: NSLayoutConstraint!
     private var centerXConstraint: NSLayoutConstraint!
-
+    private var maxWidthConstraint: NSLayoutConstraint!
+    
     // Regular constraints
     private var widthConstraint: NSLayoutConstraint!
     fileprivate var centerYConstraint: NSLayoutConstraint!
@@ -84,8 +85,6 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
         // Content View
 
-        leadingConstraint = contentView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor, constant: 12)
-        trailingConstraint = contentView.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor, constant: -12)
         centerXConstraint = contentView.centerXAnchor.constraint(equalTo: view.safeCenterXAnchor)
 
         centerYConstraint = contentView.centerYAnchor.constraint(equalTo: view.safeCenterYAnchor)
@@ -93,10 +92,6 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
         widthConstraint = contentView.widthAnchor.constraint(equalToConstant: 444)
         widthConstraint.priority = UILayoutPriorityRequired
-
-        let maxWidthConstraint = contentView.widthAnchor.constraint(lessThanOrEqualTo: view.safeWidthAnchor, constant: -24)
-        maxWidthConstraint.priority = UILayoutPriorityRequired
-        maxWidthConstraint.isActive = true
 
         // Content Stack View
 
@@ -166,15 +161,46 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
         super.viewWillAppear(animated)
         setUpLayout(with: traitCollection)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        /// Animate status bar appearance when hiding
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+            self.setNeedsStatusBarAppearanceUpdate()
+        })
+    }
 
     deinit {
         cleanUpKeyboardLogic()
     }
     
+    /// Configure content view with customizations.
+    
     fileprivate func configureContentView() {
         if let manager = manager {
             contentView.backgroundColor = manager.backgroundColor
             contentView.layer.cornerRadius = manager.cardCornerRadius ?? 0
+            
+            // Set padding according to width type
+            var padding: CGFloat = 12
+            
+            switch manager.bulletinSize {
+            case .Compact:
+                padding += 6
+            case .Full:
+                padding -= 6
+            case .Regular:
+                break
+            }
+            
+            // Set left and right padding
+            leadingConstraint = contentView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor, constant: padding)
+            trailingConstraint = contentView.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor, constant: -padding)
+            // Set maximum width with padding
+            maxWidthConstraint = contentView.widthAnchor.constraint(lessThanOrEqualTo: view.safeWidthAnchor, constant: -(padding * 2))
+            maxWidthConstraint.priority = UILayoutPriorityRequired
+            maxWidthConstraint.isActive = true
         }
     }
     
@@ -283,28 +309,37 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
     // MARK: - Background Accomodations
 
+    /// Status bar style.
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
-
-        switch manager?.statusBarAppearance {
-        case .lightContent?:
-            return .lightContent
-
-        case .automatic?:
-
-            if let isDark = manager?.backgroundViewStyle.rawValue.isDark {
-                return isDark ? .lightContent : .default
-            } else {
-                fallthrough
+        if let manager = manager {
+            switch manager.statusBarAppearance {
+            case .lightContent:
+                return .lightContent
+            case .automatic:
+                return manager.backgroundViewStyle.rawValue.isDark ? .lightContent : .default
+            default:
+                break
             }
-
-        default:
-            return .default
         }
         
+        return .default
+    }
+    
+    /// Status bar animation.
+    
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return manager?.statusBarAnimation ?? .fade
     }
 
     override var prefersStatusBarHidden: Bool {
         return manager?.statusBarAppearance == .hidden
+    }
+    
+    /// Auto hide home indicator for iPhone X
+    @available(iOS 11, *)
+    override func prefersHomeIndicatorAutoHidden() -> Bool {
+        return manager?.hidesHomeIndicator ?? false
     }
 
 }

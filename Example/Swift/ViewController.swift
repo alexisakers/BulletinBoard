@@ -133,6 +133,8 @@ class ViewController: UIViewController {
      */
 
     func showBulletin() {
+        bulletinManager.bulletinSize = .Full
+        bulletinManager.hidesHomeIndicator = true
         bulletinManager.backgroundViewStyle = currentBackground.style
         bulletinManager.statusBarAppearance = shouldHideStatusBar ? .hidden : .automatic
         bulletinManager.prepare()

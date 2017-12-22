@@ -21,6 +21,19 @@ import UIKit
 
 @objc public final class BulletinManager: NSObject {
 
+    /// Size Type for Bulletin Card.
+    ///
+    /// - Compact: Compact, less space
+    /// - Regular: Regular, normal space
+    /// - Full: Full, more space
+    
+    @objc public enum BulletinSize: Int {
+        case Compact
+        case Regular
+        case Full
+    }
+    
+    /// Bulletin view controller.
     fileprivate var viewController: BulletinViewController!
 
     // MARK: - Configuration
@@ -42,6 +55,21 @@ import UIKit
     @objc public var statusBarAppearance: BulletinStatusBarAppearance = .automatic
 
     /**
+     * The style of status bar animation. Defaults to `.fade`.
+     *
+     * Set this value before calling `prepare`. Changing it after will have no effect.
+     */
+    
+    @objc public var statusBarAnimation: UIStatusBarAnimation = .fade
+    
+    /**
+     * The home indicator for iPhone X should be hidden or not. Defaults to false.
+     *
+     * Set this value before calling `prepare`. Changing it after will have no effect.
+     */
+    @objc public var hidesHomeIndicator: Bool = false
+    
+    /**
      * The background color of the bulletin card. Defaults to white.
      *
      * Set this value before calling `prepare`. Changing it after will have no effect.
@@ -50,7 +78,15 @@ import UIKit
     @objc public var backgroundColor: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     
     /**
-     * The rounded corner radius of the bulletin card. Defaults to 12 and 25 in iPhone X.
+     * The bulletin size for card. Defaults to Regular.
+     *
+     * Set this value before calling `prepare`. Changing it after will have no effect.
+     */
+    
+    @objc public var bulletinSize: BulletinSize = .Regular
+    
+    /**
+     * The rounded corner radius of the bulletin card. Defaults to 12 and 34 in iPhone X.
      *
      * Set this value before calling `prepare`. Changing it after will have no effect.
      */
@@ -62,6 +98,7 @@ import UIKit
     
     /// The default corner radius for other devices.
     fileprivate let defaultCornerRadius: CGFloat = 12
+    
     
     // MARK: - Private Properties
 
