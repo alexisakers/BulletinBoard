@@ -50,13 +50,19 @@ import UIKit
     @objc public var backgroundColor: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     
     /**
-     * The rounded corner radius of the bulletin card. Defaults to 12.
+     * The rounded corner radius of the bulletin card. Defaults to 12 and 25 in iPhone X.
      *
      * Set this value before calling `prepare`. Changing it after will have no effect.
      */
     
-    @objc public var cardCornerRadius: CGFloat = 12
+    public var cardCornerRadius: CGFloat?
 
+    /// The default corner radius for iPhone X.
+    fileprivate let defaultXCornerRadius: CGFloat = 34
+    
+    /// The default corner radius for other devices.
+    fileprivate let defaultCornerRadius: CGFloat = 12
+    
     // MARK: - Private Properties
 
     var currentItem: BulletinItem
@@ -94,7 +100,7 @@ import UIKit
 // MARK: - Interacting with the Bulletin
 
 extension BulletinManager {
-
+    
     /**
      * Prepares the bulletin interface and displays the root item.
      *
@@ -108,6 +114,10 @@ extension BulletinManager {
         viewController = BulletinViewController()
         viewController.manager = self
 
+        if cardCornerRadius == nil {
+            cardCornerRadius = UIDevice.current.iPhoneX() ? defaultXCornerRadius : defaultCornerRadius
+        }
+        
         viewController.modalPresentationStyle = .overFullScreen
         viewController.transitioningDelegate = viewController
         viewController.loadBackgroundView()

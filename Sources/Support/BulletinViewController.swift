@@ -174,7 +174,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     fileprivate func configureContentView() {
         if let manager = manager {
             contentView.backgroundColor = manager.backgroundColor
-            contentView.layer.cornerRadius = manager.cardCornerRadius
+            contentView.layer.cornerRadius = manager.cardCornerRadius ?? 0
         }
     }
     
