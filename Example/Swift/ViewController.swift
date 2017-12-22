@@ -139,7 +139,10 @@ class ViewController: UIViewController {
 //        bulletinManager.allowsSwipeInteraction = false
 //        bulletinManager.hidesHomeIndicator = true
 //        bulletinManager.backgroundColor = .blue
-
+//        bulletinManager.bulletinCardAppeared = { (item) in
+//            // Additional configurations
+//        }
+        
         bulletinManager.backgroundViewStyle = currentBackground.style
         bulletinManager.statusBarAppearance = shouldHideStatusBar ? .hidden : .automatic
         bulletinManager.prepareAndPresent(above: self)
