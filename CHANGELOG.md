@@ -8,6 +8,8 @@
 - Customize fonts and more colors
 - Customize status bar colors
 - Customize bulletin background color
+- Customize corner radius
+- Customize padding between screen and bulletin
 - Hide the activity indicator without changing the current item 
 - Annotate library to support Objective-C apps
 - Handle keyboard frame updates (support for text fields)
@@ -19,6 +21,7 @@
 
 - On iPad, the bulletin will be presented at the center of the screen and can only be dismissed by a tap (no swipe)
 - The item will not be dismissed on swipe unless the user lifts their finger from the screen
+- Use screen corner radius on iPhone X
 
 ### Bug fixes
 
