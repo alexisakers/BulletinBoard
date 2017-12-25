@@ -392,8 +392,7 @@ extension BulletinViewController {
 
     @available(iOS 11.0, *)
     fileprivate var screenHasRoundedCorners: Bool {
-        let insets = view.safeAreaInsets
-        return (insets.top > 0) || (insets.left > 0) || (insets.right > 0) || (insets.bottom > 0)
+        return view.safeAreaInsets.bottom > 0
     }
 
     fileprivate func updateCornerRadius() {
