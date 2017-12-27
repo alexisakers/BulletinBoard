@@ -96,6 +96,14 @@ extension BulletinViewController {
 
     }
 
+    /// When the bulletin item appeared.
+    
+    public func bulletinAppeared() {
+        if let manager = manager, let bulletinCardAppeared = manager.bulletinCardAppeared {
+            bulletinCardAppeared(manager.currentItem)
+        }
+    }
+
     override func loadView() {
 
         super.loadView()

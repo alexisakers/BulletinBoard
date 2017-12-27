@@ -140,6 +140,10 @@ class ViewController: UIViewController {
 //        bulletinManager.hidesHomeIndicator = true
 //        bulletinManager.backgroundColor = .blue
 
+//        bulletinManager.bulletinCardAppeared = { (item) in
+//            // Additional configuration once card appeared
+//        }
+
         bulletinManager.backgroundViewStyle = currentBackground.style
         bulletinManager.statusBarAppearance = shouldHideStatusBar ? .hidden : .automatic
         bulletinManager.prepareAndPresent(above: self)
