@@ -98,6 +98,11 @@ import UIKit
 
     @objc public var allowsSwipeInteraction: Bool = true
 
+    /**
+     * The code to be executed when bulletin card appeared.
+     */
+    
+    @objc public var bulletinCardAppeared: ((BulletinItem) -> Void)? = nil
 
     // MARK: - Private Properties
 
@@ -526,6 +531,8 @@ extension BulletinManager {
             }
 
             UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, newArrangedSubviews.first)
+
+            self.viewController.bulletinAppeared()
 
         }
 
