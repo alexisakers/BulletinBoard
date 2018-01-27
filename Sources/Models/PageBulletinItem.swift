@@ -63,6 +63,7 @@ import UIKit
      */
 
     @objc public var descriptionText: String?
+    @objc public var descriptionAttributedText: NSAttributedString?
 
     // MARK: - Customization
 
@@ -197,6 +198,14 @@ import UIKit
             descriptionLabel!.text = descriptionText
             contentViews.append(descriptionLabel!)
 
+        }
+        
+        if let descriptionAttributedText = self.descriptionAttributedText {
+            descriptionLabel = interfaceBuilder.makeDescriptionLabel()
+            descriptionLabel?.attributedText = descriptionAttributedText
+            if let descriptionLabel = descriptionLabel {
+                contentViews.append(descriptionLabel)
+            }
         }
 
         insertComplementaryViews(viewsUnderDescription)
