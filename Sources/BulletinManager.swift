@@ -98,6 +98,12 @@ import UIKit
 
     @objc public var allowsSwipeInteraction: Bool = true
 
+    
+    /**
+     * A callback that will be called when the bulletin is completely dismissed.
+     *
+     */
+    public var dismissalHandler: (()->())?
 
     // MARK: - Private Properties
 
@@ -406,6 +412,7 @@ extension BulletinManager {
     @nonobjc func completeDismissal() {
 
         currentItem.dismissalHandler?(currentItem)
+        dismissalHandler?()
 
         for arrangedSubview in viewController.contentStackView.arrangedSubviews {
             viewController.contentStackView.removeArrangedSubview(arrangedSubview)
