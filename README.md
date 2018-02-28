@@ -270,6 +270,10 @@ Several styles are available in the `BulletinBackgroundViewStyle` enum:
 
 > Note: blurred backgrounds are available in iOS 10.0 and later.
 
+## Dismissal Closures
+
+You can set the `dismissalHandler` property of a bulletin item with a closure to be called on its dismissal. Additionally the `dismissalHandler` property of the `dismissalHandler` will be called when it is completely dismissed.
+
 ## Dismissal
 
 If you set the `isDismissable` property to `true`, the user will be able to dismiss the bulletin by tapping outside of the card or by swiping the card down.
