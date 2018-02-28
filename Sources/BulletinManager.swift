@@ -85,7 +85,17 @@ import UIKit
      */
 
     @objc public var cardCornerRadius: NSNumber?
-
+    
+   
+    /**
+     * The spacing between views in the bulletin item stackview - chosen based on vertical size class
+     *
+     * Set this value before calling `prepare`. Changing it after will have no effect.
+     */
+    @objc public var bulletinSpacingCompact: CGFloat = 12
+    @objc public var bulletinSpacingRegular: CGFloat = 24
+    @objc public var bulletinSpacingLarge: CGFloat = 32
+    
     /**
      * Whether swipe to dismiss should be allowed. Defaults to true.
      *
@@ -98,6 +108,12 @@ import UIKit
 
     @objc public var allowsSwipeInteraction: Bool = true
 
+    
+    /**
+     * A callback that will be called when the bulletin is completely dismissed.
+     *
+     */
+    public var dismissalHandler: (()->())?
 
     // MARK: - Private Properties
 
@@ -406,6 +422,7 @@ extension BulletinManager {
     @nonobjc func completeDismissal() {
 
         currentItem.dismissalHandler?(currentItem)
+        dismissalHandler?()
 
         for arrangedSubview in viewController.contentStackView.arrangedSubviews {
             viewController.contentStackView.removeArrangedSubview(arrangedSubview)

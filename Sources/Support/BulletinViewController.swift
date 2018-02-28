@@ -284,14 +284,21 @@ extension BulletinViewController {
             stackTrailingConstraint.constant = -32
             stackBottomConstraint.constant = -32
             contentTopConstraint.constant = -32
-            contentStackView.spacing = 32
+            contentStackView.spacing = manager?.bulletinSpacingLarge ?? 32
+
+        case (.compact, _):
+            stackLeadingConstraint.constant = 20
+            stackTrailingConstraint.constant = -20
+            stackBottomConstraint.constant = -20
+            contentTopConstraint.constant = -20
+            contentStackView.spacing = manager?.bulletinSpacingCompact ?? 12
 
         default:
             stackLeadingConstraint.constant = 24
             stackTrailingConstraint.constant = -24
             stackBottomConstraint.constant = -24
             contentTopConstraint.constant = -24
-            contentStackView.spacing = 24
+            contentStackView.spacing = manager?.bulletinSpacingRegular ?? 24
 
         }
 
