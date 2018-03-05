@@ -12,7 +12,7 @@ import UIKit
  * function on `UIButton` to set one.
  */
 
-class HighlightButton: UIButton {
+class HighlightButton: ContinuousButton {
 
     // MARK: - Hit Area
 
@@ -134,10 +134,6 @@ extension UIButton {
 @objc public class HighlightButtonWrapper: UIView {
 
     @objc public let button: UIButton
-
-    public override convenience init(frame: CGRect) {
-        self.init(button: HighlightButton())
-    }
 
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) is unavailable. Use init(button:) instead.")

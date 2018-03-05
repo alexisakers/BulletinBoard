@@ -17,7 +17,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     // MARK: - UI Elements
 
     /// The subview that contains the contents of the card.
-    let contentView = UIView()
+    let contentView = ContinuousMaskView(cornerRadius: 8)
 
     /**
      * The stack view displaying the content of the card.
@@ -200,7 +200,7 @@ extension BulletinViewController {
         }
 
         contentView.backgroundColor = manager.backgroundColor
-        contentView.layer.cornerRadius = CGFloat((manager.cardCornerRadius ?? 12).doubleValue)
+        contentView.cornerRadius = CGFloat((manager.cardCornerRadius ?? 12).doubleValue)
 
         let cardPadding = manager.cardPadding.rawValue
 
@@ -399,7 +399,7 @@ extension BulletinViewController {
     fileprivate func updateCornerRadius() {
 
         if manager?.cardPadding.rawValue == 0 {
-            contentView.layer.cornerRadius = 0
+            contentView.cornerRadius = 0
             return
         }
 
@@ -409,9 +409,7 @@ extension BulletinViewController {
             defaultRadius = screenHasRoundedCorners ? 36 : 12
         }
 
-
-
-        contentView.layer.cornerRadius = CGFloat((manager?.cardCornerRadius ?? defaultRadius).doubleValue)
+        contentView.cornerRadius = CGFloat((manager?.cardCornerRadius ?? defaultRadius).doubleValue)
 
     }
 

@@ -89,7 +89,7 @@ import UIKit
 
     @objc open func makeActionButton(title: String) -> HighlightButtonWrapper {
 
-        let actionButton = HighlightButton(type: .custom)
+        let actionButton = HighlightButton(cornerRadius: appearance.actionButtonCornerRadius)
         actionButton.setBackgroundColor(appearance.actionButtonColor, forState: .normal)
         actionButton.setTitleColor(appearance.actionButtonTitleColor, for: .normal)
         actionButton.contentHorizontalAlignment = .center
@@ -97,7 +97,6 @@ import UIKit
         actionButton.setTitle(title, for: .normal)
         actionButton.titleLabel?.font = appearance.makeActionButtonFont()
 
-        actionButton.layer.cornerRadius = appearance.actionButtonCornerRadius
         actionButton.clipsToBounds = true
 
         if let color = appearance.actionButtonBorderColor {
@@ -126,13 +125,12 @@ import UIKit
 
     @objc open func makeAlternativeButton(title: String) -> UIButton {
 
-        let alternativeButton = UIButton(type: .system)
+        let alternativeButton = ContinuousButton(cornerRadius: appearance.alternativeButtonCornerRadius)
         alternativeButton.setTitle(title, for: .normal)
         alternativeButton.setTitleColor(appearance.alternativeButtonColor, for: .normal)
         alternativeButton.titleLabel?.font = appearance.makeAlternativeButtonFont()
 
         if let color = appearance.alternativeButtonBorderColor {
-          alternativeButton.layer.cornerRadius = appearance.alternativeButtonCornerRadius
           alternativeButton.clipsToBounds = true
           alternativeButton.layer.borderColor = color.cgColor
           alternativeButton.layer.borderWidth = appearance.alternativeButtonBorderWidth
