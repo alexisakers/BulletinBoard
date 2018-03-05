@@ -39,8 +39,11 @@
     NSMutableArray<UIView *> *contentViews = [[NSMutableArray alloc] init];
 
     void (^insertComplementaryViews)(SEL) = ^(SEL generator) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         NSObject *result = [self performSelector:generator withObject:interfaceBuilder];
-
+#pragma clang diagnostic pop
+        
         if ([result isKindOfClass:[NSArray<UIView *> class]]) {
             [contentViews addObjectsFromArray:(NSArray<UIView *> *)result];
         }

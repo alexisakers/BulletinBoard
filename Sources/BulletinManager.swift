@@ -344,7 +344,7 @@ extension BulletinManager {
 
     @objc public func displayNextItem() {
 
-        guard let nextItem = currentItem.nextItem else {
+        guard let nextItem = currentItem.next else {
             preconditionFailure("Calling BulletinManager.displayNextItem, but the current item has no nextItem.")
         }
 
@@ -575,9 +575,9 @@ extension BulletinManager {
         item.tearDown()
         item.manager = nil
 
-        if let nextItem = item.nextItem {
+        if let nextItem = item.next {
             tearDownItemsChain(startingAt: nextItem)
-            item.nextItem = nil
+            item.next = nil
         }
 
     }

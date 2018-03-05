@@ -17,7 +17,7 @@
 		558A12301F7D73CD005EC97C /* BulletinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122A1F7D73CD005EC97C /* BulletinManager.swift */; };
 		558A12321F7D73CD005EC97C /* BulletinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122C1F7D73CD005EC97C /* BulletinViewController.swift */; };
 		558A12331F7D73CD005EC97C /* HighlightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122D1F7D73CD005EC97C /* HighlightButton.swift */; };
-		558A12371F7D73E6005EC97C /* BulletinItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A12361F7D73E5005EC97C /* BulletinItem.swift */; };
+		559F8E95204DB9BA00322949 /* BulletinItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 559F8E94204DB9BA00322949 /* BulletinItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55B3D1CF1FDADA8E00737791 /* AnimationChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B3D1CE1FDADA8E00737791 /* AnimationChain.swift */; };
 		55BF9C021F962FD700347D45 /* UIView+SafeAnchors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BF9C011F962FD700347D45 /* UIView+SafeAnchors.swift */; };
 		55C8EF3E204D8A010050E1C2 /* PageBulletinItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 55C8EF3C204D8A010050E1C2 /* PageBulletinItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -41,7 +41,7 @@
 		558A122A1F7D73CD005EC97C /* BulletinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletinManager.swift; sourceTree = "<group>"; };
 		558A122C1F7D73CD005EC97C /* BulletinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletinViewController.swift; sourceTree = "<group>"; };
 		558A122D1F7D73CD005EC97C /* HighlightButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighlightButton.swift; sourceTree = "<group>"; };
-		558A12361F7D73E5005EC97C /* BulletinItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinItem.swift; sourceTree = "<group>"; };
+		559F8E94204DB9BA00322949 /* BulletinItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BulletinItem.h; sourceTree = "<group>"; };
 		55B3D1CE1FDADA8E00737791 /* AnimationChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationChain.swift; sourceTree = "<group>"; };
 		55BF9C011F962FD700347D45 /* UIView+SafeAnchors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+SafeAnchors.swift"; sourceTree = "<group>"; };
 		55C8EF3C204D8A010050E1C2 /* PageBulletinItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PageBulletinItem.h; sourceTree = "<group>"; };
@@ -104,7 +104,7 @@
 		55B3D1D11FDD644300737791 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				558A12361F7D73E5005EC97C /* BulletinItem.swift */,
+				559F8E94204DB9BA00322949 /* BulletinItem.h */,
 				55CB0F80204D63CC001D0393 /* ActionBulletinItem.h */,
 				55CB0F81204D63CC001D0393 /* ActionBulletinItem.m */,
 				55C8EF3C204D8A010050E1C2 /* PageBulletinItem.h */,
@@ -166,6 +166,7 @@
 			files = (
 				55C8EF3E204D8A010050E1C2 /* PageBulletinItem.h in Headers */,
 				55CB0F85204D6466001D0393 /* BulletinBoard.h in Headers */,
+				559F8E95204DB9BA00322949 /* BulletinItem.h in Headers */,
 				55CB0F82204D63CC001D0393 /* ActionBulletinItem.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,7 +243,6 @@
 				558A12331F7D73CD005EC97C /* HighlightButton.swift in Sources */,
 				55DADE7A1F7D9428001B11A2 /* BulletinInterfaceBuilder.swift in Sources */,
 				55B3D1CF1FDADA8E00737791 /* AnimationChain.swift in Sources */,
-				558A12371F7D73E6005EC97C /* BulletinItem.swift in Sources */,
 				5543848F1F92050300AFFBCD /* BulletinDismissAnimationController.swift in Sources */,
 				5543848B1F91FAC500AFFBCD /* BulletinPresentationAnimationController.swift in Sources */,
 				5543848D1F92026200AFFBCD /* BulletinBackgroundView.swift in Sources */,

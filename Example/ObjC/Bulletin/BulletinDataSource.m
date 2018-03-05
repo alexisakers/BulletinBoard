@@ -20,7 +20,7 @@
     [page setActionButtonTitle:@"Configure"];
 
     [page setAppearance:[BulletinDataSource makeLightAppearance]];
-    [page setIsDismissable:YES];
+    page.dismissable = YES;
     page.shouldStartWithActivityIndicator = YES;
 
     // After the item is presented, show the contents after 3 seconds
@@ -68,7 +68,7 @@
     [page setAlternativeButtonTitle:@"Not now"];
     [page setImage:[UIImage imageNamed:@"NotificationPrompt"]];
 
-    [page setIsDismissable:NO];
+    page.dismissable = NO;
 
     [page setActionHandler:^(ActionBulletinItem * _Nonnull _item) {
         [[PermissionsManager sharedManager] requestLocalNotifications];
@@ -96,7 +96,7 @@
     [page setAlternativeButtonTitle:@"No thanks"];
 
     [[page appearance] setShouldUseCompactDescriptionText:YES];
-    [page setIsDismissable:NO];
+    page.dismissable = NO;
 
     [page setActionHandler:^(ActionBulletinItem * _Nonnull _item) {
         [[PermissionsManager sharedManager] requestWhenInUseLocation];
@@ -140,7 +140,7 @@
     [page setActionButtonTitle:@"Get started"];
     [page setAlternativeButtonTitle:@"Replay"];
 
-    [page setIsDismissable:YES];
+    page.dismissable = NO;
 
     [page setDismissalHandler:^(id<BulletinItem> _Nonnull _item) {
         [[NSNotificationCenter defaultCenter] postNotificationName:SetupDidCompleteNotificationName object:_item];

@@ -5,5 +5,6 @@
 
 @import UIKit;
 
+#import "BulletinItem.h"
 #import "ActionBulletinItem.h"
 #import "PageBulletinItem.h"

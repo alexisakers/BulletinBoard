@@ -16,8 +16,6 @@
 
 @implementation ActionBulletinItem
 
-@synthesize isDismissable;
-
 - (instancetype)init
 {
     self = [super init];
@@ -32,7 +30,7 @@
         self.presentationHandler = nil;
         self.dismissalHandler = nil;
         self.appearance = [[BulletinAppearance alloc] init];
-        self.InterfaceBuilderType = [BulletinInterfaceBuilder class];
+        self.interfaceBuilderType = [BulletinInterfaceBuilder class];
         self.actionButton = nil;
         self.alternativeButton = nil;
         self.actionHandler = nil;
@@ -73,10 +71,10 @@
 {
     NSMutableArray<UIView *> *arrangedSubviews = [[NSMutableArray alloc] init];
 
-    NSAssert([self.InterfaceBuilderType isSubclassOfClass:[BulletinInterfaceBuilder class]],
+    NSAssert([self.interfaceBuilderType isSubclassOfClass:[BulletinInterfaceBuilder class]],
              @"InterfaceBuilderType must be a subclass of BulletinInterfaceBuilder, or BulletinInterfaceBuilder.");
 
-    BulletinInterfaceBuilder *interfaceBuilder = [[self.InterfaceBuilderType alloc] performSelector:NSSelectorFromString(@"initWithAppearance:") withObject:self.appearance];
+    BulletinInterfaceBuilder *interfaceBuilder = [[self.interfaceBuilderType alloc] initWithAppearance:self.appearance];
     
     NSArray<UIView *> *contentViews = [self makeContentViewsWithInterfaceBuilder:interfaceBuilder];
     [arrangedSubviews addObjectsFromArray:contentViews];

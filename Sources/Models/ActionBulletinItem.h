@@ -5,7 +5,8 @@
 
 @import UIKit;
 
-@protocol BulletinItem;
+#import "BulletinItem.h"
+
 @class BulletinManager;
 @class BulletinAppearance;
 @class BulletinInterfaceBuilder;
@@ -144,7 +145,7 @@
  * after the bulletin page was presented has no effect.
  */
 
-@property (nonatomic, strong, nonnull) Class InterfaceBuilderType;
+@property (nonatomic, strong, nonnull) Class interfaceBuilderType;
 
 #pragma mark - Buttons
 
