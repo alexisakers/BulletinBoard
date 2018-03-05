@@ -37,6 +37,15 @@ import UIKit
     var isDismissable: Bool { get set }
 
     /**
+     * Whether the page should start with an activity indicator.
+     *
+     * Set this value to `false` to display the elements right away. If you set it to `true`,
+     * you'll need to call `manager?.hideActivityIndicator()` to show the UI.
+     */
+
+    var shouldStartWithActivityIndicator: Bool { get set }
+
+    /**
      * Whether the item should move with the keyboard.
      *
      * You must set it to `true` if the item displays a text field. Otherwise, you can set it to `false` if you
@@ -44,18 +53,6 @@ import UIKit
      */
 
     var shouldRespondToKeyboardChanges: Bool { get set }
-
-    /**
-     * The block of code to execute when the bulletin item is dismissed. This is called after the bulletin
-     * is moved out of view.
-     *
-     * - parameter item: The item that is being dismissed.
-
-     * When calling `dismissalHandler`, the manager passes a reference to `self` so you don't have to retain a
-     * weak reference yourself.
-     */
-
-    var dismissalHandler: ((_ item: BulletinItem) -> Void)? { get set }
 
     /**
      * The item to display after this one.
@@ -77,6 +74,15 @@ import UIKit
     func makeArrangedSubviews() -> [UIView]
 
     /**
+     * Called by the manager when the item was added to the bulletin.
+     *
+     * Use this function to configure your managed views, and allocate any resources required
+     * for this item.
+     */
+
+    func setUp()
+
+    /**
      * Called by the manager when the item was removed from the bulletin.
      *
      * Use this function to remove any button target or gesture recognizers from your managed views, and
@@ -84,5 +90,18 @@ import UIKit
      */
 
     func tearDown()
+
+    /**
+     * Called by the manager when bulletin item is pushed onto the view.
+     */
+
+    func onDisplay()
+
+    /**
+     * Called by the manager when bulletin item is dismissed. This is called after the bulletin
+     * is moved out of view.
+     */
+
+    func onDismiss()
 
 }

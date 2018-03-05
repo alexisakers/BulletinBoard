@@ -72,6 +72,17 @@ import UIKit
     @objc public var isDismissable: Bool = false
 
     /**
+     * Whether the page should start with an activity indicator.
+     *
+     * Set this value to `false` to display the elements right away. If you set it to `true`,
+     * you'll need to call `manager?.hideActivityIndicator()` to show the UI.
+     *
+     * This defaults to `false`.
+     */
+
+    @objc public var shouldStartWithActivityIndicator: Bool = false
+
+    /**
      * Whether the item should move with the keyboard.
      *
      * You must set it to `true` if the item displays a text field. Otherwise, you can set it to `false` if you
@@ -83,13 +94,19 @@ import UIKit
     @objc public var shouldRespondToKeyboardChanges: Bool = true
 
     /**
+     * The block of code to execute when the bulletin item is presented. This is called after the
+     * bulletin is moved onto the view.
+     *
+     * - parameter item: The item that is being presented.
+     */
+
+    @objc public var presentationHandler: ((_ item: BulletinItem) -> Void)?
+
+    /**
      * The block of code to execute when the bulletin item is dismissed. This is called when the bulletin
      * is moved out of view.
      *
      * You can leave it `nil` if `isDismissable` is set to false.
-     *
-     * - parameter item: The item that is being dismissed. When calling `dismissalHandler`, the manager
-     * passes a reference to `self` so you don't have to manage weak references yourself.
      */
 
     @objc public var dismissalHandler: ((_ item: BulletinItem) -> Void)?
@@ -232,23 +249,15 @@ import UIKit
         let buttonsStack = interfaceBuilder.makeGroupStack()
 
         if let actionButtonTitle = self.actionButtonTitle {
-
             let actionButton = interfaceBuilder.makeActionButton(title: actionButtonTitle)
             buttonsStack.addArrangedSubview(actionButton)
-            actionButton.button.addTarget(self, action: #selector(actionButtonTapped(sender:)), for: .touchUpInside)
-
             self.actionButton = actionButton.button
-
         }
 
         if let alternativeButtonTitle = self.alternativeButtonTitle {
-
             let alternativeButton = interfaceBuilder.makeAlternativeButton(title: alternativeButtonTitle)
             buttonsStack.addArrangedSubview(alternativeButton)
-            alternativeButton.addTarget(self, action: #selector(alternativeButtonTapped(sender:)), for: .touchUpInside)
-
             self.alternativeButton = alternativeButton
-
         }
 
         arrangedSubviews.append(buttonsStack)
@@ -260,6 +269,25 @@ import UIKit
         }
 
         return arrangedSubviews
+
+    }
+
+    // MARK: - Events
+
+    /**
+     * Called by the manager when the item was added to the bulletin.
+     *
+     * Override this function to configure your managed views, and allocate any resources required
+     * for this item. Make sure to call `super` if you override this method.
+     */
+
+    open func setUp() {
+
+        actionButton?.addTarget(self, action: #selector(actionButtonTapped(sender:)),
+                                      for: .touchUpInside)
+
+        alternativeButton?.addTarget(self, action: #selector(alternativeButtonTapped(sender:)),
+                                    for: .touchUpInside)
 
     }
 
@@ -279,6 +307,31 @@ import UIKit
         actionButton = nil
         alternativeButton = nil
 
+    }
+
+    /**
+     * Called by the manager when bulletin item is pushed onto the view.
+     *
+     * By default, this method calls trhe `presentationHandler` of the action item. Override this
+     * method if you need to perform additional preparation after presentation (although using
+     * `setUp` is preferred).
+     */
+
+    open func onDisplay() {
+        presentationHandler?(self)
+    }
+
+    /**
+     * Called by the manager when bulletin item is dismissed. This is called after the bulletin
+     * is moved out of view.
+     *
+     * By default, this method calls trhe `dismissalHandler` of the action item. Override this
+     * method if you need to perform additional cleanup after dismissal (although using
+     * `tearDown` is preferred).
+     */
+
+    open func onDismiss() {
+        dismissalHandler?(self)
     }
 
 }

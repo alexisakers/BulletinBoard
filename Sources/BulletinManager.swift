@@ -109,6 +109,8 @@ import UIKit
 
     fileprivate var isPrepared: Bool = false
     fileprivate var isPreparing: Bool = false
+    fileprivate var shouldDisplayActivityIndicator: Bool = false
+    fileprivate var lastActivityIndicatorColor: UIColor = .black
 
     // MARK: - Initialization
 
@@ -161,6 +163,7 @@ extension BulletinManager {
 
         isPrepared = true
         isPreparing = true
+        shouldDisplayActivityIndicator = rootItem.shouldStartWithActivityIndicator
 
         refreshCurrentItemInterface()
         isPreparing = false
@@ -227,6 +230,9 @@ extension BulletinManager {
         assertIsPrepared()
         assertIsMainThread()
 
+        shouldDisplayActivityIndicator = true
+        lastActivityIndicatorColor = color
+
         viewController.displayActivityIndicator(color: color)
 
     }
@@ -243,8 +249,9 @@ extension BulletinManager {
         assertIsPrepared()
         assertIsMainThread()
 
+        shouldDisplayActivityIndicator = false
         viewController.swipeInteractionController?.cancelIfNeeded()
-        viewController.hideActivityIndicator(showContentStack: true)
+        refreshCurrentItemInterface(elementsChanged: false)
 
     }
 
@@ -262,6 +269,8 @@ extension BulletinManager {
         itemsStack.append(item)
 
         currentItem = item
+
+        shouldDisplayActivityIndicator = item.shouldStartWithActivityIndicator
         refreshCurrentItemInterface()
 
     }
@@ -288,6 +297,8 @@ extension BulletinManager {
         }
 
         self.currentItem = currentItem
+
+        shouldDisplayActivityIndicator = currentItem.shouldStartWithActivityIndicator
         refreshCurrentItemInterface()
 
     }
@@ -310,6 +321,7 @@ extension BulletinManager {
 
         itemsStack = []
 
+        shouldDisplayActivityIndicator = rootItem.shouldStartWithActivityIndicator
         refreshCurrentItemInterface()
 
     }
@@ -349,8 +361,18 @@ extension BulletinManager {
                                       animated: Bool = true,
                                       completion: (() -> Void)? = nil) {
 
+        let isDetached = viewController.presentingViewController == nil
+        assert(isDetached, "Attempt to present a Bulletin that is already presented.")
+
         assertIsPrepared()
         assertIsMainThread()
+        viewController.loadView()
+
+        let refreshActivityIndicator = shouldDisplayActivityIndicator && isDetached
+
+        if refreshActivityIndicator {
+            viewController.displayActivityIndicator(color: lastActivityIndicatorColor)
+        }
 
         viewController.modalPresentationCapturesStatusBarAppearance = true
         presentingVC.present(viewController, animated: animated, completion: completion)
@@ -389,7 +411,7 @@ extension BulletinManager {
 
     @nonobjc func completeDismissal() {
 
-        currentItem.dismissalHandler?(currentItem)
+        currentItem.onDismiss()
 
         for arrangedSubview in viewController.contentStackView.arrangedSubviews {
             viewController.contentStackView.removeArrangedSubview(arrangedSubview)
@@ -420,35 +442,44 @@ extension BulletinManager {
 extension BulletinManager {
 
     /// Refreshes the interface for the current item.
-    fileprivate func refreshCurrentItemInterface() {
-
-        viewController.swipeInteractionController?.cancelIfNeeded()
+    fileprivate func refreshCurrentItemInterface(elementsChanged: Bool = true) {
 
         viewController.isDismissable = false
+        viewController.swipeInteractionController?.cancelIfNeeded()
         viewController.refreshSwipeInteractionController()
+
+        let showActivityIndicator = self.shouldDisplayActivityIndicator
+        let contentAlpha: CGFloat =  showActivityIndicator ? 0 : 1
 
         // Tear down old item
 
         let oldArrangedSubviews = viewController.contentStackView.arrangedSubviews
         let oldHideableArrangedSubviews = recursiveArrangedSubviews(in: oldArrangedSubviews)
 
-        previousItem?.tearDown()
-        previousItem?.manager = nil
-        previousItem = nil
-
-        currentItem.manager = self
+        if elementsChanged {
+            previousItem?.tearDown()
+            previousItem?.manager = nil
+            previousItem = nil
+        }
 
         // Create new views
 
         let newArrangedSubviews = currentItem.makeArrangedSubviews()
         let newHideableArrangedSubviews = recursiveArrangedSubviews(in: newArrangedSubviews)
 
-        for arrangedSubview in newHideableArrangedSubviews {
-            arrangedSubview.isHidden = isPreparing ? false : true
-        }
+        if elementsChanged {
 
-        for arrangedSubview in newArrangedSubviews {
-            viewController.contentStackView.addArrangedSubview(arrangedSubview)
+            currentItem.setUp()
+            currentItem.manager = self
+
+            for arrangedSubview in newHideableArrangedSubviews {
+                arrangedSubview.isHidden = isPreparing ? false : true
+            }
+
+            for arrangedSubview in newArrangedSubviews {
+                viewController.contentStackView.addArrangedSubview(arrangedSubview)
+            }
+
         }
 
         // Animate transition
@@ -460,7 +491,9 @@ extension BulletinManager {
 
         hideSubviewsAnimationPhase.block = {
 
-            self.viewController.hideActivityIndicator(showContentStack: false)
+            if !showActivityIndicator {
+                self.viewController.hideActivityIndicator()
+            }
 
             for arrangedSubview in oldArrangedSubviews {
                 arrangedSubview.alpha = 0
@@ -486,37 +519,48 @@ extension BulletinManager {
 
         }
 
-        displayNewItemsAnimationPhase.completionHandler = {
-            self.viewController.contentStackView.alpha = 1
-        }
-
         let finalAnimationPhase = AnimationPhase(relativeDuration: 1/3, curve: .linear)
 
         finalAnimationPhase.block = {
 
-            for arrangedSubview in newArrangedSubviews {
-                arrangedSubview.alpha = 1
+            let currentElements = elementsChanged ? newArrangedSubviews : oldArrangedSubviews
+            self.viewController.contentStackView.alpha = contentAlpha
+
+            for arrangedSubview in currentElements {
+                arrangedSubview.alpha = contentAlpha
             }
 
         }
 
         finalAnimationPhase.completionHandler = {
 
-            self.viewController.isDismissable = self.currentItem.isDismissable
+            self.viewController.isDismissable = self.currentItem.isDismissable && (showActivityIndicator == false)
 
-            for arrangedSubview in oldArrangedSubviews {
-                self.viewController.contentStackView.removeArrangedSubview(arrangedSubview)
-                arrangedSubview.removeFromSuperview()
+            if elementsChanged {
+
+                self.currentItem.onDisplay()
+
+                for arrangedSubview in oldArrangedSubviews {
+                    self.viewController.contentStackView.removeArrangedSubview(arrangedSubview)
+                    arrangedSubview.removeFromSuperview()
+                }
+
             }
 
             UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, newArrangedSubviews.first)
 
         }
 
-        transitionAnimationChain.add(hideSubviewsAnimationPhase)
-        transitionAnimationChain.add(displayNewItemsAnimationPhase)
-        transitionAnimationChain.add(finalAnimationPhase)
+        // Perform animation
 
+        if elementsChanged {
+            transitionAnimationChain.add(hideSubviewsAnimationPhase)
+            transitionAnimationChain.add(displayNewItemsAnimationPhase)
+        } else {
+            viewController.hideActivityIndicator()
+        }
+
+        transitionAnimationChain.add(finalAnimationPhase)
         transitionAnimationChain.start()
 
     }

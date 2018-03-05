@@ -36,6 +36,15 @@ enum BulletinDataSource {
         page.actionButtonTitle = "Configure"
 
         page.isDismissable = true
+        page.shouldStartWithActivityIndicator = true
+
+        page.presentationHandler = { item in
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+                item.manager?.hideActivityIndicator()
+            }
+
+        }
 
         page.actionHandler = { item in
             item.manager?.displayNextItem()
