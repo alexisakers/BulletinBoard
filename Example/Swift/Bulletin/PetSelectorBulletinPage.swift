@@ -116,7 +116,7 @@ class PetSelectorBulletinPage: FeedbackPageBulletinItem {
         button.layer.borderColor = buttonColor.cgColor
 
         if isSelected {
-            nextItem = PetValidationBulletinItem(dataSource: dataSource, animalType: animalType.lowercased())
+            next = PetValidationBulletinItem(dataSource: dataSource, animalType: animalType.lowercased())
         }
 
         return button
@@ -153,7 +153,7 @@ class PetSelectorBulletinPage: FeedbackPageBulletinItem {
 
         // Set the next item
 
-        nextItem = PetValidationBulletinItem(dataSource: .cat, animalType: "cats")
+        next = PetValidationBulletinItem(dataSource: .cat, animalType: "cats")
 
     }
 
@@ -185,7 +185,7 @@ class PetSelectorBulletinPage: FeedbackPageBulletinItem {
 
         // Set the next item
 
-        nextItem = PetValidationBulletinItem(dataSource: .dog, animalType: "dogs")
+        next = PetValidationBulletinItem(dataSource: .dog, animalType: "dogs")
 
     }
 

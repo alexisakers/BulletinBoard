@@ -6,6 +6,21 @@
 	objectVersion = 48;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		559F8E9A204DBFE300322949 /* All Demos */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 559F8E9B204DBFE300322949 /* Build configuration list for PBXAggregateTarget "All Demos" */;
+			buildPhases = (
+			);
+			dependencies = (
+				559F8E9F204DBFED00322949 /* PBXTargetDependency */,
+				559F8EA1204DBFED00322949 /* PBXTargetDependency */,
+			);
+			name = "All Demos";
+			productName = "All Demos";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		5506756B1F90ADEF00874D8B /* BackgroundStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5506756A1F90ADEF00874D8B /* BackgroundStyles.swift */; };
 		551837CD1FD6F40500B69CAE /* CollectionViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551837CC1FD6F40500B69CAE /* CollectionViewWrapper.swift */; };
@@ -46,6 +61,23 @@
 		55DADE921F7ED65E001B11A2 /* BulletinBoard.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55DADE901F7ED65E001B11A2 /* BulletinBoard.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		652A87ED1FA24C8B006CDCF6 /* TextFieldBulletinPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652A87EC1FA24C8B006CDCF6 /* TextFieldBulletinPage.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		559F8E9E204DBFED00322949 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 558A12391F7D7865005EC97C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 558A12401F7D7865005EC97C;
+			remoteInfo = "BB-Swift";
+		};
+		559F8EA0204DBFED00322949 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 558A12391F7D7865005EC97C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55D7BA691FBC783E0008A602;
+			remoteInfo = "BB-ObjC";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		55D7BA861FBC786B0008A602 /* Embed Frameworks */ = {
@@ -330,6 +362,10 @@
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
 					};
+					559F8E9A204DBFE300322949 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
 					55D7BA691FBC783E0008A602 = {
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 0920;
@@ -350,6 +386,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				559F8E9A204DBFE300322949 /* All Demos */,
 				558A12401F7D7865005EC97C /* BB-Swift */,
 				55D7BA691FBC783E0008A602 /* BB-ObjC */,
 			);
@@ -423,6 +460,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		559F8E9F204DBFED00322949 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 558A12401F7D7865005EC97C /* BB-Swift */;
+			targetProxy = 559F8E9E204DBFED00322949 /* PBXContainerItemProxy */;
+		};
+		559F8EA1204DBFED00322949 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55D7BA691FBC783E0008A602 /* BB-ObjC */;
+			targetProxy = 559F8EA0204DBFED00322949 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		551CF5F91FBF849A007DFEEA /* Main-ObjC.storyboard */ = {
@@ -591,6 +641,24 @@
 			};
 			name = Release;
 		};
+		559F8E9C204DBFE300322949 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 75E8K39Z38;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		559F8E9D204DBFE300322949 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 75E8K39Z38;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		55D7BA7D1FBC783E0008A602 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -649,6 +717,15 @@
 			buildConfigurations = (
 				558A12541F7D7865005EC97C /* Debug */,
 				558A12551F7D7865005EC97C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		559F8E9B204DBFE300322949 /* Build configuration list for PBXAggregateTarget "All Demos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				559F8E9C204DBFE300322949 /* Debug */,
+				559F8E9D204DBFE300322949 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

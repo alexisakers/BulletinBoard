@@ -88,7 +88,7 @@ class PetValidationBulletinItem: FeedbackPageBulletinItem {
 
             // Display next item
 
-            self.nextItem = BulletinDataSource.makeCompletionPage()
+            self.next = BulletinDataSource.makeCompletionPage()
             self.manager?.displayNextItem()
 
         }

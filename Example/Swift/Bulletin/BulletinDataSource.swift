@@ -50,7 +50,7 @@ enum BulletinDataSource {
             item.manager?.displayNextItem()
         }
 
-        page.nextItem = makeTextFieldPage()
+        page.next = makeTextFieldPage()
 
         return page
 
@@ -106,7 +106,7 @@ enum BulletinDataSource {
             item.manager?.displayNextItem()
         }
 
-        page.nextItem = makeNotitificationsPage()
+        page.next = makeNotitificationsPage()
 
         return page
 
@@ -143,7 +143,7 @@ enum BulletinDataSource {
             item.manager?.displayNextItem()
         }
 
-        page.nextItem = makeLocationPage()
+        page.next = makeLocationPage()
 
         return page
 
@@ -181,7 +181,7 @@ enum BulletinDataSource {
             item.manager?.displayNextItem()
         }
 
-        page.nextItem = makeChoicePage()
+        page.next = makeChoicePage()
 
         return page
 

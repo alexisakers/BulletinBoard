@@ -337,18 +337,18 @@ extension BulletinManager {
     }
 
     /**
-     * Displays the next item, if the `nextItem` property of the current item is set.
+     * Displays the next item, if the `next` property of the current item is set.
      *
-     * - warning: If you call this method but `nextItem` is `nil`, an exception will be raised.
+     * - warning: If you call this method but `next` is `nil`, an exception will be raised.
      */
 
     @objc public func displayNextItem() {
 
-        guard let nextItem = currentItem.next else {
+        guard let next = currentItem.next else {
             preconditionFailure("Calling BulletinManager.displayNextItem, but the current item has no nextItem.")
         }
 
-        push(item: nextItem)
+        push(item: next)
 
     }
 
@@ -575,8 +575,8 @@ extension BulletinManager {
         item.tearDown()
         item.manager = nil
 
-        if let nextItem = item.next {
-            tearDownItemsChain(startingAt: nextItem)
+        if let next = item.next {
+            tearDownItemsChain(startingAt: next)
             item.next = nil
         }
 
