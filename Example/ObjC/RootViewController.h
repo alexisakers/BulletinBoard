@@ -19,9 +19,9 @@
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *showIntoButtonItem;
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 
--(IBAction)styleButtonTapped:(id)sender;
--(IBAction)showIntroButtonTapped:(id)sender;
--(IBAction)tabIndexChanged:(UISegmentedControl *)sender;
+- (IBAction)styleButtonTapped:(id)sender;
+- (IBAction)showIntroButtonTapped:(id)sender;
+- (IBAction)tabIndexChanged:(UISegmentedControl *)sender;
 
 @end
 

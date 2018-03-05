@@ -6,7 +6,7 @@
 #import "BulletinDataSource.h"
 #import "PermissionsManager.h"
 #import "TextFieldBulletinPage.h"
-#import "BBObjC-Swift.h"
+#import "PetSelectorBulletinPage.h"
 
 @implementation BulletinDataSource
 
@@ -21,6 +21,16 @@
 
     [page setAppearance:[BulletinDataSource makeLightAppearance]];
     [page setIsDismissable:YES];
+    page.shouldStartWithActivityIndicator = YES;
+
+    // After the item is presented, show the contents after 3 seconds
+    [page setPresentationHandler:^(id<BulletinItem> _Nonnull _item) {
+
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [_item.manager hideActivityIndicator];
+        });
+
+    }];
 
     [page setActionHandler:^(ActionBulletinItem * _Nonnull _item) {
         [[_item manager] displayNextItem];
@@ -34,9 +44,11 @@
 
 +(TextFieldBulletinPage *)makeTextFieldPage {
 
-    TextFieldBulletinPage *page = [TextFieldBulletinPage new];
+    TextFieldBulletinPage *page = [[TextFieldBulletinPage alloc] initWithTitle:@"Enter Your Name"];
+    page.descriptionText = @"To create your profile, please tell us your name. We will use it to customize your feed.";
+    page.actionButtonTitle = @"Sign Up";
 
-    [page setActionHandler:^(TextFieldBulletinPage * _Nonnull _item) {
+    [page setActionHandler:^(ActionBulletinItem * _Nonnull _item) {
         [[_item manager] displayNextItem];
     }];
 
@@ -101,14 +113,12 @@
 
 };
 
-+(PetSelectorBulletinPage *)makeChoicePage {
-
++ (PetSelectorBulletinPage *)makeChoicePage
+{
     PetSelectorBulletinPage* page = [PetSelectorBulletinPage new];
     [page setActionButtonTitle:@"Select"];
-
     return page;
-
-};
+}
 
 +(PageBulletinItem *)makeCompletionPage {
 

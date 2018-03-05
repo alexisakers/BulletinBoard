@@ -18,7 +18,7 @@ class DatePickerBulletinItem: PageBulletinItem {
      * Display the date picker under the description label.
      */
 
-    override func viewsUnderDescription(_ interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
+    override func makeViewsUnderDescription(with interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
         datePicker.datePickerMode = .date
         return [datePicker]
     }

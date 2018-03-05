@@ -5,76 +5,40 @@
 
 #import "TextFieldBulletinPage.h"
 
-@implementation TextFieldBulletinPage {
-    UILabel *_descriptionLabel;
-    UITextField *_textField;
-    HighlightButtonWrapper *_doneButton;
-    BulletinAppearance *_appearance;
-}
+@interface TextFieldBulletinPage () <UITextFieldDelegate>
 
-@synthesize nextItem;
-@synthesize manager;
-@synthesize isDismissable;
-@synthesize dismissalHandler;
-@synthesize shouldRespondToKeyboardChanges;
+@property (nonatomic, strong, readwrite) UITextField *textField;
 
-- (instancetype)init
+@end
+
+@implementation TextFieldBulletinPage
+
+- (NSArray<UIView *> *)makeViewsUnderDescriptionWithInterfaceBuilder:(BulletinInterfaceBuilder *)interfaceBuilder
 {
-    self = [super init];
-    if (self) {
-        _appearance = [[BulletinAppearance alloc] init];
-    }
-    return self;
+    self.textField = [interfaceBuilder makeTextFieldWithPlaceholder:@"Full Name"
+                                                          returnKey:UIReturnKeyJoin
+                                                           delegate:self];
+    return @[self.textField];
 }
 
--(NSArray<UIView *> * _Nonnull)makeArrangedSubviews {
-
-    NSMutableArray<UIView *> *arrangedSubviews = [NSMutableArray array];
-    BulletinInterfaceBuilder *interfaceBuilder = [[BulletinInterfaceBuilder alloc] initWithAppearance:_appearance];
-
-    // Title Label
-
-    UILabel *titleLabel = [interfaceBuilder makeTitleLabel];
-    titleLabel.text = @"Enter Your Name";
-    [arrangedSubviews addObject:titleLabel];
-
-    // Description Label
-
-    _descriptionLabel = [interfaceBuilder makeDescriptionLabel];
-    _descriptionLabel.text = @"To create your profile, please tell us your name. We will use it to customize your feed.";
-    [arrangedSubviews addObject:_descriptionLabel];
-
-    // Text Field
-
-    _textField = [UITextField new];
-    [_textField setDelegate:self];
-    [_textField setBorderStyle:UITextBorderStyleRoundedRect];
-    [_textField setReturnKeyType:UIReturnKeyDone];
-    [_textField setPlaceholder:@"First and Last Name"];
-    [arrangedSubviews addObject:_textField];
-
-    // Done Button
-
-    _doneButton = [interfaceBuilder makeActionButtonWithTitle:@"Done"];
-    [_doneButton.button addTarget:self action:@selector(doneButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    [arrangedSubviews addObject:_doneButton];
-
-    return arrangedSubviews;
-
+- (void)onDisplay
+{
+    // Uncomment to start typing when the bulletin item is presented
+    [self.textField becomeFirstResponder];
 }
 
--(void)tearDown {
-    [_textField setDelegate:NULL];
-    [_doneButton.button removeTarget:self action:NULL forControlEvents:UIControlEventTouchUpInside];
+- (void)tearDown {
+    [self.textField setDelegate:nil];
 }
 
 #pragma mark UITextFieldDelegate
 
--(void)doneButtonTapped:(UIButton *)sender {
-    [self textFieldShouldReturn:_textField];
-};
+- (void)actionButtonTappedWithSender:(UIButton *)sender
+{
+    [self textFieldShouldReturn:self.textField];
+}
 
--(BOOL)isInputValid:(NSString *)text {
+- (BOOL)isInputValid:(NSString *)text {
 
     if (text == NULL || [text length] == 0) {
         return false;
@@ -84,7 +48,7 @@
 
 };
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField {
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
 
     if ([self isInputValid: [textField text]]) {
 
@@ -99,10 +63,9 @@
     } else {
 
         UIColor *redColor = [[UIColor redColor] colorWithAlphaComponent:0.3];
-
-        [_descriptionLabel setTextColor:[UIColor redColor]];
-        [_descriptionLabel setText:@"You must enter some text to continue."];
-        [_textField setBackgroundColor:redColor];
+        self.descriptionLabel.textColor = [UIColor redColor];
+        self.descriptionLabel.text = @"You must enter a valid name to continue.";
+        self.textField.backgroundColor = redColor;
 
         return false;
 

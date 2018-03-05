@@ -40,8 +40,8 @@ class PetSelectorBulletinPage: FeedbackPageBulletinItem {
      * `BulletinInterfaceFactory` to generate standard views, such as title labels and buttons.
      */
 
-    override func viewsUnderDescription(_ interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
-
+    override func makeViewsUnderDescription(with interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
+        
         let favoriteTabIndex = BulletinDataSource.favoriteTabIndex
 
         // Pets Stack

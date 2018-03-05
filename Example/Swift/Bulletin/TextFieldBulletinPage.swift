@@ -19,7 +19,7 @@ class TextFieldBulletinPage: FeedbackPageBulletinItem {
 
     @objc public var textInputHandler: ((ActionBulletinItem, String?) -> Void)? = nil
 
-    override func viewsUnderDescription(_ interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
+    override func makeViewsUnderDescription(with interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
         textField = interfaceBuilder.makeTextField(placeholder: "First and Last Name", returnKey: .done, delegate: self)
         return [textField]
     }

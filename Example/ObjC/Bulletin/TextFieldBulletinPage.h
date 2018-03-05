@@ -6,8 +6,8 @@
 @import UIKit;
 @import BulletinBoard;
 
-@interface TextFieldBulletinPage : NSObject <BulletinItem, UITextFieldDelegate>
+@interface TextFieldBulletinPage : PageBulletinItem
 
-@property (nonatomic, copy, nullable) void (^actionHandler)(TextFieldBulletinPage* _Nonnull);
+@property (nonatomic, strong, readonly) UITextField *textField;
 
 @end

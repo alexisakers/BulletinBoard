@@ -68,7 +68,7 @@ enum BulletinDataSource {
         let page = TextFieldBulletinPage(title: "Enter your Name")
         page.isDismissable = false
         page.descriptionText = "To create your profile, please tell us your name. We will use it to customize your feed."
-        page.actionButtonTitle = "Done"
+        page.actionButtonTitle = "Sign Up"
 
         page.textInputHandler = { (item, text) in
 
