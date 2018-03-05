@@ -16,6 +16,8 @@
 - Support for tinting images with template rendering mode
 - Allow customization of the background view
 - Add text field as a standard control
+- Show activity indicator immediately after item is presented
+- Callback for configuration and presentation from BulletinItem
 
 ### User-Facing Changes
 
@@ -34,6 +36,7 @@
 - Fix cropped bulletin when presenting above split view controller
 - Correctly reset non-dismissable cards position when swipe ends
 - Fix Auto Layout conflicts during transitions
+- Fix crash when reusing bulletin manager
 
 ### Library
 

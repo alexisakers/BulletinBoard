@@ -1,4 +1,4 @@
-# BulletinBoard
+# BulletinBoard Beta
 
 [![CI Status](https://travis-ci.org/alexaubry/BulletinBoard.svg?branch=master)](https://travis-ci.org/alexaubry/BulletinBoard)
 [![Version](https://img.shields.io/cocoapods/v/BulletinBoard.svg?style=flat)](https://cocoapods.org/pods/BulletinBoard)
@@ -9,7 +9,7 @@
 
 BulletinBoard is an iOS library that generates and manages contextual cards displayed at the bottom of the screen. It is especially well suited for quick user interactions such as onboarding screens or configuration.
 
-It has an interface similar to the cards displayed by iOS for AirPods, Apple TV configuration and NFC tag scanning.
+It has an interface similar to the cards displayed by iOS for AirPods, Apple TV configuration and NFC tag scanning. It supports both the iPhone, iPhone X and the iPad.
 
 It has built-in support for accessibility features such as VoiceOver and Switch Control.
 
@@ -150,14 +150,9 @@ If you omit an optional property, the page won't generate a view for it. For ins
 
 The `PageBulletinItem` class exposes a `appearance` property that allows you to fully customize the appearance of the generated interface.
 
-This property references a `BulletinAppearance`, which is used to generate the standard components (more on this later). You can subclass this class in Swift and further customize the appearance of the app.
+This property references a `BulletinAppearance`, which is used to generate the standard components (more on this later).
 
 You can customize both color and fonts. You need to change these before you present / push the item. Changing them after presentation will have no effect.
-
-There are several properties that you can change:
-
-- `tintColor` - the tint color of the buttons (defaults to iOS blue)
-- `actionButtonTitleColor` - the color of action button titles
 
 **Example**
 
@@ -180,7 +175,7 @@ To handle taps on buttons, set a closure for these properties:
 - `alternativeHandler` - called when the alternative button is tapped.
 
 ~~~swift
-page.actionHandler = { (item: PageBulletinItem) in
+page.actionHandler = { (item: ActionBulletinItem) in
     print("Action button tapped")
 }
 ~~~
@@ -188,7 +183,7 @@ page.actionHandler = { (item: PageBulletinItem) in
 This prints `"Action button tapped"` when the action button is tapped.
 
 ~~~swift
-page.alternativeHandler = { (item: PageBulletinItem) in
+page.alternativeHandler = { (item: ActionBulletinItem) in
     print("Alternative button tapped")
 }
 ~~~
@@ -233,17 +228,17 @@ If you need to perform a task between the moment the user taps a button and the 
 
 This is especially useful if you need to fetch data from a server (in-app purchase price, subscription status, ...) or save data (e.g. Core Data).
 
-Once your task is finished, call one of the methods described in [Changing the Presented Item](#changing-the-presented-item).
+Once your task is finished, you call one of the methods described in [Changing the Presented Item](#changing-the-presented-item) to display the new item, or call `hideActivityIndicator()` to hide the indicator without changing the item.
 
 **Example**:
 
 ~~~swift
-page.actionHandler = { (item: PageBulletinItem) in
+page.actionHandler = { (item: ActionBulletinItem) in
     item.manager?.displayActivityIndicator()
     // do your task
     // ...
     // when your task is finished, transition to the appropriate bulletin item
-    item.displayNextItem()
+    item.manager?.displayNextItem()
 }
 ~~~
 
@@ -280,33 +275,7 @@ You should set this property to `true` for the last item.
 
 To create custom bulletin items, create a class that implements the `BulletinItem` protocol. To learn with a concrete example, you can read the implementation of `PageBulletinItem`.
 
-### Conforming to `BulletinItem`
-
-To conform to this protocol, you need to add the required properties and implement two methods:
-
-#### `makeArrangedSubviews()`
-
-This method should return all the elements to display on the card.
-
-Please note that the `alpha` and `isHidden` properties will be ignored.
-
-#### `tearDown()`
-
-In this method, clear all the resources allocated for the item (such as notification observers or button targets). After this method is called, the `manager` will be set to `nil` and the arranged subviews will be hidden and removed from the card.
-
-### Generating Standard Views
-
-Even though you are creating a custom card, you may still want to display some standard elements, such as title labels or action buttons.
-
-To generate standard elements `BulletinInterfaceBuilder`. Interface builders with appearance objects (`BulletinAppearance`) to create standard elements.
-
-Use these methods to generate standard components for your custom items:
-
-- `makeTitleLabel(text:)` to create a title label with the given title
-- `makeDescriptionLabel()` to create a description label
-- `makeActionButton(title:)` to create an action button
-- `makeAlternativeButton(title:)` to create an alternative button
-- `makeGroupStack(spacing:)` to create a vertical stack view with the given spacing
+See the [Creating a Custom Item](guides/Creating%20a%20Custom%20Item.md) guide to learn more.
 
 ## Internals
 
