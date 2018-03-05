@@ -128,6 +128,16 @@ import UIKit
 
     }
 
+    deinit {
+
+        tearDownItemsChain(startingAt: self.rootItem)
+
+        for item in itemsStack {
+            tearDownItemsChain(startingAt: item)
+        }
+
+    }
+
     @available(*, unavailable, message: "Use init(rootItem:) instead.")
     override init() {
         fatalError("BulletinManager.init is unavailable. Use init(rootItem:) instead.")
@@ -425,12 +435,6 @@ extension BulletinManager {
         viewController = nil
 
         currentItem = self.rootItem
-        tearDownItemsChain(startingAt: self.rootItem)
-
-        for item in itemsStack {
-            tearDownItemsChain(startingAt: item)
-        }
-
         itemsStack.removeAll()
 
     }
