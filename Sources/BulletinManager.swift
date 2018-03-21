@@ -156,7 +156,7 @@ extension BulletinManager {
         viewController.setNeedsStatusBarAppearanceUpdate()
 
         if #available(iOS 11.0, *) {
-            if responds(to: #selector(setNeedsUpdateOfHomeIndicatorAutoHidden)) {
+            if responds(to: #selector(viewController.setNeedsUpdateOfHomeIndicatorAutoHidden)) {
                 viewController.setNeedsUpdateOfHomeIndicatorAutoHidden()
             }
         }
