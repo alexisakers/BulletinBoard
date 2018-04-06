@@ -14,5 +14,6 @@
 
 ### Environment
 
+- **BulletinBoard Version**: [INSERT LIBRARY VERSION HERE]
 - **iOS Version**: [INSERT iOS VERSION HERE]
 - **Device(s)**: [INSERT DEVICE(S) HERE]
