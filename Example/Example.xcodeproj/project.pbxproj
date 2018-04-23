@@ -23,10 +23,10 @@
 
 /* Begin PBXBuildFile section */
 		5506756B1F90ADEF00874D8B /* BackgroundStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5506756A1F90ADEF00874D8B /* BackgroundStyles.swift */; };
-		550A8C46208DE65D0056F3C7 /* Bulletin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550A8C45208DE65D0056F3C7 /* Bulletin.framework */; };
-		550A8C47208DE65D0056F3C7 /* Bulletin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 550A8C45208DE65D0056F3C7 /* Bulletin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		550A8C49208DE6680056F3C7 /* Bulletin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550A8C48208DE6680056F3C7 /* Bulletin.framework */; };
-		550A8C4A208DE6680056F3C7 /* Bulletin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 550A8C48208DE6680056F3C7 /* Bulletin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		550A8C50208DEA550056F3C7 /* BLTNBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550A8C4F208DEA550056F3C7 /* BLTNBoard.framework */; };
+		550A8C51208DEA550056F3C7 /* BLTNBoard.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 550A8C4F208DEA550056F3C7 /* BLTNBoard.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		550A8C53208DEA590056F3C7 /* BLTNBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550A8C52208DEA590056F3C7 /* BLTNBoard.framework */; };
+		550A8C54208DEA590056F3C7 /* BLTNBoard.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 550A8C52208DEA590056F3C7 /* BLTNBoard.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		551837CD1FD6F40500B69CAE /* CollectionViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551837CC1FD6F40500B69CAE /* CollectionViewWrapper.swift */; };
 		551CF5E01FBF471A007DFEEA /* ImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 551CF5DF1FBF471A007DFEEA /* ImageCollectionViewCell.m */; };
 		551CF5E31FBF4985007DFEEA /* CollectionDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 551CF5E21FBF4985007DFEEA /* CollectionDataSource.m */; };
@@ -80,24 +80,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		550A8C4E208DEA2C0056F3C7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				550A8C51208DEA550056F3C7 /* BLTNBoard.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55D7BA861FBC786B0008A602 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				550A8C4A208DE6680056F3C7 /* Bulletin.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		55DADE8F1F7ED659001B11A2 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				550A8C47208DE65D0056F3C7 /* Bulletin.framework in Embed Frameworks */,
+				550A8C54208DEA590056F3C7 /* BLTNBoard.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -106,8 +106,8 @@
 
 /* Begin PBXFileReference section */
 		5506756A1F90ADEF00874D8B /* BackgroundStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundStyles.swift; sourceTree = "<group>"; };
-		550A8C45208DE65D0056F3C7 /* Bulletin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bulletin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		550A8C48208DE6680056F3C7 /* Bulletin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bulletin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		550A8C4F208DEA550056F3C7 /* BLTNBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BLTNBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		550A8C52208DEA590056F3C7 /* BLTNBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BLTNBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		551837CC1FD6F40500B69CAE /* CollectionViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewWrapper.swift; sourceTree = "<group>"; };
 		551CF5DE1FBF471A007DFEEA /* ImageCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ImageCollectionViewCell.h; path = "Supporting Files/ImageCollectionViewCell.h"; sourceTree = "<group>"; };
 		551CF5DF1FBF471A007DFEEA /* ImageCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ImageCollectionViewCell.m; path = "Supporting Files/ImageCollectionViewCell.m"; sourceTree = "<group>"; };
@@ -164,7 +164,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				550A8C46208DE65D0056F3C7 /* Bulletin.framework in Frameworks */,
+				550A8C50208DEA550056F3C7 /* BLTNBoard.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,7 +172,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				550A8C49208DE6680056F3C7 /* Bulletin.framework in Frameworks */,
+				550A8C53208DEA590056F3C7 /* BLTNBoard.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,8 +212,8 @@
 		558A12381F7D7865005EC97C = {
 			isa = PBXGroup;
 			children = (
-				550A8C48208DE6680056F3C7 /* Bulletin.framework */,
-				550A8C45208DE65D0056F3C7 /* Bulletin.framework */,
+				550A8C52208DEA590056F3C7 /* BLTNBoard.framework */,
+				550A8C4F208DEA550056F3C7 /* BLTNBoard.framework */,
 				55D7021E1FBCCA1A00835D8A /* Assets.xcassets */,
 				551CF5FC1FBF86F2007DFEEA /* Configs */,
 				55D702191FBCCA1A00835D8A /* Base.lproj */,
@@ -319,7 +319,7 @@
 				558A123D1F7D7865005EC97C /* Sources */,
 				558A123E1F7D7865005EC97C /* Frameworks */,
 				558A123F1F7D7865005EC97C /* Resources */,
-				55DADE8F1F7ED659001B11A2 /* Embed Frameworks */,
+				550A8C4E208DEA2C0056F3C7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

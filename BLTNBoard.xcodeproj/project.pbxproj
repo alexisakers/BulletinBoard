@@ -204,7 +204,7 @@
 		52D6D9731BEFF229002C0205 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = "";
+				CLASSPREFIX = BLTN;
 				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Bulletin;
