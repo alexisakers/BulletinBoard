@@ -127,7 +127,7 @@ import UIKit
 
         let alternativeButton = ContinuousButton(cornerRadius: appearance.alternativeButtonCornerRadius)
         alternativeButton.setTitle(title, for: .normal)
-        alternativeButton.setTitleColor(appearance.alternativeButtonColor, for: .normal)
+        alternativeButton.setTitleColor(appearance.alternativeButtonTitleColor, for: .normal)
         alternativeButton.titleLabel?.font = appearance.makeAlternativeButtonFont()
 
         if let color = appearance.alternativeButtonBorderColor {

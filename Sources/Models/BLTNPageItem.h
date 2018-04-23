@@ -59,6 +59,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, nullable) NSString *descriptionText;
 
+/**
+ * An attributed description text to display below the image.
+ *
+ * If you set this property to `nil`, no label will be displayed (this is the default). The attributed
+ * text takes priority over the regular description label. If you set both values, only the
+ * `attributedDescriptionText` will be used.
+ */
+
+@property (nonatomic, nullable) NSAttributedString *attributedDescriptionText;
+
 #pragma mark - View Management
 
 @property (nonatomic, nonnull, readonly) UILabel *titleLabel;

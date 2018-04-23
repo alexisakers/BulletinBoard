@@ -133,6 +133,8 @@ class ViewController: UIViewController {
 
     func showBulletin() {
 
+        reloadManager()
+
 //        Uncomment to customize interface
 //        bulletinManager.cardCornerRadius = 22
 //        bulletinManager.edgeSpacing = .none

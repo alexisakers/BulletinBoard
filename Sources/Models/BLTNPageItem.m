@@ -37,6 +37,9 @@
 - (void)setDescriptionText:(NSString *)descriptionText
 {
     _descriptionText = descriptionText;
+    if (self.attributedDescriptionText) {
+        return;
+    }
     if (self.descriptionLabel) {
         self.descriptionLabel.text = descriptionText;
     }
@@ -55,6 +58,15 @@
     _imageAccessibilityLabel = imageAccessibilityLabel;
     if (self.imageView) {
         self.imageView.accessibilityLabel = imageAccessibilityLabel;
+    }
+}
+
+- (void)setAttributedDescriptionText:(NSAttributedString *)attributedDescriptionText
+{
+    _attributedDescriptionText = self.attributedDescriptionText;
+    self.descriptionText = nil;
+    if (self.descriptionLabel) {
+        self.descriptionLabel.attributedText = attributedDescriptionText;
     }
 }
 
@@ -108,7 +120,13 @@
 
     // Description Label
 
-    if (self.descriptionText) {
+    if (self.attributedDescriptionText) {
+        self.descriptionLabel = [interfaceBuilder makeDescriptionLabel];
+        self.descriptionLabel.attributedText = self.attributedDescriptionText;
+        [contentViews addObject:self.descriptionLabel];
+        insertComplementaryViews(@selector(makeViewsUnderDescriptionWithInterfaceBuilder:));
+
+    } else if (self.descriptionText) {
         self.descriptionLabel = [interfaceBuilder makeDescriptionLabel];
         self.descriptionLabel.text = self.descriptionText;
         [contentViews addObject:self.descriptionLabel];
