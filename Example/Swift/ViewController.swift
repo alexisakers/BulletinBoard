@@ -140,6 +140,7 @@ class ViewController: UIViewController {
 //        bulletinManager.hidesHomeIndicator = true
 //        bulletinManager.backgroundColor = .blue
 
+        reloadManager()
         bulletinManager.backgroundViewStyle = currentBackground.style
         bulletinManager.statusBarAppearance = shouldHideStatusBar ? .hidden : .automatic
         bulletinManager.showBulletin(above: self)
