@@ -13,13 +13,13 @@ import BulletinBoard
  * next item based on user interaction.
  */
 
-class PetSelectorBulletinPage: FeedbackPageBulletinItem {
+class PetSelectorBulletinPage: FeedbackPageBLTNItem {
 
     private var catButtonContainer: UIButton!
     private var dogButtonContainer: UIButton!
     private var selectionFeedbackGenerator = SelectionFeedbackGenerator()
 
-    // MARK: - BulletinItem
+    // MARK: - BLTNItem
 
     /**
      * Called by the manager when the item is about to be removed from the bulletin.
@@ -116,7 +116,7 @@ class PetSelectorBulletinPage: FeedbackPageBulletinItem {
         button.layer.borderColor = buttonColor.cgColor
 
         if isSelected {
-            next = PetValidationBulletinItem(dataSource: dataSource, animalType: animalType.lowercased())
+            next = PetValidationBLTNItem(dataSource: dataSource, animalType: animalType.lowercased())
         }
 
         return button
@@ -153,7 +153,7 @@ class PetSelectorBulletinPage: FeedbackPageBulletinItem {
 
         // Set the next item
 
-        next = PetValidationBulletinItem(dataSource: .cat, animalType: "cats")
+        next = PetValidationBLTNItem(dataSource: .cat, animalType: "cats")
 
     }
 
@@ -185,7 +185,7 @@ class PetSelectorBulletinPage: FeedbackPageBulletinItem {
 
         // Set the next item
 
-        next = PetValidationBulletinItem(dataSource: .dog, animalType: "dogs")
+        next = PetValidationBLTNItem(dataSource: .dog, animalType: "dogs")
 
     }
 

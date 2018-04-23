@@ -3,10 +3,10 @@
  *  Copyright (c) 2017 Alexis Aubry. Licensed under the MIT license.
  */
 
-#import "PageBulletinItem.h"
-#import <BulletinBoard/BulletinBoard-Swift.h>
+#import "BLTNPageItem.h"
+#import <Bulletin/Bulletin-Swift.h>
 
-@interface PageBulletinItem ()
+@interface BLTNPageItem ()
 
 @property (nonatomic, nonnull, readwrite) NSString *title;
 @property (nonatomic, nullable, readwrite) UILabel *titleLabel;
@@ -15,7 +15,7 @@
 
 @end
 
-@implementation PageBulletinItem
+@implementation BLTNPageItem
 
 - (instancetype)initWithTitle:(NSString *)title
 {
@@ -30,6 +30,32 @@
         self.imageView = nil;
     }
     return self;
+}
+
+#pragma mark - View Updates
+
+- (void)setDescriptionText:(NSString *)descriptionText
+{
+    _descriptionText = descriptionText;
+    if (self.descriptionLabel) {
+        self.descriptionLabel.text = descriptionText;
+    }
+}
+
+- (void)setImage:(UIImage *)image
+{
+    _image = image;
+    if (self.imageView) {
+        self.imageView.image = image;
+    }
+}
+
+- (void)setImageAccessibilityLabel:(NSString *)imageAccessibilityLabel
+{
+    _imageAccessibilityLabel = imageAccessibilityLabel;
+    if (self.imageView) {
+        self.imageView.accessibilityLabel = imageAccessibilityLabel;
+    }
 }
 
 #pragma mark - View Management

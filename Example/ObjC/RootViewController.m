@@ -12,7 +12,7 @@
 @interface RootViewController ()
 
 @property (nonatomic, strong) CollectionDataSource *dataSource;
-@property (nonatomic, strong) BulletinManager *bulletinManager;
+@property (nonatomic, strong) BLTNItemManager *bulletinManager;
 @property (nonatomic, strong) NSArray<BackgroundViewStyle *> *backgroundStyles;
 @property (nonatomic, strong) BackgroundViewStyle *currentBackground;
 @property (nonatomic) BOOL shouldHideStatusBar;
@@ -23,7 +23,8 @@
 
 #pragma mark View
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 
     [self reloadManager];
@@ -59,12 +60,14 @@
     [self.collectionView setContentInset:cvInset];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated
+{
     [super viewDidAppear:animated];
     [self prepareForBulletin];
 }
 
-- (void)dealloc {
+- (void)dealloc
+{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -74,8 +77,8 @@
  * Prepares the view controller for the bulletin interface.
  */
 
-- (void)prepareForBulletin {
-
+- (void)prepareForBulletin
+{
     // Register notification observers
 
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -106,11 +109,10 @@
     if ([BulletinDataSource userDidCompleteSetup] == NO) {
         [self showBulletin];
     }
-
 }
 
-- (void)showBulletin {
-
+- (void)showBulletin
+{
     [self.bulletinManager setBackgroundViewStyle:[self.currentBackground style]];
 
     if (self.shouldHideStatusBar == YES) {
@@ -119,26 +121,24 @@
         [self.bulletinManager setStatusBarAppearance:BulletinStatusBarAppearanceAutomatic];
     }
 
-    [self.bulletinManager prepare];
-    [self.bulletinManager presentBulletinAboveViewController:self
-                                                animated:YES
-                                              completion:NULL];
-
+    [self.bulletinManager showBulletinAboveViewController:self animated:YES completion:NULL];
 }
 
-- (void)reloadManager {
-    PageBulletinItem *introPage = [BulletinDataSource makeIntroPage];
-    self.bulletinManager = [[BulletinManager alloc] initWithRootItem:introPage];
-};
+- (void)reloadManager
+{
+    PageBLTNItem *introPage = [BulletinDataSource makeIntroPage];
+    self.bulletinManager = [[BLTNItemManager alloc] initWithRootItem:introPage];
+}
 
 #pragma mark Notifications
 
-- (void)setupDidComplete {
+- (void)setupDidComplete
+{
     [BulletinDataSource setUserDidCompleteSetup:YES];
 }
 
-- (void)favoriteIndexDidChangeWithNotification:(NSNotification *)notification {
-
+- (void)favoriteIndexDidChangeWithNotification:(NSNotification *)notification
+{
     NSNumber *intValue = (NSNumber *)[[notification userInfo] objectForKey:@"Index"];
 
     if (intValue) {
@@ -147,8 +147,8 @@
 
 }
 
-- (void)updateTabWithNewIndex:(NSNumber *)newIndex {
-
+- (void)updateTabWithNewIndex:(NSNumber *)newIndex
+{
     NSInteger integerValue = newIndex.integerValue;
 
     if (integerValue) {
@@ -161,13 +161,12 @@
     self.segmentedControl.selectedSegmentIndex = integerValue;
     [BulletinDataSource setFavoriteTabIndex:integerValue];
     [self.collectionView reloadData];
-
 }
 
 #pragma mark Button Actions
 
-- (IBAction)styleButtonTapped:(id)sender {
-
+- (IBAction)styleButtonTapped:(id)sender
+{
     UIAlertController *styleSelectorSheet = [UIAlertController alertControllerWithTitle:@"Bulletin Background Style"
                                                                                 message:NULL preferredStyle:UIAlertControllerStyleActionSheet];
 
@@ -197,24 +196,27 @@
     [[styleSelectorSheet popoverPresentationController] setBarButtonItem:self.styleButtonItem];
 
     [self presentViewController:styleSelectorSheet animated:YES completion:NULL];
-
 }
 
-- (IBAction)showIntroButtonTapped:(id)sender {
+- (IBAction)showIntroButtonTapped:(id)sender
+{
     [self showBulletin];
 }
 
-- (IBAction)tabIndexChanged:(UISegmentedControl *)sender {
+- (IBAction)tabIndexChanged:(UISegmentedControl *)sender
+{
     [self updateTabWithNewIndex:[NSNumber numberWithInteger:sender.selectedSegmentIndex]];
 }
 
-- (void)fontButtonTapped:(UIBarButtonItem *)sender {
+- (void)fontButtonTapped:(UIBarButtonItem *)sender
+{
     [BulletinDataSource setUseAvenirFont:![BulletinDataSource useAvenirFont]];
     [sender setTitle:[BulletinDataSource currentFontName]];
     [self reloadManager];
 }
 
-- (void)fullScreenButtonTapped:(UIBarButtonItem *)sender {
+- (void)fullScreenButtonTapped:(UIBarButtonItem *)sender
+{
     self.shouldHideStatusBar = !(self.shouldHideStatusBar);
     NSString *newTitle = self.shouldHideStatusBar ? @"Status Bar: OFF" : @"Status Bar: On";
     [sender setTitle:newTitle];
@@ -223,27 +225,28 @@
 
 #pragma mark Collection View
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
     return 1;
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
     return [self.dataSource numberOfImages];
 }
 
-- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
     ImageCollectionViewCell *cell = (ImageCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
 
     UIImage *image = [self.dataSource imageAtIndex:[indexPath row]];
     [cell.imageView setImage: image];
 
     return cell;
+}
 
-};
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
     UIImage *image = [self.dataSource imageAtIndex:[indexPath row]];
     CGFloat width = collectionView.frame.size.width;
 
@@ -255,7 +258,6 @@
     CGFloat height = width * aspectRatio;
 
     return CGSizeMake(width, height);
-
 }
 
 @end

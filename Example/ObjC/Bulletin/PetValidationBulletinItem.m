@@ -3,14 +3,14 @@
  *  Copyright (c) 2017 Alexis Aubry. Licensed under the MIT license.
  */
 
-#import "PetValidationBulletinItem.h"
+#import "PetValidationBLTNItem.h"
 #import "BulletinDataSource.h"
 #import "CollectionViewWrapper.h"
 #import "ImageCollectionViewCell.h"
 #import "SelectionFeedbackGenerator.h"
 #import "SuccessFeedbackGenerator.h"
 
-@interface PetValidationBulletinItem ()
+@interface PetValidationBLTNItem ()
 
 @property (nonatomic, strong) CollectionDataSource *dataSource;
 @property (nonatomic, strong) SelectionFeedbackGenerator *selectionFeedbackGenerator;
@@ -19,11 +19,11 @@
 
 @end
 
-@interface PetValidationBulletinItem (CollectionView) <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
+@interface PetValidationBLTNItem (CollectionView) <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
 
 @end
 
-@implementation PetValidationBulletinItem
+@implementation PetValidationBLTNItem
 
 - (instancetype)initWithDataSource:(CollectionDataSource *)data
 {

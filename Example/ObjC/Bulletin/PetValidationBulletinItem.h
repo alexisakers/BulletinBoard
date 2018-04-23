@@ -14,7 +14,7 @@
  * This item demonstrates popping to the previous item, and including a collection view inside the card.
  */
 
-@interface PetValidationBulletinItem : PageBulletinItem
+@interface PetValidationBLTNItem : PageBLTNItem
 
 - (instancetype)initWithDataSource:(CollectionDataSource *)data;
 

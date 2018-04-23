@@ -3,18 +3,18 @@
  *  Copyright (c) 2017 Alexis Aubry. Licensed under the MIT license.
  */
 
-#import "ActionBulletinItem.h"
+#import "BLTNActionItem.h"
 #import <objc/message.h>
-#import <BulletinBoard/BulletinBoard-Swift.h>
+#import <Bulletin/Bulletin-Swift.h>
 
-@interface ActionBulletinItem ()
+@interface BLTNActionItem ()
 
 @property (nonatomic, strong, nullable, readwrite) UIButton *actionButton;
 @property (nonatomic, strong, nullable, readwrite) UIButton *alternativeButton;
 
 @end
 
-@implementation ActionBulletinItem
+@implementation BLTNActionItem
 
 - (instancetype)init
 {
@@ -37,6 +37,24 @@
         self.alternativeHandler = nil;
     }
     return self;
+}
+
+#pragma mark - Properties
+
+- (void)setActionButtonTitle:(NSString *)actionButtonTitle
+{
+    _actionButtonTitle = actionButtonTitle;
+    if (self.actionButton) {
+        [self.actionButton setTitle:actionButtonTitle forState:UIControlStateNormal];
+    }
+}
+
+- (void)setAlternativeButtonTitle:(NSString *)alternativeButtonTitle
+{
+    _alternativeButtonTitle = alternativeButtonTitle;
+    if (self.alternativeButton) {
+        [self.alternativeButton setTitle:alternativeButtonTitle forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark - Buttons

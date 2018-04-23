@@ -12,7 +12,7 @@ import BulletinBoard
  * This item demonstrates popping to the previous item, and including a collection view inside the page.
  */
 
-class PetValidationBulletinItem: FeedbackPageBulletinItem {
+class PetValidationBLTNItem: FeedbackPageBLTNItem {
 
     let dataSource: CollectionDataSource
     let animalType: String
@@ -112,7 +112,7 @@ class PetValidationBulletinItem: FeedbackPageBulletinItem {
 
 // MARK: - Collection View
 
-extension PetValidationBulletinItem: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension PetValidationBLTNItem: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1

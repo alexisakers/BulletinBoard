@@ -5,7 +5,7 @@
 
 @import UIKit;
 
-#import "ActionBulletinItem.h"
+#import "BLTNActionItem.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
  * A standard bulletin item with a title and optional additional informations. It can display a large
  * action button and a smaller button for alternative options.
  *
- * - If you need to display custom elements with the standard buttons, subclass `PageBulletinItem` and
+ * - If you need to display custom elements with the standard buttons, subclass `BLTNPageItem` and
  * implement the `makeArrangedSubviews` method to return the elements to display above the buttons.
  *
  * You can also override this class to customize button tap handling. Override the `actionButtonTapped(sender:)`
@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  * builder type, change the `InterfaceBuilderType` property.
  */
 
-@interface PageBulletinItem : ActionBulletinItem
+@interface BLTNPageItem : BLTNActionItem
 
 /**
  * Creates a bulletin page with the specified title.
@@ -122,7 +122,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 - (NSArray<UIView *> * _Nullable)makeViewsUnderDescriptionWithInterfaceBuilder:(BulletinInterfaceBuilder *)interfaceBuilder;
-
 
 @end
 

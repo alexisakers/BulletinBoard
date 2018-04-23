@@ -4,7 +4,7 @@
  */
 
 import UIKit
-import BulletinBoard
+import Bulletin
 
 /**
  * A view controller displaying a set of images.
@@ -42,9 +42,9 @@ class ViewController: UIViewController {
      * the bulletin manager.
      */
 
-    lazy var bulletinManager: BulletinManager = {
+    lazy var bulletinManager: BLTNItemManager = {
         let introPage = BulletinDataSource.makeIntroPage()
-        return BulletinManager(rootItem: introPage)
+        return BLTNItemManager(rootItem: introPage)
     }()
 
     // MARK: - View
@@ -142,13 +142,13 @@ class ViewController: UIViewController {
 
         bulletinManager.backgroundViewStyle = currentBackground.style
         bulletinManager.statusBarAppearance = shouldHideStatusBar ? .hidden : .automatic
-        bulletinManager.prepareAndPresent(above: self)
+        bulletinManager.showBulletin(above: self)
 
     }
 
     func reloadManager() {
         let introPage = BulletinDataSource.makeIntroPage()
-        bulletinManager = BulletinManager(rootItem: introPage)
+        bulletinManager = BLTNItemManager(rootItem: introPage)
     }
 
     // MARK: - Actions

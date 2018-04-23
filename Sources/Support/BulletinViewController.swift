@@ -12,7 +12,7 @@ import UIKit
 final class BulletinViewController: UIViewController, UIGestureRecognizerDelegate {
 
     /// The object managing the view controller.
-    weak var manager: BulletinManager?
+    weak var manager: BLTNItemManager?
 
     // MARK: - UI Elements
 

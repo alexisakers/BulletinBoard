@@ -19,24 +19,24 @@
 /**
  * Create the introduction page.
  *
- * This creates a `FeedbackPageBulletinItem` with: a title, an image, a description text and
+ * This creates a `FeedbackPageBLTNItem` with: a title, an image, a description text and
  * and action button.
  *
  * The action button presents the next item (the textfield page).
  */
 
-+(PageBulletinItem *)makeIntroPage;
++(PageBLTNItem *)makeIntroPage;
 
 /**
  * Create the location page.
  *
- * This creates a `PageBulletinItem` with: a title, an image, a description text, and an action
+ * This creates a `PageBLTNItem` with: a title, an image, a description text, and an action
  * button. The item can be dismissed. The tint color of the action button is customized.
  *
  * The action button dismisses the bulletin. The alternative button pops to the root item.
  */
 
-+(PageBulletinItem *)makeCompletionPage;
++(PageBLTNItem *)makeCompletionPage;
 
 #pragma mark User Defaults
 

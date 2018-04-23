@@ -10,9 +10,9 @@
 
 @implementation BulletinDataSource
 
-+(PageBulletinItem *)makeIntroPage {
++(PageBLTNItem *)makeIntroPage {
 
-    PageBulletinItem *page = [[PageBulletinItem alloc] initWithTitle:@"Welcome to PetBoard"];
+    PageBLTNItem *page = [[PageBLTNItem alloc] initWithTitle:@"Welcome to PetBoard"];
     [page setImage:[UIImage imageNamed:@"RoundedIcon"]];
     [page setImageAccessibilityLabel:@"😻"];
 
@@ -24,7 +24,7 @@
     page.shouldStartWithActivityIndicator = YES;
 
     // After the item is presented, show the contents after 3 seconds
-    [page setPresentationHandler:^(id<BulletinItem> _Nonnull _item) {
+    [page setPresentationHandler:^(id<BLTNItem> _Nonnull _item) {
 
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [_item.manager hideActivityIndicator];
@@ -32,7 +32,7 @@
 
     }];
 
-    [page setActionHandler:^(ActionBulletinItem * _Nonnull _item) {
+    [page setActionHandler:^(ActionBLTNItem * _Nonnull _item) {
         [[_item manager] displayNextItem];
     }];
 
@@ -48,7 +48,7 @@
     page.descriptionText = @"To create your profile, please tell us your name. We will use it to customize your feed.";
     page.actionButtonTitle = @"Sign Up";
 
-    [page setActionHandler:^(ActionBulletinItem * _Nonnull _item) {
+    [page setActionHandler:^(ActionBLTNItem * _Nonnull _item) {
         [[_item manager] displayNextItem];
     }];
 
@@ -58,9 +58,9 @@
 
 };
 
-+(PageBulletinItem *)makeNotificationsPage {
++(PageBLTNItem *)makeNotificationsPage {
 
-    PageBulletinItem* page = [[PageBulletinItem alloc] initWithTitle:@"Push Notifications"];
+    PageBLTNItem* page = [[PageBLTNItem alloc] initWithTitle:@"Push Notifications"];
     [page setAppearance:[BulletinDataSource makeLightAppearance]];
 
     [page setDescriptionText:@"Receive push notifications when new photos of pets are available."];
@@ -70,12 +70,12 @@
 
     page.dismissable = NO;
 
-    [page setActionHandler:^(ActionBulletinItem * _Nonnull _item) {
+    [page setActionHandler:^(ActionBLTNItem * _Nonnull _item) {
         [[PermissionsManager sharedManager] requestLocalNotifications];
         [[_item manager] displayNextItem];
     }];
 
-    [page setAlternativeHandler:^(ActionBulletinItem * _Nonnull _item) {
+    [page setAlternativeHandler:^(ActionBLTNItem * _Nonnull _item) {
         [[_item manager] displayNextItem];
     }];
 
@@ -85,9 +85,9 @@
 
 };
 
-+(PageBulletinItem *)makeLocationPage {
++(PageBLTNItem *)makeLocationPage {
 
-    PageBulletinItem* page = [[PageBulletinItem alloc] initWithTitle:@"Customize Feed"];
+    PageBLTNItem* page = [[PageBLTNItem alloc] initWithTitle:@"Customize Feed"];
     [page setImage:[UIImage imageNamed:@"LocationPrompt"]];
     [page setImageAccessibilityLabel:@"Location Icon"];
 
@@ -98,12 +98,12 @@
     [[page appearance] setShouldUseCompactDescriptionText:YES];
     page.dismissable = NO;
 
-    [page setActionHandler:^(ActionBulletinItem * _Nonnull _item) {
+    [page setActionHandler:^(ActionBLTNItem * _Nonnull _item) {
         [[PermissionsManager sharedManager] requestWhenInUseLocation];
         [[_item manager] displayNextItem];
     }];
 
-    [page setAlternativeHandler:^(ActionBulletinItem * _Nonnull _item) {
+    [page setAlternativeHandler:^(ActionBLTNItem * _Nonnull _item) {
         [[_item manager] displayNextItem];
     }];
 
@@ -120,14 +120,14 @@
     return page;
 }
 
-+(PageBulletinItem *)makeCompletionPage {
++(PageBLTNItem *)makeCompletionPage {
 
     UIColor *greenColor = [UIColor colorWithRed:0.2980392157
                                           green:0.8509803922
                                            blue:0.3921568627
                                           alpha:1];
 
-    PageBulletinItem* page = [[PageBulletinItem alloc] initWithTitle:@"Setup Completed"];
+    PageBLTNItem* page = [[PageBLTNItem alloc] initWithTitle:@"Setup Completed"];
 
     [page setImage:[UIImage imageNamed:@"IntroCompletion"]];
     [page setImageAccessibilityLabel:@"Checkmark"];
@@ -142,15 +142,15 @@
 
     page.dismissable = NO;
 
-    [page setDismissalHandler:^(id<BulletinItem> _Nonnull _item) {
+    [page setDismissalHandler:^(id<BLTNItem> _Nonnull _item) {
         [[NSNotificationCenter defaultCenter] postNotificationName:SetupDidCompleteNotificationName object:_item];
     }];
 
-    [page setActionHandler:^(ActionBulletinItem * _Nonnull _item) {
+    [page setActionHandler:^(ActionBLTNItem * _Nonnull _item) {
         [[_item manager] dismissBulletinAnimated:YES];
     }];
 
-    [page setAlternativeHandler:^(ActionBulletinItem * _Nonnull _item) {
+    [page setAlternativeHandler:^(ActionBLTNItem * _Nonnull _item) {
         [[_item manager] popToRootItem];
     }];
 

@@ -7,7 +7,7 @@
 #import "SelectionFeedbackGenerator.h"
 #import "BulletinDataSource.h"
 #import "CollectionDataSource.h"
-#import "PetValidationBulletinItem.h"
+#import "PetValidationBLTNItem.h"
 
 @interface PetSelectorBulletinPage ()
 
@@ -66,7 +66,7 @@
     [self updateButtonAppearance:button forSelection:isSelected];
 
     if (isSelected) {
-        self.nextItem = [[PetValidationBulletinItem alloc] initWithDataSource:dataSource];
+        self.nextItem = [[PetValidationBLTNItem alloc] initWithDataSource:dataSource];
     }
 
     return button;
@@ -126,7 +126,7 @@
                                                       userInfo:@{@"Index": @0}];
 
     // Set the next item
-    self.nextItem = [[PetValidationBulletinItem alloc] initWithDataSource:[[CatCollectionDataSource alloc] init]];
+    self.nextItem = [[PetValidationBLTNItem alloc] initWithDataSource:[[CatCollectionDataSource alloc] init]];
 }
 
 - (void)dogButtonTapped
@@ -145,7 +145,7 @@
                                                       userInfo:@{@"Index": @1}];
 
     // Set the next item
-    self.nextItem = [[PetValidationBulletinItem alloc] initWithDataSource:[[DogCollectionDataSource alloc] init]];
+    self.nextItem = [[PetValidationBLTNItem alloc] initWithDataSource:[[DogCollectionDataSource alloc] init]];
 }
 
 - (void)actionButtonTappedWithSender:(UIButton *)sender

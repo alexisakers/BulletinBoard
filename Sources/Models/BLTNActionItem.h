@@ -5,9 +5,9 @@
 
 @import UIKit;
 
-#import "BulletinItem.h"
+#import "BLTNItem.h"
 
-@class BulletinManager;
+@class BLTNItemManager;
 @class BulletinAppearance;
 @class BulletinInterfaceBuilder;
 
@@ -16,11 +16,11 @@
  *
  * You do not use this class directly:
  *
- * - If your custom item has a title and optional stock elements (description, image), use `PageBulletinItem`
+ * - If your custom item has a title and optional stock elements (description, image), use `BLTNPageItem`
  * which provides these stock elements. You can also override this class to insert custom views between the stock
  * views.
  *
- * - If you need to display custom elements with the standard buttons on a page without a title, subclass `ActionBulletinItem`
+ * - If you need to display custom elements with the standard buttons on a page without a title, subclass `BLTNActionItem`
  * and implement the `makeContentViews` method to return the elements to display above the buttons.
  *
  * Subclasses can override several methods to customize the UI:
@@ -33,7 +33,7 @@
  * builder type, change the `InterfaceBuilderType` property.
  */
 
-@interface ActionBulletinItem : NSObject <BulletinItem>
+@interface BLTNActionItem : NSObject <BLTNItem>
 
 #pragma mark - Page Contents
 
@@ -54,7 +54,7 @@
 
 @property (nonatomic, strong, nullable) NSString *alternativeButtonTitle;
 
-#pragma mark - BulletinItem
+#pragma mark - BLTNItem
 
 /**
  * The object managing the item.
@@ -63,7 +63,7 @@
  * the item is removed from bulletin.
  */
 
-@property (nonatomic, strong, nullable) BulletinManager *manager;
+@property (nonatomic, nullable, weak) BLTNItemManager *manager;
 
 /**
  * Whether the page can be dismissed.
@@ -105,7 +105,7 @@
  * the stack.
  */
 
-@property (nonatomic, strong, nullable) id<BulletinItem> nextItem;
+@property (nonatomic, strong, nullable) id<BLTNItem> nextItem;
 
 /**
  * The block of code to execute when the bulletin item is presented. This is called after the
@@ -114,7 +114,7 @@
  * - parameter item: The item that is being presented.
  */
 
-@property (nonatomic, nullable) void(^presentationHandler)(id<BulletinItem> _Nonnull);
+@property (nonatomic, nullable) void(^presentationHandler)(id<BLTNItem> _Nonnull);
 
 /**
  * The block of code to execute when the bulletin item is dismissed. This is called when the bulletin
@@ -123,7 +123,7 @@
  * You can leave it `nil` if `isDismissable` is set to false.
  */
 
-@property (nonatomic, nullable) void(^dismissalHandler)(id<BulletinItem> _Nonnull);
+@property (nonatomic, nullable) void(^dismissalHandler)(id<BLTNItem> _Nonnull);
 
 #pragma mark - Customization
 
@@ -165,13 +165,13 @@
  * The code to execute when the action button is tapped.
  */
 
-@property (nonatomic, nullable) void(^actionHandler)(ActionBulletinItem * _Nonnull);
+@property (nonatomic, nullable) void(^actionHandler)(BLTNActionItem * _Nonnull);
 
 /**
  * The code to execute when the alternative button is tapped.
  */
 
-@property (nonatomic, nullable) void(^alternativeHandler)(ActionBulletinItem * _Nonnull);
+@property (nonatomic, nullable) void(^alternativeHandler)(BLTNActionItem * _Nonnull);
 
 /**
  * Handles a tap on the action button.
@@ -224,7 +224,7 @@
 /**
  * Creates the list of views to display on the bulletin.
  *
- * This is an implementation detail of `BulletinItem` and you should not call it directly. Subclasses should not override this method, and should
+ * This is an implementation detail of `BLTNItem` and you should not call it directly. Subclasses should not override this method, and should
  * implement `makeContentViewsWithInterfaceBuilder:` instead.
  */
 
@@ -247,7 +247,7 @@
  * Override this method if elements you returned in `makeContentViews` need cleanup. Make sure
  * to call `super` if you override this method.
  *
- * This is an implementation detail of `BulletinItem` and you should not call it directly.
+ * This is an implementation detail of `BLTNItem` and you should not call it directly.
  */
 
 - (void)tearDown;

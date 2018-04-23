@@ -5,6 +5,6 @@
 
 @import UIKit;
 
-#import "BulletinItem.h"
-#import "ActionBulletinItem.h"
-#import "PageBulletinItem.h"
+#import "BLTNItem.h"
+#import "BLTNActionItem.h"
+#import "BLTNPageItem.h"

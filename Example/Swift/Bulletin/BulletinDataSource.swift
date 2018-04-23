@@ -4,7 +4,8 @@
  */
 
 import UIKit
-import BulletinBoard
+import Bulletin
+import SafariServices
 
 /**
  * A set of tools to interact with the demo data.
@@ -19,21 +20,22 @@ enum BulletinDataSource {
     /**
      * Create the introduction page.
      *
-     * This creates a `FeedbackPageBulletinItem` with: a title, an image, a description text and
+     * This creates a `FeedbackPageBLTNItem` with: a title, an image, a description text and
      * and action button.
      *
      * The action button presents the next item (the textfield page).
      */
 
-    static func makeIntroPage() -> FeedbackPageBulletinItem {
+    static func makeIntroPage() -> FeedbackPageBLTNItem {
 
-        let page = FeedbackPageBulletinItem(title: "Welcome to PetBoard")
+        let page = FeedbackPageBLTNItem(title: "Welcome to PetBoard")
         page.image = #imageLiteral(resourceName: "RoundedIcon")
         page.imageAccessibilityLabel = "😻"
         page.appearance = makeLightAppearance()
 
         page.descriptionText = "Discover curated images of the best pets in the world."
         page.actionButtonTitle = "Configure"
+        page.alternativeButtonTitle = "Privacy Policy"
 
         page.isDismissable = true
         page.shouldStartWithActivityIndicator = true
@@ -48,6 +50,11 @@ enum BulletinDataSource {
 
         page.actionHandler = { item in
             item.manager?.displayNextItem()
+        }
+
+        page.alternativeHandler = { item in
+            let privacyPolicyVC = SFSafariViewController(url: URL(string: "https://example.com")!)
+            item.manager?.present(privacyPolicyVC, animated: true)
         }
 
         page.next = makeTextFieldPage()
@@ -80,7 +87,7 @@ enum BulletinDataSource {
 
     }
 
-    static func makeDatePage(userName: String?) -> BulletinItem {
+    static func makeDatePage(userName: String?) -> BLTNItem {
 
         var greeting = userName ?? "Lone Ranger"
 
@@ -96,7 +103,7 @@ enum BulletinDataSource {
 
         }
 
-        let page = DatePickerBulletinItem(title: "Enter Birth Date")
+        let page = DatePickerBLTNItem(title: "Enter Birth Date")
         page.descriptionText = "When were you born, \(greeting)?"
         page.isDismissable = false
         page.actionButtonTitle = "Done"
@@ -115,16 +122,16 @@ enum BulletinDataSource {
     /**
      * Create the notifications page.
      *
-     * This creates a `FeedbackPageBulletinItem` with: a title, an image, a description text, an action
+     * This creates a `FeedbackPageBLTNItem` with: a title, an image, a description text, an action
      * and an alternative button.
      *
      * The action and the alternative buttons present the next item (the location page). The action button
      * starts a notification registration request.
      */
 
-    static func makeNotitificationsPage() -> FeedbackPageBulletinItem {
+    static func makeNotitificationsPage() -> FeedbackPageBLTNItem {
 
-        let page = FeedbackPageBulletinItem(title: "Push Notifications")
+        let page = FeedbackPageBLTNItem(title: "Push Notifications")
         page.image = #imageLiteral(resourceName: "NotificationPrompt")
         page.imageAccessibilityLabel = "Notifications Icon"
 
@@ -152,16 +159,16 @@ enum BulletinDataSource {
     /**
      * Create the location page.
      *
-     * This creates a `FeedbackPageBulletinItem` with: a title, an image, a compact description text,
+     * This creates a `FeedbackPageBLTNItem` with: a title, an image, a compact description text,
      * an action and an alternative button.
      *
      * The action and the alternative buttons present the next item (the animal choice page). The action button
      * requests permission for location.
      */
 
-    static func makeLocationPage() -> FeedbackPageBulletinItem {
+    static func makeLocationPage() -> FeedbackPageBLTNItem {
 
-        let page = FeedbackPageBulletinItem(title: "Customize Feed")
+        let page = FeedbackPageBLTNItem(title: "Customize Feed")
         page.image = #imageLiteral(resourceName: "LocationPrompt")
         page.imageAccessibilityLabel = "Location Icon"
 
@@ -207,15 +214,15 @@ enum BulletinDataSource {
     /**
      * Create the location page.
      *
-     * This creates a `PageBulletinItem` with: a title, an image, a description text, and an action
+     * This creates a `PageBLTNItem` with: a title, an image, a description text, and an action
      * button. The item can be dismissed. The tint color of the action button is customized.
      *
      * The action button dismisses the bulletin. The alternative button pops to the root item.
      */
 
-    static func makeCompletionPage() -> PageBulletinItem {
+    static func makeCompletionPage() -> PageBLTNItem {
 
-        let page = PageBulletinItem(title: "Setup Completed")
+        let page = PageBLTNItem(title: "Setup Completed")
         page.image = #imageLiteral(resourceName: "IntroCompletion")
         page.imageAccessibilityLabel = "Checkmark"
         page.appearance.actionButtonColor = #colorLiteral(red: 0.2980392157, green: 0.8509803922, blue: 0.3921568627, alpha: 1)

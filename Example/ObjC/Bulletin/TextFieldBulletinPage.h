@@ -6,7 +6,7 @@
 @import UIKit;
 @import BulletinBoard;
 
-@interface TextFieldBulletinPage : PageBulletinItem
+@interface TextFieldBulletinPage : PageBLTNItem
 
 @property (nonatomic, strong, readonly) UITextField *textField;
 

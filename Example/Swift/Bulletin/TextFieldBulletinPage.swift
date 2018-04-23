@@ -13,11 +13,11 @@ import BulletinBoard
  * when the keyboard is visible.
  */
 
-class TextFieldBulletinPage: FeedbackPageBulletinItem {
+class TextFieldBulletinPage: FeedbackPageBLTNItem {
 
     @objc public var textField: UITextField!
 
-    @objc public var textInputHandler: ((ActionBulletinItem, String?) -> Void)? = nil
+    @objc public var textInputHandler: ((ActionBLTNItem, String?) -> Void)? = nil
 
     override func makeViewsUnderDescription(with interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
         textField = interfaceBuilder.makeTextField(placeholder: "First and Last Name", returnKey: .done, delegate: self)

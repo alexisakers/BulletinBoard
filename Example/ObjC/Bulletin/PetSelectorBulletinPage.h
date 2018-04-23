@@ -13,6 +13,6 @@
  * next item based on user interaction.
  */
 
-@interface PetSelectorBulletinPage : PageBulletinItem
+@interface PetSelectorBulletinPage : PageBLTNItem
 
 @end

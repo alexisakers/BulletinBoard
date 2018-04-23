@@ -5,13 +5,13 @@
 
 @import UIKit;
 
-@class BulletinManager;
+@class BLTNItemManager;
 
 /**
  * An item that can be displayed inside a bulletin card.
  */
 
-@protocol BulletinItem <NSObject>
+@protocol BLTNItem <NSObject>
 
 #pragma mark - Configuration
 
@@ -21,10 +21,10 @@
  * This property is set when the item is currently being displayed. It will be set to `nil` when
  * the item is removed from view.
  *
- * When implementing `BulletinItem`, you should mark this property `weak` to avoid retain cycles.
+ * When implementing `BLTNItem`, you should mark this property `weak` to avoid retain cycles.
  */
 
-@property (nonatomic, nullable, strong) BulletinManager *manager;
+@property (nonatomic, nullable, weak) BLTNItemManager *manager;
 
 /**
  * Whether the page can be dismissed.
@@ -39,7 +39,7 @@
 @property (nonatomic, getter=isDismissable) BOOL dismissable;
 
 /**
- * Whether the page should start with an activity indicator.
+ * Whether the card should start with an activity indicator.
  *
  * Set this value to `false` to display the elements right away. If you set it to `true`,
  * you'll need to call `manager?.hideActivityIndicator()` to show the UI.
@@ -50,8 +50,9 @@
 /**
  * Whether the item should move with the keyboard.
  *
- * You must set it to `true` if the item displays a text field. Otherwise, you can set it to `false` if you
- * don't want the bulletin to move when system alerts are displayed.
+ * You must set it to `true` if the item displays a text field. You can set it to `false` if you
+ * don't want the bulletin to move when system alerts containing a text field (ex: iTunes login)
+ * are displayed.
  */
 
 @property (nonatomic) BOOL shouldRespondToKeyboardChanges;
@@ -63,7 +64,7 @@
  * the stack.
  */
 
-@property (nonatomic, nullable, strong) id<BulletinItem> nextItem;
+@property (nonatomic, nullable, strong) id<BLTNItem> nextItem;
 
 // MARK: - Interface
 

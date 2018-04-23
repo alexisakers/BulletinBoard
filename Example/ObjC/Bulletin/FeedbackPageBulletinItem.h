@@ -9,9 +9,9 @@
 /**
  * A subclass of page bulletin item that plays an haptic feedback when the buttons are pressed.
  *
- * This class demonstrates how to override `PageBulletinItem` to customize button tap handling.
+ * This class demonstrates how to override `PageBLTNItem` to customize button tap handling.
  */
 
-@interface FeedbackPageBulletinItem : ActionBulletinItem
+@interface FeedbackPageBLTNItem : ActionBLTNItem
 
 @end
