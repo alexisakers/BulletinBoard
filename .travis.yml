@@ -18,8 +18,8 @@ before_script:
 
 script:
   # Build Framework
-  - set -o pipefail && xcodebuild clean build -workspace "$WORKSPACE" -scheme "BulletinBoard" -destination "$DESTINATION" SWIFT_VERSION="3.0" | xcpretty
-  - set -o pipefail && xcodebuild clean build -workspace "$WORKSPACE" -scheme "BulletinBoard" -destination "$DESTINATION" SWIFT_VERSION="4.0" | xcpretty
+  - set -o pipefail && xcodebuild clean build -workspace "$WORKSPACE" -scheme "BLTNBoard" -destination "$DESTINATION" SWIFT_VERSION="3.0" | xcpretty
+  - set -o pipefail && xcodebuild clean build -workspace "$WORKSPACE" -scheme "BLTNBoard" -destination "$DESTINATION" SWIFT_VERSION="4.0" | xcpretty
   # Build Demo Project
   - set -o pipefail && xcodebuild clean build -workspace "$WORKSPACE" -scheme "BB-Swift" -destination "$DESTINATION" | xcpretty
   - set -o pipefail && xcodebuild clean build -workspace "$WORKSPACE" -scheme "BB-ObjC" -destination "$DESTINATION" | xcpretty
