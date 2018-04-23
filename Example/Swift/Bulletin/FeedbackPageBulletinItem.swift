@@ -4,7 +4,7 @@
  */
 
 import UIKit
-import BulletinBoard
+import Bulletin
 
 /**
  * A subclass of page bulletin item that plays an haptic feedback when the buttons are pressed.
@@ -12,7 +12,7 @@ import BulletinBoard
  * This class demonstrates how to override `PageBLTNItem` to customize button tap handling.
  */
 
-class FeedbackPageBLTNItem: PageBLTNItem {
+class FeedbackPageBLTNItem: BLTNPageItem {
 
     private let feedbackGenerator = SelectionFeedbackGenerator()
 

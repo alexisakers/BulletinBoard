@@ -4,7 +4,7 @@
  */
 
 @import UIKit;
-@import BulletinBoard;
+@import Bulletin;
 
 /**
  * A background view style.
@@ -16,7 +16,7 @@
 @property NSString *name;
 
 /// The raw style to use.
-@property BulletinBackgroundViewStyle *style;
+@property BLTNBackgroundViewStyle *style;
 
 /// All the styles.
 +(NSArray<BackgroundViewStyle*> *)allStyles;

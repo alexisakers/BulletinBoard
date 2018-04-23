@@ -4,7 +4,7 @@
  */
 
 @import UIKit;
-@import BulletinBoard;
+@import Bulletin;
 
 #import "CollectionDataSource.h"
 
@@ -14,7 +14,7 @@
  * This item demonstrates popping to the previous item, and including a collection view inside the card.
  */
 
-@interface PetValidationBLTNItem : PageBLTNItem
+@interface PetValidationBulletinItem : BLTNPageItem
 
 - (instancetype)initWithDataSource:(CollectionDataSource *)data;
 

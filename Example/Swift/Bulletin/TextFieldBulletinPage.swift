@@ -4,7 +4,7 @@
  */
 
 import UIKit
-import BulletinBoard
+import Bulletin
 
 /**
  * An item that displays a text field.
@@ -17,9 +17,9 @@ class TextFieldBulletinPage: FeedbackPageBLTNItem {
 
     @objc public var textField: UITextField!
 
-    @objc public var textInputHandler: ((ActionBLTNItem, String?) -> Void)? = nil
+    @objc public var textInputHandler: ((BLTNActionItem, String?) -> Void)? = nil
 
-    override func makeViewsUnderDescription(with interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
+    override func makeViewsUnderDescription(with interfaceBuilder: BLTNInterfaceBuilder) -> [UIView]? {
         textField = interfaceBuilder.makeTextField(placeholder: "First and Last Name", returnKey: .done, delegate: self)
         return [textField]
     }

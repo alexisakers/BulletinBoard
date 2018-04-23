@@ -7,7 +7,7 @@
 #import "SelectionFeedbackGenerator.h"
 #import "BulletinDataSource.h"
 #import "CollectionDataSource.h"
-#import "PetValidationBLTNItem.h"
+#import "PetValidationBulletinItem.h"
 
 @interface PetSelectorBulletinPage ()
 
@@ -29,7 +29,7 @@
     return self;
 }
 
-- (NSArray<UIView *> *)makeViewsUnderDescriptionWithInterfaceBuilder:(BulletinInterfaceBuilder *)interfaceBuilder
+- (NSArray<UIView *> *)makeViewsUnderDescriptionWithInterfaceBuilder:(BLTNInterfaceBuilder *)interfaceBuilder
 {
     // We add choice cells to a group stack because they need less spacing
     UIStackView *petsStack = [interfaceBuilder makeGroupStackWithSpacing:16];
@@ -66,7 +66,7 @@
     [self updateButtonAppearance:button forSelection:isSelected];
 
     if (isSelected) {
-        self.nextItem = [[PetValidationBLTNItem alloc] initWithDataSource:dataSource];
+        self.nextItem = [[PetValidationBulletinItem alloc] initWithDataSource:dataSource];
     }
 
     return button;
@@ -126,7 +126,7 @@
                                                       userInfo:@{@"Index": @0}];
 
     // Set the next item
-    self.nextItem = [[PetValidationBLTNItem alloc] initWithDataSource:[[CatCollectionDataSource alloc] init]];
+    self.nextItem = [[PetValidationBulletinItem alloc] initWithDataSource:[[CatCollectionDataSource alloc] init]];
 }
 
 - (void)dogButtonTapped
@@ -145,7 +145,7 @@
                                                       userInfo:@{@"Index": @1}];
 
     // Set the next item
-    self.nextItem = [[PetValidationBLTNItem alloc] initWithDataSource:[[DogCollectionDataSource alloc] init]];
+    self.nextItem = [[PetValidationBulletinItem alloc] initWithDataSource:[[DogCollectionDataSource alloc] init]];
 }
 
 - (void)actionButtonTappedWithSender:(UIButton *)sender

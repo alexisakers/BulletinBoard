@@ -13,7 +13,7 @@
 
 @implementation TextFieldBulletinPage
 
-- (NSArray<UIView *> *)makeViewsUnderDescriptionWithInterfaceBuilder:(BulletinInterfaceBuilder *)interfaceBuilder
+- (NSArray<UIView *> *)makeViewsUnderDescriptionWithInterfaceBuilder:(BLTNInterfaceBuilder *)interfaceBuilder
 {
     self.textField = [interfaceBuilder makeTextFieldWithPlaceholder:@"Full Name"
                                                           returnKey:UIReturnKeyJoin

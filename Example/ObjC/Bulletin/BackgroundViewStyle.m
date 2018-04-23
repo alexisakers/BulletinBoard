@@ -7,10 +7,10 @@
 
 @implementation BackgroundViewStyle {
     NSString *_name;
-    BulletinBackgroundViewStyle *_style;
+    BLTNBackgroundViewStyle *_style;
 }
 
--(instancetype)initWithName:(NSString *)name style:(BulletinBackgroundViewStyle *)style {
+-(instancetype)initWithName:(NSString *)name style:(BLTNBackgroundViewStyle *)style {
     self = [super init];
     if (self) {
         _name = name;
@@ -24,10 +24,10 @@
     NSMutableArray<BackgroundViewStyle*> *styles = [NSMutableArray array];
 
     BackgroundViewStyle *none = [[BackgroundViewStyle alloc] initWithName:@"None"
-                                                                    style:[BulletinBackgroundViewStyle none]];
+                                                                    style:[BLTNBackgroundViewStyle none]];
 
     BackgroundViewStyle *dimmed = [[BackgroundViewStyle alloc] initWithName:@"Dimmed"
-                                                                      style:[BulletinBackgroundViewStyle dimmed]];
+                                                                      style:[BLTNBackgroundViewStyle dimmed]];
 
     [styles addObject:none];
     [styles addObject:dimmed];
@@ -35,16 +35,16 @@
     if (@available(iOS 10.0, *)) {
 
         BackgroundViewStyle *extraLight = [[BackgroundViewStyle alloc] initWithName:@"Light"
-                                                                              style:[BulletinBackgroundViewStyle blurredLight]];
+                                                                              style:[BLTNBackgroundViewStyle blurredLight]];
 
         BackgroundViewStyle *light = [[BackgroundViewStyle alloc] initWithName:@"Extra Light"
-                                                                         style:[BulletinBackgroundViewStyle blurredExtraLight]];
+                                                                         style:[BLTNBackgroundViewStyle blurredExtraLight]];
 
         BackgroundViewStyle *dark = [[BackgroundViewStyle alloc] initWithName:@"Dark"
-                                                                         style:[BulletinBackgroundViewStyle blurredDark]];
+                                                                         style:[BLTNBackgroundViewStyle blurredDark]];
 
         BackgroundViewStyle *extraDark = [[BackgroundViewStyle alloc] initWithName:@"Extra Dark"
-                                                                             style:[BulletinBackgroundViewStyle blurredWithStyle:3 isDark:YES]];
+                                                                             style:[BLTNBackgroundViewStyle blurredWithStyle:3 isDark:YES]];
 
         [styles addObject:extraLight];
         [styles addObject:light];
@@ -60,7 +60,7 @@
 +(BackgroundViewStyle *)defaultStyle {
 
     return [[BackgroundViewStyle alloc] initWithName:@"Dimmed"
-                                               style:[BulletinBackgroundViewStyle dimmed]];
+                                               style:[BLTNBackgroundViewStyle dimmed]];
 
 };
 

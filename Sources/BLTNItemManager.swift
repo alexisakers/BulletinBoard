@@ -155,7 +155,7 @@ extension BLTNItemManager {
      * This method must be called before any other interaction with the bulletin.
      */
 
-    @objc private func prepare() {
+    @objc fileprivate func prepare() {
 
         assertIsMainThread()
 
@@ -195,7 +195,7 @@ extension BLTNItemManager {
     @objc(presentViewControllerAboveBulletin:animated:completion:)
     public func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
         assertIsPrepared()
-        self.bulletinController.present(bulletinController, animated: animated, completion: completion)
+        self.bulletinController.present(viewController, animated: animated, completion: completion)
     }
 
     /**
@@ -379,6 +379,8 @@ extension BLTNItemManager {
     public func showBulletin(above presentingVC: UIViewController,
                                        animated: Bool = true,
                                      completion: (() -> Void)? = nil) {
+
+        self.prepare()
 
         let isDetached = bulletinController.presentingViewController == nil
         assert(isDetached, "Attempt to present a Bulletin that is already presented.")

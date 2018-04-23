@@ -4,7 +4,7 @@
  */
 
 @import UIKit;
-@import BulletinBoard;
+@import Bulletin;
 
 /**
  * An item that displays a choice with two buttons.
@@ -13,6 +13,6 @@
  * next item based on user interaction.
  */
 
-@interface PetSelectorBulletinPage : PageBLTNItem
+@interface PetSelectorBulletinPage : BLTNPageItem
 
 @end

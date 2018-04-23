@@ -3,14 +3,14 @@
  *  Copyright (c) 2017 Alexis Aubry. Licensed under the MIT license.
  */
 
-#import "PetValidationBLTNItem.h"
+#import "PetValidationBulletinItem.h"
 #import "BulletinDataSource.h"
 #import "CollectionViewWrapper.h"
 #import "ImageCollectionViewCell.h"
 #import "SelectionFeedbackGenerator.h"
 #import "SuccessFeedbackGenerator.h"
 
-@interface PetValidationBLTNItem ()
+@interface PetValidationBulletinItem ()
 
 @property (nonatomic, strong) CollectionDataSource *dataSource;
 @property (nonatomic, strong) SelectionFeedbackGenerator *selectionFeedbackGenerator;
@@ -19,11 +19,11 @@
 
 @end
 
-@interface PetValidationBLTNItem (CollectionView) <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
+@interface PetValidationBulletinItem (CollectionView) <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
 
 @end
 
-@implementation PetValidationBLTNItem
+@implementation PetValidationBulletinItem
 
 - (instancetype)initWithDataSource:(CollectionDataSource *)data
 {
@@ -40,7 +40,7 @@
     return self;
 }
 
-- (NSArray<UIView *> *)makeViewsUnderDescriptionWithInterfaceBuilder:(BulletinInterfaceBuilder *)interfaceBuilder
+- (NSArray<UIView *> *)makeViewsUnderDescriptionWithInterfaceBuilder:(BLTNInterfaceBuilder *)interfaceBuilder
 {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;

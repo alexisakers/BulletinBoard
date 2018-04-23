@@ -10,9 +10,9 @@
 
 @implementation BulletinDataSource
 
-+(PageBLTNItem *)makeIntroPage {
++(BLTNPageItem *)makeIntroPage {
 
-    PageBLTNItem *page = [[PageBLTNItem alloc] initWithTitle:@"Welcome to PetBoard"];
+    BLTNPageItem *page = [[BLTNPageItem alloc] initWithTitle:@"Welcome to PetBoard"];
     [page setImage:[UIImage imageNamed:@"RoundedIcon"]];
     [page setImageAccessibilityLabel:@"😻"];
 
@@ -32,7 +32,7 @@
 
     }];
 
-    [page setActionHandler:^(ActionBLTNItem * _Nonnull _item) {
+    [page setActionHandler:^(BLTNActionItem * _Nonnull _item) {
         [[_item manager] displayNextItem];
     }];
 
@@ -48,7 +48,7 @@
     page.descriptionText = @"To create your profile, please tell us your name. We will use it to customize your feed.";
     page.actionButtonTitle = @"Sign Up";
 
-    [page setActionHandler:^(ActionBLTNItem * _Nonnull _item) {
+    [page setActionHandler:^(BLTNActionItem * _Nonnull _item) {
         [[_item manager] displayNextItem];
     }];
 
@@ -58,9 +58,9 @@
 
 };
 
-+(PageBLTNItem *)makeNotificationsPage {
++(BLTNPageItem *)makeNotificationsPage {
 
-    PageBLTNItem* page = [[PageBLTNItem alloc] initWithTitle:@"Push Notifications"];
+    BLTNPageItem* page = [[BLTNPageItem alloc] initWithTitle:@"Push Notifications"];
     [page setAppearance:[BulletinDataSource makeLightAppearance]];
 
     [page setDescriptionText:@"Receive push notifications when new photos of pets are available."];
@@ -70,12 +70,12 @@
 
     page.dismissable = NO;
 
-    [page setActionHandler:^(ActionBLTNItem * _Nonnull _item) {
+    [page setActionHandler:^(BLTNActionItem * _Nonnull _item) {
         [[PermissionsManager sharedManager] requestLocalNotifications];
         [[_item manager] displayNextItem];
     }];
 
-    [page setAlternativeHandler:^(ActionBLTNItem * _Nonnull _item) {
+    [page setAlternativeHandler:^(BLTNActionItem * _Nonnull _item) {
         [[_item manager] displayNextItem];
     }];
 
@@ -85,9 +85,9 @@
 
 };
 
-+(PageBLTNItem *)makeLocationPage {
++(BLTNPageItem *)makeLocationPage {
 
-    PageBLTNItem* page = [[PageBLTNItem alloc] initWithTitle:@"Customize Feed"];
+    BLTNPageItem* page = [[BLTNPageItem alloc] initWithTitle:@"Customize Feed"];
     [page setImage:[UIImage imageNamed:@"LocationPrompt"]];
     [page setImageAccessibilityLabel:@"Location Icon"];
 
@@ -98,12 +98,12 @@
     [[page appearance] setShouldUseCompactDescriptionText:YES];
     page.dismissable = NO;
 
-    [page setActionHandler:^(ActionBLTNItem * _Nonnull _item) {
+    [page setActionHandler:^(BLTNActionItem * _Nonnull _item) {
         [[PermissionsManager sharedManager] requestWhenInUseLocation];
         [[_item manager] displayNextItem];
     }];
 
-    [page setAlternativeHandler:^(ActionBLTNItem * _Nonnull _item) {
+    [page setAlternativeHandler:^(BLTNActionItem * _Nonnull _item) {
         [[_item manager] displayNextItem];
     }];
 
@@ -120,14 +120,14 @@
     return page;
 }
 
-+(PageBLTNItem *)makeCompletionPage {
++(BLTNPageItem *)makeCompletionPage {
 
     UIColor *greenColor = [UIColor colorWithRed:0.2980392157
                                           green:0.8509803922
                                            blue:0.3921568627
                                           alpha:1];
 
-    PageBLTNItem* page = [[PageBLTNItem alloc] initWithTitle:@"Setup Completed"];
+    BLTNPageItem* page = [[BLTNPageItem alloc] initWithTitle:@"Setup Completed"];
 
     [page setImage:[UIImage imageNamed:@"IntroCompletion"]];
     [page setImageAccessibilityLabel:@"Checkmark"];
@@ -146,11 +146,11 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:SetupDidCompleteNotificationName object:_item];
     }];
 
-    [page setActionHandler:^(ActionBLTNItem * _Nonnull _item) {
+    [page setActionHandler:^(BLTNActionItem * _Nonnull _item) {
         [[_item manager] dismissBulletinAnimated:YES];
     }];
 
-    [page setAlternativeHandler:^(ActionBLTNItem * _Nonnull _item) {
+    [page setAlternativeHandler:^(BLTNActionItem * _Nonnull _item) {
         [[_item manager] popToRootItem];
     }];
 
@@ -190,9 +190,9 @@
 
 #pragma mark Font
 
-+(BulletinAppearance *)makeLightAppearance {
++(BLTNItemAppearance *)makeLightAppearance {
 
-    BulletinAppearance *appearance = [[BulletinAppearance alloc] init];
+    BLTNItemAppearance *appearance = [[BLTNItemAppearance alloc] init];
 
     if ([BulletinDataSource useAvenirFont]) {
 

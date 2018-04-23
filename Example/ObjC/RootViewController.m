@@ -116,9 +116,9 @@
     [self.bulletinManager setBackgroundViewStyle:[self.currentBackground style]];
 
     if (self.shouldHideStatusBar == YES) {
-        [self.bulletinManager setStatusBarAppearance:BulletinStatusBarAppearanceHidden];
+        [self.bulletinManager setStatusBarAppearance:BLTNStatusBarAppearanceHidden];
     } else {
-        [self.bulletinManager setStatusBarAppearance:BulletinStatusBarAppearanceAutomatic];
+        [self.bulletinManager setStatusBarAppearance:BLTNStatusBarAppearanceAutomatic];
     }
 
     [self.bulletinManager showBulletinAboveViewController:self animated:YES completion:NULL];
@@ -126,7 +126,7 @@
 
 - (void)reloadManager
 {
-    PageBLTNItem *introPage = [BulletinDataSource makeIntroPage];
+    BLTNPageItem *introPage = [BulletinDataSource makeIntroPage];
     self.bulletinManager = [[BLTNItemManager alloc] initWithRootItem:introPage];
 }
 

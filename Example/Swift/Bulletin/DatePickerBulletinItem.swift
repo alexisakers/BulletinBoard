@@ -4,13 +4,13 @@
  */
 
 import UIKit
-import BulletinBoard
+import Bulletin
 
 /**
  * A bulletin item that demonstrates how to integrate a date picker inside a bulletin item.
  */
 
-class DatePickerBLTNItem: PageBLTNItem {
+class DatePickerBLTNItem: BLTNPageItem {
 
     lazy var datePicker = UIDatePicker()
 
@@ -18,7 +18,7 @@ class DatePickerBLTNItem: PageBLTNItem {
      * Display the date picker under the description label.
      */
 
-    override func makeViewsUnderDescription(with interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
+    override func makeViewsUnderDescription(with interfaceBuilder: BLTNInterfaceBuilder) -> [UIView]? {
         datePicker.datePickerMode = .date
         return [datePicker]
     }

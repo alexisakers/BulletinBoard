@@ -4,7 +4,7 @@
  */
 
 @import UIKit;
-@import BulletinBoard;
+@import Bulletin;
 
 /**
  * A set of tools to interact with the demo data.
@@ -25,7 +25,7 @@
  * The action button presents the next item (the textfield page).
  */
 
-+(PageBLTNItem *)makeIntroPage;
++(BLTNPageItem *)makeIntroPage;
 
 /**
  * Create the location page.
@@ -36,7 +36,7 @@
  * The action button dismisses the bulletin. The alternative button pops to the root item.
  */
 
-+(PageBLTNItem *)makeCompletionPage;
++(BLTNPageItem *)makeCompletionPage;
 
 #pragma mark User Defaults
 

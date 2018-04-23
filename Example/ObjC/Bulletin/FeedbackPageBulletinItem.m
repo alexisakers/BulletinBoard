@@ -3,16 +3,16 @@
  *  Copyright (c) 2017 Alexis Aubry. Licensed under the MIT license.
  */
 
-#import "FeedbackPageBLTNItem.h"
+#import "FeedbackPageBulletinItem.h"
 #import "SelectionFeedbackGenerator.h"
 
-@interface FeedbackPageBLTNItem ()
+@interface FeedbackPageBulletinItem ()
 
 @property (nonatomic, strong) SelectionFeedbackGenerator *feedbackGenerator;
 
 @end
 
-@implementation FeedbackPageBLTNItem
+@implementation FeedbackPageBulletinItem
 
 - (void)actionButtonTappedWithSender:(UIButton *)sender
 {

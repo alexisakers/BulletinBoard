@@ -4,7 +4,7 @@
  */
 
 import UIKit
-import BulletinBoard
+import Bulletin
 
 /**
  * A bulletin page that allows the user to validate its selection.
@@ -36,7 +36,7 @@ class PetValidationBLTNItem: FeedbackPageBLTNItem {
 
     var collectionView: UICollectionView?
 
-    override func makeViewsUnderDescription(with interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
+    override func makeViewsUnderDescription(with interfaceBuilder: BLTNInterfaceBuilder) -> [UIView]? {
 
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical

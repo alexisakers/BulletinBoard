@@ -220,9 +220,9 @@ enum BulletinDataSource {
      * The action button dismisses the bulletin. The alternative button pops to the root item.
      */
 
-    static func makeCompletionPage() -> PageBLTNItem {
+    static func makeCompletionPage() -> BLTNPageItem {
 
-        let page = PageBLTNItem(title: "Setup Completed")
+        let page = BLTNPageItem(title: "Setup Completed")
         page.image = #imageLiteral(resourceName: "IntroCompletion")
         page.imageAccessibilityLabel = "Checkmark"
         page.appearance.actionButtonColor = #colorLiteral(red: 0.2980392157, green: 0.8509803922, blue: 0.3921568627, alpha: 1)

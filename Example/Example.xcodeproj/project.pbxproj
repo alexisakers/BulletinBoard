@@ -23,6 +23,10 @@
 
 /* Begin PBXBuildFile section */
 		5506756B1F90ADEF00874D8B /* BackgroundStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5506756A1F90ADEF00874D8B /* BackgroundStyles.swift */; };
+		550A8C46208DE65D0056F3C7 /* Bulletin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550A8C45208DE65D0056F3C7 /* Bulletin.framework */; };
+		550A8C47208DE65D0056F3C7 /* Bulletin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 550A8C45208DE65D0056F3C7 /* Bulletin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		550A8C49208DE6680056F3C7 /* Bulletin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550A8C48208DE6680056F3C7 /* Bulletin.framework */; };
+		550A8C4A208DE6680056F3C7 /* Bulletin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 550A8C48208DE6680056F3C7 /* Bulletin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		551837CD1FD6F40500B69CAE /* CollectionViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551837CC1FD6F40500B69CAE /* CollectionViewWrapper.swift */; };
 		551CF5E01FBF471A007DFEEA /* ImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 551CF5DF1FBF471A007DFEEA /* ImageCollectionViewCell.m */; };
 		551CF5E31FBF4985007DFEEA /* CollectionDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 551CF5E21FBF4985007DFEEA /* CollectionDataSource.m */; };
@@ -49,16 +53,12 @@
 		55D7022C1FBCCADC00835D8A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55D7021A1FBCCA1A00835D8A /* LaunchScreen.storyboard */; };
 		55D7BA6E1FBC783E0008A602 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D7BA6D1FBC783E0008A602 /* AppDelegate.m */; };
 		55D7BA7C1FBC783E0008A602 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D7BA7B1FBC783E0008A602 /* main.m */; };
-		55D7BA841FBC786B0008A602 /* BulletinBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D7BA831FBC786B0008A602 /* BulletinBoard.framework */; };
-		55D7BA851FBC786B0008A602 /* BulletinBoard.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55D7BA831FBC786B0008A602 /* BulletinBoard.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		55DADE761F7D7AEA001B11A2 /* BulletinDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DADE751F7D7AEA001B11A2 /* BulletinDataSource.swift */; };
 		55DADE781F7D8B29001B11A2 /* PetSelectorBulletinPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DADE771F7D8B29001B11A2 /* PetSelectorBulletinPage.swift */; };
 		55DADE7C1F7E3A53001B11A2 /* FeedbackGenerators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DADE7B1F7E3A53001B11A2 /* FeedbackGenerators.swift */; };
 		55DADE811F7E3C0B001B11A2 /* FeedbackPageBulletinItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DADE801F7E3C0B001B11A2 /* FeedbackPageBulletinItem.swift */; };
 		55DADE831F7E4204001B11A2 /* PermissionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DADE821F7E4204001B11A2 /* PermissionsManager.swift */; };
 		55DADE851F7E592F001B11A2 /* CollectionUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DADE841F7E592F001B11A2 /* CollectionUtilities.swift */; };
-		55DADE911F7ED65E001B11A2 /* BulletinBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DADE901F7ED65E001B11A2 /* BulletinBoard.framework */; };
-		55DADE921F7ED65E001B11A2 /* BulletinBoard.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55DADE901F7ED65E001B11A2 /* BulletinBoard.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		652A87ED1FA24C8B006CDCF6 /* TextFieldBulletinPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652A87EC1FA24C8B006CDCF6 /* TextFieldBulletinPage.swift */; };
 /* End PBXBuildFile section */
 
@@ -86,7 +86,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				55D7BA851FBC786B0008A602 /* BulletinBoard.framework in Embed Frameworks */,
+				550A8C4A208DE6680056F3C7 /* Bulletin.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -97,7 +97,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				55DADE921F7ED65E001B11A2 /* BulletinBoard.framework in Embed Frameworks */,
+				550A8C47208DE65D0056F3C7 /* Bulletin.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -106,6 +106,8 @@
 
 /* Begin PBXFileReference section */
 		5506756A1F90ADEF00874D8B /* BackgroundStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundStyles.swift; sourceTree = "<group>"; };
+		550A8C45208DE65D0056F3C7 /* Bulletin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bulletin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		550A8C48208DE6680056F3C7 /* Bulletin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bulletin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		551837CC1FD6F40500B69CAE /* CollectionViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewWrapper.swift; sourceTree = "<group>"; };
 		551CF5DE1FBF471A007DFEEA /* ImageCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ImageCollectionViewCell.h; path = "Supporting Files/ImageCollectionViewCell.h"; sourceTree = "<group>"; };
 		551CF5DF1FBF471A007DFEEA /* ImageCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ImageCollectionViewCell.m; path = "Supporting Files/ImageCollectionViewCell.m"; sourceTree = "<group>"; };
@@ -148,14 +150,12 @@
 		55D7BA6F1FBC783E0008A602 /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		55D7BA701FBC783E0008A602 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		55D7BA7B1FBC783E0008A602 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		55D7BA831FBC786B0008A602 /* BulletinBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BulletinBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55DADE751F7D7AEA001B11A2 /* BulletinDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinDataSource.swift; sourceTree = "<group>"; };
 		55DADE771F7D8B29001B11A2 /* PetSelectorBulletinPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSelectorBulletinPage.swift; sourceTree = "<group>"; };
 		55DADE7B1F7E3A53001B11A2 /* FeedbackGenerators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackGenerators.swift; sourceTree = "<group>"; };
 		55DADE801F7E3C0B001B11A2 /* FeedbackPageBulletinItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackPageBulletinItem.swift; sourceTree = "<group>"; };
 		55DADE821F7E4204001B11A2 /* PermissionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsManager.swift; sourceTree = "<group>"; };
 		55DADE841F7E592F001B11A2 /* CollectionUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionUtilities.swift; sourceTree = "<group>"; };
-		55DADE901F7ED65E001B11A2 /* BulletinBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BulletinBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		652A87EC1FA24C8B006CDCF6 /* TextFieldBulletinPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBulletinPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -164,7 +164,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55DADE911F7ED65E001B11A2 /* BulletinBoard.framework in Frameworks */,
+				550A8C46208DE65D0056F3C7 /* Bulletin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,7 +172,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55D7BA841FBC786B0008A602 /* BulletinBoard.framework in Frameworks */,
+				550A8C49208DE6680056F3C7 /* Bulletin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,8 +212,8 @@
 		558A12381F7D7865005EC97C = {
 			isa = PBXGroup;
 			children = (
-				55D7BA831FBC786B0008A602 /* BulletinBoard.framework */,
-				55DADE901F7ED65E001B11A2 /* BulletinBoard.framework */,
+				550A8C48208DE6680056F3C7 /* Bulletin.framework */,
+				550A8C45208DE65D0056F3C7 /* Bulletin.framework */,
 				55D7021E1FBCCA1A00835D8A /* Assets.xcassets */,
 				551CF5FC1FBF86F2007DFEEA /* Configs */,
 				55D702191FBCCA1A00835D8A /* Base.lproj */,
@@ -355,7 +355,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0910;
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Alexis Aubry";
 				TargetAttributes = {
 					558A12401F7D7865005EC97C = {
@@ -516,6 +516,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -523,6 +524,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -573,6 +575,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -580,6 +583,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

@@ -4,7 +4,7 @@
  */
 
 import UIKit
-import BulletinBoard
+import Bulletin
 
 /**
  * An item that displays a choice with two buttons.
@@ -40,7 +40,7 @@ class PetSelectorBulletinPage: FeedbackPageBLTNItem {
      * `BulletinInterfaceFactory` to generate standard views, such as title labels and buttons.
      */
 
-    override func makeViewsUnderDescription(with interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
+    override func makeViewsUnderDescription(with interfaceBuilder: BLTNInterfaceBuilder) -> [UIView]? {
         
         let favoriteTabIndex = BulletinDataSource.favoriteTabIndex
 
