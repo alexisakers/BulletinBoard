@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
  * - returns: The header views for the item, or `nil` if no header views should be added.
  */
 
-- (NSArray<UIView *> * _Nullable)makeHeaderViewsWithInterfaceBuilder:(BulletinInterfaceBuilder *)interfaceBuilder;
+- (NSArray<UIView *> * _Nullable)makeHeaderViewsWithInterfaceBuilder:(BLTNInterfaceBuilder *)interfaceBuilder;
 
 /**
  * The views to display below the title.
@@ -93,7 +93,7 @@ NS_ASSUME_NONNULL_BEGIN
  * - returns: The views to display after the title, or `nil` if no views should be added.
  */
 
-- (NSArray<UIView *> * _Nullable)makeViewsUnderTitleWithInterfaceBuilder:(BulletinInterfaceBuilder *)interfaceBuilder;
+- (NSArray<UIView *> * _Nullable)makeViewsUnderTitleWithInterfaceBuilder:(BLTNInterfaceBuilder *)interfaceBuilder;
 
 /**
  * The views to display below the image.
@@ -107,7 +107,7 @@ NS_ASSUME_NONNULL_BEGIN
  * - returns: The views to display after the image, or `nil` if no views should be added.
  */
 
-- (NSArray<UIView *> * _Nullable)makeViewsUnderImageWithInterfaceBuilder:(BulletinInterfaceBuilder *)interfaceBuilder;
+- (NSArray<UIView *> * _Nullable)makeViewsUnderImageWithInterfaceBuilder:(BLTNInterfaceBuilder *)interfaceBuilder;
 
 /**
  * The views to display below the description.
@@ -121,7 +121,7 @@ NS_ASSUME_NONNULL_BEGIN
  * - returns: The views to display after the description, or `nil` if no views should be added.
  */
 
-- (NSArray<UIView *> * _Nullable)makeViewsUnderDescriptionWithInterfaceBuilder:(BulletinInterfaceBuilder *)interfaceBuilder;
+- (NSArray<UIView *> * _Nullable)makeViewsUnderDescriptionWithInterfaceBuilder:(BLTNInterfaceBuilder *)interfaceBuilder;
 
 @end
 

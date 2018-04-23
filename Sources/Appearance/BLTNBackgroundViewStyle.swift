@@ -9,7 +9,7 @@ import UIKit
  * The types of background used to cover the content behind the bulletins.
  */
 
-@objc public class BulletinBackgroundViewStyle: NSObject {
+@objc public class BLTNBackgroundViewStyle: NSObject {
 
     enum Style {
 
@@ -36,27 +36,27 @@ import UIKit
 
     @available(*, unavailable, message: "Use one of the presets to create a backrgound style object.")
     override init() {
-        fatalError("BulletinBackgroundViewStyle.init is unavailable. Use one of the presets instead.")
+        fatalError("BLTNBackgroundViewStyle.init is unavailable. Use one of the presets instead.")
     }
 
 }
 
 // MARK: - Presets
 
-extension BulletinBackgroundViewStyle {
+extension BLTNBackgroundViewStyle {
 
     /**
      * The background content is not covered.
      */
 
-    @objc public static let none = BulletinBackgroundViewStyle(rawValue: .none)
+    @objc public static let none = BLTNBackgroundViewStyle(rawValue: .none)
 
     /**
      * The background is covered with a semi-transparent view similar to the view displayed behind
      * UIKit alerts and action sheets.
      */
 
-    @objc public static let dimmed = BulletinBackgroundViewStyle(rawValue: .dimmed)
+    @objc public static let dimmed = BLTNBackgroundViewStyle(rawValue: .dimmed)
 
     /**
      * The background is blurred with the specified effect.
@@ -68,20 +68,20 @@ extension BulletinBackgroundViewStyle {
      */
 
     @available(iOS 10, *)
-    @objc public static func blurred(style: UIBlurEffectStyle, isDark: Bool) -> BulletinBackgroundViewStyle {
-        return BulletinBackgroundViewStyle(rawValue: .blurred(style: style, isDark: isDark))
+    @objc public static func blurred(style: UIBlurEffectStyle, isDark: Bool) -> BLTNBackgroundViewStyle {
+        return BLTNBackgroundViewStyle(rawValue: .blurred(style: style, isDark: isDark))
     }
 
     /// The background blurred with a light style.
     @available(iOS 10, *)
-    @objc public static let blurredLight: BulletinBackgroundViewStyle = .blurred(style: .light, isDark: false)
+    @objc public static let blurredLight: BLTNBackgroundViewStyle = .blurred(style: .light, isDark: false)
 
     /// The background blurred with an extra light style.
     @available(iOS 10, *)
-    @objc public static let blurredExtraLight: BulletinBackgroundViewStyle = .blurred(style: .extraLight, isDark: false)
+    @objc public static let blurredExtraLight: BLTNBackgroundViewStyle = .blurred(style: .extraLight, isDark: false)
 
     /// The background blurred with a dark style.
     @available(iOS 10, *)
-    @objc public static let blurredDark: BulletinBackgroundViewStyle = .blurred(style: .dark, isDark: true)
+    @objc public static let blurredDark: BLTNBackgroundViewStyle = .blurred(style: .dark, isDark: true)
 
 }

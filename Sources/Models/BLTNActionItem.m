@@ -29,8 +29,8 @@
         self.nextItem = nil;
         self.presentationHandler = nil;
         self.dismissalHandler = nil;
-        self.appearance = [[BulletinAppearance alloc] init];
-        self.interfaceBuilderType = [BulletinInterfaceBuilder class];
+        self.appearance = [[BLTNItemAppearance alloc] init];
+        self.interfaceBuilderType = [BLTNInterfaceBuilder class];
         self.actionButton = nil;
         self.alternativeButton = nil;
         self.actionHandler = nil;
@@ -75,12 +75,12 @@
 
 #pragma mark - View Management
 
-- (NSArray<UIView *> *)makeFooterViewsWithInterfaceBuilder:(BulletinInterfaceBuilder *)interfaceBuilder
+- (NSArray<UIView *> *)makeFooterViewsWithInterfaceBuilder:(BLTNInterfaceBuilder *)interfaceBuilder
 {
     return nil;
 }
 
-- (NSArray<UIView *> *)makeContentViewsWithInterfaceBuilder:(BulletinInterfaceBuilder *)interfaceBuilder
+- (NSArray<UIView *> *)makeContentViewsWithInterfaceBuilder:(BLTNInterfaceBuilder *)interfaceBuilder
 {
     return @[];
 }
@@ -89,10 +89,10 @@
 {
     NSMutableArray<UIView *> *arrangedSubviews = [[NSMutableArray alloc] init];
 
-    NSAssert([self.interfaceBuilderType isSubclassOfClass:[BulletinInterfaceBuilder class]],
+    NSAssert([self.interfaceBuilderType isSubclassOfClass:[BLTNInterfaceBuilder class]],
              @"InterfaceBuilderType must be a subclass of BulletinInterfaceBuilder, or BulletinInterfaceBuilder.");
 
-    BulletinInterfaceBuilder *interfaceBuilder = [[self.interfaceBuilderType alloc] initWithAppearance:self.appearance];
+    BLTNInterfaceBuilder *interfaceBuilder = [[self.interfaceBuilderType alloc] initWithAppearance:self.appearance];
     
     NSArray<UIView *> *contentViews = [self makeContentViewsWithInterfaceBuilder:interfaceBuilder];
     [arrangedSubviews addObjectsFromArray:contentViews];

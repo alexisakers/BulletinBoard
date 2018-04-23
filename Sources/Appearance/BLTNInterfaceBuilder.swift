@@ -10,13 +10,13 @@ import UIKit
  * standard components.
  */
 
-@objc open class BulletinInterfaceBuilder: NSObject {
+@objc open class BLTNInterfaceBuilder: NSObject {
 
     /// The appearance to use to generate the items.
-    @objc public let appearance: BulletinAppearance
+    @objc public let appearance: BLTNItemAppearance
 
     /// Creates a new interface builder.
-    @objc public required init(appearance: BulletinAppearance) {
+    @objc public required init(appearance: BLTNItemAppearance) {
         self.appearance = appearance
     }
 

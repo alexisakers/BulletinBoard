@@ -202,7 +202,7 @@ extension BulletinViewController {
         contentView.backgroundColor = manager.backgroundColor
         contentView.cornerRadius = CGFloat((manager.cardCornerRadius ?? 12).doubleValue)
 
-        let cardPadding = manager.cardPadding.rawValue
+        let cardPadding = manager.edgeSpacing.rawValue
 
         // Set left and right padding
         leadingConstraint = contentView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor,
@@ -301,10 +301,10 @@ extension BulletinViewController {
 
     func bottomMargin() -> CGFloat {
 
-        var bottomMargin: CGFloat = manager?.cardPadding.rawValue ?? 12
+        var bottomMargin: CGFloat = manager?.edgeSpacing.rawValue ?? 12
 
         if manager?.hidesHomeIndicator == true {
-            bottomMargin = manager?.cardPadding.rawValue == 0 ? 0 : 6
+            bottomMargin = manager?.edgeSpacing.rawValue == 0 ? 0 : 6
         }
 
         return bottomMargin
@@ -397,7 +397,7 @@ extension BulletinViewController {
 
     fileprivate func updateCornerRadius() {
 
-        if manager?.cardPadding.rawValue == 0 {
+        if manager?.edgeSpacing.rawValue == 0 {
             contentView.cornerRadius = 0
             return
         }

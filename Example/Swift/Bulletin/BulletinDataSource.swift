@@ -289,9 +289,9 @@ enum BulletinDataSource {
 
 extension BulletinDataSource {
 
-    static func makeLightAppearance() -> BulletinAppearance {
+    static func makeLightAppearance() -> BLTNItemAppearance {
 
-        let appearance = BulletinAppearance()
+        let appearance = BLTNItemAppearance()
 
         if useAvenirFont {
 

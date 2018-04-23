@@ -60,7 +60,7 @@
 
 #pragma mark - View Management
 
-- (NSArray<UIView *> *)makeContentViewsWithInterfaceBuilder:(BulletinInterfaceBuilder *)interfaceBuilder
+- (NSArray<UIView *> *)makeContentViewsWithInterfaceBuilder:(BLTNInterfaceBuilder *)interfaceBuilder
 {
     NSMutableArray<UIView *> *contentViews = [[NSMutableArray alloc] init];
 
@@ -121,22 +121,22 @@
 
 #pragma mark - Customization
 
-- (NSArray<UIView *> *)makeHeaderViewsWithInterfaceBuilder:(BulletinInterfaceBuilder *)interfaceBuilder
+- (NSArray<UIView *> *)makeHeaderViewsWithInterfaceBuilder:(BLTNInterfaceBuilder *)interfaceBuilder
 {
     return nil;
 }
 
-- (NSArray<UIView *> *)makeViewsUnderTitleWithInterfaceBuilder:(BulletinInterfaceBuilder *)interfaceBuilder
+- (NSArray<UIView *> *)makeViewsUnderTitleWithInterfaceBuilder:(BLTNInterfaceBuilder *)interfaceBuilder
 {
     return nil;
 }
 
-- (NSArray<UIView *> *)makeViewsUnderImageWithInterfaceBuilder:(BulletinInterfaceBuilder *)interfaceBuilder
+- (NSArray<UIView *> *)makeViewsUnderImageWithInterfaceBuilder:(BLTNInterfaceBuilder *)interfaceBuilder
 {
     return nil;
 }
 
-- (NSArray<UIView *> *)makeViewsUnderDescriptionWithInterfaceBuilder:(BulletinInterfaceBuilder *)interfaceBuilder
+- (NSArray<UIView *> *)makeViewsUnderDescriptionWithInterfaceBuilder:(BLTNInterfaceBuilder *)interfaceBuilder
 {
     return nil;
 }

@@ -11,7 +11,7 @@ import UIKit
 
 class BulletinBackgroundView: UIView {
 
-    let style: BulletinBackgroundViewStyle
+    let style: BLTNBackgroundViewStyle
 
     // MARK: - Content View
 
@@ -35,7 +35,7 @@ class BulletinBackgroundView: UIView {
 
     // MARK: - Initialization
 
-    init(style: BulletinBackgroundViewStyle) {
+    init(style: BLTNBackgroundViewStyle) {
         self.style = style
         super.init(frame: .zero)
         initialize()

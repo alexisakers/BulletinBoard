@@ -13,9 +13,9 @@ import UIKit
 
 class BulletinPresentationAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
 
-    let style: BulletinBackgroundViewStyle
+    let style: BLTNBackgroundViewStyle
 
-    init(style: BulletinBackgroundViewStyle) {
+    init(style: BLTNBackgroundViewStyle) {
         self.style = style
     }
 

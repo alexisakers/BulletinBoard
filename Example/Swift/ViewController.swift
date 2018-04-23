@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     let backgroundStyles = BackgroundStyles()
 
     /// The current background style.
-    var currentBackground = (name: "Dimmed", style: BulletinBackgroundViewStyle.dimmed)
+    var currentBackground = (name: "Dimmed", style: BLTNBackgroundViewStyle.dimmed)
 
     // MARK: - Bulletin Manager
 
@@ -135,7 +135,7 @@ class ViewController: UIViewController {
 
 //        Uncomment to customize interface
 //        bulletinManager.cardCornerRadius = 22
-//        bulletinManager.cardPadding = .none
+//        bulletinManager.edgeSpacing = .none
 //        bulletinManager.allowsSwipeInteraction = false
 //        bulletinManager.hidesHomeIndicator = true
 //        bulletinManager.backgroundColor = .blue

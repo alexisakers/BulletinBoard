@@ -9,7 +9,7 @@ import UIKit
  * An object that defines the appearance of bulletin items.
  */
 
-@objc public class BulletinAppearance: NSObject {
+public class BLTNItemAppearance: NSObject {
 
     // MARK: - Color Customization
 
@@ -92,7 +92,7 @@ import UIKit
 
 // MARK: - Font Factories
 
-extension BulletinAppearance {
+extension BLTNItemAppearance {
 
     /**
      * Creates the font for title labels.
@@ -160,7 +160,7 @@ extension BulletinAppearance {
  * Styles of status bar to use with bulletin items.
  */
 
-@objc public enum BulletinStatusBarAppearance: Int {
+@objc public enum BLTNStatusBarAppearance: Int {
 
     /// The status bar is hidden.
     case hidden

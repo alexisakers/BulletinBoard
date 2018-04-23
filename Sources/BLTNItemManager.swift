@@ -40,7 +40,7 @@ public final class BLTNItemManager: NSObject {
      * Set this value before presenting the bulletin. Changing it after will have no effect.
      */
 
-    @objc public var backgroundViewStyle: BulletinBackgroundViewStyle = .dimmed
+    @objc public var backgroundViewStyle: BLTNBackgroundViewStyle = .dimmed
 
     // MARK: - Status Bar
 
@@ -50,7 +50,7 @@ public final class BLTNItemManager: NSObject {
      * Set this value before presenting the bulletin. Changing it after will have no effect.
      */
 
-    @objc public var statusBarAppearance: BulletinStatusBarAppearance = .automatic
+    @objc public var statusBarAppearance: BLTNStatusBarAppearance = .automatic
 
     /**
      * The style of status bar animation. Defaults to `.fade`.
@@ -76,7 +76,7 @@ public final class BLTNItemManager: NSObject {
      * Set this value before presenting the bulletin. Changing it after will have no effect.
      */
 
-    @objc public var cardPadding: BulletinPadding = .regular
+    @objc public var edgeSpacing: BLTNSpacing = .regular
 
     /**
      * The rounded corner radius of the bulletin card. Defaults to 12, and 36 on iPhone X.
@@ -195,7 +195,7 @@ extension BLTNItemManager {
     @objc(presentViewControllerAboveBulletin:animated:completion:)
     public func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
         assertIsPrepared()
-        self.bulletinController.present(viewController, animated: animated, completion: completion)
+        self.bulletinController.present(bulletinController, animated: animated, completion: completion)
     }
 
     /**
@@ -229,22 +229,6 @@ extension BLTNItemManager {
 
         return result
 
-    }
-
-    /**
-     * Presents a view controller above the bulletin.
-     *
-     * This method must only be called if a bulletin is currently presented.
-     *
-     * - parameter viewController: The view controller to present. For example, an alert or a Safari View
-     * Controller.
-     * - parameter animated: Whether presentation should be animated.
-     * - parameter completion: An optional block to call after presentation completes.
-     */
-
-    @objc(presentViewControllerAboveBulletin:animated:completion:)
-    public func presentAboveBulletin(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)?) {
-        self.viewController.present(viewController, animated: animated, completion: completion)
     }
 
     /**

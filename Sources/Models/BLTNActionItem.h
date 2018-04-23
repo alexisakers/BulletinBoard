@@ -8,8 +8,8 @@
 #import "BLTNItem.h"
 
 @class BLTNItemManager;
-@class BulletinAppearance;
-@class BulletinInterfaceBuilder;
+@class BLTNItemAppearance;
+@class BLTNInterfaceBuilder;
 
 /**
  * A standard bulletin item with that displays a large action button and a smaller button for alternative options.
@@ -136,7 +136,7 @@
  * after the bulletin page was presented has no effect.
  */
 
-@property (nonatomic, strong, nonnull) BulletinAppearance *appearance;
+@property (nonatomic, strong, nonnull) BLTNItemAppearance *appearance;
 
 /**
  * The type of interface builder to use to generate the components.
@@ -205,7 +205,7 @@
  * - returns: The footer views for the item, or `nil` if no footer views should be added.
  */
 
-- (NSArray<UIView *> * _Nullable)makeFooterViewsWithInterfaceBuilder:(BulletinInterfaceBuilder * _Nonnull)interfaceBuilder;
+- (NSArray<UIView *> * _Nullable)makeFooterViewsWithInterfaceBuilder:(BLTNInterfaceBuilder * _Nonnull)interfaceBuilder;
 
 /**
  * Creates the content views of the page. Content views are displayed above the buttons.
@@ -219,7 +219,7 @@
  * - returns: The views to display above the buttons.
  */
 
-- (NSArray<UIView*> * _Nonnull)makeContentViewsWithInterfaceBuilder:(BulletinInterfaceBuilder * _Nonnull)interfaceBuilder;
+- (NSArray<UIView*> * _Nonnull)makeContentViewsWithInterfaceBuilder:(BLTNInterfaceBuilder * _Nonnull)interfaceBuilder;
 
 /**
  * Creates the list of views to display on the bulletin.
