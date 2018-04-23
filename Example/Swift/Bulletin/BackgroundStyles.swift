@@ -1,5 +1,5 @@
 import UIKit
-import Bulletin
+import BLTNBoard
 
 /**
  * Returns a list of all the background styles.

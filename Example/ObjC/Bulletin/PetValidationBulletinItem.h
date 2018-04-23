@@ -4,7 +4,7 @@
  */
 
 @import UIKit;
-@import Bulletin;
+@import BLTNBoard;
 
 #import "CollectionDataSource.h"
 

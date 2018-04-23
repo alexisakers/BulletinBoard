@@ -4,7 +4,7 @@
  */
 
 @import UIKit;
-@import Bulletin;
+@import BLTNBoard;
 
 /**
  * A view controller displaying a set of images.

@@ -4,7 +4,7 @@
  */
 
 import UIKit
-import Bulletin
+import BLTNBoard
 
 /**
  * An item that displays a choice with two buttons.

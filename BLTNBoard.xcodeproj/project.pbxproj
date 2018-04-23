@@ -26,13 +26,13 @@
 		55C8EF3F204D8A010050E1C2 /* BLTNPageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C8EF3D204D8A010050E1C2 /* BLTNPageItem.m */; };
 		55CB0F82204D63CC001D0393 /* BLTNActionItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 55CB0F80204D63CC001D0393 /* BLTNActionItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55CB0F83204D63CC001D0393 /* BLTNActionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CB0F81204D63CC001D0393 /* BLTNActionItem.m */; };
-		55CB0F85204D6466001D0393 /* Bulletin.h in Headers */ = {isa = PBXBuildFile; fileRef = 55CB0F84204D6466001D0393 /* Bulletin.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55CB0F85204D6466001D0393 /* BLTNBoard.h in Headers */ = {isa = PBXBuildFile; fileRef = 55CB0F84204D6466001D0393 /* BLTNBoard.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55DADE7A1F7D9428001B11A2 /* BLTNInterfaceBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DADE791F7D9428001B11A2 /* BLTNInterfaceBuilder.swift */; };
 		55FA45CA1FED1DE40084B6A0 /* BLTNSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA45C91FED1DE40084B6A0 /* BLTNSpacing.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		52D6D97C1BEFF229002C0205 /* Bulletin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bulletin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		52D6D97C1BEFF229002C0205 /* BLTNBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BLTNBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		550675681F90A0A500874D8B /* BLTNBackgroundViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNBackgroundViewStyle.swift; sourceTree = "<group>"; };
 		551D2D9B1FC060E90078DB21 /* BLTNItemAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNItemAppearance.swift; sourceTree = "<group>"; };
 		5543848A1F91FAC500AFFBCD /* BulletinPresentationAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinPresentationAnimationController.swift; sourceTree = "<group>"; };
@@ -52,10 +52,10 @@
 		55C8EF3D204D8A010050E1C2 /* BLTNPageItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLTNPageItem.m; sourceTree = "<group>"; };
 		55CB0F80204D63CC001D0393 /* BLTNActionItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLTNActionItem.h; sourceTree = "<group>"; };
 		55CB0F81204D63CC001D0393 /* BLTNActionItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLTNActionItem.m; sourceTree = "<group>"; };
-		55CB0F84204D6466001D0393 /* Bulletin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bulletin.h; sourceTree = "<group>"; };
+		55CB0F84204D6466001D0393 /* BLTNBoard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLTNBoard.h; sourceTree = "<group>"; };
 		55DADE791F7D9428001B11A2 /* BLTNInterfaceBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNInterfaceBuilder.swift; sourceTree = "<group>"; };
 		55FA45C91FED1DE40084B6A0 /* BLTNSpacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNSpacing.swift; sourceTree = "<group>"; };
-		AD2FAA261CD0B6D800659CF4 /* Bulletin.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Bulletin.plist; sourceTree = "<group>"; };
+		AD2FAA261CD0B6D800659CF4 /* BLTNBoard.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BLTNBoard.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +81,7 @@
 		52D6D97D1BEFF229002C0205 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				52D6D97C1BEFF229002C0205 /* Bulletin.framework */,
+				52D6D97C1BEFF229002C0205 /* BLTNBoard.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -89,7 +89,7 @@
 		52D6D99C1BEFF38C002C0205 /* Configs */ = {
 			isa = PBXGroup;
 			children = (
-				AD2FAA261CD0B6D800659CF4 /* Bulletin.plist */,
+				AD2FAA261CD0B6D800659CF4 /* BLTNBoard.plist */,
 			);
 			path = Configs;
 			sourceTree = "<group>";
@@ -154,7 +154,7 @@
 		8933C7811EB5B7E0000D00A4 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				55CB0F84204D6466001D0393 /* Bulletin.h */,
+				55CB0F84204D6466001D0393 /* BLTNBoard.h */,
 				558A122A1F7D73CD005EC97C /* BLTNItemManager.swift */,
 				55B3D1D11FDD644300737791 /* Models */,
 				55B3D1D01FDD643B00737791 /* Appearance */,
@@ -171,7 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55C8EF3E204D8A010050E1C2 /* BLTNPageItem.h in Headers */,
-				55CB0F85204D6466001D0393 /* Bulletin.h in Headers */,
+				55CB0F85204D6466001D0393 /* BLTNBoard.h in Headers */,
 				559F8E95204DB9BA00322949 /* BLTNItem.h in Headers */,
 				55CB0F82204D63CC001D0393 /* BLTNActionItem.h in Headers */,
 			);
@@ -180,9 +180,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		52D6D97B1BEFF229002C0205 /* Bulletin */ = {
+		52D6D97B1BEFF229002C0205 /* BLTNBoard */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 52D6D9901BEFF229002C0205 /* Build configuration list for PBXNativeTarget "Bulletin" */;
+			buildConfigurationList = 52D6D9901BEFF229002C0205 /* Build configuration list for PBXNativeTarget "BLTNBoard" */;
 			buildPhases = (
 				52D6D9771BEFF229002C0205 /* Sources */,
 				52D6D9781BEFF229002C0205 /* Frameworks */,
@@ -193,9 +193,9 @@
 			);
 			dependencies = (
 			);
-			name = Bulletin;
+			name = BLTNBoard;
 			productName = Bulletin;
-			productReference = 52D6D97C1BEFF229002C0205 /* Bulletin.framework */;
+			productReference = 52D6D97C1BEFF229002C0205 /* BLTNBoard.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -215,7 +215,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 52D6D9761BEFF229002C0205 /* Build configuration list for PBXProject "Bulletin" */;
+			buildConfigurationList = 52D6D9761BEFF229002C0205 /* Build configuration list for PBXProject "BLTNBoard" */;
 			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -227,7 +227,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				52D6D97B1BEFF229002C0205 /* Bulletin */,
+				52D6D97B1BEFF229002C0205 /* BLTNBoard */,
 			);
 		};
 /* End PBXProject section */
@@ -395,13 +395,13 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Configs/Bulletin.plist;
+				INFOPLIST_FILE = Configs/BLTNBoard.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.BulletinBoard.BulletinBoard-iOS";
-				PRODUCT_NAME = Bulletin;
+				PRODUCT_NAME = BLTNBoard;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -418,12 +418,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Configs/Bulletin.plist;
+				INFOPLIST_FILE = Configs/BLTNBoard.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.BulletinBoard.BulletinBoard-iOS";
-				PRODUCT_NAME = Bulletin;
+				PRODUCT_NAME = BLTNBoard;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
@@ -433,7 +433,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		52D6D9761BEFF229002C0205 /* Build configuration list for PBXProject "Bulletin" */ = {
+		52D6D9761BEFF229002C0205 /* Build configuration list for PBXProject "BLTNBoard" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				52D6D98E1BEFF229002C0205 /* Debug */,
@@ -442,7 +442,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		52D6D9901BEFF229002C0205 /* Build configuration list for PBXNativeTarget "Bulletin" */ = {
+		52D6D9901BEFF229002C0205 /* Build configuration list for PBXNativeTarget "BLTNBoard" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				52D6D9911BEFF229002C0205 /* Debug */,

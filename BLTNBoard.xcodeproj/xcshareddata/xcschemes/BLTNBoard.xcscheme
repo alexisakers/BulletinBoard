@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "52D6D97B1BEFF229002C0205"
-               BuildableName = "Bulletin.framework"
-               BlueprintName = "Bulletin"
-               ReferencedContainer = "container:Bulletin.xcodeproj">
+               BuildableName = "BLTNBoard.framework"
+               BlueprintName = "BLTNBoard"
+               ReferencedContainer = "container:BLTNBoard.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,9 +46,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "52D6D97B1BEFF229002C0205"
-            BuildableName = "Bulletin.framework"
-            BlueprintName = "Bulletin"
-            ReferencedContainer = "container:Bulletin.xcodeproj">
+            BuildableName = "BLTNBoard.framework"
+            BlueprintName = "BLTNBoard"
+            ReferencedContainer = "container:BLTNBoard.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -64,9 +64,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "52D6D97B1BEFF229002C0205"
-            BuildableName = "Bulletin.framework"
-            BlueprintName = "Bulletin"
-            ReferencedContainer = "container:Bulletin.xcodeproj">
+            BuildableName = "BLTNBoard.framework"
+            BlueprintName = "BLTNBoard"
+            ReferencedContainer = "container:BLTNBoard.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

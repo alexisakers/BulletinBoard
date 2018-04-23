@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/aleks/Developer/OSS/BulletinBoard/Bulletin.xcodeproj">
+      location = "group:/Users/aleks/Developer/OSS/BulletinBoard/BLTNBoard.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Example/Example.xcodeproj">

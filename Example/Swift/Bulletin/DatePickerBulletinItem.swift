@@ -4,7 +4,7 @@
  */
 
 import UIKit
-import Bulletin
+import BLTNBoard
 
 /**
  * A bulletin item that demonstrates how to integrate a date picker inside a bulletin item.

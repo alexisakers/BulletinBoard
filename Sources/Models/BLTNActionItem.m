@@ -5,7 +5,7 @@
 
 #import "BLTNActionItem.h"
 #import <objc/message.h>
-#import <Bulletin/Bulletin-Swift.h>
+#import <BLTNBoard/BLTNBoard-Swift.h>
 
 @interface BLTNActionItem ()
 

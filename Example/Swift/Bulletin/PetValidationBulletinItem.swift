@@ -4,7 +4,7 @@
  */
 
 import UIKit
-import Bulletin
+import BLTNBoard
 
 /**
  * A bulletin page that allows the user to validate its selection.

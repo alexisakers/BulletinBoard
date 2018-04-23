@@ -4,7 +4,7 @@
  */
 
 @import UIKit;
-@import Bulletin;
+@import BLTNBoard;
 
 /**
  * A set of tools to interact with the demo data.

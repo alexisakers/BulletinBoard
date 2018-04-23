@@ -4,7 +4,7 @@
  */
 
 @import UIKit;
-@import Bulletin;
+@import BLTNBoard;
 
 /**
  * A subclass of page bulletin item that plays an haptic feedback when the buttons are pressed.
