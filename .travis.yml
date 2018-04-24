@@ -17,6 +17,7 @@ before_script:
   - open -b com.apple.iphonesimulator
 
 script:
+  - xcodebuild -workspace "$WORKSPACE" -list
   # Build Framework
   - set -o pipefail && xcodebuild clean build -workspace "$WORKSPACE" -scheme "BLTNBoard" -destination "$DESTINATION" SWIFT_VERSION="3.0" | xcpretty
   - set -o pipefail && xcodebuild clean build -workspace "$WORKSPACE" -scheme "BLTNBoard" -destination "$DESTINATION" SWIFT_VERSION="4.0" | xcpretty
