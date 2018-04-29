@@ -38,14 +38,7 @@ class BulletinPresentationAnimationController: NSObject, UIViewControllerAnimate
 
         // Add root view
 
-        rootView.frame = containerView.frame
         containerView.addSubview(rootView)
-
-        rootView.translatesAutoresizingMaskIntoConstraints = false
-        rootView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-        rootView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        rootView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        rootView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
 
         // Prepare background view
 
