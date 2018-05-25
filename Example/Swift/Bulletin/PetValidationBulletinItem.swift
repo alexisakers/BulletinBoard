@@ -45,7 +45,7 @@ class PetValidationBLTNItem: FeedbackPageBLTNItem {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.backgroundColor = .white
 
-        let collectionWrapper = CollectionViewWrapper(collectionView: collectionView)
+        let collectionWrapper = interfaceBuilder.wrapView(collectionView, width: nil, height: 256, position: .pinnedToEdges)
 
         self.collectionView = collectionView
         collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "cell")

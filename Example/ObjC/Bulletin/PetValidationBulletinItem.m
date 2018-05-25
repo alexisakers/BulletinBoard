@@ -5,7 +5,6 @@
 
 #import "PetValidationBulletinItem.h"
 #import "BulletinDataSource.h"
-#import "CollectionViewWrapper.h"
 #import "ImageCollectionViewCell.h"
 #import "SelectionFeedbackGenerator.h"
 #import "SuccessFeedbackGenerator.h"
@@ -49,7 +48,7 @@
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
     collectionView.backgroundColor = [UIColor whiteColor];
 
-    CollectionViewWrapper *collectionWrapper = [[CollectionViewWrapper alloc] initWithCollectionView:collectionView];
+    BLTNContainerView *collectionWrapper = [interfaceBuilder wrapView:collectionView width:NULL height:@256 position:BLTNViewPositionPinnedToEdges];
 
     self.collectionView = collectionView;
     return @[collectionWrapper];

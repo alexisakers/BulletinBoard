@@ -160,4 +160,46 @@ import UIKit
 
     }
 
+    /**
+     * Wraps a view without intrinsic content size inside a view with an intrinsic content size.
+     *
+     * This method allows you to display view without an intrinsic content size, such as collection views,
+     * inside stack views; by using the returned `BLTNContentView` view.
+     *
+     * - parameter view: The view to wrap in the container.
+     * - parameter width: The width of the content. Pass `nil` if the content has a flexible width.
+     * - parameter height: The height of the content. Pass `nil` if the content has a flexible height.
+     * - parameter position: The position of `view` inside its parent.
+     *
+     * - returns: The view that contains the `view` and an intrinsic content size. You can add the returned
+     * view to a stack view.
+     */
+
+    @objc open func wrapView(_ view: UIView, width: NSNumber?, height: NSNumber?, position: BLTNViewPosition) -> BLTNContainerView {
+
+        let container = BLTNContainerView()
+
+        container.contentSize = CGSize(width: width.flatMap(CGFloat.init) ?? UIViewNoIntrinsicMetric,
+                                       height: height.flatMap(CGFloat.init) ?? UIViewNoIntrinsicMetric)
+
+        container.setChildView(view) { parent, child in
+
+            switch position {
+            case .centered:
+                child.centerXAnchor.constraint(equalTo: parent.centerXAnchor).isActive = true
+                child.centerYAnchor.constraint(equalTo: parent.centerYAnchor).isActive = true
+
+            case .pinnedToEdges:
+                child.leadingAnchor.constraint(equalTo: parent.leadingAnchor).isActive = true
+                child.trailingAnchor.constraint(equalTo: parent.trailingAnchor).isActive = true
+                child.topAnchor.constraint(equalTo: parent.topAnchor).isActive = true
+                child.bottomAnchor.constraint(equalTo: parent.bottomAnchor).isActive = true
+            }
+
+        }
+
+        return container
+
+    }
+
 }

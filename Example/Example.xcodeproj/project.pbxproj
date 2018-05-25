@@ -27,7 +27,6 @@
 		550A8C51208DEA550056F3C7 /* BLTNBoard.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 550A8C4F208DEA550056F3C7 /* BLTNBoard.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		550A8C53208DEA590056F3C7 /* BLTNBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550A8C52208DEA590056F3C7 /* BLTNBoard.framework */; };
 		550A8C54208DEA590056F3C7 /* BLTNBoard.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 550A8C52208DEA590056F3C7 /* BLTNBoard.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		551837CD1FD6F40500B69CAE /* CollectionViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551837CC1FD6F40500B69CAE /* CollectionViewWrapper.swift */; };
 		551CF5E01FBF471A007DFEEA /* ImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 551CF5DF1FBF471A007DFEEA /* ImageCollectionViewCell.m */; };
 		551CF5E31FBF4985007DFEEA /* CollectionDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 551CF5E21FBF4985007DFEEA /* CollectionDataSource.m */; };
 		551CF5E61FBF4D14007DFEEA /* SelectionFeedbackGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 551CF5E51FBF4D14007DFEEA /* SelectionFeedbackGenerator.m */; };
@@ -40,7 +39,6 @@
 		558A12451F7D7865005EC97C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A12441F7D7865005EC97C /* AppDelegate.swift */; };
 		558A12471F7D7865005EC97C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A12461F7D7865005EC97C /* ViewController.swift */; };
 		559F8E8A204D98DC00322949 /* FeedbackPageBulletinItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 559F8E89204D98DC00322949 /* FeedbackPageBulletinItem.m */; };
-		559F8E8D204D99FC00322949 /* CollectionViewWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 559F8E8C204D99FC00322949 /* CollectionViewWrapper.m */; };
 		559F8E90204D9C7400322949 /* PetValidationBulletinItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 559F8E8F204D9C7400322949 /* PetValidationBulletinItem.m */; };
 		559F8E93204DA22E00322949 /* PetSelectorBulletinPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 559F8E92204DA22E00322949 /* PetSelectorBulletinPage.m */; };
 		55A7B1DB1FE3D858000F80DE /* DatePickerBulletinItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A7B1DA1FE3D858000F80DE /* DatePickerBulletinItem.swift */; };
@@ -108,7 +106,6 @@
 		5506756A1F90ADEF00874D8B /* BackgroundStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundStyles.swift; sourceTree = "<group>"; };
 		550A8C4F208DEA550056F3C7 /* BLTNBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BLTNBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		550A8C52208DEA590056F3C7 /* BLTNBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BLTNBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		551837CC1FD6F40500B69CAE /* CollectionViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewWrapper.swift; sourceTree = "<group>"; };
 		551CF5DE1FBF471A007DFEEA /* ImageCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ImageCollectionViewCell.h; path = "Supporting Files/ImageCollectionViewCell.h"; sourceTree = "<group>"; };
 		551CF5DF1FBF471A007DFEEA /* ImageCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ImageCollectionViewCell.m; path = "Supporting Files/ImageCollectionViewCell.m"; sourceTree = "<group>"; };
 		551CF5E11FBF4985007DFEEA /* CollectionDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CollectionDataSource.h; path = "Supporting Files/CollectionDataSource.h"; sourceTree = "<group>"; };
@@ -130,8 +127,6 @@
 		558A12461F7D7865005EC97C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		559F8E88204D98DC00322949 /* FeedbackPageBulletinItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedbackPageBulletinItem.h; sourceTree = "<group>"; };
 		559F8E89204D98DC00322949 /* FeedbackPageBulletinItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedbackPageBulletinItem.m; sourceTree = "<group>"; };
-		559F8E8B204D99FC00322949 /* CollectionViewWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewWrapper.h; sourceTree = "<group>"; };
-		559F8E8C204D99FC00322949 /* CollectionViewWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewWrapper.m; sourceTree = "<group>"; };
 		559F8E8E204D9C7400322949 /* PetValidationBulletinItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PetValidationBulletinItem.h; sourceTree = "<group>"; };
 		559F8E8F204D9C7400322949 /* PetValidationBulletinItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PetValidationBulletinItem.m; sourceTree = "<group>"; };
 		559F8E91204DA22E00322949 /* PetSelectorBulletinPage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PetSelectorBulletinPage.h; sourceTree = "<group>"; };
@@ -194,8 +189,6 @@
 				559F8E92204DA22E00322949 /* PetSelectorBulletinPage.m */,
 				559F8E8E204D9C7400322949 /* PetValidationBulletinItem.h */,
 				559F8E8F204D9C7400322949 /* PetValidationBulletinItem.m */,
-				559F8E8B204D99FC00322949 /* CollectionViewWrapper.h */,
-				559F8E8C204D99FC00322949 /* CollectionViewWrapper.m */,
 			);
 			path = Bulletin;
 			sourceTree = "<group>";
@@ -304,7 +297,6 @@
 				55DADE841F7E592F001B11A2 /* CollectionUtilities.swift */,
 				55DADE7B1F7E3A53001B11A2 /* FeedbackGenerators.swift */,
 				55DADE821F7E4204001B11A2 /* PermissionsManager.swift */,
-				551837CC1FD6F40500B69CAE /* CollectionViewWrapper.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -428,7 +420,6 @@
 				55DADE7C1F7E3A53001B11A2 /* FeedbackGenerators.swift in Sources */,
 				55A7B1DB1FE3D858000F80DE /* DatePickerBulletinItem.swift in Sources */,
 				55DADE781F7D8B29001B11A2 /* PetSelectorBulletinPage.swift in Sources */,
-				551837CD1FD6F40500B69CAE /* CollectionViewWrapper.swift in Sources */,
 				558A12451F7D7865005EC97C /* AppDelegate.swift in Sources */,
 				553CDD4D1FD6F44B00E18C82 /* PetValidationBulletinItem.swift in Sources */,
 				55DADE761F7D7AEA001B11A2 /* BulletinDataSource.swift in Sources */,
@@ -451,7 +442,6 @@
 				559F8E90204D9C7400322949 /* PetValidationBulletinItem.m in Sources */,
 				55D702061FBCA4A300835D8A /* BulletinDataSource.m in Sources */,
 				559F8E93204DA22E00322949 /* PetSelectorBulletinPage.m in Sources */,
-				559F8E8D204D99FC00322949 /* CollectionViewWrapper.m in Sources */,
 				551CF5F21FBF6BCC007DFEEA /* TextFieldBulletinPage.m in Sources */,
 				55D702131FBCC02F00835D8A /* PermissionsManager.m in Sources */,
 				551CF5E01FBF471A007DFEEA /* ImageCollectionViewCell.m in Sources */,
