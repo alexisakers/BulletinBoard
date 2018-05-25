@@ -15,13 +15,13 @@
  * Prepares the taptic engine.
  */
 
--(void)prepare;
+- (void)prepare;
 
 /**
  * Plays a success haptic feedback.
  */
 
--(void)notifySuccess;
+- (void)notifySuccess;
 
 @end
 

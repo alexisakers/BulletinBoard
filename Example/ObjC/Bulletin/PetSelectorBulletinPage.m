@@ -33,7 +33,7 @@
 {
     // We add choice cells to a group stack because they need less spacing
     UIStackView *petsStack = [interfaceBuilder makeGroupStackWithSpacing:16];
-    NSInteger favoriteTabIndex = [BulletinDataSource favoriteTabIndex];
+    NSInteger favoriteTabIndex = BulletinDataSource.favoriteTabIndex;
 
     // Cat button
     self.catButton = [self createChoiceCellWithDataSource:[[CatCollectionDataSource alloc] init] isSelected:favoriteTabIndex != 1];
@@ -50,8 +50,8 @@
 
 - (UIButton *)createChoiceCellWithDataSource:(CollectionDataSource *)dataSource isSelected:(BOOL)isSelected
 {
-    NSString *petName = [dataSource pluralizedPetName];
-    NSString *buttonTitle = [[NSString alloc] initWithFormat:@"%@ %@", [dataSource emoji], petName];
+    NSString *petName = dataSource.pluralizedPetName;
+    NSString *buttonTitle = [[NSString alloc] initWithFormat:@"%@ %@", dataSource.emoji, petName];
 
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     [button setTitle:buttonTitle forState:UIControlStateNormal];

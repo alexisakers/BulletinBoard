@@ -24,10 +24,11 @@
 - (void)onDisplay
 {
     // Uncomment to start typing when the bulletin item is presented
-    [self.textField becomeFirstResponder];
+    // [self.textField becomeFirstResponder];
 }
 
-- (void)tearDown {
+- (void)tearDown
+{
     [self.textField setDelegate:nil];
 }
 
@@ -39,15 +40,10 @@
     [super actionButtonTappedWithSender:sender];
 }
 
-- (BOOL)isInputValid:(NSString *)text {
-
-    if (text == NULL || [text length] == 0) {
-        return false;
-    }
-
-    return true;
-
-};
+- (BOOL)isValidInput:(NSString *)text
+{
+    return text != NULL && text.length > 0;
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -62,7 +58,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if ([self isInputValid:textField.text]) {
+    if ([self isValidInput:textField.text]) {
         if (self.textInputHandler) {
             self.textInputHandler(self, textField.text);
         }

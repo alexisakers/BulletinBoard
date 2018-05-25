@@ -15,12 +15,12 @@
  * Prepares the taptic engine.
  */
 
--(void)prepare;
+- (void)prepare;
 
 /**
  * Plays a selection change haptic feedback.
  */
 
--(void)selectionChanged;
+- (void)selectionChanged;
 
 @end

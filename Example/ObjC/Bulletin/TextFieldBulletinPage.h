@@ -6,9 +6,23 @@
 @import UIKit;
 @import BLTNBoard;
 
+/**
+ * A page item that displays a text field for user input.
+ */
+
 @interface TextFieldBulletinPage : BLTNPageItem
 
-@property (nonatomic, copy, nullable) void (^textInputHandler)(TextFieldBulletinPage *, NSString * _Nullable);
-@property (nonatomic, strong, readonly, nonnull) UITextField *textField;
+/// The block executed when the user finished inputting the text.
+@property (nonatomic, nullable) void (^textInputHandler)(TextFieldBulletinPage *, NSString * _Nullable);
+
+/// The text field presented by the page.
+@property (nonatomic, strong, readonly) UITextField *textField;
+
+/**
+ * The method called to determine if the text is valid, and if the user can continue.
+ * You can override this method to customize the validation process.
+ */
+
+- (BOOL)isValidInput:(NSString *)text;
 
 @end

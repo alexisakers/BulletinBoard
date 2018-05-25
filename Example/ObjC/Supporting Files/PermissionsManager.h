@@ -6,18 +6,22 @@
 @import UIKit;
 @import CoreLocation;
 
+/**
+ * Manages the permissions of the app.
+ */
+
 @interface PermissionsManager : NSObject
 
 /**
  * Requests permission for system features.
  */
 
-+(PermissionsManager*)sharedManager;
++ (PermissionsManager*)sharedManager;
 
 /// Show the notification permission prompt.
--(void)requestLocalNotifications;
+- (void)requestLocalNotifications;
 
 /// Show the location permission prompt.
--(void)requestWhenInUseLocation;
+- (void)requestWhenInUseLocation;
 
 @end

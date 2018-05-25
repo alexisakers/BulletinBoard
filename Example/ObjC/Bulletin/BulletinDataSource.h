@@ -14,6 +14,18 @@
 
 @interface BulletinDataSource : NSObject
 
+/// The current favorite tab index.
+@property (class) NSInteger favoriteTabIndex;
+
+/// Whether user completed setup.
+@property (class) BOOL userDidCompleteSetup;
+
+/// Whether to use the Avenir font.
+@property (class) BOOL useAvenirFont;
+
+/// The name of the current font.
+@property (class, copy, readonly) NSString *currentFontName;
+
 #pragma mark Pages
 
 /**
@@ -37,29 +49,6 @@
  */
 
 +(BLTNPageItem *)makeCompletionPage;
-
-#pragma mark User Defaults
-
-/// The current favorite tab index.
-+(NSInteger)favoriteTabIndex;
-
-/// The current favorite tab index.
-+(void)setFavoriteTabIndex:(NSInteger)newValue;
-
-/// Whether user completed setup.
-+(BOOL)userDidCompleteSetup;
-
-/// Whether user completed setup.
-+(void)setUserDidCompleteSetup:(BOOL)newValue;
-
-/// Whether to use the Avenir font.
-+(BOOL)useAvenirFont;
-
-/// Whether to use the Avenir font.
-+(void)setUseAvenirFont:(BOOL)newValue;
-
-/// The name of the current font.
-+(NSString *)currentFontName;
 
 @end
 

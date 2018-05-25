@@ -28,14 +28,14 @@
     [super viewDidLoad];
 
     [self reloadManager];
-    self.backgroundStyles = [BackgroundViewStyle allStyles];
-    self.currentBackground = [BackgroundViewStyle defaultStyle];
+    self.backgroundStyles = BackgroundViewStyle.allStyles;
+    self.currentBackground = BackgroundViewStyle.defaultStyle;
     self.shouldHideStatusBar = NO;
 
     // Finish Initialization
 
-    NSInteger favoriteTab = [BulletinDataSource favoriteTabIndex];
-    [self.segmentedControl setSelectedSegmentIndex:favoriteTab];
+    NSInteger favoriteTab = BulletinDataSource.favoriteTabIndex;
+    self.segmentedControl.selectedSegmentIndex = favoriteTab;
     self.dataSource = favoriteTab == 0 ?
         [[CatCollectionDataSource alloc] init] : [[DogCollectionDataSource alloc] init];
 
@@ -44,20 +44,21 @@
     // Set up the collection view
 
     [self.collectionView registerClass:[ImageCollectionViewCell class]
-       forCellWithReuseIdentifier:@"cell"];
+            forCellWithReuseIdentifier:@"cell"];
 
-    [self.collectionView setBackgroundColor:[UIColor whiteColor]];
-    [self.collectionView setDelegate:self];
-    [self.collectionView setDataSource:self];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
 
     UILayoutGuide *guide = self.view.readableContentGuide;
-    [[[self.collectionView leadingAnchor] constraintEqualToAnchor:[guide leadingAnchor]] setActive:YES];
-    [[[self.collectionView trailingAnchor] constraintEqualToAnchor:[guide trailingAnchor]] setActive:YES];
-    [[[self.collectionView topAnchor] constraintEqualToAnchor:[guide topAnchor]] setActive:YES];
+    [[self.collectionView.leadingAnchor constraintEqualToAnchor:[guide leadingAnchor]] setActive:YES];
+    [[self.collectionView.trailingAnchor constraintEqualToAnchor:[guide trailingAnchor]] setActive:YES];
+    [[self.collectionView.topAnchor constraintEqualToAnchor:[guide topAnchor]] setActive:YES];
 
     UIEdgeInsets cvInset = UIEdgeInsetsMake(8, self.collectionView.contentInset.left,
                                             8, self.collectionView.contentInset.right);
-    [self.collectionView setContentInset:cvInset];
+
+    self.collectionView.contentInset = cvInset;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -102,23 +103,23 @@
                                                                       style:UIBarButtonItemStylePlain
                                                                      target:self
                                                                      action:@selector(fullScreenButtonTapped:)];
-    [self setToolbarItems:@[fontItem, statusBarItem]];
+    self.toolbarItems = @[fontItem, statusBarItem];
 
     // If the user did not complete the setup, present the bulletin automatically
 
-    if ([BulletinDataSource userDidCompleteSetup] == NO) {
+    if (BulletinDataSource.userDidCompleteSetup == NO) {
         [self showBulletin];
     }
 }
 
 - (void)showBulletin
 {
-    [self.bulletinManager setBackgroundViewStyle:[self.currentBackground style]];
+    self.bulletinManager.backgroundViewStyle = self.currentBackground.style;
 
     if (self.shouldHideStatusBar == YES) {
-        [self.bulletinManager setStatusBarAppearance:BLTNStatusBarAppearanceHidden];
+        self.bulletinManager.statusBarAppearance = BLTNStatusBarAppearanceHidden;
     } else {
-        [self.bulletinManager setStatusBarAppearance:BLTNStatusBarAppearanceAutomatic];
+        self.bulletinManager.statusBarAppearance = BLTNStatusBarAppearanceAutomatic;
     }
 
     [self.bulletinManager showBulletinAboveViewController:self animated:YES completion:NULL];
@@ -140,8 +141,7 @@
 - (void)favoriteIndexDidChangeWithNotification:(NSNotification *)notification
 {
     NSNumber *intValue = (NSNumber *)[[notification userInfo] objectForKey:@"Index"];
-
-    if (intValue) {
+    if (intValue != nil) {
         [self updateTabWithNewIndex:intValue];
     }
 
@@ -159,7 +159,7 @@
     }
 
     self.segmentedControl.selectedSegmentIndex = integerValue;
-    [BulletinDataSource setFavoriteTabIndex:integerValue];
+    BulletinDataSource .favoriteTabIndex = integerValue;
     [self.collectionView reloadData];
 }
 
@@ -172,8 +172,8 @@
 
     for (BackgroundViewStyle *background in self.backgroundStyles) {
 
-        UIAlertAction *action = [UIAlertAction actionWithTitle: background.name
-                                                         style: UIAlertActionStyleDefault
+        UIAlertAction *action = [UIAlertAction actionWithTitle:background.name
+                                                         style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction * _Nonnull action) {
                                                            [self.styleButtonItem setTitle:background.name];
                                                            self.currentBackground = background;
@@ -211,15 +211,14 @@
 - (void)fontButtonTapped:(UIBarButtonItem *)sender
 {
     [BulletinDataSource setUseAvenirFont:![BulletinDataSource useAvenirFont]];
-    [sender setTitle:[BulletinDataSource currentFontName]];
+    sender.title = BulletinDataSource.currentFontName;
     [self reloadManager];
 }
 
 - (void)fullScreenButtonTapped:(UIBarButtonItem *)sender
 {
     self.shouldHideStatusBar = !(self.shouldHideStatusBar);
-    NSString *newTitle = self.shouldHideStatusBar ? @"Status Bar: OFF" : @"Status Bar: On";
-    [sender setTitle:newTitle];
+    sender.title = self.shouldHideStatusBar ? @"Status Bar: OFF" : @"Status Bar: On";
     [self reloadManager];
 }
 
@@ -240,8 +239,7 @@
     ImageCollectionViewCell *cell = (ImageCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
 
     UIImage *image = [self.dataSource imageAtIndex:[indexPath row]];
-    [cell.imageView setImage: image];
-
+    cell.imageView.image = image;
     return cell;
 }
 

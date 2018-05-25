@@ -13,15 +13,15 @@
 @interface BackgroundViewStyle : NSObject
 
 /// The name of the style.
-@property NSString *name;
+@property (nonatomic, copy) NSString *name;
 
 /// The raw style to use.
-@property BLTNBackgroundViewStyle *style;
+@property (nonatomic) BLTNBackgroundViewStyle *style;
 
 /// All the styles.
-+(NSArray<BackgroundViewStyle*> *)allStyles;
+@property (class, copy, readonly) NSArray<BackgroundViewStyle*> *allStyles;
 
 /// The default style.
-+(BackgroundViewStyle *)defaultStyle;
+@property (class, readonly) BackgroundViewStyle *defaultStyle;
 
 @end

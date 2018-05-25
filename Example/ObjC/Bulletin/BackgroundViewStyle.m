@@ -5,22 +5,19 @@
 
 #import "BackgroundViewStyle.h"
 
-@implementation BackgroundViewStyle {
-    NSString *_name;
-    BLTNBackgroundViewStyle *_style;
-}
+@implementation BackgroundViewStyle
 
 -(instancetype)initWithName:(NSString *)name style:(BLTNBackgroundViewStyle *)style {
     self = [super init];
     if (self) {
-        _name = name;
-        _style = style;
+        self.name = name;
+        self.style = style;
     }
     return self;
 };
 
-+(NSArray<BackgroundViewStyle*> *)allStyles {
-
++ (NSArray<BackgroundViewStyle*> *)allStyles
+{
     NSMutableArray<BackgroundViewStyle*> *styles = [NSMutableArray array];
 
     BackgroundViewStyle *none = [[BackgroundViewStyle alloc] initWithName:@"None"
@@ -50,18 +47,15 @@
         [styles addObject:light];
         [styles addObject:dark];
         [styles addObject:extraDark];
-
     }
 
     return (NSArray<BackgroundViewStyle*> *)styles;
+}
 
-};
-
-+(BackgroundViewStyle *)defaultStyle {
-
++ (BackgroundViewStyle *)defaultStyle
+{
     return [[BackgroundViewStyle alloc] initWithName:@"Dimmed"
                                                style:[BLTNBackgroundViewStyle dimmed]];
-
-};
+}
 
 @end

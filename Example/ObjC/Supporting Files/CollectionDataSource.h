@@ -11,20 +11,20 @@
 
 @interface CollectionDataSource : NSObject
 
-/// Get the image at the given index.
-- (UIImage *)imageAtIndex:(NSInteger)index;
-
 /// The number of images on the data set.
-- (int)numberOfImages;
+@property (nonatomic, readonly) NSInteger numberOfImages;
 
 /// The name of the pet.
-- (NSString *)petName;
+@property (nonatomic, copy, readonly) NSString *petName;
 
 /// The pluralized name of the pet.
-- (NSString *)pluralizedPetName;
+@property (nonatomic, copy, readonly) NSString *pluralizedPetName;
 
 /// The emoji for the animal.
-- (NSString *)emoji;
+@property (nonatomic, copy, readonly) NSString *emoji;
+
+/// Get the image at the given index.
+- (UIImage *)imageAtIndex:(NSInteger)index;
 
 @end
 

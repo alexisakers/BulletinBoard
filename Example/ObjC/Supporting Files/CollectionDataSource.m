@@ -7,35 +7,39 @@
 
 @implementation CollectionDataSource
 
-- (UIImage *)imageAtIndex:(NSInteger)index {
-    NSString *name = [NSString stringWithFormat:@"%@_img_%lx", [self petName], (unsigned long)index + 1];
-    return [UIImage imageNamed:name];
-};
-
-- (int)numberOfImages {
+- (NSInteger)numberOfImages
+{
     return 16;
 }
 
-- (NSString *)petName {
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                   reason:@"Please use a concrete sublclass of CollectionDataSource"
-                                 userInfo:NULL];
+- (NSString *)petName
+{
+    @throw [self requireConcreteImplementation];
 }
 
 - (NSString *)pluralizedPetName
 {
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                   reason:@"Please use a concrete sublclass of CollectionDataSource"
-                                 userInfo:NULL];
+    @throw [self requireConcreteImplementation];
 }
 
 
 -(NSString *)emoji
 {
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+    @throw [self requireConcreteImplementation];
+}
+
+- (UIImage *)imageAtIndex:(NSInteger)index
+{
+    NSString *name = [NSString stringWithFormat:@"%@_img_%lx", [self petName], (unsigned long)index + 1];
+    return [UIImage imageNamed:name];
+}
+
+- (NSException *)requireConcreteImplementation
+{
+    return [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:@"Please use a concrete sublclass of CollectionDataSource"
                                  userInfo:NULL];
-};
+}
 
 @end
 
@@ -62,6 +66,7 @@
 - (NSString *)petName {
     return @"cat";
 }
+
 - (NSString *)pluralizedPetName
 {
     return @"Cats";
