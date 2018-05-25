@@ -48,9 +48,11 @@
     page.descriptionText = @"To create your profile, please tell us your name. We will use it to customize your feed.";
     page.actionButtonTitle = @"Sign Up";
 
-    [page setActionHandler:^(BLTNActionItem * _Nonnull _item) {
-        [[_item manager] displayNextItem];
-    }];
+    page.textInputHandler = ^(TextFieldBulletinPage * item, NSString * _Nullable text) {
+        NSLog(@"Text: %@", text);
+        [item.manager displayNextItem];
+    };
+    
 
     [page setNextItem:[BulletinDataSource makeNotificationsPage]];
 

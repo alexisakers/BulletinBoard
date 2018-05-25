@@ -30,12 +30,8 @@ class TextFieldBulletinPage: FeedbackPageBLTNItem {
     }
 
     override func actionButtonTapped(sender: UIButton) {
-
-        if textFieldShouldReturn(self.textField) {
-            textInputHandler?(self, textField.text)
-            super.actionButtonTapped(sender: sender)
-        }
-
+        textField.resignFirstResponder()
+        super.actionButtonTapped(sender: sender)
     }
 
 }
@@ -54,21 +50,23 @@ extension TextFieldBulletinPage: UITextFieldDelegate {
 
     }
 
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        return true
+    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
 
         if isInputValid(text: textField.text) {
-
-            textField.resignFirstResponder()
             textInputHandler?(self, textField.text)
-            return true
-
         } else {
-
             descriptionLabel!.textColor = .red
             descriptionLabel!.text = "You must enter some text to continue."
             textField.backgroundColor = UIColor.red.withAlphaComponent(0.3)
-            return false
-
         }
 
     }

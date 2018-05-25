@@ -36,6 +36,7 @@
 - (void)actionButtonTappedWithSender:(UIButton *)sender
 {
     [self textFieldShouldReturn:self.textField];
+    [super actionButtonTappedWithSender:sender];
 }
 
 - (BOOL)isInputValid:(NSString *)text {
@@ -48,29 +49,29 @@
 
 };
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.textField resignFirstResponder];
+    return YES;
+}
 
-    if ([self isInputValid: [textField text]]) {
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    return YES;
+}
 
-        [_textField resignFirstResponder];
-
-        if (self.actionHandler) {
-            self.actionHandler(self);
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if ([self isInputValid:textField.text]) {
+        if (self.textInputHandler) {
+            self.textInputHandler(self, textField.text);
         }
-
-        return true;
-
     } else {
-
         UIColor *redColor = [[UIColor redColor] colorWithAlphaComponent:0.3];
         self.descriptionLabel.textColor = [UIColor redColor];
         self.descriptionLabel.text = @"You must enter a valid name to continue.";
         self.textField.backgroundColor = redColor;
-
-        return false;
-
     }
-
-};
+}
 
 @end

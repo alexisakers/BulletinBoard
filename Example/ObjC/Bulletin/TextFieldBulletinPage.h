@@ -8,6 +8,7 @@
 
 @interface TextFieldBulletinPage : BLTNPageItem
 
-@property (nonatomic, strong, readonly) UITextField *textField;
+@property (nonatomic, copy, nullable) void (^textInputHandler)(TextFieldBulletinPage *, NSString * _Nullable);
+@property (nonatomic, strong, readonly, nonnull) UITextField *textField;
 
 @end

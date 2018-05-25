@@ -78,7 +78,7 @@ enum BulletinDataSource {
         page.actionButtonTitle = "Sign Up"
 
         page.textInputHandler = { (item, text) in
-
+            print("Text: \(text ?? "nil")")
             let datePage = self.makeDatePage(userName: text)
             item.manager?.push(item: datePage)
         }
