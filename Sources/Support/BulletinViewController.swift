@@ -17,7 +17,7 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     // MARK: - UI Elements
 
     /// The subview that contains the contents of the card.
-    let contentView = ContinuousMaskView(cornerRadius: 8)
+    let contentView = ContinuousMaskView()
 
     /**
      * The stack view displaying the content of the card.

@@ -12,7 +12,7 @@ import UIKit
  * function on `UIButton` to set one.
  */
 
-class HighlightButton: ContinuousButton {
+class HighlightButton: RoundedButton {
 
     // MARK: - Hit Area
 
