@@ -8,9 +8,21 @@
 
 import UIKit
 
-class ContinuousMaskLayer: CALayer {
+private class AnimatingShapeLayer: CAShapeLayer {
 
-    private let maskLayer = CAShapeLayer()
+    override func action(forKey event: String) -> CAAction? {
+
+        if event == "path" {
+            return CABasicAnimation(keyPath: event)
+        } else {
+            return super.action(forKey: event)
+        }
+
+    }
+
+}
+
+class ContinuousMaskLayer: CALayer {
 
     /// The corner radius.
     var continuousCornerRadius: CGFloat = 0 {
@@ -28,12 +40,11 @@ class ContinuousMaskLayer: CALayer {
 
     override init(layer: Any) {
         super.init(layer: layer)
-        self.mask = maskLayer
     }
 
     override init() {
         super.init()
-        self.mask = maskLayer
+        self.mask = AnimatingShapeLayer()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -47,10 +58,14 @@ class ContinuousMaskLayer: CALayer {
 
     private func refreshMask() {
 
+        guard let mask = mask as? CAShapeLayer else {
+            return
+        }
+
         let radii = CGSize(width: continuousCornerRadius, height: continuousCornerRadius)
         let roundedPath = UIBezierPath(roundedRect: bounds, byRoundingCorners: roundedCorners, cornerRadii: radii)
 
-        maskLayer.path = roundedPath.cgPath
+        mask.path = roundedPath.cgPath
 
     }
 
