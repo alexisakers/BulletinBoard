@@ -16,4 +16,5 @@ Pod::Spec.new do |s|
   s.source_files  = "Sources/**/*"
   s.frameworks  = "UIKit"
   s.documentation_url = "https://alexaubry.github.io/BulletinBoard"
+  s.module_name = "BLTNBoard"
 end
