@@ -515,11 +515,11 @@ extension BLTNItemManager {
             }
 
             for arrangedSubview in oldArrangedSubviews {
-                arrangedSubview.alpha = 0
+                arrangedSubview.alpha = 1 // 0
             }
 
             for arrangedSubview in newArrangedSubviews {
-                arrangedSubview.alpha = 0
+                arrangedSubview.alpha = 1 // 0
             }
 
         }

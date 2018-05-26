@@ -149,10 +149,6 @@ extension BulletinViewController {
         stackTrailingConstraint = contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         stackTrailingConstraint.isActive = true
 
-        minYConstraint = contentView.topAnchor.constraint(greaterThanOrEqualTo: view.safeTopAnchor)
-        minYConstraint.isActive = true
-        minYConstraint.priority = UILayoutPriorityRequired
-
         contentStackView.axis = .vertical
         contentStackView.alignment = .fill
         contentStackView.distribution = .fill
@@ -310,7 +306,6 @@ extension BulletinViewController {
             stackBottomConstraint.constant = -24
             contentTopConstraint.constant = -24
             contentStackView.spacing = 24
-
         }
 
     }
