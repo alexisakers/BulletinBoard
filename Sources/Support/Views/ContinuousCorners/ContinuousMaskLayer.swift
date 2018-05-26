@@ -10,12 +10,12 @@ import UIKit
 
 private class AnimatingShapeLayer: CAShapeLayer {
 
-    override func action(forKey event: String) -> CAAction? {
+    override class func defaultAction(forKey event: String) -> CAAction? {
 
         if event == "path" {
             return CABasicAnimation(keyPath: event)
         } else {
-            return super.action(forKey: event)
+            return super.defaultAction(forKey: event)
         }
 
     }
