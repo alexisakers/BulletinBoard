@@ -456,6 +456,10 @@ extension BLTNItemManager {
 
 extension BLTNItemManager {
 
+    var needsCloseButton: Bool {
+        return currentItem.isDismissable && currentItem.requiresCloseButton
+    }
+
     /// Refreshes the interface for the current item.
     fileprivate func refreshCurrentItemInterface(elementsChanged: Bool = true) {
 
@@ -540,6 +544,7 @@ extension BLTNItemManager {
 
             let currentElements = elementsChanged ? newArrangedSubviews : oldArrangedSubviews
             self.bulletinController.contentStackView.alpha = contentAlpha
+            self.bulletinController.updateCloseButton(isRequired: self.needsCloseButton && !showActivityIndicator)
 
             for arrangedSubview in currentElements {
                 arrangedSubview.alpha = contentAlpha

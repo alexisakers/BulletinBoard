@@ -24,6 +24,7 @@
         self.alternativeButtonTitle = nil;
         self.manager = nil;
         self.dismissable = YES;
+        self.requiresCloseButton = YES;
         self.shouldStartWithActivityIndicator = NO;
         self.shouldRespondToKeyboardChanges = YES;
         self.nextItem = nil;
@@ -92,8 +93,9 @@
     NSAssert([self.interfaceBuilderType isSubclassOfClass:[BLTNInterfaceBuilder class]],
              @"InterfaceBuilderType must be a subclass of BulletinInterfaceBuilder, or BulletinInterfaceBuilder.");
 
-    BLTNInterfaceBuilder *interfaceBuilder = [[self.interfaceBuilderType alloc] initWithAppearance:self.appearance];
-    
+    BLTNInterfaceBuilder *interfaceBuilder = [[self.interfaceBuilderType alloc] initWithAppearance:self.appearance
+                                                                                              item:self];
+
     NSArray<UIView *> *contentViews = [self makeContentViewsWithInterfaceBuilder:interfaceBuilder];
     [arrangedSubviews addObjectsFromArray:contentViews];
 

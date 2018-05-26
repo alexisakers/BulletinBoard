@@ -12,30 +12,38 @@ import UIKit
 
 @objc open class BLTNInterfaceBuilder: NSObject {
 
+    /// The item for which the interface builder was created.
+    @objc public weak var item: BLTNItem?
+
     /// The appearance to use to generate the items.
     @objc public let appearance: BLTNItemAppearance
 
     /// Creates a new interface builder.
-    @objc public required init(appearance: BLTNItemAppearance) {
+    @objc public required init(appearance: BLTNItemAppearance, item: BLTNItem) {
         self.appearance = appearance
+        self.item = item
     }
 
     /**
      * Creates a standard title label.
      */
 
-    @objc open func makeTitleLabel() -> UILabel {
+    @objc open func makeTitleLabel() -> BLTNTitleLabelContainer {
 
         let titleLabel = UILabel()
         titleLabel.textAlignment = .center
         titleLabel.textColor = appearance.titleTextColor
         titleLabel.accessibilityTraits |= UIAccessibilityTraitHeader
-        titleLabel.numberOfLines = 1
+        titleLabel.numberOfLines = 2
         titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.lineBreakMode = .byWordWrapping
 
         titleLabel.font = appearance.makeTitleFont()
 
-        return titleLabel
+        let needsCloseButton = item?.isDismissable == true && item?.requiresCloseButton == true
+        let inset: CGFloat = needsCloseButton ? 12 + 30 : 0
+
+        return BLTNTitleLabelContainer(label: titleLabel, horizontalInset: inset)
 
     }
 

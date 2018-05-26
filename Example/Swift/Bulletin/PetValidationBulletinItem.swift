@@ -26,6 +26,7 @@ class PetValidationBLTNItem: FeedbackPageBLTNItem {
         self.animalType = animalType
         super.init(title: "Choose your Favorite")
 
+        isDismissable = false
         descriptionText = "You chose \(animalType) as your favorite animal type. Here are a few examples of posts in this category."
         actionButtonTitle = "Validate"
         alternativeButtonTitle = "Change"

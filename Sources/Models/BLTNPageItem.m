@@ -9,7 +9,7 @@
 @interface BLTNPageItem ()
 
 @property (nonatomic, nonnull, readwrite) NSString *title;
-@property (nonatomic, nullable, readwrite) UILabel *titleLabel;
+@property (nonatomic, nullable, readwrite) BLTNTitleLabelContainer *titleLabel;
 @property (nonatomic, nullable, readwrite) UILabel *descriptionLabel;
 @property (nonatomic, nullable, readwrite) UIImageView *imageView;
 
@@ -92,7 +92,7 @@
     // Title label
 
     self.titleLabel = [interfaceBuilder makeTitleLabel];
-    self.titleLabel.text = self.title;
+    self.titleLabel.label.text = self.title;
 
     [contentViews addObject:self.titleLabel];
     insertComplementaryViews(@selector(makeViewsUnderTitleWithInterfaceBuilder:));

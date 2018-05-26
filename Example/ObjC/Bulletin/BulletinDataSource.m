@@ -12,7 +12,7 @@
 
 + (BLTNPageItem *)makeIntroPage
 {
-    BLTNPageItem *page = [[BLTNPageItem alloc] initWithTitle:@"Welcome to PetBoard"];
+    BLTNPageItem *page = [[BLTNPageItem alloc] initWithTitle:@"Welcome to\nPetBoard"];
     page.appearance = [self makeLightAppearance];
 
     page.image = [UIImage imageNamed:@"RoundedIcon"];

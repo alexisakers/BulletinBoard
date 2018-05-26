@@ -17,6 +17,12 @@
 		558A12301F7D73CD005EC97C /* BLTNItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122A1F7D73CD005EC97C /* BLTNItemManager.swift */; };
 		558A12321F7D73CD005EC97C /* BulletinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122C1F7D73CD005EC97C /* BulletinViewController.swift */; };
 		558A12331F7D73CD005EC97C /* HighlightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122D1F7D73CD005EC97C /* HighlightButton.swift */; };
+		5590C04B20B852150045C315 /* CloseGlyph.png in Resources */ = {isa = PBXBuildFile; fileRef = 5590C04820B852150045C315 /* CloseGlyph.png */; };
+		5590C04C20B852150045C315 /* CloseGlyph@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5590C04920B852150045C315 /* CloseGlyph@2x.png */; };
+		5590C04D20B852150045C315 /* CloseGlyph@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5590C04A20B852150045C315 /* CloseGlyph@3x.png */; };
+		5590C04F20B85BCE0045C315 /* BLTNTitleLabelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590C04E20B85BCE0045C315 /* BLTNTitleLabelContainer.swift */; };
+		5590C05120B934230045C315 /* Highlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590C05020B934230045C315 /* Highlighter.swift */; };
+		5590C05320B93B350045C315 /* UIColor+Luminance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590C05220B93B350045C315 /* UIColor+Luminance.swift */; };
 		559F8E95204DB9BA00322949 /* BLTNItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 559F8E94204DB9BA00322949 /* BLTNItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		559F8EA3204DC42D00322949 /* ContinuousMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F8EA2204DC42D00322949 /* ContinuousMaskView.swift */; };
 		55B3D1CF1FDADA8E00737791 /* AnimationChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B3D1CE1FDADA8E00737791 /* AnimationChain.swift */; };
@@ -31,6 +37,8 @@
 		55E8621720B7F23A00584EAC /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E8621620B7F23A00584EAC /* RoundedView.swift */; };
 		55E8621920B844F800584EAC /* BLTNContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E8621820B844F800584EAC /* BLTNContainerView.swift */; };
 		55E8621B20B8476000584EAC /* BLTNViewPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E8621A20B8476000584EAC /* BLTNViewPosition.swift */; };
+		55E8621E20B84E0E00584EAC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55E8621D20B84E0E00584EAC /* Localizable.strings */; };
+		55E8622020B84F3100584EAC /* BLTNCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E8621F20B84F3100584EAC /* BLTNCloseButton.swift */; };
 		55FA45CA1FED1DE40084B6A0 /* BLTNSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA45C91FED1DE40084B6A0 /* BLTNSpacing.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +54,12 @@
 		558A122A1F7D73CD005EC97C /* BLTNItemManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLTNItemManager.swift; sourceTree = "<group>"; };
 		558A122C1F7D73CD005EC97C /* BulletinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletinViewController.swift; sourceTree = "<group>"; };
 		558A122D1F7D73CD005EC97C /* HighlightButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighlightButton.swift; sourceTree = "<group>"; };
+		5590C04820B852150045C315 /* CloseGlyph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseGlyph.png; sourceTree = "<group>"; };
+		5590C04920B852150045C315 /* CloseGlyph@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CloseGlyph@2x.png"; sourceTree = "<group>"; };
+		5590C04A20B852150045C315 /* CloseGlyph@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CloseGlyph@3x.png"; sourceTree = "<group>"; };
+		5590C04E20B85BCE0045C315 /* BLTNTitleLabelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNTitleLabelContainer.swift; sourceTree = "<group>"; };
+		5590C05020B934230045C315 /* Highlighter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Highlighter.swift; sourceTree = "<group>"; };
+		5590C05220B93B350045C315 /* UIColor+Luminance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Luminance.swift"; sourceTree = "<group>"; };
 		559F8E94204DB9BA00322949 /* BLTNItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLTNItem.h; sourceTree = "<group>"; };
 		559F8EA2204DC42D00322949 /* ContinuousMaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinuousMaskView.swift; sourceTree = "<group>"; };
 		55B3D1CE1FDADA8E00737791 /* AnimationChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationChain.swift; sourceTree = "<group>"; };
@@ -60,6 +74,8 @@
 		55E8621620B7F23A00584EAC /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		55E8621820B844F800584EAC /* BLTNContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNContainerView.swift; sourceTree = "<group>"; };
 		55E8621A20B8476000584EAC /* BLTNViewPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNViewPosition.swift; sourceTree = "<group>"; };
+		55E8621D20B84E0E00584EAC /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		55E8621F20B84F3100584EAC /* BLTNCloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNCloseButton.swift; sourceTree = "<group>"; };
 		55FA45C91FED1DE40084B6A0 /* BLTNSpacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNSpacing.swift; sourceTree = "<group>"; };
 		AD2FAA261CD0B6D800659CF4 /* BLTNBoard.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BLTNBoard.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,6 +94,7 @@
 		52D6D9721BEFF229002C0205 = {
 			isa = PBXGroup;
 			children = (
+				55E8621C20B84DE500584EAC /* Resources */,
 				8933C7811EB5B7E0000D00A4 /* Sources */,
 				52D6D99C1BEFF38C002C0205 /* Configs */,
 				52D6D97D1BEFF229002C0205 /* Products */,
@@ -127,11 +144,14 @@
 		55B3D1D21FDD645900737791 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				55E8621520B7F1D800584EAC /* ContinuousCorners */,
+				5590C05020B934230045C315 /* Highlighter.swift */,
 				558A122D1F7D73CD005EC97C /* HighlightButton.swift */,
 				5568227D1F864B270038E8DD /* ActivityIndicator.swift */,
 				5543848C1F92026200AFFBCD /* BulletinBackgroundView.swift */,
 				55E8621820B844F800584EAC /* BLTNContainerView.swift */,
-				55E8621520B7F1D800584EAC /* ContinuousCorners */,
+				55E8621F20B84F3100584EAC /* BLTNCloseButton.swift */,
+				5590C04E20B85BCE0045C315 /* BLTNTitleLabelContainer.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -152,6 +172,7 @@
 			children = (
 				558A122C1F7D73CD005EC97C /* BulletinViewController.swift */,
 				55BF9C011F962FD700347D45 /* UIView+SafeAnchors.swift */,
+				5590C05220B93B350045C315 /* UIColor+Luminance.swift */,
 				55B3D1D21FDD645900737791 /* Views */,
 				55B3D1D31FDD646400737791 /* Animations */,
 			);
@@ -166,6 +187,17 @@
 				559F8EA2204DC42D00322949 /* ContinuousMaskView.swift */,
 			);
 			path = ContinuousCorners;
+			sourceTree = "<group>";
+		};
+		55E8621C20B84DE500584EAC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5590C04820B852150045C315 /* CloseGlyph.png */,
+				5590C04920B852150045C315 /* CloseGlyph@2x.png */,
+				5590C04A20B852150045C315 /* CloseGlyph@3x.png */,
+				55E8621D20B84E0E00584EAC /* Localizable.strings */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		8933C7811EB5B7E0000D00A4 /* Sources */ = {
@@ -254,6 +286,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5590C04D20B852150045C315 /* CloseGlyph@3x.png in Resources */,
+				5590C04B20B852150045C315 /* CloseGlyph.png in Resources */,
+				55E8621E20B84E0E00584EAC /* Localizable.strings in Resources */,
+				5590C04C20B852150045C315 /* CloseGlyph@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +303,7 @@
 				558A12331F7D73CD005EC97C /* HighlightButton.swift in Sources */,
 				55DADE7A1F7D9428001B11A2 /* BLTNInterfaceBuilder.swift in Sources */,
 				55B3D1CF1FDADA8E00737791 /* AnimationChain.swift in Sources */,
+				5590C04F20B85BCE0045C315 /* BLTNTitleLabelContainer.swift in Sources */,
 				55E8621420B7F11000584EAC /* ContinuousMaskLayer.swift in Sources */,
 				5543848F1F92050300AFFBCD /* BulletinDismissAnimationController.swift in Sources */,
 				5543848B1F91FAC500AFFBCD /* BulletinPresentationAnimationController.swift in Sources */,
@@ -279,9 +316,12 @@
 				550675691F90A0A500874D8B /* BLTNBackgroundViewStyle.swift in Sources */,
 				55C8EF3F204D8A010050E1C2 /* BLTNPageItem.m in Sources */,
 				5569CB7F1F920B72000F31EB /* BulletinSwipeInteractionController.swift in Sources */,
+				5590C05320B93B350045C315 /* UIColor+Luminance.swift in Sources */,
 				559F8EA3204DC42D00322949 /* ContinuousMaskView.swift in Sources */,
 				55FA45CA1FED1DE40084B6A0 /* BLTNSpacing.swift in Sources */,
 				551D2D9C1FC060EA0078DB21 /* BLTNItemAppearance.swift in Sources */,
+				5590C05120B934230045C315 /* Highlighter.swift in Sources */,
+				55E8622020B84F3100584EAC /* BLTNCloseButton.swift in Sources */,
 				55CB0F83204D63CC001D0393 /* BLTNActionItem.m in Sources */,
 				5568227E1F864B270038E8DD /* ActivityIndicator.swift in Sources */,
 				558A12321F7D73CD005EC97C /* BulletinViewController.swift in Sources */,

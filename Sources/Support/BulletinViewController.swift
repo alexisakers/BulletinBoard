@@ -19,6 +19,9 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     /// The subview that contains the contents of the card.
     let contentView = ContinuousMaskView()
 
+    /// The button that allows the users to close the bulletin.
+    let closeButton = BLTNCloseButton()
+
     /**
      * The stack view displaying the content of the card.
      *
@@ -124,6 +127,18 @@ extension BulletinViewController {
         widthConstraint = contentView.widthAnchor.constraint(equalToConstant: 444)
         widthConstraint.priority = UILayoutPriorityRequired
 
+        // Close button
+
+        contentView.addSubview(closeButton)
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12).isActive = true
+        closeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12).isActive = true
+        closeButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        closeButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
+        closeButton.isUserInteractionEnabled = true
+
+        closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+
         // Content Stack View
 
         contentView.addSubview(contentStackView)
@@ -182,6 +197,8 @@ extension BulletinViewController {
         configureContentView()
         setUpKeyboardLogic()
 
+        contentView.bringSubview(toFront: closeButton)
+
     }
 
     @available(iOS 11.0, *)
@@ -201,6 +218,7 @@ extension BulletinViewController {
 
         contentView.backgroundColor = manager.backgroundColor
         contentView.cornerRadius = CGFloat((manager.cardCornerRadius ?? 12).doubleValue)
+        closeButton.updateColors(isDarkBackground: manager.backgroundColor.needsDarkText == false)
 
         let cardPadding = manager.edgeSpacing.rawValue
 
@@ -455,6 +473,7 @@ extension BulletinViewController {
         let animations = {
             self.activityIndicator.alpha = 1
             self.contentStackView.alpha = 0
+            self.closeButton.alpha = 0
         }
 
         UIView.animate(withDuration: 0.25, animations: animations) { _ in
@@ -469,12 +488,37 @@ extension BulletinViewController {
         activityIndicator.stopAnimating()
         activityIndicator.alpha = 0
 
+        let needsCloseButton = manager?.needsCloseButton == true
+
         let animations = {
             self.activityIndicator.alpha = 0
+            self.updateCloseButton(isRequired: needsCloseButton)
         }
 
         UIView.animate(withDuration: 0.25, animations: animations)
 
+    }
+
+}
+
+// MARK: - Close Button
+
+extension BulletinViewController {
+
+    func updateCloseButton(isRequired: Bool) {
+        isRequired ? showCloseButton() : hideCloseButton()
+    }
+
+    func showCloseButton() {
+        closeButton.alpha = 1
+    }
+
+    func hideCloseButton() {
+        closeButton.alpha = 0
+    }
+
+    @objc func closeButtonTapped() {
+        manager?.dismissBulletin(animated: true)
     }
 
 }

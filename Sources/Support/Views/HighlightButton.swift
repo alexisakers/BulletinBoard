@@ -12,78 +12,43 @@ import UIKit
  * function on `UIButton` to set one.
  */
 
-class HighlightButton: RoundedButton {
+class HighlightButton: RoundedButton, HighlighterTarget {
 
-    // MARK: - Hit Area
-
-    private var _cachedHitArea: CGRect!
+    private let highlighter = Highlighter()
 
     override var bounds: CGRect {
         didSet {
-            _cachedHitArea = makeHitArea()
+            highlighter.updateBounds(bounds)
         }
     }
 
-    private func makeHitArea() -> CGRect {
-        let scaleTransform = CGAffineTransform(scaleX: 5/3, y: 5/3)
-        let translateTransform = CGAffineTransform(translationX: -frame.width/3, y: -frame.height/3)
-        return bounds.applying(scaleTransform).applying(translateTransform)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        highlighter.target = self
     }
 
-    /// The area where touches are considered to be inside the button.
-    private var hitArea: CGRect {
-        return _cachedHitArea ?? makeHitArea()
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        highlighter.target = self
     }
-
 
     // MARK: - Touch Handling
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        highlight()
+        highlighter.handleTouchesBegan(touches, with: event)
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-
-        guard let mainTouch = touches.first else {
-            return
-        }
-
-        let currentLocation = mainTouch.location(in: self)
-        let previousLocation = mainTouch.previousLocation(in: self)
-
-        let containsCurrentLocation = hitArea.contains(currentLocation)
-        let containsPreviousLocation = hitArea.contains(previousLocation)
-
-        let isEntering = !containsPreviousLocation && containsCurrentLocation
-        let isExiting = containsPreviousLocation && !containsCurrentLocation
-
-        if isEntering {
-            highlight()
-        } else if isExiting {
-            unhighlight()
-        }
-
+        highlighter.handleTouchesMoved(touches, with: event)
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-
-        guard let mainTouch = touches.first else {
-            return
-        }
-
-        let currentLocation = mainTouch.location(in: self)
-
-        if hitArea.contains(currentLocation) {
-            sendActions(for: .touchUpInside)
-        }
-
-        unhighlight()
-
+        highlighter.handleTouchesEnded(touches, with: event)
     }
 
     // MARK: - Transitions
 
-    @objc private func highlight() {
+    func highlight() {
 
         let animations = {
             self.alpha = 0.5
@@ -93,7 +58,7 @@ class HighlightButton: RoundedButton {
 
     }
 
-    @objc private func unhighlight() {
+    func unhighlight() {
 
         let animations = {
             self.alpha = 1
@@ -111,7 +76,7 @@ extension UIButton {
      * Sets a solid background color for the button.
      */
 
-    public func setBackgroundColor(_ color: UIColor, forState controlState: UIControlState) {
+    func setBackgroundColor(_ color: UIColor, forState controlState: UIControlState) {
 
         UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
         UIGraphicsGetCurrentContext()?.setFillColor(color.cgColor)

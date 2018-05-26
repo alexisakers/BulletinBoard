@@ -23,6 +23,7 @@
 {
     self = [super initWithTitle:@"Choose your Favorite"];
     if (self) {
+        self.dismissable = NO;
         self.descriptionText = @"Your favorite pets will appear when you open the app.";
         self.feedbackGenerator = [[SelectionFeedbackGenerator alloc] init];
     }

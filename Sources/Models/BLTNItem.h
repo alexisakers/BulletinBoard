@@ -39,6 +39,18 @@
 @property (nonatomic, getter=isDismissable) BOOL dismissable;
 
 /**
+ * Whether the page can be dismissed with a close button.
+ *
+ * The default value is `true`. The user will be able to dismiss the bulletin by tapping on a button
+ * in the corner of the screen.
+ *
+ * You should set it to `false` if the interface of the bulletin already has buttons to dismiss the item,
+ * such as an action button.
+ */
+
+@property (nonatomic) BOOL requiresCloseButton;
+
+/**
  * Whether the card should start with an activity indicator.
  *
  * Set this value to `false` to display the elements right away. If you set it to `true`,
