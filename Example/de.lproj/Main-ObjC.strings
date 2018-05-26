@@ -1,0 +1,12 @@
+
+/* Class = "UIBarButtonItem"; title = "Show Intro"; ObjectID = "EpR-v7-nqd"; */
+"EpR-v7-nqd.title" = "Show Intro";
+
+/* Class = "UIBarButtonItem"; title = "%@STYLE%@"; ObjectID = "euD-bA-1s9"; */
+"euD-bA-1s9.title" = "%@STYLE%@";
+
+/* Class = "UISegmentedControl"; nJY-e8-Bxo.segmentTitles[0] = "Cats"; ObjectID = "nJY-e8-Bxo"; */
+"nJY-e8-Bxo.segmentTitles[0]" = "Cats";
+
+/* Class = "UISegmentedControl"; nJY-e8-Bxo.segmentTitles[1] = "Dogs"; ObjectID = "nJY-e8-Bxo"; */
+"nJY-e8-Bxo.segmentTitles[1]" = "Dogs";

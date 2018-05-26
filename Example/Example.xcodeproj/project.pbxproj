@@ -125,6 +125,12 @@
 		558A12411F7D7865005EC97C /* BB-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BB-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		558A12441F7D7865005EC97C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		558A12461F7D7865005EC97C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5590C07920B945580045C315 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = ../fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		5590C07A20B945580045C315 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = "../fr.lproj/Main-Swift.strings"; sourceTree = "<group>"; };
+		5590C07B20B945580045C315 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = "../fr.lproj/Main-ObjC.strings"; sourceTree = "<group>"; };
+		5590C07C20B9455D0045C315 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = ../de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		5590C07D20B9455D0045C315 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "../de.lproj/Main-Swift.strings"; sourceTree = "<group>"; };
+		5590C07E20B9455D0045C315 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "../de.lproj/Main-ObjC.strings"; sourceTree = "<group>"; };
 		559F8E88204D98DC00322949 /* FeedbackPageBulletinItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedbackPageBulletinItem.h; sourceTree = "<group>"; };
 		559F8E89204D98DC00322949 /* FeedbackPageBulletinItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedbackPageBulletinItem.m; sourceTree = "<group>"; };
 		559F8E8E204D9C7400322949 /* PetValidationBulletinItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PetValidationBulletinItem.h; sourceTree = "<group>"; };
@@ -469,6 +475,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				551CF5FA1FBF849A007DFEEA /* Base */,
+				5590C07B20B945580045C315 /* fr */,
+				5590C07E20B9455D0045C315 /* de */,
 			);
 			name = "Main-ObjC.storyboard";
 			sourceTree = "<group>";
@@ -477,6 +485,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				55D7021B1FBCCA1A00835D8A /* Base */,
+				5590C07920B945580045C315 /* fr */,
+				5590C07C20B9455D0045C315 /* de */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -485,6 +495,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				55D7021D1FBCCA1A00835D8A /* Base */,
+				5590C07A20B945580045C315 /* fr */,
+				5590C07D20B9455D0045C315 /* de */,
 			);
 			name = "Main-Swift.storyboard";
 			sourceTree = "<group>";
@@ -496,6 +508,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -555,6 +568,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

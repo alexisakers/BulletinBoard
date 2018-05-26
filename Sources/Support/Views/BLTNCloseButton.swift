@@ -29,14 +29,26 @@ class BLTNCloseButton: UIControl, HighlighterTarget {
     }
 
     private func configureSubviews() {
+
+        // Content
+
+        isAccessibilityElement = true
+        accessibilityLabel = NSLocalizedString("Close", tableName: "Localizable", bundle: Bundle(for: BLTNCloseButton.self), comment: "")
+
+        // Layout
+
         addSubview(backgroundContainer)
         addSubview(closeGlyph)
+
         backgroundContainer.layer.cornerRadius = 14
+
         let glyph = UIImage(named: "CloseGlyph", in: Bundle(for: BLTNCloseButton.self), compatibleWith: nil)!
         closeGlyph.image = glyph.withRenderingMode(.alwaysTemplate)
         closeGlyph.clipsToBounds = true
+
         backgroundContainer.isUserInteractionEnabled = false
         closeGlyph.isUserInteractionEnabled = false
+
     }
 
     private func configureConstraints() {
