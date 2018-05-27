@@ -17,10 +17,10 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     // MARK: - UI Elements
 
     /// The subview that contains the contents of the card.
-    let contentView = ContinuousMaskView()
+    let contentView = RoundedView()
 
     /// The button that allows the users to close the bulletin.
-    let closeButton = BLTNCloseButton()
+    let closeButton = BulletinCloseButton()
 
     /**
      * The stack view displaying the content of the card.

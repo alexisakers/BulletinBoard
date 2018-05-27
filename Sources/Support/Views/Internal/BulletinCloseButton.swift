@@ -5,7 +5,11 @@
 
 import UIKit
 
-class BLTNCloseButton: UIControl, HighlighterTarget {
+/**
+ * A button to close the bulletin.
+ */
+
+class BulletinCloseButton: UIControl, HighlighterTarget {
 
     private let backgroundContainer = UIView()
     private let closeGlyph = UIImageView()
@@ -33,7 +37,8 @@ class BLTNCloseButton: UIControl, HighlighterTarget {
         // Content
 
         isAccessibilityElement = true
-        accessibilityLabel = NSLocalizedString("Close", tableName: "Localizable", bundle: Bundle(for: BLTNCloseButton.self), comment: "")
+        accessibilityLabel = NSLocalizedString("Close", tableName: "Localizable",
+                                               bundle: Bundle(for: BulletinCloseButton.self), comment: "")
 
         // Layout
 
@@ -42,7 +47,7 @@ class BLTNCloseButton: UIControl, HighlighterTarget {
 
         backgroundContainer.layer.cornerRadius = 14
 
-        let glyph = UIImage(named: "CloseGlyph", in: Bundle(for: BLTNCloseButton.self), compatibleWith: nil)!
+        let glyph = UIImage(named: "CloseGlyph", in: Bundle(for: BulletinCloseButton.self), compatibleWith: nil)!
         closeGlyph.image = glyph.withRenderingMode(.alwaysTemplate)
         closeGlyph.clipsToBounds = true
 

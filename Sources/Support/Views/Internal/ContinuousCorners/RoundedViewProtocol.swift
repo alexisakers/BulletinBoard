@@ -1,19 +1,24 @@
-//
-//  RoundedView.swift
-//  BLTNBoard
-//
-//  Created by Alexis AUBRY on 5/25/18.
-//  Copyright © 2018 Bulletin. All rights reserved.
-//
+/**
+ *  BulletinBoard
+ *  Copyright (c) 2017 - present Alexis Aubry. Licensed under the MIT license.
+ */
 
 import UIKit
 
-protocol RoundedView: NSObjectProtocol {
+/**
+ * A view with rounded corners. Adopt this protocol if your view's layer is a `ContinuousMaskLayer`.
+ * This protocol provides utilities to easily change the rounded corners.
+ *
+ * You need to override `+ (Class *)layerClass` on `UIView` before conforming to this protocol.
+ */
+
+protocol RoundedViewProtocol: NSObjectProtocol {
     var layer: CALayer { get }
 }
 
-extension RoundedView {
+extension RoundedViewProtocol {
 
+    /// The corner radius of the view.
     var cornerRadius: CGFloat {
         get {
             return roundedLayer.continuousCornerRadius
@@ -23,6 +28,7 @@ extension RoundedView {
         }
     }
 
+    /// The corners to round.
     var roundedCorners: UIRectCorner {
         get {
             return roundedLayer.roundedCorners

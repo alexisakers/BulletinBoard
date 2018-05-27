@@ -33,6 +33,7 @@ Most types have been renamed to adopt the `BLTN` prefix. See the table below for
 | PageBulletinItem | BLTNPageItem |
 | BulletinPadding | BLTNSpacing |
 | BulletinBackgroundViewStyle | BLTNBackgroundViewStyle |
+| HighlightButtonWrapper | BLTNHighlightButtonWrapper |
 
 ### Changes to interface factory
 

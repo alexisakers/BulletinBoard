@@ -1,12 +1,13 @@
-//
-//  ContinuousMaskLayer.swift
-//  BLTNBoard
-//
-//  Created by Alexis AUBRY on 5/25/18.
-//  Copyright © 2018 Bulletin. All rights reserved.
-//
+/**
+ *  BulletinBoard
+ *  Copyright (c) 2017 - present Alexis Aubry. Licensed under the MIT license.
+ */
 
 import UIKit
+
+/**
+ * A shape layer that animates its path inside a block.
+ */
 
 private class AnimatingShapeLayer: CAShapeLayer {
 
@@ -21,6 +22,10 @@ private class AnimatingShapeLayer: CAShapeLayer {
     }
 
 }
+
+/**
+ * A layer whose corners are rounded with a continuous mask (“squircle“).
+ */
 
 class ContinuousMaskLayer: CALayer {
 
@@ -38,6 +43,8 @@ class ContinuousMaskLayer: CALayer {
         }
     }
 
+    // MARK: - Initialization
+
     override init(layer: Any) {
         super.init(layer: layer)
     }
@@ -50,6 +57,8 @@ class ContinuousMaskLayer: CALayer {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    // MARK: - Layout
 
     override func layoutSublayers() {
         super.layoutSublayers()

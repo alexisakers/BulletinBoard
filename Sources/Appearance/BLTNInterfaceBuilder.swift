@@ -95,7 +95,7 @@ import UIKit
      * - parameter title: The title of the button.
      */
 
-    @objc open func makeActionButton(title: String) -> HighlightButtonWrapper {
+    @objc open func makeActionButton(title: String) -> BLTNHighlightButtonWrapper {
 
         let actionButton = HighlightButton()
         actionButton.cornerRadius = appearance.actionButtonCornerRadius
@@ -113,7 +113,7 @@ import UIKit
           actionButton.layer.borderWidth = appearance.actionButtonBorderWidth
         }
 
-        let wrapper = HighlightButtonWrapper(button: actionButton)
+        let wrapper = BLTNHighlightButtonWrapper(button: actionButton)
         wrapper.setContentHuggingPriority(UILayoutPriorityDefaultLow, for: .horizontal)
 
         let heightConstraint = wrapper.heightAnchor.constraint(equalToConstant: 55)

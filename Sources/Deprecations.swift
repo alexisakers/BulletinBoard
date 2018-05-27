@@ -6,22 +6,25 @@
 import Foundation
 
 @available(*, unavailable, renamed: "BLTNItem")
-@objc protocol BulletinItem {}
+@objc public protocol BulletinItem {}
 
 @available(*, unavailable, renamed: "BLTNItemManager")
 @objc public class BulletinManager: NSObject {}
 
 @available(*, unavailable, renamed: "BLTNActionItem")
-@objc class ActionBulletinItem: NSObject {}
+@objc public class ActionBulletinItem: NSObject {}
 
 @available(*, unavailable, renamed: "BLTNPageItem")
-@objc class PageBulletinItem: NSObject {}
+@objc public class PageBulletinItem: NSObject {}
 
 @available(*, unavailable, message: "To specify the appearance, use BLTNItemAppearance. To create standard views, use BLTNInterfaceBuilder.")
-@objc class BulletinInterfaceFactory: NSObject {}
+@objc public class BulletinInterfaceFactory: NSObject {}
 
 @available(*, unavailable, renamed: "BLTNSpacing")
-@objc class BulletinPadding: NSObject {}
+@objc public class BulletinPadding: NSObject {}
 
 @available(*, unavailable, renamed: "BLTNBackgroundViewStyle")
-@objc class BulletinBackgroundViewStyle: NSObject {}
+@objc public class BulletinBackgroundViewStyle: NSObject {}
+
+@available(*, unavailable, renamed: "BLTNHighlightButtonWrapper")
+@objc public class HighlightButtonWrapper: UIView {}

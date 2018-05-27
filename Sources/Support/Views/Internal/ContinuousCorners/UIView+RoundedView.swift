@@ -5,7 +5,11 @@
 
 import UIKit
 
-class ContinuousMaskView: UIView, RoundedView {
+/**
+ * A view with rounded corners.
+ */
+
+class RoundedView: UIView, RoundedViewProtocol {
 
     override class var layerClass: AnyClass {
         return ContinuousMaskLayer.self
@@ -13,7 +17,11 @@ class ContinuousMaskView: UIView, RoundedView {
 
 }
 
-class RoundedButton: UIButton, RoundedView {
+/**
+ * A button with rounded corners.
+ */
+
+class RoundedButton: UIButton, RoundedViewProtocol {
 
     override class var layerClass: AnyClass {
         return ContinuousMaskLayer.self
