@@ -25,7 +25,7 @@ Here are some screenshots showing what you can build with BulletinBoard:
 
 ## Demo
 
-A demo project is included in the `BLTNBoard` workspace. It demonstrates how to: 
+A demo project is included in the `BulletinBoard` workspace. It demonstrates how to: 
 
 - integrate the library (setup, data flow)
 - create standard page cards
