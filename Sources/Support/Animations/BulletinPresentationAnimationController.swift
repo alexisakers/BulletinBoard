@@ -61,11 +61,8 @@ class BulletinPresentationAnimationController: NSObject, UIViewControllerAnimate
         let options = UIViewAnimationOptions(rawValue: 7 << 16)
 
         let animations = {
-
             toVC.moveIntoPlace()
             backgroundView.show()
-            toVC.showBottomSafeAreaCover()
-
         }
 
         UIView.animate(withDuration: duration, delay: 0, options: options, animations: animations) { _ in

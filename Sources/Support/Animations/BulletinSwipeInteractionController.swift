@@ -235,7 +235,6 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
         }
 
         viewController.backgroundView.show()
-        viewController.showBottomSafeAreaCover()
 
         UIView.animate(withDuration: 0.15, delay: 0, options: options, animations: animations) { _ in
             self.update(0)

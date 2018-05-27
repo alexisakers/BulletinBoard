@@ -50,8 +50,6 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
 
     // MARK: - Private Interface Elements
 
-    fileprivate let bottomSafeAreaCoverView = UIVisualEffectView()
-
     // Compact constraints
     fileprivate var leadingConstraint: NSLayoutConstraint!
     fileprivate var trailingConstraint: NSLayoutConstraint!
@@ -173,17 +171,6 @@ extension BulletinViewController {
 
         activityIndicator.alpha = 0
 
-        // Safe Area Cover View
-
-        bottomSafeAreaCoverView.effect = nil
-        bottomSafeAreaCoverView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(bottomSafeAreaCoverView)
-
-        bottomSafeAreaCoverView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor).isActive = true
-        bottomSafeAreaCoverView.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor).isActive = true
-        bottomSafeAreaCoverView.topAnchor.constraint(equalTo: view.safeBottomAnchor).isActive = true
-        bottomSafeAreaCoverView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-
         // Vertical Position
 
         stackBottomConstraint = contentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
@@ -239,7 +226,6 @@ extension BulletinViewController {
 
         if manager.hidesHomeIndicator {
             contentBottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            bottomSafeAreaCoverView.removeFromSuperview()
         } else {
             contentBottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.safeBottomAnchor)
         }
@@ -318,6 +304,12 @@ extension BulletinViewController {
     // MARK: - Transition Adaptivity
 
     func bottomMargin() -> CGFloat {
+
+        if #available(iOS 11, *) {
+            if view.safeAreaInsets.bottom > 0 {
+                return 0
+            }
+        }
 
         var bottomMargin: CGFloat = manager?.edgeSpacing.rawValue ?? 12
 
@@ -441,23 +433,6 @@ extension BulletinViewController {
         backgroundView = BulletinBackgroundView(style: manager?.backgroundViewStyle ?? .dimmed)
     }
 
-    /// Displays the cover view at the bottom of the safe area. Animatable.
-    func showBottomSafeAreaCover() {
-
-        guard let isDark = manager?.backgroundViewStyle.rawValue.isDark else {
-            return
-        }
-
-        let blurStyle: UIBlurEffectStyle = isDark ? .dark : .extraLight
-        bottomSafeAreaCoverView.effect = UIBlurEffect(style: blurStyle)
-
-    }
-
-    /// Hides the cover view at the bottom of the safe area. Animatable.
-    func hideBottomSafeAreaCover() {
-        bottomSafeAreaCoverView.effect = nil
-    }
-
 }
 
 // MARK: - Activity Indicator
@@ -561,7 +536,6 @@ extension BulletinViewController: UIViewControllerTransitioningDelegate {
 
     /// Prepares the view controller for dismissal.
     func prepareForDismissal(displaying snapshot: UIView) {
-        view.bringSubview(toFront: bottomSafeAreaCoverView)
         activeSnapshotView = snapshot
     }
 
