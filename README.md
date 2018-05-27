@@ -41,7 +41,7 @@ Build and run the scheme for your favorite language to open the demo app.
 
 Here's a video showing it in action:
 
-[![Watch Demo on YouTube](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_thumbnail.png)](https://youtu.be/DT58Lz7qpTA)
+[![Watch Demo on YouTube](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_thumbnail.png)](https://youtu.be/f4UErY-epYY)
 
 ## Installation
 
