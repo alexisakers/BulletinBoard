@@ -1,6 +1,6 @@
 /**
  *  BulletinBoard
- *  Copyright (c) 2017 Alexis Aubry. Licensed under the MIT license.
+ *  Copyright (c) 2017 - present Alexis Aubry. Licensed under the MIT license.
  */
 
 #import "RootViewController.h"
@@ -9,63 +9,66 @@
 #import "CollectionDataSource.h"
 #import "BackgroundViewStyle.h"
 
-@implementation RootViewController {
-    CollectionDataSource *_dataSource;
-    BulletinManager *_bulletinManager;
-    NSArray<BackgroundViewStyle *> *_backgroundStyles;
-    BackgroundViewStyle *_currentBackground;
-    BOOL _shouldHideStatusBar;
-}
+@interface RootViewController ()
 
-@synthesize styleButtonItem;
-@synthesize segmentedControl;
-@synthesize showIntoButtonItem;
-@synthesize collectionView;
+@property (nonatomic, strong) CollectionDataSource *dataSource;
+@property (nonatomic, strong) BLTNItemManager *bulletinManager;
+@property (nonatomic, strong) NSArray<BackgroundViewStyle *> *backgroundStyles;
+@property (nonatomic, strong) BackgroundViewStyle *currentBackground;
+@property (nonatomic) BOOL shouldHideStatusBar;
+
+@end
+
+@implementation RootViewController
 
 #pragma mark View
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 
     [self reloadManager];
-    _backgroundStyles = [BackgroundViewStyle allStyles];
-    _currentBackground = [BackgroundViewStyle defaultStyle];
-    _shouldHideStatusBar = NO;
+    self.backgroundStyles = BackgroundViewStyle.allStyles;
+    self.currentBackground = BackgroundViewStyle.defaultStyle;
+    self.shouldHideStatusBar = NO;
 
     // Finish Initialization
 
-    NSInteger favoriteTab = [BulletinDataSource favoriteTabIndex];
-    [segmentedControl setSelectedSegmentIndex:favoriteTab];
-    _dataSource = favoriteTab == 0 ?
+    NSInteger favoriteTab = BulletinDataSource.favoriteTabIndex;
+    self.segmentedControl.selectedSegmentIndex = favoriteTab;
+    self.dataSource = favoriteTab == 0 ?
         [[CatCollectionDataSource alloc] init] : [[DogCollectionDataSource alloc] init];
 
-    [styleButtonItem setTitle:_currentBackground.name];
+    self.styleButtonItem.title = self.currentBackground.name;
 
     // Set up the collection view
 
-    [collectionView registerClass:[ImageCollectionViewCell class]
-       forCellWithReuseIdentifier:@"cell"];
+    [self.collectionView registerClass:[ImageCollectionViewCell class]
+            forCellWithReuseIdentifier:@"cell"];
 
-    [collectionView setBackgroundColor:[UIColor whiteColor]];
-    [collectionView setDelegate:self];
-    [collectionView setDataSource:self];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
 
     UILayoutGuide *guide = self.view.readableContentGuide;
-    [[[collectionView leadingAnchor] constraintEqualToAnchor:[guide leadingAnchor]] setActive:YES];
-    [[[collectionView trailingAnchor] constraintEqualToAnchor:[guide trailingAnchor]] setActive:YES];
-    [[[collectionView topAnchor] constraintEqualToAnchor:[guide topAnchor]] setActive:YES];
+    [[self.collectionView.leadingAnchor constraintEqualToAnchor:[guide leadingAnchor]] setActive:YES];
+    [[self.collectionView.trailingAnchor constraintEqualToAnchor:[guide trailingAnchor]] setActive:YES];
+    [[self.collectionView.topAnchor constraintEqualToAnchor:[guide topAnchor]] setActive:YES];
 
-    UIEdgeInsets cvInset = UIEdgeInsetsMake(8, collectionView.contentInset.left, 8, collectionView.contentInset.right);
-    [collectionView setContentInset:cvInset];
+    UIEdgeInsets cvInset = UIEdgeInsetsMake(8, self.collectionView.contentInset.left,
+                                            8, self.collectionView.contentInset.right);
 
+    self.collectionView.contentInset = cvInset;
 }
 
--(void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated
+{
     [super viewDidAppear:animated];
     [self prepareForBulletin];
-};
+}
 
--(void)dealloc {
+- (void)dealloc
+{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -75,8 +78,8 @@
  * Prepares the view controller for the bulletin interface.
  */
 
--(void)prepareForBulletin {
-
+- (void)prepareForBulletin
+{
     // Register notification observers
 
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -96,94 +99,87 @@
                                                                 target:self
                                                                 action:@selector(fontButtonTapped:)];
 
-    UIBarButtonItem *statusBarItem = [[UIBarButtonItem alloc] initWithTitle:_shouldHideStatusBar ? @"Status Bar: OFF" : @"Status Bar: ON"
+    UIBarButtonItem *statusBarItem = [[UIBarButtonItem alloc] initWithTitle:self.shouldHideStatusBar ? @"Status Bar: OFF" : @"Status Bar: ON"
                                                                       style:UIBarButtonItemStylePlain
                                                                      target:self
                                                                      action:@selector(fullScreenButtonTapped:)];
-    [self setToolbarItems:@[fontItem, statusBarItem]];
+    self.toolbarItems = @[fontItem, statusBarItem];
 
     // If the user did not complete the setup, present the bulletin automatically
 
-    if ([BulletinDataSource userDidCompleteSetup] == NO) {
+    if (BulletinDataSource.userDidCompleteSetup == NO) {
         [self showBulletin];
     }
+}
 
-};
+- (void)showBulletin
+{
+    self.bulletinManager.backgroundViewStyle = self.currentBackground.style;
 
--(void)showBulletin {
-
-    [_bulletinManager setBackgroundViewStyle:[_currentBackground style]];
-
-    if (_shouldHideStatusBar == YES) {
-        [_bulletinManager setStatusBarAppearance:BulletinStatusBarAppearanceHidden];
+    if (self.shouldHideStatusBar == YES) {
+        self.bulletinManager.statusBarAppearance = BLTNStatusBarAppearanceHidden;
     } else {
-        [_bulletinManager setStatusBarAppearance:BulletinStatusBarAppearanceAutomatic];
+        self.bulletinManager.statusBarAppearance = BLTNStatusBarAppearanceAutomatic;
     }
 
-    [_bulletinManager prepare];
-    [_bulletinManager presentBulletinAboveViewController:self
-                                                animated:YES
-                                              completion:NULL];
+    [self.bulletinManager showBulletinAboveViewController:self animated:YES completion:NULL];
+}
 
-};
-
--(void)reloadManager {
-
-    PageBulletinItem *introPage = [BulletinDataSource makeIntroPage];
-    _bulletinManager = [[BulletinManager alloc] initWithRootItem:introPage];
-
-};
+- (void)reloadManager
+{
+    BLTNPageItem *introPage = [BulletinDataSource makeIntroPage];
+    self.bulletinManager = [[BLTNItemManager alloc] initWithRootItem:introPage];
+}
 
 #pragma mark Notifications
 
--(void)setupDidComplete {
+- (void)setupDidComplete
+{
     [BulletinDataSource setUserDidCompleteSetup:YES];
-};
+}
 
--(void)favoriteIndexDidChangeWithNotification:(NSNotification *)notification {
-
+- (void)favoriteIndexDidChangeWithNotification:(NSNotification *)notification
+{
     NSNumber *intValue = (NSNumber *)[[notification userInfo] objectForKey:@"Index"];
-
-    if (intValue) {
+    if (intValue != nil) {
         [self updateTabWithNewIndex:intValue];
     }
 
-};
+}
 
--(void)updateTabWithNewIndex:(NSNumber *)newIndex {
-
+- (void)updateTabWithNewIndex:(NSNumber *)newIndex
+{
     NSInteger integerValue = newIndex.integerValue;
 
     if (integerValue) {
-        _dataSource = [[DogCollectionDataSource alloc] init];
+        self.dataSource = [[DogCollectionDataSource alloc] init];
     } else {
         integerValue = 0;
-        _dataSource = [[CatCollectionDataSource alloc] init];
+        self.dataSource = [[CatCollectionDataSource alloc] init];
     }
 
-    segmentedControl.selectedSegmentIndex = integerValue;
-    [BulletinDataSource setFavoriteTabIndex:integerValue];
-    [collectionView reloadData];
-
-};
+    self.segmentedControl.selectedSegmentIndex = integerValue;
+    BulletinDataSource .favoriteTabIndex = integerValue;
+    [self.collectionView reloadData];
+}
 
 #pragma mark Button Actions
 
--(IBAction)styleButtonTapped:(id)sender {
-
+- (IBAction)styleButtonTapped:(id)sender
+{
     UIAlertController *styleSelectorSheet = [UIAlertController alertControllerWithTitle:@"Bulletin Background Style"
                                                                                 message:NULL preferredStyle:UIAlertControllerStyleActionSheet];
 
-    for (BackgroundViewStyle *background in _backgroundStyles) {
+    for (BackgroundViewStyle *background in self.backgroundStyles) {
 
-        UIAlertAction *action = [UIAlertAction actionWithTitle: background.name
-                                                         style: UIAlertActionStyleDefault
+        UIAlertAction *action = [UIAlertAction actionWithTitle:background.name
+                                                         style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction * _Nonnull action) {
-                                                             [self.styleButtonItem setTitle:background.name];
-                                                             self->_currentBackground = background;
+                                                           [self.styleButtonItem setTitle:background.name];
+                                                           self.currentBackground = background;
                                                        }];
 
-        BOOL isSelected = [background.name isEqualToString:_currentBackground.name];
+        BOOL isSelected = [background.name isEqualToString:self.currentBackground.name];
         NSNumber *checked = [NSNumber numberWithBool:isSelected];
         [action setValue:checked forKey:@"checked"];
 
@@ -197,57 +193,59 @@
 
     [styleSelectorSheet addAction:cancelAction];
 
-    [[styleSelectorSheet popoverPresentationController] setBarButtonItem:styleButtonItem];
+    [[styleSelectorSheet popoverPresentationController] setBarButtonItem:self.styleButtonItem];
 
     [self presentViewController:styleSelectorSheet animated:YES completion:NULL];
+}
 
-};
-
--(IBAction)showIntroButtonTapped:(id)sender {
+- (IBAction)showIntroButtonTapped:(id)sender
+{
     [self showBulletin];
-};
+}
 
--(IBAction)tabIndexChanged:(UISegmentedControl *)sender {
+- (IBAction)tabIndexChanged:(UISegmentedControl *)sender
+{
     [self updateTabWithNewIndex:[NSNumber numberWithInteger:sender.selectedSegmentIndex]];
-};
+}
 
--(void)fontButtonTapped:(UIBarButtonItem *)sender {
+- (void)fontButtonTapped:(UIBarButtonItem *)sender
+{
     [BulletinDataSource setUseAvenirFont:![BulletinDataSource useAvenirFont]];
-    [sender setTitle:[BulletinDataSource currentFontName]];
+    sender.title = BulletinDataSource.currentFontName;
     [self reloadManager];
 }
 
--(void)fullScreenButtonTapped:(UIBarButtonItem *)sender {
-    _shouldHideStatusBar = !(_shouldHideStatusBar);
-    NSString *newTitle = _shouldHideStatusBar ? @"Status Bar: OFF" : @"Status Bar: On";
-    [sender setTitle:newTitle];
+- (void)fullScreenButtonTapped:(UIBarButtonItem *)sender
+{
+    self.shouldHideStatusBar = !(self.shouldHideStatusBar);
+    sender.title = self.shouldHideStatusBar ? @"Status Bar: OFF" : @"Status Bar: On";
     [self reloadManager];
 }
 
 #pragma mark Collection View
 
--(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
     return 1;
 }
 
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [_dataSource numberOfImages];
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return [self.dataSource numberOfImages];
 }
 
-- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
     ImageCollectionViewCell *cell = (ImageCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
 
-    UIImage *image = [_dataSource imageAtIndex:[indexPath row]];
-    [cell.imageView setImage: image];
-
+    UIImage *image = [self.dataSource imageAtIndex:[indexPath row]];
+    cell.imageView.image = image;
     return cell;
+}
 
-};
-
--(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-
-    UIImage *image = [_dataSource imageAtIndex:[indexPath row]];
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIImage *image = [self.dataSource imageAtIndex:[indexPath row]];
     CGFloat width = collectionView.frame.size.width;
 
     if (!image) {
@@ -258,7 +256,6 @@
     CGFloat height = width * aspectRatio;
 
     return CGSizeMake(width, height);
-
-};
+}
 
 @end

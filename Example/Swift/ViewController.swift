@@ -1,10 +1,10 @@
 /**
  *  BulletinBoard
- *  Copyright (c) 2017 Alexis Aubry. Licensed under the MIT license.
+ *  Copyright (c) 2017 - present Alexis Aubry. Licensed under the MIT license.
  */
 
 import UIKit
-import BulletinBoard
+import BLTNBoard
 
 /**
  * A view controller displaying a set of images.
@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     let backgroundStyles = BackgroundStyles()
 
     /// The current background style.
-    var currentBackground = (name: "Dimmed", style: BulletinBackgroundViewStyle.dimmed)
+    var currentBackground = (name: "Dimmed", style: BLTNBackgroundViewStyle.dimmed)
 
     // MARK: - Bulletin Manager
 
@@ -42,9 +42,9 @@ class ViewController: UIViewController {
      * the bulletin manager.
      */
 
-    lazy var bulletinManager: BulletinManager = {
+    lazy var bulletinManager: BLTNItemManager = {
         let introPage = BulletinDataSource.makeIntroPage()
-        return BulletinManager(rootItem: introPage)
+        return BLTNItemManager(rootItem: introPage)
     }()
 
     // MARK: - View
@@ -133,22 +133,24 @@ class ViewController: UIViewController {
 
     func showBulletin() {
 
+        reloadManager()
+
 //        Uncomment to customize interface
 //        bulletinManager.cardCornerRadius = 22
-//        bulletinManager.cardPadding = .none
+//        bulletinManager.edgeSpacing = .none
 //        bulletinManager.allowsSwipeInteraction = false
 //        bulletinManager.hidesHomeIndicator = true
 //        bulletinManager.backgroundColor = .blue
 
         bulletinManager.backgroundViewStyle = currentBackground.style
         bulletinManager.statusBarAppearance = shouldHideStatusBar ? .hidden : .automatic
-        bulletinManager.prepareAndPresent(above: self)
+        bulletinManager.showBulletin(above: self)
 
     }
 
     func reloadManager() {
         let introPage = BulletinDataSource.makeIntroPage()
-        bulletinManager = BulletinManager(rootItem: introPage)
+        bulletinManager = BLTNItemManager(rootItem: introPage)
     }
 
     // MARK: - Actions

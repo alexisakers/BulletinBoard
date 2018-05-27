@@ -1,6 +1,6 @@
 /**
  *  BulletinBoard
- *  Copyright (c) 2017 Alexis Aubry. Licensed under the MIT license.
+ *  Copyright (c) 2017 - present Alexis Aubry. Licensed under the MIT license.
  */
 
 import UIKit
@@ -13,9 +13,9 @@ import UIKit
 
 class BulletinPresentationAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
 
-    let style: BulletinBackgroundViewStyle
+    let style: BLTNBackgroundViewStyle
 
-    init(style: BulletinBackgroundViewStyle) {
+    init(style: BLTNBackgroundViewStyle) {
         self.style = style
     }
 
@@ -38,14 +38,7 @@ class BulletinPresentationAnimationController: NSObject, UIViewControllerAnimate
 
         // Add root view
 
-        rootView.frame = containerView.frame
         containerView.addSubview(rootView)
-
-        rootView.translatesAutoresizingMaskIntoConstraints = false
-        rootView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-        rootView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        rootView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        rootView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
 
         // Prepare background view
 
@@ -68,11 +61,8 @@ class BulletinPresentationAnimationController: NSObject, UIViewControllerAnimate
         let options = UIViewAnimationOptions(rawValue: 7 << 16)
 
         let animations = {
-
             toVC.moveIntoPlace()
             backgroundView.show()
-            toVC.showBottomSafeAreaCover()
-
         }
 
         UIView.animate(withDuration: duration, delay: 0, options: options, animations: animations) { _ in

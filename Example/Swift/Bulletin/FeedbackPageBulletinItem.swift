@@ -1,18 +1,18 @@
 /**
  *  BulletinBoard
- *  Copyright (c) 2017 Alexis Aubry. Licensed under the MIT license.
+ *  Copyright (c) 2017 - present Alexis Aubry. Licensed under the MIT license.
  */
 
 import UIKit
-import BulletinBoard
+import BLTNBoard
 
 /**
  * A subclass of page bulletin item that plays an haptic feedback when the buttons are pressed.
  *
- * This class demonstrates how to override `PageBulletinItem` to customize button tap handling.
+ * This class demonstrates how to override `PageBLTNItem` to customize button tap handling.
  */
 
-class FeedbackPageBulletinItem: PageBulletinItem {
+class FeedbackPageBLTNItem: BLTNPageItem {
 
     private let feedbackGenerator = SelectionFeedbackGenerator()
 

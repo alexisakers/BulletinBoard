@@ -1,13 +1,17 @@
 /**
  *  BulletinBoard
- *  Copyright (c) 2017 Alexis Aubry. Licensed under the MIT license.
+ *  Copyright (c) 2017 - present Alexis Aubry. Licensed under the MIT license.
  */
 
 #import "ImageCollectionViewCell.h"
 
-@implementation ImageCollectionViewCell {
-    UIImageView *_imageView;
-}
+@interface ImageCollectionViewCell ()
+
+@property (nonatomic, strong, readwrite) UIImageView *imageView;
+
+@end
+
+@implementation ImageCollectionViewCell
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -27,19 +31,18 @@
     return self;
 }
 
--(void)performInit {
+-(void)performInit
+{
+    self.imageView = [[UIImageView alloc] init];
 
-    _imageView = [[UIImageView alloc] init];
-
-    [_imageView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [_imageView setContentMode:UIViewContentModeScaleAspectFill];
+    [self.imageView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.imageView setContentMode:UIViewContentModeScaleAspectFill];
 
     [self.contentView addSubview:_imageView];
-    [[_imageView.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor] setActive:YES];
-    [[_imageView.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor] setActive:YES];
-    [[_imageView.topAnchor constraintEqualToAnchor:self.contentView.topAnchor] setActive:YES];
-    [[self.contentView.bottomAnchor constraintEqualToAnchor:_imageView.bottomAnchor] setActive:YES];
-
-};
+    [[self.imageView.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor] setActive:YES];
+    [[self.imageView.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor] setActive:YES];
+    [[self.imageView.topAnchor constraintEqualToAnchor:self.contentView.topAnchor] setActive:YES];
+    [[self.contentView.bottomAnchor constraintEqualToAnchor:self.imageView.bottomAnchor] setActive:YES];
+}
 
 @end

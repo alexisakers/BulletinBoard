@@ -1,33 +1,30 @@
 /**
  *  BulletinBoard
- *  Copyright (c) 2017 Alexis Aubry. Licensed under the MIT license.
+ *  Copyright (c) 2017 - present Alexis Aubry. Licensed under the MIT license.
  */
 
 #import "BackgroundViewStyle.h"
 
-@implementation BackgroundViewStyle {
-    NSString *_name;
-    BulletinBackgroundViewStyle *_style;
-}
+@implementation BackgroundViewStyle
 
--(instancetype)initWithName:(NSString *)name style:(BulletinBackgroundViewStyle *)style {
+-(instancetype)initWithName:(NSString *)name style:(BLTNBackgroundViewStyle *)style {
     self = [super init];
     if (self) {
-        _name = name;
-        _style = style;
+        self.name = name;
+        self.style = style;
     }
     return self;
 };
 
-+(NSArray<BackgroundViewStyle*> *)allStyles {
-
++ (NSArray<BackgroundViewStyle*> *)allStyles
+{
     NSMutableArray<BackgroundViewStyle*> *styles = [NSMutableArray array];
 
     BackgroundViewStyle *none = [[BackgroundViewStyle alloc] initWithName:@"None"
-                                                                    style:[BulletinBackgroundViewStyle none]];
+                                                                    style:[BLTNBackgroundViewStyle none]];
 
     BackgroundViewStyle *dimmed = [[BackgroundViewStyle alloc] initWithName:@"Dimmed"
-                                                                      style:[BulletinBackgroundViewStyle dimmed]];
+                                                                      style:[BLTNBackgroundViewStyle dimmed]];
 
     [styles addObject:none];
     [styles addObject:dimmed];
@@ -35,33 +32,30 @@
     if (@available(iOS 10.0, *)) {
 
         BackgroundViewStyle *extraLight = [[BackgroundViewStyle alloc] initWithName:@"Light"
-                                                                              style:[BulletinBackgroundViewStyle blurredLight]];
+                                                                              style:[BLTNBackgroundViewStyle blurredLight]];
 
         BackgroundViewStyle *light = [[BackgroundViewStyle alloc] initWithName:@"Extra Light"
-                                                                         style:[BulletinBackgroundViewStyle blurredExtraLight]];
+                                                                         style:[BLTNBackgroundViewStyle blurredExtraLight]];
 
         BackgroundViewStyle *dark = [[BackgroundViewStyle alloc] initWithName:@"Dark"
-                                                                         style:[BulletinBackgroundViewStyle blurredDark]];
+                                                                         style:[BLTNBackgroundViewStyle blurredDark]];
 
         BackgroundViewStyle *extraDark = [[BackgroundViewStyle alloc] initWithName:@"Extra Dark"
-                                                                             style:[BulletinBackgroundViewStyle blurredWithStyle:3 isDark:YES]];
+                                                                             style:[BLTNBackgroundViewStyle blurredWithStyle:3 isDark:YES]];
 
         [styles addObject:extraLight];
         [styles addObject:light];
         [styles addObject:dark];
         [styles addObject:extraDark];
-
     }
 
     return (NSArray<BackgroundViewStyle*> *)styles;
+}
 
-};
-
-+(BackgroundViewStyle *)defaultStyle {
-
++ (BackgroundViewStyle *)defaultStyle
+{
     return [[BackgroundViewStyle alloc] initWithName:@"Dimmed"
-                                               style:[BulletinBackgroundViewStyle dimmed]];
-
-};
+                                               style:[BLTNBackgroundViewStyle dimmed]];
+}
 
 @end

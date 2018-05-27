@@ -1,4 +1,4 @@
-# BulletinBoard
+# BulletinBoard Beta
 
 [![CI Status](https://travis-ci.org/alexaubry/BulletinBoard.svg?branch=master)](https://travis-ci.org/alexaubry/BulletinBoard)
 [![Version](https://img.shields.io/cocoapods/v/BulletinBoard.svg?style=flat)](https://cocoapods.org/pods/BulletinBoard)
@@ -9,7 +9,7 @@
 
 BulletinBoard is an iOS library that generates and manages contextual cards displayed at the bottom of the screen. It is especially well suited for quick user interactions such as onboarding screens or configuration.
 
-It has an interface similar to the cards displayed by iOS for AirPods, Apple TV configuration and NFC tag scanning.
+It has an interface similar to the cards displayed by iOS for AirPods, Apple TV/HomePod configuration and NFC tag scanning. It supports both the iPhone, iPhone X and the iPad.
 
 It has built-in support for accessibility features such as VoiceOver and Switch Control.
 
@@ -41,7 +41,7 @@ Build and run the scheme for your favorite language to open the demo app.
 
 Here's a video showing it in action:
 
-[![Watch Demo on YouTube](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_thumbnail.png)](https://youtu.be/DT58Lz7qpTA)
+[![Watch Demo on YouTube](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_thumbnail.png)](https://youtu.be/f4UErY-epYY)
 
 ## Installation
 
@@ -70,37 +70,29 @@ BulletinBoard is fully compatible with Objective-C.
 To import it in your Objective-C app, just add this line at the top of your files:
 
 ~~~objc
-@import BulletinBoard; 
+@import BLTNBoard; 
 ~~~
-
-### Limitations
-
-`PageBulletinItem`, `BulletinAppearance` and `BulletinInterfaceBuilder` subclasses must be written in Swift, as Swift classes cannot be overriden in Objective-C.
-
-You can use [Mix and Match](https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html#//apple_ref/doc/uid/TP40014216-CH10-ID126) to write your subclass in Swift and import it into your Objective-C code, as demonstrated in the example project.
 
 ## Usage
 
 ## The Basics
 
-The `BulletinManager` class generates, manages and displays bulletin cards. Cards are created using bulletin items. Bulletin items are objects that conform to the `BulletinItem` protocol.
+The `BLTNManager` class generates, manages and displays bulletin cards. Cards are created using bulletin items. Bulletin items are objects that conform to the `BLTNItem` protocol.
 
-The library provides a standard item type: `PageBulletinItem`. If you need to customize the items, you can override this class, or create new item types from scratch.
+The library provides a standard item type: `BLTNPageItem`. If you need to customize the items, you can override this class, or create new item types from scratch.
 
 ## Displaying Bulletins
 
 To display bulletins you first need to create the root item to display (explained in the next sections).
 
-With this root item, you need to create a `BulletinManager`. We recommend putting it in the view controller that will display the bulletin.
+With this root item, you need to create a `BLTNManager`. We recommend putting it in the view controller that will display the bulletin.
 
 ~~~swift
 class ViewController: UIViewController {
 
-    lazy var bulletinManager: BulletinManager = {
-
-        let rootItem: BulletinItem = // ... create your item here
-        return BulletinManager(rootItem: rootItem)
-
+    lazy var bulletinManager: BLTNManager = {
+        let rootItem: BLTNItem = // ... create your item here
+        return BLTNManager(rootItem: rootItem)
     }()
 
 }
@@ -109,34 +101,31 @@ class ViewController: UIViewController {
 To present your bulletin, call this method:
 
 ~~~swift
-bulletinManager.prepare()
-bulletinManager.presentBulletin(above: self)
+bulletinManager.showBulletin(above: self)
 ~~~
-
-Always call `prepare()` before calling `presentBulletin()`! Failure to do so will cause a precondition failure (TL;DR your app will crash).
 
 For the case of onboarding, you can call it in `viewWillAppear(animated:)` after checking if the user has already completed onboarding.
 
 ## Creating Page Items
 
-You can create standard page items using the `PageBulletinItem` class.
+You can create standard page items using the `BLTNPageItem` class.
 
 It takes care of generating a user interface with standard components:
 
 - a title (required)
 - an icon image (should be 128x128px or less)
-- a description text
+- a description text (plain or attributed)
 - a large action button
 - a smaller alternative button
 
-For example, this interface was created using a `PageBulletinItem`:
+For example, this interface was created using a `BLTNPageItem`:
 
-![Customizing PageBulletinItem](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/page_customization.png)
+![Customizing BLTNPageItem](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/page_customization.png)
 
 To recreate this interface, use this code:
 
 ~~~swift
-let page = PageBulletinItem(title: "Push Notifications")
+let page = BLTNPageItem(title: "Push Notifications")
 page.image = UIImage(named: "...")
 
 page.descriptionText = "Receive push notifications when new photos of pets are available."
@@ -146,18 +135,15 @@ page.alternativeButtonTitle = "Not now"
 
 If you omit an optional property, the page won't generate a view for it. For instance, if you set `alternativeButtonTitle` to `nil`, the card won't display an alternative button.
 
+You can also set the `attributedDescriptionText` if you want to use an attributed string.
+
 ### Customizing the Appearance
 
-The `PageBulletinItem` class exposes a `appearance` property that allows you to fully customize the appearance of the generated interface.
+The `BLTNPageItem` class exposes a `appearance` property that allows you to fully customize the appearance of the generated interface.
 
-This property references a `BulletinAppearance`, which is used to generate the standard components (more on this later). You can subclass this class in Swift and further customize the appearance of the app.
+This property references a `BLTNAppearance`, which is used to generate the standard components (more on this later).
 
 You can customize both color and fonts. You need to change these before you present / push the item. Changing them after presentation will have no effect.
-
-There are several properties that you can change:
-
-- `tintColor` - the tint color of the buttons (defaults to iOS blue)
-- `actionButtonTitleColor` - the color of action button titles
 
 **Example**
 
@@ -180,7 +166,7 @@ To handle taps on buttons, set a closure for these properties:
 - `alternativeHandler` - called when the alternative button is tapped.
 
 ~~~swift
-page.actionHandler = { (item: PageBulletinItem) in
+page.actionHandler = { (item: BLTNActionItem) in
     print("Action button tapped")
 }
 ~~~
@@ -188,7 +174,7 @@ page.actionHandler = { (item: PageBulletinItem) in
 This prints `"Action button tapped"` when the action button is tapped.
 
 ~~~swift
-page.alternativeHandler = { (item: PageBulletinItem) in
+page.alternativeHandler = { (item: BLTNActionItem) in
     print("Alternative button tapped")
 }
 ~~~
@@ -199,7 +185,7 @@ Use these handlers as an opportunity to change the presented item, dismiss the b
 
 ## Changing the Presented Item
 
-The `BulletinItem` protocol exposes a `manager` property that is set when the item is currently being displayed by a manager.
+The `BLTNItem` protocol exposes a `manager` property that is set when the item is currently being displayed by a manager.
 
 You can use it to interact with the presented bulletin. Call:
 
@@ -211,7 +197,7 @@ You can use it to interact with the presented bulletin. Call:
 
 You need to call these methods from the main thread. Never force unwrap `manager`, as this property will be unset as soon as the item is removed from the bulletin.
 
-It is also possible to set the `nextItem` property to the `BulletinItem` that should be displayed next and call the `displayNextItem()` method when you want to display it.
+It is also possible to set the `nextItem` property to the `BLTNItem` that should be displayed next and call the `displayNextItem()` method when you want to display it.
 
 For instance, to present a new card when the user taps the action button:
 
@@ -233,17 +219,17 @@ If you need to perform a task between the moment the user taps a button and the 
 
 This is especially useful if you need to fetch data from a server (in-app purchase price, subscription status, ...) or save data (e.g. Core Data).
 
-Once your task is finished, call one of the methods described in [Changing the Presented Item](#changing-the-presented-item).
+Once your task is finished, you call one of the methods described in [Changing the Presented Item](#changing-the-presented-item) to display the new item, or call `hideActivityIndicator()` to hide the indicator without changing the item.
 
 **Example**:
 
 ~~~swift
-page.actionHandler = { (item: PageBulletinItem) in
+page.actionHandler = { (item: BLTNActionItem) in
     item.manager?.displayActivityIndicator()
     // do your task
     // ...
     // when your task is finished, transition to the appropriate bulletin item
-    item.displayNextItem()
+    item.manager?.displayNextItem()
 }
 ~~~
 
@@ -272,47 +258,23 @@ Several styles are available in the `BulletinBackgroundViewStyle` enum:
 
 ## Dismissal
 
-If you set the `isDismissable` property to `true`, the user will be able to dismiss the bulletin by tapping outside of the card or by swiping the card down.
+If you set the `isDismissable` property to `true`, the user will be able to dismiss the bulletin by tapping outside of the card or by swiping the card down. This property defaults to `true`. You should set this property to `false` if completing the task is required, and should not be avoided by the user. 
 
-You should set this property to `true` for the last item.
+By default, a close button will be displayed when the item can be dismissed. If you don't want this behavior, you can set the `requiresCloseButton` property to `false`. This is useful when the bulletin already provides an action button to close the item (such as a “Done“ button).
+
+![Dimming View](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_background_styles.png)
 
 ## Creating Custom Items
 
-To create custom bulletin items, create a class that implements the `BulletinItem` protocol. To learn with a concrete example, you can read the implementation of `PageBulletinItem`.
+To create custom bulletin items, create a class that implements the `BLTNItem` protocol. It is usually easier to subclass `BLTNPageItem` and implement one of the hook methods to provide your custom views to display with standard elements.
 
-### Conforming to `BulletinItem`
-
-To conform to this protocol, you need to add the required properties and implement two methods:
-
-#### `makeArrangedSubviews()`
-
-This method should return all the elements to display on the card.
-
-Please note that the `alpha` and `isHidden` properties will be ignored.
-
-#### `tearDown()`
-
-In this method, clear all the resources allocated for the item (such as notification observers or button targets). After this method is called, the `manager` will be set to `nil` and the arranged subviews will be hidden and removed from the card.
-
-### Generating Standard Views
-
-Even though you are creating a custom card, you may still want to display some standard elements, such as title labels or action buttons.
-
-To generate standard elements `BulletinInterfaceBuilder`. Interface builders with appearance objects (`BulletinAppearance`) to create standard elements.
-
-Use these methods to generate standard components for your custom items:
-
-- `makeTitleLabel(text:)` to create a title label with the given title
-- `makeDescriptionLabel()` to create a description label
-- `makeActionButton(title:)` to create an action button
-- `makeAlternativeButton(title:)` to create an alternative button
-- `makeGroupStack(spacing:)` to create a vertical stack view with the given spacing
+See the [Creating a Custom Item](guides/Creating%20a%20Custom%20Item.md) guide to learn more.
 
 ## Internals
 
 BulletinBoard uses stack views and Auto Layout to display and manage cards. It automatically adapts to changes in width and height. iPad and iPhone X are supported out of the box.
 
-If you are interested in learning how it works in more details, look at the implementation of `BulletinManager`, `BulletinViewController` and `BulletinInterfaceBuilder`.
+If you are interested in learning how it works in more details, look at the implementation of `BLTNManager`, `BulletinViewController` and `BLTNInterfaceBuilder`.
 
 ## Contributing
 

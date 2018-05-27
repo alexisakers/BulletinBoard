@@ -1,6 +1,6 @@
 /**
  *  BulletinBoard
- *  Copyright (c) 2017 Alexis Aubry. Licensed under the MIT license.
+ *  Copyright (c) 2017 - present Alexis Aubry. Licensed under the MIT license.
  */
 
 import UIKit
@@ -12,12 +12,15 @@ import UIKit
 final class BulletinViewController: UIViewController, UIGestureRecognizerDelegate {
 
     /// The object managing the view controller.
-    weak var manager: BulletinManager?
+    weak var manager: BLTNItemManager?
 
     // MARK: - UI Elements
 
     /// The subview that contains the contents of the card.
-    let contentView = UIView()
+    let contentView = RoundedView()
+
+    /// The button that allows the users to close the bulletin.
+    let closeButton = BulletinCloseButton()
 
     /**
      * The stack view displaying the content of the card.
@@ -46,8 +49,6 @@ final class BulletinViewController: UIViewController, UIGestureRecognizerDelegat
     var swipeInteractionController: BulletinSwipeInteractionController!
 
     // MARK: - Private Interface Elements
-
-    fileprivate let bottomSafeAreaCoverView = UIVisualEffectView()
 
     // Compact constraints
     fileprivate var leadingConstraint: NSLayoutConstraint!
@@ -124,6 +125,18 @@ extension BulletinViewController {
         widthConstraint = contentView.widthAnchor.constraint(equalToConstant: 444)
         widthConstraint.priority = UILayoutPriorityRequired
 
+        // Close button
+
+        contentView.addSubview(closeButton)
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12).isActive = true
+        closeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12).isActive = true
+        closeButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        closeButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
+        closeButton.isUserInteractionEnabled = true
+
+        closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+
         // Content Stack View
 
         contentView.addSubview(contentStackView)
@@ -158,17 +171,6 @@ extension BulletinViewController {
 
         activityIndicator.alpha = 0
 
-        // Safe Area Cover View
-
-        bottomSafeAreaCoverView.effect = nil
-        bottomSafeAreaCoverView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(bottomSafeAreaCoverView)
-
-        bottomSafeAreaCoverView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor).isActive = true
-        bottomSafeAreaCoverView.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor).isActive = true
-        bottomSafeAreaCoverView.topAnchor.constraint(equalTo: view.safeBottomAnchor).isActive = true
-        bottomSafeAreaCoverView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-
         // Vertical Position
 
         stackBottomConstraint = contentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
@@ -181,6 +183,8 @@ extension BulletinViewController {
 
         configureContentView()
         setUpKeyboardLogic()
+
+        contentView.bringSubview(toFront: closeButton)
 
     }
 
@@ -200,9 +204,10 @@ extension BulletinViewController {
         }
 
         contentView.backgroundColor = manager.backgroundColor
-        contentView.layer.cornerRadius = CGFloat((manager.cardCornerRadius ?? 12).doubleValue)
+        contentView.cornerRadius = CGFloat((manager.cardCornerRadius ?? 12).doubleValue)
+        closeButton.updateColors(isDarkBackground: manager.backgroundColor.needsDarkText == false)
 
-        let cardPadding = manager.cardPadding.rawValue
+        let cardPadding = manager.edgeSpacing.rawValue
 
         // Set left and right padding
         leadingConstraint = contentView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor,
@@ -221,7 +226,6 @@ extension BulletinViewController {
 
         if manager.hidesHomeIndicator {
             contentBottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            bottomSafeAreaCoverView.removeFromSuperview()
         } else {
             contentBottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.safeBottomAnchor)
         }
@@ -299,12 +303,22 @@ extension BulletinViewController {
 
     // MARK: - Transition Adaptivity
 
+    var defaultBottomMargin: CGFloat {
+        return manager?.edgeSpacing.rawValue ?? 12
+    }
+
     func bottomMargin() -> CGFloat {
 
-        var bottomMargin: CGFloat = manager?.cardPadding.rawValue ?? 12
+        if #available(iOS 11, *) {
+            if view.safeAreaInsets.bottom > 0 {
+                return 0
+            }
+        }
+
+        var bottomMargin: CGFloat = manager?.edgeSpacing.rawValue ?? 12
 
         if manager?.hidesHomeIndicator == true {
-            bottomMargin = manager?.cardPadding.rawValue == 0 ? 0 : 6
+            bottomMargin = manager?.edgeSpacing.rawValue == 0 ? 0 : 6
         }
 
         return bottomMargin
@@ -397,8 +411,8 @@ extension BulletinViewController {
 
     fileprivate func updateCornerRadius() {
 
-        if manager?.cardPadding.rawValue == 0 {
-            contentView.layer.cornerRadius = 0
+        if manager?.edgeSpacing.rawValue == 0 {
+            contentView.cornerRadius = 0
             return
         }
 
@@ -408,9 +422,7 @@ extension BulletinViewController {
             defaultRadius = screenHasRoundedCorners ? 36 : 12
         }
 
-
-
-        contentView.layer.cornerRadius = CGFloat((manager?.cardCornerRadius ?? defaultRadius).doubleValue)
+        contentView.cornerRadius = CGFloat((manager?.cardCornerRadius ?? defaultRadius).doubleValue)
 
     }
 
@@ -423,23 +435,6 @@ extension BulletinViewController {
     /// Creates a new background view for the bulletin.
     func loadBackgroundView() {
         backgroundView = BulletinBackgroundView(style: manager?.backgroundViewStyle ?? .dimmed)
-    }
-
-    /// Displays the cover view at the bottom of the safe area. Animatable.
-    func showBottomSafeAreaCover() {
-
-        guard let isDark = manager?.backgroundViewStyle.rawValue.isDark else {
-            return
-        }
-
-        let blurStyle: UIBlurEffectStyle = isDark ? .dark : .extraLight
-        bottomSafeAreaCoverView.effect = UIBlurEffect(style: blurStyle)
-
-    }
-
-    /// Hides the cover view at the bottom of the safe area. Animatable.
-    func hideBottomSafeAreaCover() {
-        bottomSafeAreaCoverView.effect = nil
     }
 
 }
@@ -457,6 +452,7 @@ extension BulletinViewController {
         let animations = {
             self.activityIndicator.alpha = 1
             self.contentStackView.alpha = 0
+            self.closeButton.alpha = 0
         }
 
         UIView.animate(withDuration: 0.25, animations: animations) { _ in
@@ -466,21 +462,42 @@ extension BulletinViewController {
     }
 
     /// Hides the activity indicator.
-    func hideActivityIndicator(showContentStack: Bool) {
+    func hideActivityIndicator() {
 
         activityIndicator.stopAnimating()
         activityIndicator.alpha = 0
 
+        let needsCloseButton = manager?.needsCloseButton == true
+
         let animations = {
             self.activityIndicator.alpha = 0
-
-            if showContentStack {
-                self.contentStackView.alpha = 1
-            }
+            self.updateCloseButton(isRequired: needsCloseButton)
         }
 
         UIView.animate(withDuration: 0.25, animations: animations)
 
+    }
+
+}
+
+// MARK: - Close Button
+
+extension BulletinViewController {
+
+    func updateCloseButton(isRequired: Bool) {
+        isRequired ? showCloseButton() : hideCloseButton()
+    }
+
+    func showCloseButton() {
+        closeButton.alpha = 1
+    }
+
+    func hideCloseButton() {
+        closeButton.alpha = 0
+    }
+
+    @objc func closeButtonTapped() {
+        manager?.dismissBulletin(animated: true)
     }
 
 }
@@ -523,7 +540,6 @@ extension BulletinViewController: UIViewControllerTransitioningDelegate {
 
     /// Prepares the view controller for dismissal.
     func prepareForDismissal(displaying snapshot: UIView) {
-        view.bringSubview(toFront: bottomSafeAreaCoverView)
         activeSnapshotView = snapshot
     }
 
@@ -560,7 +576,7 @@ extension BulletinViewController {
         let animationOptions = UIViewAnimationOptions(curve: animationCurve)
 
         UIView.animate(withDuration: duration, delay: 0, options: animationOptions, animations: {
-            var bottomSpacing = -(keyboardFrameFinal.size.height + self.bottomMargin())
+            var bottomSpacing = -(keyboardFrameFinal.size.height + self.defaultBottomMargin)
 
             if #available(iOS 11.0, *) {
 

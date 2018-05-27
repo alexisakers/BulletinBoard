@@ -1,6 +1,6 @@
 /**
  *  BulletinBoard
- *  Copyright (c) 2017 Alexis Aubry. Licensed under the MIT license.
+ *  Copyright (c) 2017 - present Alexis Aubry. Licensed under the MIT license.
  */
 
 @import UIKit;
@@ -15,12 +15,12 @@
  * Prepares the taptic engine.
  */
 
--(void)prepare;
+- (void)prepare;
 
 /**
  * Plays a selection change haptic feedback.
  */
 
--(void)selectionChanged;
+- (void)selectionChanged;
 
 @end

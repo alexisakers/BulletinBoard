@@ -1,10 +1,10 @@
 /**
  *  BulletinBoard
- *  Copyright (c) 2017 Alexis Aubry. Licensed under the MIT license.
+ *  Copyright (c) 2017 - present Alexis Aubry. Licensed under the MIT license.
  */
 
 import UIKit
-import BulletinBoard
+import BLTNBoard
 
 /**
  * An item that displays a text field.
@@ -13,13 +13,13 @@ import BulletinBoard
  * when the keyboard is visible.
  */
 
-class TextFieldBulletinPage: FeedbackPageBulletinItem {
+class TextFieldBulletinPage: FeedbackPageBLTNItem {
 
     @objc public var textField: UITextField!
 
-    @objc public var textInputHandler: ((ActionBulletinItem, String?) -> Void)? = nil
+    @objc public var textInputHandler: ((BLTNActionItem, String?) -> Void)? = nil
 
-    override func viewsUnderDescription(_ interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
+    override func makeViewsUnderDescription(with interfaceBuilder: BLTNInterfaceBuilder) -> [UIView]? {
         textField = interfaceBuilder.makeTextField(placeholder: "First and Last Name", returnKey: .done, delegate: self)
         return [textField]
     }
@@ -30,12 +30,8 @@ class TextFieldBulletinPage: FeedbackPageBulletinItem {
     }
 
     override func actionButtonTapped(sender: UIButton) {
-
-        if textFieldShouldReturn(self.textField) {
-            textInputHandler?(self, textField.text)
-            super.actionButtonTapped(sender: sender)
-        }
-
+        textField.resignFirstResponder()
+        super.actionButtonTapped(sender: sender)
     }
 
 }
@@ -54,21 +50,23 @@ extension TextFieldBulletinPage: UITextFieldDelegate {
 
     }
 
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        return true
+    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
 
         if isInputValid(text: textField.text) {
-
-            textField.resignFirstResponder()
             textInputHandler?(self, textField.text)
-            return true
-
         } else {
-
             descriptionLabel!.textColor = .red
             descriptionLabel!.text = "You must enter some text to continue."
             textField.backgroundColor = UIColor.red.withAlphaComponent(0.3)
-            return false
-
         }
 
     }

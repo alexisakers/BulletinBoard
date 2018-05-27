@@ -1,13 +1,13 @@
 import UIKit
-import BulletinBoard
+import BLTNBoard
 
 /**
  * Returns a list of all the background styles.
  */
 
-func BackgroundStyles() -> [(name: String, style: BulletinBackgroundViewStyle)] {
+func BackgroundStyles() -> [(name: String, style: BLTNBackgroundViewStyle)] {
 
-    var styles: [(name: String, style: BulletinBackgroundViewStyle)] = [
+    var styles: [(name: String, style: BLTNBackgroundViewStyle)] = [
         ("None", .none),
         ("Dimmed", .dimmed)
     ]

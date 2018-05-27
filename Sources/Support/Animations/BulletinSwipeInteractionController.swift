@@ -1,6 +1,6 @@
 /**
  *  BulletinBoard
- *  Copyright (c) 2017 Alexis Aubry. Licensed under the MIT license.
+ *  Copyright (c) 2017 - present Alexis Aubry. Licensed under the MIT license.
  */
 
 import UIKit
@@ -235,7 +235,6 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
         }
 
         viewController.backgroundView.show()
-        viewController.showBottomSafeAreaCover()
 
         UIView.animate(withDuration: 0.15, delay: 0, options: options, animations: animations) { _ in
             self.update(0)

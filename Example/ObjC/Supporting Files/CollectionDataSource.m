@@ -1,44 +1,80 @@
 /**
  *  BulletinBoard
- *  Copyright (c) 2017 Alexis Aubry. Licensed under the MIT license.
+ *  Copyright (c) 2017 - present Alexis Aubry. Licensed under the MIT license.
  */
 
 #import "CollectionDataSource.h"
 
 @implementation CollectionDataSource
 
-/// Get the image at the given index.
--(UIImage *)imageAtIndex:(NSInteger)index {
+- (NSInteger)numberOfImages
+{
+    return 16;
+}
+
+- (NSString *)petName
+{
+    @throw [self requireConcreteImplementation];
+}
+
+- (NSString *)pluralizedPetName
+{
+    @throw [self requireConcreteImplementation];
+}
+
+
+-(NSString *)emoji
+{
+    @throw [self requireConcreteImplementation];
+}
+
+- (UIImage *)imageAtIndex:(NSInteger)index
+{
     NSString *name = [NSString stringWithFormat:@"%@_img_%lx", [self petName], (unsigned long)index + 1];
     return [UIImage imageNamed:name];
-};
+}
 
-/// The number of images on the data set.
--(int)numberOfImages {
-    return 16;
-};
-
-/// The name of the pet.
--(NSString *)petName {
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+- (NSException *)requireConcreteImplementation
+{
+    return [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:@"Please use a concrete sublclass of CollectionDataSource"
                                  userInfo:NULL];
-};
+}
 
 @end
 
 @implementation DogCollectionDataSource
 
--(NSString *)petName {
+- (NSString *)petName {
     return @"dog";
+}
+
+- (NSString *)pluralizedPetName
+{
+    return @"Dogs";
+}
+
+- (NSString *)emoji
+{
+    return @"🐶";
 }
 
 @end
 
 @implementation CatCollectionDataSource
 
--(NSString *)petName {
+- (NSString *)petName {
     return @"cat";
+}
+
+- (NSString *)pluralizedPetName
+{
+    return @"Cats";
+}
+
+- (NSString *)emoji
+{
+    return @"🐱";
 }
 
 @end

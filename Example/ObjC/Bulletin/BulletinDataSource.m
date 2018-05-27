@@ -1,202 +1,228 @@
 /**
  *  BulletinBoard
- *  Copyright (c) 2017 Alexis Aubry. Licensed under the MIT license.
+ *  Copyright (c) 2017 - present Alexis Aubry. Licensed under the MIT license.
  */
 
 #import "BulletinDataSource.h"
 #import "PermissionsManager.h"
 #import "TextFieldBulletinPage.h"
-#import "BBObjC-Swift.h"
+#import "PetSelectorBulletinPage.h"
 
 @implementation BulletinDataSource
 
-+(PageBulletinItem *)makeIntroPage {
++ (BLTNPageItem *)makeIntroPage
+{
+    BLTNPageItem *page = [[BLTNPageItem alloc] initWithTitle:@"Welcome to\nPetBoard"];
+    page.appearance = [self makeLightAppearance];
 
-    PageBulletinItem *page = [[PageBulletinItem alloc] initWithTitle:@"Welcome to PetBoard"];
-    [page setImage:[UIImage imageNamed:@"RoundedIcon"]];
-    [page setImageAccessibilityLabel:@"😻"];
+    page.image = [UIImage imageNamed:@"RoundedIcon"];
+    page.imageAccessibilityLabel = @"😻";
 
-    [page setDescriptionText:@"Discover curated images of the best pets in the world."];
-    [page setActionButtonTitle:@"Configure"];
+    page.descriptionText = @"Discover curated images of the best pets in the world.";
+    page.actionButtonTitle = @"Configure";
 
-    [page setAppearance:[BulletinDataSource makeLightAppearance]];
-    [page setIsDismissable:YES];
+    page.dismissable = [self userDidCompleteSetup];
+    page.shouldStartWithActivityIndicator = YES;
 
-    [page setActionHandler:^(ActionBulletinItem * _Nonnull _item) {
+    // After the item is presented, show the contents after 3 seconds
+    page.presentationHandler = ^(id<BLTNItem> _Nonnull _item) {
+
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [_item.manager hideActivityIndicator];
+        });
+
+    };
+
+    page.actionHandler = ^(BLTNActionItem * _Nonnull _item) {
         [[_item manager] displayNextItem];
-    }];
+    };
 
-    [page setNextItem:[BulletinDataSource makeTextFieldPage]];
+    page.nextItem = [self makeTextFieldPage];
 
     return page;
 
-};
+}
 
-+(TextFieldBulletinPage *)makeTextFieldPage {
++ (TextFieldBulletinPage *)makeTextFieldPage
+{
+    TextFieldBulletinPage *page = [[TextFieldBulletinPage alloc] initWithTitle:@"Enter Your Name"];
+    page.appearance = [self makeLightAppearance];
 
-    TextFieldBulletinPage *page = [TextFieldBulletinPage new];
+    page.descriptionText = @"To create your profile, please tell us your name. We will use it to customize your feed.";
+    page.actionButtonTitle = @"Sign Up";
 
-    [page setActionHandler:^(TextFieldBulletinPage * _Nonnull _item) {
-        [[_item manager] displayNextItem];
-    }];
+    page.dismissable = NO;
 
-    [page setNextItem:[BulletinDataSource makeNotificationsPage]];
+    page.textInputHandler = ^(TextFieldBulletinPage * item, NSString * _Nullable text) {
+        NSLog(@"Text: %@", text);
+        [item.manager displayNextItem];
+    };
 
+    page.nextItem = [self makeNotificationsPage];
     return page;
 
-};
+}
 
-+(PageBulletinItem *)makeNotificationsPage {
++ (BLTNPageItem *)makeNotificationsPage
+{
+    BLTNPageItem* page = [[BLTNPageItem alloc] initWithTitle:@"Push Notifications"];
+    page.appearance = [self makeLightAppearance];
 
-    PageBulletinItem* page = [[PageBulletinItem alloc] initWithTitle:@"Push Notifications"];
-    [page setAppearance:[BulletinDataSource makeLightAppearance]];
+    page.image = [UIImage imageNamed:@"NotificationPrompt"];
+    page.imageAccessibilityLabel = @"Notifications Icon";
 
-    [page setDescriptionText:@"Receive push notifications when new photos of pets are available."];
-    [page setActionButtonTitle:@"Subscribe"];
-    [page setAlternativeButtonTitle:@"Not now"];
-    [page setImage:[UIImage imageNamed:@"NotificationPrompt"]];
+    page.descriptionText = @"Receive push notifications when new photos of pets are available.";
+    page.actionButtonTitle = @"Subscribe";
+    page.alternativeButtonTitle = @"Not now";
 
-    [page setIsDismissable:NO];
+    page.dismissable = NO;
 
-    [page setActionHandler:^(ActionBulletinItem * _Nonnull _item) {
+    page.actionHandler = ^(BLTNActionItem * _Nonnull _item) {
         [[PermissionsManager sharedManager] requestLocalNotifications];
         [[_item manager] displayNextItem];
-    }];
+    };
 
-    [page setAlternativeHandler:^(ActionBulletinItem * _Nonnull _item) {
+    page.alternativeHandler = ^(BLTNActionItem * _Nonnull _item) {
         [[_item manager] displayNextItem];
-    }];
+    };
 
-    [page setNextItem:[BulletinDataSource makeLocationPage]];
+    page.nextItem = [self makeLocationPage];
 
     return page;
 
-};
+}
 
-+(PageBulletinItem *)makeLocationPage {
++ (BLTNPageItem *)makeLocationPage
+{
+    BLTNPageItem* page = [[BLTNPageItem alloc] initWithTitle:@"Customize Feed"];
+    page.appearance = [self makeLightAppearance];
 
-    PageBulletinItem* page = [[PageBulletinItem alloc] initWithTitle:@"Customize Feed"];
-    [page setImage:[UIImage imageNamed:@"LocationPrompt"]];
-    [page setImageAccessibilityLabel:@"Location Icon"];
+    page.image = [UIImage imageNamed:@"LocationPrompt"];
+    page.imageAccessibilityLabel = @"Location Icon";
 
-    [page setDescriptionText:@"We can use your location to customize the feed. This data will be sent to our servers anonymously. You can update your choice later in the app settings."];
-    [page setActionButtonTitle:@"Send location data"];
-    [page setAlternativeButtonTitle:@"No thanks"];
+    page.descriptionText = @"We can use your location to customize the feed. This data will be sent to our servers anonymously. You can update your choice later in the app settings.";
+    page.actionButtonTitle = @"Send location data";
+    page.alternativeButtonTitle = @"No thanks";
 
-    [[page appearance] setShouldUseCompactDescriptionText:YES];
-    [page setIsDismissable:NO];
+    page.dismissable = NO;
 
-    [page setActionHandler:^(ActionBulletinItem * _Nonnull _item) {
+    page.actionHandler = ^(BLTNActionItem * _Nonnull _item) {
         [[PermissionsManager sharedManager] requestWhenInUseLocation];
         [[_item manager] displayNextItem];
-    }];
+    };
 
-    [page setAlternativeHandler:^(ActionBulletinItem * _Nonnull _item) {
+    page.alternativeHandler = ^(BLTNActionItem * _Nonnull _item) {
         [[_item manager] displayNextItem];
-    }];
+    };
 
-    [page setNextItem:[BulletinDataSource makeChoicePage]];
+    page.nextItem = [self makeChoicePage];
 
     return page;
+}
 
-};
-
-+(PetSelectorBulletinPage *)makeChoicePage {
-
++ (PetSelectorBulletinPage *)makeChoicePage
+{
     PetSelectorBulletinPage* page = [PetSelectorBulletinPage new];
-    [page setActionButtonTitle:@"Select"];
+    page.appearance = [self makeLightAppearance];
+
+    page.actionButtonTitle = @"Select";
+
+    page.dismissable = NO;
 
     return page;
+}
 
-};
-
-+(PageBulletinItem *)makeCompletionPage {
-
++ (BLTNPageItem *)makeCompletionPage
+{
     UIColor *greenColor = [UIColor colorWithRed:0.2980392157
                                           green:0.8509803922
                                            blue:0.3921568627
                                           alpha:1];
 
-    PageBulletinItem* page = [[PageBulletinItem alloc] initWithTitle:@"Setup Completed"];
+    BLTNPageItem* page = [[BLTNPageItem alloc] initWithTitle:@"Setup Completed"];
+    page.appearance = [self makeLightAppearance];
 
-    [page setImage:[UIImage imageNamed:@"IntroCompletion"]];
-    [page setImageAccessibilityLabel:@"Checkmark"];
+    page.appearance.actionButtonColor = greenColor;
+    page.appearance.imageViewTintColor = greenColor;
+    page.appearance.actionButtonTitleColor = [UIColor whiteColor];
 
-    [[page appearance] setActionButtonColor:greenColor];
-    [[page appearance] setImageViewTintColor:greenColor];
-    [[page appearance] setActionButtonTitleColor:[UIColor whiteColor]];
+    page.image = [UIImage imageNamed:@"IntroCompletion"];
+    page.imageAccessibilityLabel = @"Checkmark";
 
-    [page setDescriptionText:@"PetBoard is ready for you to use. Happy browsing!."];
-    [page setActionButtonTitle:@"Get started"];
-    [page setAlternativeButtonTitle:@"Replay"];
+    page.descriptionText = @"PetBoard is ready for you to use. Happy browsing!.";
+    page.actionButtonTitle = @"Get started";
+    page.alternativeButtonTitle = @"Replay";
 
-    [page setIsDismissable:YES];
+    page.dismissable = NO;
 
-    [page setDismissalHandler:^(id<BulletinItem> _Nonnull _item) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:SetupDidCompleteNotificationName object:_item];
-    }];
-
-    [page setActionHandler:^(ActionBulletinItem * _Nonnull _item) {
+    page.actionHandler = ^(BLTNActionItem * _Nonnull _item) {
         [[_item manager] dismissBulletinAnimated:YES];
-    }];
+    };
 
-    [page setAlternativeHandler:^(ActionBulletinItem * _Nonnull _item) {
+    page.alternativeHandler = ^(BLTNActionItem * _Nonnull _item) {
         [[_item manager] popToRootItem];
-    }];
+    };
 
-    [page setNextItem:[BulletinDataSource makeChoicePage]];
+    page.dismissalHandler = ^(id<BLTNItem> _Nonnull _item) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:SetupDidCompleteNotificationName object:_item];
+    };
+
+    page.nextItem = [self makeChoicePage];
 
     return page;
+}
 
-};
+#pragma mark - User Defaults
 
-+(NSInteger)favoriteTabIndex {
++ (NSInteger)favoriteTabIndex {
     return [[NSUserDefaults standardUserDefaults] integerForKey: @"PetBoardFavoriteTabIndex"];
-};
+}
 
-+(void)setFavoriteTabIndex:(NSInteger)newValue {
++ (void)setFavoriteTabIndex:(NSInteger)newValue {
     [[NSUserDefaults standardUserDefaults] setInteger:newValue forKey:@"PetBoardFavoriteTabIndex"];
-};
+}
 
-+(BOOL)userDidCompleteSetup {
++ (BOOL)userDidCompleteSetup {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"PetBoardUserDidCompleteSetup"];
-};
+}
 
-+(void)setUserDidCompleteSetup:(BOOL)newValue {
++ (void)setUserDidCompleteSetup:(BOOL)newValue {
     [[NSUserDefaults standardUserDefaults] setBool:newValue forKey:@"PetBoardUserDidCompleteSetup"];
-};
+}
 
-+(BOOL)useAvenirFont {
++ (BOOL)useAvenirFont {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"UseAvenirFont"];
-};
+}
 
-+(void)setUseAvenirFont:(BOOL)newValue {
++ (void)setUseAvenirFont:(BOOL)newValue {
     [[NSUserDefaults standardUserDefaults] setBool:newValue forKey:@"UseAvenirFont"];
-};
+}
 
-+(NSString *)currentFontName {
-    return [self useAvenirFont] ? @"Avenir Next" : @"San Francisco";
++ (NSString *)currentFontName {
+    return self.useAvenirFont ? @"Avenir Next" : @"San Francisco";
 }
 
 #pragma mark Font
 
-+(BulletinAppearance *)makeLightAppearance {
++ (BLTNItemAppearance *)makeLightAppearance
+{
+    BLTNItemAppearance *appearance = [[BLTNItemAppearance alloc] init];
 
-    BulletinAppearance *appearance = [[BulletinAppearance alloc] init];
+    if (self.useAvenirFont) {
 
-    if ([BulletinDataSource useAvenirFont]) {
+        appearance.titleFontDescriptor = [UIFontDescriptor fontDescriptorWithName:@"AvenitNext-Medium"
+                                                                           matrix:CGAffineTransformIdentity];
 
-        [appearance setTitleFontDescriptor:[UIFontDescriptor fontDescriptorWithName:@"AvenitNext-Medium" matrix:CGAffineTransformIdentity]];
+        appearance.descriptionFontDescriptor = [UIFontDescriptor fontDescriptorWithName:@"AvenirNext-Regular"
+                                                                                 matrix:CGAffineTransformIdentity];
 
-        [appearance setDescriptionFontDescriptor:[UIFontDescriptor fontDescriptorWithName:@"AvenirNext-Regular" matrix:CGAffineTransformIdentity]];
-
-        [appearance setButtonFontDescriptor:[UIFontDescriptor fontDescriptorWithName:@"AvenirNext-DemiBold" matrix:CGAffineTransformIdentity]];
+        appearance.buttonFontDescriptor = [UIFontDescriptor fontDescriptorWithName:@"AvenirNext-DemiBold"
+                                                                            matrix:CGAffineTransformIdentity];
 
     }
 
     return appearance;
-
-};
+}
 
 @end
 

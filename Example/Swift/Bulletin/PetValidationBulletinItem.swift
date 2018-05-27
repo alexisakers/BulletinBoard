@@ -1,10 +1,10 @@
 /**
  *  BulletinBoard
- *  Copyright (c) 2017 Alexis Aubry. Licensed under the MIT license.
+ *  Copyright (c) 2017 - present Alexis Aubry. Licensed under the MIT license.
  */
 
 import UIKit
-import BulletinBoard
+import BLTNBoard
 
 /**
  * A bulletin page that allows the user to validate its selection.
@@ -12,7 +12,7 @@ import BulletinBoard
  * This item demonstrates popping to the previous item, and including a collection view inside the page.
  */
 
-class PetValidationBulletinItem: FeedbackPageBulletinItem {
+class PetValidationBLTNItem: FeedbackPageBLTNItem {
 
     let dataSource: CollectionDataSource
     let animalType: String
@@ -26,6 +26,7 @@ class PetValidationBulletinItem: FeedbackPageBulletinItem {
         self.animalType = animalType
         super.init(title: "Choose your Favorite")
 
+        isDismissable = false
         descriptionText = "You chose \(animalType) as your favorite animal type. Here are a few examples of posts in this category."
         actionButtonTitle = "Validate"
         alternativeButtonTitle = "Change"
@@ -36,7 +37,7 @@ class PetValidationBulletinItem: FeedbackPageBulletinItem {
 
     var collectionView: UICollectionView?
 
-    override func viewsUnderDescription(_ interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
+    override func makeViewsUnderDescription(with interfaceBuilder: BLTNInterfaceBuilder) -> [UIView]? {
 
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
@@ -45,7 +46,7 @@ class PetValidationBulletinItem: FeedbackPageBulletinItem {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.backgroundColor = .white
 
-        let collectionWrapper = CollectionViewWrapper(collectionView: collectionView)
+        let collectionWrapper = interfaceBuilder.wrapView(collectionView, width: nil, height: 256, position: .pinnedToEdges)
 
         self.collectionView = collectionView
         collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
@@ -88,7 +89,7 @@ class PetValidationBulletinItem: FeedbackPageBulletinItem {
 
             // Display next item
 
-            self.nextItem = BulletinDataSource.makeCompletionPage()
+            self.next = BulletinDataSource.makeCompletionPage()
             self.manager?.displayNextItem()
 
         }
@@ -112,7 +113,7 @@ class PetValidationBulletinItem: FeedbackPageBulletinItem {
 
 // MARK: - Collection View
 
-extension PetValidationBulletinItem: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension PetValidationBLTNItem: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1

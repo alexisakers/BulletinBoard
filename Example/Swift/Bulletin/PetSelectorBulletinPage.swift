@@ -1,10 +1,10 @@
 /**
  *  BulletinBoard
- *  Copyright (c) 2017 Alexis Aubry. Licensed under the MIT license.
+ *  Copyright (c) 2017 - present Alexis Aubry. Licensed under the MIT license.
  */
 
 import UIKit
-import BulletinBoard
+import BLTNBoard
 
 /**
  * An item that displays a choice with two buttons.
@@ -13,13 +13,13 @@ import BulletinBoard
  * next item based on user interaction.
  */
 
-class PetSelectorBulletinPage: FeedbackPageBulletinItem {
+class PetSelectorBulletinPage: FeedbackPageBLTNItem {
 
     private var catButtonContainer: UIButton!
     private var dogButtonContainer: UIButton!
     private var selectionFeedbackGenerator = SelectionFeedbackGenerator()
 
-    // MARK: - BulletinItem
+    // MARK: - BLTNItem
 
     /**
      * Called by the manager when the item is about to be removed from the bulletin.
@@ -40,8 +40,8 @@ class PetSelectorBulletinPage: FeedbackPageBulletinItem {
      * `BulletinInterfaceFactory` to generate standard views, such as title labels and buttons.
      */
 
-    override func viewsUnderDescription(_ interfaceBuilder: BulletinInterfaceBuilder) -> [UIView]? {
-
+    override func makeViewsUnderDescription(with interfaceBuilder: BLTNInterfaceBuilder) -> [UIView]? {
+        
         let favoriteTabIndex = BulletinDataSource.favoriteTabIndex
 
         // Pets Stack
@@ -116,7 +116,7 @@ class PetSelectorBulletinPage: FeedbackPageBulletinItem {
         button.layer.borderColor = buttonColor.cgColor
 
         if isSelected {
-            nextItem = PetValidationBulletinItem(dataSource: dataSource, animalType: animalType.lowercased())
+            next = PetValidationBLTNItem(dataSource: dataSource, animalType: animalType.lowercased())
         }
 
         return button
@@ -153,7 +153,7 @@ class PetSelectorBulletinPage: FeedbackPageBulletinItem {
 
         // Set the next item
 
-        nextItem = PetValidationBulletinItem(dataSource: .cat, animalType: "cats")
+        next = PetValidationBLTNItem(dataSource: .cat, animalType: "cats")
 
     }
 
@@ -185,7 +185,7 @@ class PetSelectorBulletinPage: FeedbackPageBulletinItem {
 
         // Set the next item
 
-        nextItem = PetValidationBulletinItem(dataSource: .dog, animalType: "dogs")
+        next = PetValidationBLTNItem(dataSource: .dog, animalType: "dogs")
 
     }
 

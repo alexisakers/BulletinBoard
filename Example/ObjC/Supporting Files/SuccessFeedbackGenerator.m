@@ -1,41 +1,42 @@
 /**
  *  BulletinBoard
- *  Copyright (c) 2017 Alexis Aubry. Licensed under the MIT license.
+ *  Copyright (c) 2017 - present Alexis Aubry. Licensed under the MIT license.
  */
 
 #import "SuccessFeedbackGenerator.h"
 
-@implementation SuccessFeedbackGenerator {
-    NSObject *_feedbackGenerator;
-}
+@interface SuccessFeedbackGenerator ()
+
+@property (nonatomic, strong, nullable) NSObject *feedbackGenerator;
+
+@end
+
+@implementation SuccessFeedbackGenerator
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-
         if (@available(iOS 10.0, *)) {
-            _feedbackGenerator = [[UINotificationFeedbackGenerator alloc] init];
+            self.feedbackGenerator = [[UINotificationFeedbackGenerator alloc] init];
         }
 
     }
     return self;
 }
 
--(void)prepare {
-
+- (void)prepare
+{
     if (@available(iOS 10.0, *)) {
-        [((UINotificationFeedbackGenerator *)_feedbackGenerator) prepare];
+        [((UINotificationFeedbackGenerator *)self.feedbackGenerator) prepare];
     }
+}
 
-};
-
--(void)notifySuccess {
-
+- (void)notifySuccess
+{
     if (@available(iOS 10.0, *)) {
-        [((UINotificationFeedbackGenerator *)_feedbackGenerator) notificationOccurred:UINotificationFeedbackTypeSuccess];
+        [((UINotificationFeedbackGenerator *)self.feedbackGenerator) notificationOccurred:UINotificationFeedbackTypeSuccess];
     }
-
-};
+}
 
 @end

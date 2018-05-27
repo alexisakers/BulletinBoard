@@ -1,16 +1,20 @@
 /**
  *  BulletinBoard
- *  Copyright (c) 2017 Alexis Aubry. Licensed under the MIT license.
+ *  Copyright (c) 2017 - present Alexis Aubry. Licensed under the MIT license.
  */
 
 #import "PermissionsManager.h"
 
-@implementation PermissionsManager {
-    CLLocationManager* _locationManager;
-}
+@interface PermissionsManager ()
 
-+(PermissionsManager*)sharedManager {
+@property (nonatomic, strong) CLLocationManager *locationManager;
 
+@end
+
+@implementation PermissionsManager
+
++ (PermissionsManager*)sharedManager
+{
     static PermissionsManager *manager;
     static dispatch_once_t onceToken;
 
@@ -19,28 +23,27 @@
     });
 
     return manager;
-
 }
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        _locationManager = [[CLLocationManager alloc] init];
+        self.locationManager = [[CLLocationManager alloc] init];
     }
     return self;
 }
 
--(void)requestLocalNotifications {
-
+-(void)requestLocalNotifications
+{
     UIUserNotificationSettings* settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound) categories:NULL];
 
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+}
 
-};
-
--(void)requestWhenInUseLocation {
-    [_locationManager requestWhenInUseAuthorization];
+-(void)requestWhenInUseLocation
+{
+    [self.locationManager requestWhenInUseAuthorization];
 }
 
 @end
