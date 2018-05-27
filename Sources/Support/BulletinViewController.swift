@@ -303,6 +303,10 @@ extension BulletinViewController {
 
     // MARK: - Transition Adaptivity
 
+    var defaultBottomMargin: CGFloat {
+        return manager?.edgeSpacing.rawValue ?? 12
+    }
+
     func bottomMargin() -> CGFloat {
 
         if #available(iOS 11, *) {
@@ -572,7 +576,7 @@ extension BulletinViewController {
         let animationOptions = UIViewAnimationOptions(curve: animationCurve)
 
         UIView.animate(withDuration: duration, delay: 0, options: animationOptions, animations: {
-            var bottomSpacing = -(keyboardFrameFinal.size.height + self.bottomMargin())
+            var bottomSpacing = -(keyboardFrameFinal.size.height + self.defaultBottomMargin)
 
             if #available(iOS 11.0, *) {
 

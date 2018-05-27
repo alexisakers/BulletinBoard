@@ -21,7 +21,7 @@
     page.descriptionText = @"Discover curated images of the best pets in the world.";
     page.actionButtonTitle = @"Configure";
 
-    page.dismissable = YES;
+    page.dismissable = [self userDidCompleteSetup];
     page.shouldStartWithActivityIndicator = YES;
 
     // After the item is presented, show the contents after 3 seconds
