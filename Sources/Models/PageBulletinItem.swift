@@ -59,10 +59,18 @@ import UIKit
     /**
      * An description text to display below the image.
      *
-     * If you set this property to `nil`, no label will be displayed (this is the default).
+     * If you set this property to `nil`, no label will be displayed unless the `attributedDescriptionText` is set (this is the default).
      */
 
     @objc public var descriptionText: String?
+
+    /**
+     * An attributed description text to display below the image.
+     *
+     * If you set this property to `nil`, no label will be displayed unless the `descriptionText` is set (this is the default).
+     */
+
+    @objc public var attributedDescriptionText: NSAttributedString?
 
     // MARK: - Customization
 
@@ -191,7 +199,14 @@ import UIKit
 
         // Description Label
 
-        if let descriptionText = self.descriptionText {
+
+        if let attributedDescriptionText = self.attributedDescriptionText {
+
+            descriptionLabel = interfaceBuilder.makeDescriptionLabel()
+            descriptionLabel!.attributedText = attributedDescriptionText
+            contentViews.append(descriptionLabel!)
+
+        } else if let descriptionText = self.descriptionText {
 
             descriptionLabel = interfaceBuilder.makeDescriptionLabel()
             descriptionLabel!.text = descriptionText
