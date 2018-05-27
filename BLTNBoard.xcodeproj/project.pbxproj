@@ -27,6 +27,7 @@
 		559F8E95204DB9BA00322949 /* BLTNItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 559F8E94204DB9BA00322949 /* BLTNItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		559F8EA3204DC42D00322949 /* ContinuousMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F8EA2204DC42D00322949 /* ContinuousMaskView.swift */; };
 		55B3D1CF1FDADA8E00737791 /* AnimationChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B3D1CE1FDADA8E00737791 /* AnimationChain.swift */; };
+		55BDB08920B9BF25005A6C2B /* Deprecations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BDB08820B9BF25005A6C2B /* Deprecations.swift */; };
 		55BF9C021F962FD700347D45 /* UIView+SafeAnchors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BF9C011F962FD700347D45 /* UIView+SafeAnchors.swift */; };
 		55C8EF3E204D8A010050E1C2 /* BLTNPageItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 55C8EF3C204D8A010050E1C2 /* BLTNPageItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55C8EF3F204D8A010050E1C2 /* BLTNPageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C8EF3D204D8A010050E1C2 /* BLTNPageItem.m */; };
@@ -97,6 +98,7 @@
 		559F8E94204DB9BA00322949 /* BLTNItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLTNItem.h; sourceTree = "<group>"; };
 		559F8EA2204DC42D00322949 /* ContinuousMaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinuousMaskView.swift; sourceTree = "<group>"; };
 		55B3D1CE1FDADA8E00737791 /* AnimationChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationChain.swift; sourceTree = "<group>"; };
+		55BDB08820B9BF25005A6C2B /* Deprecations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deprecations.swift; sourceTree = "<group>"; };
 		55BF9C011F962FD700347D45 /* UIView+SafeAnchors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+SafeAnchors.swift"; sourceTree = "<group>"; };
 		55C8EF3C204D8A010050E1C2 /* BLTNPageItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLTNPageItem.h; sourceTree = "<group>"; };
 		55C8EF3D204D8A010050E1C2 /* BLTNPageItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLTNPageItem.m; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 			children = (
 				55CB0F84204D6466001D0393 /* BLTNBoard.h */,
 				558A122A1F7D73CD005EC97C /* BLTNItemManager.swift */,
+				55BDB08820B9BF25005A6C2B /* Deprecations.swift */,
 				55B3D1D11FDD644300737791 /* Models */,
 				55B3D1D01FDD643B00737791 /* Appearance */,
 				55DADEB81F8153B3001B11A2 /* Support */,
@@ -378,6 +381,7 @@
 				55DADE7A1F7D9428001B11A2 /* BLTNInterfaceBuilder.swift in Sources */,
 				55B3D1CF1FDADA8E00737791 /* AnimationChain.swift in Sources */,
 				5590C04F20B85BCE0045C315 /* BLTNTitleLabelContainer.swift in Sources */,
+				55BDB08920B9BF25005A6C2B /* Deprecations.swift in Sources */,
 				55E8621420B7F11000584EAC /* ContinuousMaskLayer.swift in Sources */,
 				5543848F1F92050300AFFBCD /* BulletinDismissAnimationController.swift in Sources */,
 				5543848B1F91FAC500AFFBCD /* BulletinPresentationAnimationController.swift in Sources */,
