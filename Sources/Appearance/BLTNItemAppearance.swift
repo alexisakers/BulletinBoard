@@ -9,7 +9,7 @@ import UIKit
  * An object that defines the appearance of bulletin items.
  */
 
-public class BLTNItemAppearance: NSObject {
+@objc public class BLTNItemAppearance: NSObject {
 
     // MARK: - Color Customization
 
@@ -98,7 +98,7 @@ extension BLTNItemAppearance {
      * Creates the font for title labels.
      */
 
-    public func makeTitleFont() -> UIFont {
+    @objc public func makeTitleFont() -> UIFont {
 
         if let titleFontDescriptor = self.titleFontDescriptor {
             return UIFont(descriptor: titleFontDescriptor, size: titleFontSize)
@@ -112,7 +112,7 @@ extension BLTNItemAppearance {
      * Creates the font for description labels.
      */
 
-    public func makeDescriptionFont() -> UIFont {
+    @objc public func makeDescriptionFont() -> UIFont {
 
         let size = shouldUseCompactDescriptionText ? compactDescriptionFontSize : descriptionFontSize
 
@@ -128,7 +128,7 @@ extension BLTNItemAppearance {
      * Creates the font for action buttons.
      */
 
-    public func makeActionButtonFont() -> UIFont {
+    @objc public func makeActionButtonFont() -> UIFont {
 
         if let buttonFontDescriptor = self.buttonFontDescriptor {
             return UIFont(descriptor: buttonFontDescriptor, size: actionButtonFontSize)
@@ -142,7 +142,7 @@ extension BLTNItemAppearance {
      * Creates the font for alternative buttons.
      */
 
-    public func makeAlternativeButtonFont() -> UIFont {
+    @objc public func makeAlternativeButtonFont() -> UIFont {
 
         if let buttonFontDescriptor = self.buttonFontDescriptor {
             return UIFont(descriptor: buttonFontDescriptor, size: alternativeButtonFontSize)

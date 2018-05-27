@@ -19,7 +19,7 @@ import UIKit
  * `BLTNItemManager` must only be used from the main thread.
  */
 
-public final class BLTNItemManager: NSObject {
+@objc public final class BLTNItemManager: NSObject {
 
     /// Bulletin view controller.
     fileprivate var bulletinController: BulletinViewController!
@@ -155,7 +155,7 @@ extension BLTNItemManager {
      * This method must be called before any other interaction with the bulletin.
      */
 
-    @objc fileprivate func prepare() {
+    fileprivate func prepare() {
 
         assertIsMainThread()
 
