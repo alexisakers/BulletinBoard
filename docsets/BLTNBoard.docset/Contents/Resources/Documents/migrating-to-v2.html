@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Migrating To V2  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="Migrating To V2  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">BLTNBoard Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/alexaubry/BulletinBoard"><img src="img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right"><a href="dash-feed://https%3A%2F%2Falexaubry%2Egithub%2Eio%2Fdocsets%2FBLTNBoard%2Exml"><img src="img/dash.png"/>Install in Dash</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">BLTNBoard Reference</a>
+        <img id="carat" src="img/carat.png" />
+        Migrating To V2  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="migrating-to-v2.html">Migrating To V2</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/BLTNBackgroundViewStyle.html">BLTNBackgroundViewStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/BLTNInterfaceBuilder.html">BLTNInterfaceBuilder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/BLTNItemAppearance.html">BLTNItemAppearance</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/BLTNItemManager.html">BLTNItemManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/BLTNSpacing.html">BLTNSpacing</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/BLTNStatusBarAppearance.html">BLTNStatusBarAppearance</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/BLTNViewPosition.html">BLTNViewPosition</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <h1 id='migrating-to-em-bulletinboard-em-v2' class='heading'>Migrating to <em>BulletinBoard</em> v2</h1>
+
+<p><em>BulletinBoard</em> v2 was released on May 28 2018. This version contains lots of new feature such as extended customizability, and provides a more refined developer experience. To view all the new features, please see the <a href="https://github.com/alexaubry/BulletinBoard/releases/tag/2.0.0">release notes</a>.</p>
+
+<p>Before updating, please be aware that numerous source breaking changes have been made in this version. We wrote this document to help you with the migration task. If you encounter an issue not mentioned in this document, please open an issue on <a href="https://github.com/alexaubry/BulletinBoard/issues">GitHub</a>; we will be happy to help you.</p>
+<h2 id='imports' class='heading'>Imports</h2>
+
+<p>For compatibility reasons, the module was renamed to <code>BLTNBoard</code>. You will need to update all your import declarations:</p>
+<h3 id='swift' class='heading'>Swift</h3>
+<pre class="highlight swift"><code><span class="c1">// import BulletinBoard</span>
+<span class="kd">import</span> <span class="kt">BLTNBoard</span>
+</code></pre>
+<h3 id='objective-c' class='heading'>Objective-C</h3>
+<pre class="highlight objective_c"><code><span class="c1">// #import &lt;BulletinBoard/BulletinBoard.h&gt;
+</span><span class="cp">#import &lt;BLTNBoard/BLTNBoard.h&gt;
+</span></code></pre>
+<h2 id='renamed-classes' class='heading'>Renamed classes</h2>
+
+<p>Most types have been renamed to adopt the <code>BLTN</code> prefix. See the table below for a comparison of old and new names.</p>
+
+<table><thead>
+<tr>
+<th>Name in &lt;= v1.3.0</th>
+<th>Name in v2.0.0</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>BulletinItem</td>
+<td>BLTNItem</td>
+</tr>
+<tr>
+<td>BulletinManager</td>
+<td>BLTNItemManager</td>
+</tr>
+<tr>
+<td>PageBulletinItem</td>
+<td>BLTNPageItem</td>
+</tr>
+<tr>
+<td>BulletinPadding</td>
+<td>BLTNSpacing</td>
+</tr>
+<tr>
+<td>BulletinBackgroundViewStyle</td>
+<td>BLTNBackgroundViewStyle</td>
+</tr>
+<tr>
+<td>HighlightButtonWrapper</td>
+<td>BLTNHighlightButtonWrapper</td>
+</tr>
+</tbody></table>
+<h3 id='changes-to-interface-factory' class='heading'>Changes to interface factory</h3>
+
+<p>The <code>BulletinIterfaceFactory</code> class was split into two entities: <code><a href="Classes/BLTNItemAppearance.html">BLTNItemAppearance</a></code> and <code><a href="Classes/BLTNInterfaceBuilder.html">BLTNInterfaceBuilder</a></code>.</p>
+
+<p><code>BLTNActionItem</code> and its subclasses vend a <code><a href="Classes/BLTNItemAppearance.html">BLTNItemAppearance</a></code> through their <code>appearance</code> property. You can change the values of this object when configuring pages to change the appearance.</p>
+
+<p>When the item calls <code>makeContentViewsWithInterfaceBuilder</code>, it creates an iterface builder for subclasses to use when creating the content. If your custom item is not based on <code>BLTNActionItem</code>, you can also create a custom <code><a href="Classes/BLTNInterfaceBuilder.html">BLTNInterfaceBuilder</a></code> yourself.</p>
+<h2 id='presenting-bulletins' class='heading'>Presenting bulletins</h2>
+
+<p>You don&rsquo;t need to manually call <code>prepare</code> before presenting the bulletin anymore.</p>
+
+<p>Replace:</p>
+<pre class="highlight swift"><code><span class="n">bulletinManager</span><span class="o">.</span><span class="nf">prepare</span><span class="p">()</span>
+<span class="n">bulletinManager</span><span class="o">.</span><span class="nf">presentBulletin</span><span class="p">(</span><span class="nv">above</span><span class="p">:</span> <span class="k">self</span><span class="p">)</span>    
+</code></pre>
+
+<p>By:</p>
+<pre class="highlight swift"><code><span class="n">bulletinManager</span><span class="o">.</span><span class="nf">showBulletin</span><span class="p">(</span><span class="nv">above</span><span class="p">:</span> <span class="k">self</span><span class="p">)</span>
+</code></pre>
+<h2 id='creating-custom-items' class='heading'>Creating custom items</h2>
+
+<p>The flow for creating custom items was revamped. If you create a page that contains buttons and text, you can subclass <code>BLTNPageItem</code> and implement one of these methods to provide the views to add:</p>
+
+<ul>
+<li><code>makeHeaderViewsWithInterfaceBuilder:</code></li>
+<li><code>makeViewsUnderTitleWithInterfaceBuilder:</code></li>
+<li><code>makeViewsUnderImageWithInterfaceBuilder:</code></li>
+<li><code>makeViewsUnderDescriptionWithInterfaceBuilder:</code></li>
+<li><code>makeFooterViewsWithInterfaceBuilder:</code></li>
+</ul>
+
+<p>These allow you to create the views you need in addition to the standard controls, without having to recreate those; as it was required in the previous version.</p>
+<h3 id='example' class='heading'>Example</h3>
+
+<p>This is how you would create a page with a text field.</p>
+<pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">TextFieldBulletinPage</span><span class="p">:</span> <span class="kt">FeedbackPageBLTNItem</span> <span class="p">{</span>
+
+    <span class="k">var</span> <span class="nv">textField</span><span class="p">:</span> <span class="kt">UITextField</span><span class="o">!</span>
+
+    <span class="k">override</span> <span class="kd">func</span> <span class="nf">makeViewsUnderDescription</span><span class="p">(</span><span class="n">with</span> <span class="nv">interfaceBuilder</span><span class="p">:</span> <span class="kt">BLTNInterfaceBuilder</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">UIView</span><span class="p">]?</span> <span class="p">{</span>
+        <span class="n">textField</span> <span class="o">=</span> <span class="n">interfaceBuilder</span><span class="o">.</span><span class="nf">makeTextField</span><span class="p">(</span><span class="nv">placeholder</span><span class="p">:</span> <span class="s">"First and Last Name"</span><span class="p">,</span> <span class="nv">returnKey</span><span class="p">:</span> <span class="o">.</span><span class="n">done</span><span class="p">,</span> <span class="nv">delegate</span><span class="p">:</span> <span class="k">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">textField</span><span class="p">]</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">page</span> <span class="o">=</span> <span class="kt">TextFieldBulletinPage</span><span class="p">(</span><span class="nv">title</span><span class="p">:</span> <span class="s">"Enter your Name"</span><span class="p">)</span>
+<span class="n">page</span><span class="o">.</span><span class="n">descriptionText</span> <span class="o">=</span> <span class="s">"This will be displayed on your profile page."</span>
+<span class="n">page</span><span class="o">.</span><span class="n">actionButtonTitle</span> <span class="o">=</span> <span class="s">"Save"</span>
+</code></pre>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>Copyright © 2017 - present Alexis Aubry. Available under the MIT License.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>BLTNInterfaceBuilder Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/BLTNInterfaceBuilder" class="dashAnchor"></a>
+    <a title="BLTNInterfaceBuilder Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">BLTNBoard Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/alexaubry/BulletinBoard"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right"><a href="dash-feed://https%3A%2F%2Falexaubry%2Egithub%2Eio%2Fdocsets%2FBLTNBoard%2Exml"><img src="../img/dash.png"/>Install in Dash</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">BLTNBoard Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        BLTNInterfaceBuilder Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../migrating-to-v2.html">Migrating To V2</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/BLTNBackgroundViewStyle.html">BLTNBackgroundViewStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BLTNInterfaceBuilder.html">BLTNInterfaceBuilder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BLTNItemAppearance.html">BLTNItemAppearance</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BLTNItemManager.html">BLTNItemManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BLTNSpacing.html">BLTNSpacing</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/BLTNStatusBarAppearance.html">BLTNStatusBarAppearance</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/BLTNViewPosition.html">BLTNViewPosition</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>BLTNInterfaceBuilder</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">open</span> <span class="kd">class</span> <span class="kt">BLTNInterfaceBuilder</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+
+                </div>
+              </div>
+            <p>Generates interface elements for bulletins. Use this class to create custom bulletin items with
+standard components.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@BLTNBoard@objc(cs)BLTNInterfaceBuilder(py)item"></a>
+                    <a name="//apple_ref/swift/Property/item" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@BLTNBoard@objc(cs)BLTNInterfaceBuilder(py)item">item</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The item for which the interface builder was created.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">public</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">item</span><span class="p">:</span> <span class="kt">BLTNItem</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/Appearance/BLTNInterfaceBuilder.swift#L16">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@BLTNBoard@objc(cs)BLTNInterfaceBuilder(py)appearance"></a>
+                    <a name="//apple_ref/swift/Property/appearance" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@BLTNBoard@objc(cs)BLTNInterfaceBuilder(py)appearance">appearance</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The appearance to use to generate the items.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">public</span> <span class="k">let</span> <span class="nv">appearance</span><span class="p">:</span> <span class="kt"><a href="../Classes/BLTNItemAppearance.html">BLTNItemAppearance</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/Appearance/BLTNInterfaceBuilder.swift#L19">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@BLTNBoard@objc(cs)BLTNInterfaceBuilder(im)initWithAppearance:item:"></a>
+                    <a name="//apple_ref/swift/Method/init(appearance:item:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@BLTNBoard@objc(cs)BLTNInterfaceBuilder(im)initWithAppearance:item:">init(appearance:item:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a new interface builder.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">public</span> <span class="kd">required</span> <span class="nf">init</span><span class="p">(</span><span class="nv">appearance</span><span class="p">:</span> <span class="kt"><a href="../Classes/BLTNItemAppearance.html">BLTNItemAppearance</a></span><span class="p">,</span> <span class="nv">item</span><span class="p">:</span> <span class="kt">BLTNItem</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/Appearance/BLTNInterfaceBuilder.swift#L22-L25">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@BLTNBoard@objc(cs)BLTNInterfaceBuilder(im)makeTitleLabel"></a>
+                    <a name="//apple_ref/swift/Method/makeTitleLabel()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@BLTNBoard@objc(cs)BLTNInterfaceBuilder(im)makeTitleLabel">makeTitleLabel()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a standard title label.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">open</span> <span class="kd">func</span> <span class="nf">makeTitleLabel</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">BLTNTitleLabelContainer</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/Appearance/BLTNInterfaceBuilder.swift#L31-L48">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@BLTNBoard@objc(cs)BLTNInterfaceBuilder(im)makeDescriptionLabel"></a>
+                    <a name="//apple_ref/swift/Method/makeDescriptionLabel()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@BLTNBoard@objc(cs)BLTNInterfaceBuilder(im)makeDescriptionLabel">makeDescriptionLabel()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a standard description label.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">open</span> <span class="kd">func</span> <span class="nf">makeDescriptionLabel</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UILabel</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/Appearance/BLTNInterfaceBuilder.swift#L54-L64">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@BLTNBoard@objc(cs)BLTNInterfaceBuilder(im)makeTextFieldWithPlaceholder:returnKey:delegate:"></a>
+                    <a name="//apple_ref/swift/Method/makeTextField(placeholder:returnKey:delegate:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@BLTNBoard@objc(cs)BLTNInterfaceBuilder(im)makeTextFieldWithPlaceholder:returnKey:delegate:">makeTextField(placeholder:returnKey:delegate:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a standard text field with an optional delegate.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">open</span> <span class="kd">func</span> <span class="nf">makeTextField</span><span class="p">(</span><span class="nv">placeholder</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+                        <span class="nv">returnKey</span><span class="p">:</span> <span class="kt">UIReturnKeyType</span> <span class="o">=</span> <span class="o">.</span><span class="k">default</span><span class="p">,</span>
+                        <span class="nv">delegate</span><span class="p">:</span> <span class="kt">UITextFieldDelegate</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UITextField</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>placeholder</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The placeholder text.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>returnKey</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The type of return key to apply to the text field.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>delegate</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The delegate for the text field.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/Appearance/BLTNInterfaceBuilder.swift#L74-L87">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@BLTNBoard@objc(cs)BLTNInterfaceBuilder(im)makeActionButtonWithTitle:"></a>
+                    <a name="//apple_ref/swift/Method/makeActionButton(title:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@BLTNBoard@objc(cs)BLTNInterfaceBuilder(im)makeActionButtonWithTitle:">makeActionButton(title:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a standard action (main) button.</p>
+
+<p>The created button will have rounded corners, a background color set to the <code>tintColor</code> and
+ a title color set to <code>actionButtonTitleColor</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">open</span> <span class="kd">func</span> <span class="nf">makeActionButton</span><span class="p">(</span><span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">BLTNHighlightButtonWrapper</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>title</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The title of the button.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/Appearance/BLTNInterfaceBuilder.swift#L98-L125">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@BLTNBoard@objc(cs)BLTNInterfaceBuilder(im)makeAlternativeButtonWithTitle:"></a>
+                    <a name="//apple_ref/swift/Method/makeAlternativeButton(title:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@BLTNBoard@objc(cs)BLTNInterfaceBuilder(im)makeAlternativeButtonWithTitle:">makeAlternativeButton(title:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a standard alternative button.</p>
+
+<p>The created button will have no background color and a title color set to <code>tintColor</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">open</span> <span class="kd">func</span> <span class="nf">makeAlternativeButton</span><span class="p">(</span><span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UIButton</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>title</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The title of the button.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/Appearance/BLTNInterfaceBuilder.swift#L135-L151">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@BLTNBoard@objc(cs)BLTNInterfaceBuilder(im)makeGroupStackWithSpacing:"></a>
+                    <a name="//apple_ref/swift/Method/makeGroupStack(spacing:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@BLTNBoard@objc(cs)BLTNInterfaceBuilder(im)makeGroupStackWithSpacing:">makeGroupStack(spacing:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a stack view to contain a group of objects.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">open</span> <span class="kd">func</span> <span class="nf">makeGroupStack</span><span class="p">(</span><span class="nv">spacing</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UIStackView</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>spacing</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The spacing between elements. Defaults to <code>10</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/Appearance/BLTNInterfaceBuilder.swift#L159-L169">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@BLTNBoard@objc(cs)BLTNInterfaceBuilder(im)wrapView:width:height:position:"></a>
+                    <a name="//apple_ref/swift/Method/wrapView(_:width:height:position:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@BLTNBoard@objc(cs)BLTNInterfaceBuilder(im)wrapView:width:height:position:">wrapView(_:width:height:position:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Wraps a view without intrinsic content size inside a view with an intrinsic content size.</p>
+
+<p>This method allows you to display view without an intrinsic content size, such as collection views,
+ inside stack views; by using the returned <code>BLTNContentView</code> view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">open</span> <span class="kd">func</span> <span class="nf">wrapView</span><span class="p">(</span><span class="n">_</span> <span class="nv">view</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">NSNumber</span><span class="p">?,</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">NSNumber</span><span class="p">?,</span> <span class="nv">position</span><span class="p">:</span> <span class="kt"><a href="../Enums/BLTNViewPosition.html">BLTNViewPosition</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">BLTNContainerView</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>view</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The view to wrap in the container.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>width</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The width of the content. Pass <code>nil</code> if the content has a flexible width.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>height</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The height of the content. Pass <code>nil</code> if the content has a flexible height.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>position</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The position of <code>view</code> inside its parent.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The view that contains the <code>view</code> and an intrinsic content size. You can add the returned
+view to a stack view.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/alexaubry/BulletinBoard/tree/master/Sources/Appearance/BLTNInterfaceBuilder.swift#L186-L211">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>Copyright © 2017 - present Alexis Aubry. Available under the MIT License.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
