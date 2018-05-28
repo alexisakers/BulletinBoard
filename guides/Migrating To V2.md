@@ -1,6 +1,6 @@
 # Migrating to _BulletinBoard_ v2
 
-_BulletinBoard_ v2 was released on [TBD]. This version contains lots of new feature such as extended customizability, and provides a more refined developer experience. To view all the new features, please see the [release notes](https://github.com/alexaubry/BulletinBoard/releases/tag/2.0.0).
+_BulletinBoard_ v2 was released on May 28 2018. This version contains lots of new feature such as extended customizability, and provides a more refined developer experience. To view all the new features, please see the [release notes](https://github.com/alexaubry/BulletinBoard/releases/tag/2.0.0).
 
 Before updating, please be aware that numerous source breaking changes have been made in this version. We wrote this document to help you with the migration task. If you encounter an issue not mentioned in this document, please open an issue on [GitHub](https://github.com/alexaubry/BulletinBoard/issues); we will be happy to help you.
 
