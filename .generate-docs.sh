@@ -3,11 +3,11 @@ set -e
 
 MODULE_VERSION=$1
 OUTPUT=$2
-SWIFT_VERSION="4.0"
+SWIFT_VERSION="4.1"
 AUTHOR="Alexis Aubry"
 AUTHOR_URL="https://twitter.com/_alexaubry"
-MODULE_NAME="BulletinBoard"
-COPYRIGHT="Copyright © 2017 $AUTHOR. Available under the MIT License."
+MODULE_NAME="BLTNBoard"
+COPYRIGHT="Copyright © 2017 - present $AUTHOR. Available under the MIT License."
 GITHUB_URL="https://github.com/alexaubry/BulletinBoard"
 GH_PAGES_URL="https://alexaubry.github.io/BulletinBoard"
 
@@ -24,4 +24,5 @@ jazzy \
     -o "$OUTPUT"\
     --min-acl public \
     --use-safe-filenames \
-    --exclude="Sources/Support/*.swift"
+    --exclude="Sources/Support/*.swift" \
+    --documentation="guides/*.md"

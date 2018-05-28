@@ -1,4 +1,4 @@
-# BulletinBoard Beta
+# BulletinBoard
 
 [![CI Status](https://travis-ci.org/alexaubry/BulletinBoard.svg?branch=master)](https://travis-ci.org/alexaubry/BulletinBoard)
 [![Version](https://img.shields.io/cocoapods/v/BulletinBoard.svg?style=flat)](https://cocoapods.org/pods/BulletinBoard)
@@ -262,7 +262,7 @@ If you set the `isDismissable` property to `true`, the user will be able to dism
 
 By default, a close button will be displayed when the item can be dismissed. If you don't want this behavior, you can set the `requiresCloseButton` property to `false`. This is useful when the bulletin already provides an action button to close the item (such as a “Done“ button).
 
-![Dimming View](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_background_styles.png)
+![Dismissal](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_close_button.png)
 
 ## Creating Custom Items
 
