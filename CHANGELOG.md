@@ -1,5 +1,9 @@
 # _BulletinBoard_ Changelog
 
+## 🔖 v2.0.1
+
+- Add missing resources to Podspec (this caused a crash)
+
 ## 🔖 v2.0.0
 
 ### New Features
