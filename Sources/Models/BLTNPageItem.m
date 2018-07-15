@@ -36,7 +36,7 @@
 
 - (void)setDescriptionText:(NSString *)descriptionText
 {
-    _descriptionText = descriptionText;
+    _descriptionText = [descriptionText copy];
     if (self.attributedDescriptionText) {
         return;
     }
@@ -55,7 +55,7 @@
 
 - (void)setImageAccessibilityLabel:(NSString *)imageAccessibilityLabel
 {
-    _imageAccessibilityLabel = imageAccessibilityLabel;
+    _imageAccessibilityLabel = [imageAccessibilityLabel copy];
     if (self.imageView) {
         self.imageView.accessibilityLabel = imageAccessibilityLabel;
     }
@@ -63,7 +63,7 @@
 
 - (void)setAttributedDescriptionText:(NSAttributedString *)attributedDescriptionText
 {
-    _attributedDescriptionText = self.attributedDescriptionText;
+    _attributedDescriptionText = [attributedDescriptionText copy];
     self.descriptionText = nil;
     if (self.descriptionLabel) {
         self.descriptionLabel.attributedText = attributedDescriptionText;
