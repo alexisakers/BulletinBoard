@@ -50,6 +50,18 @@ When the coding is done and you’ve finished testing your changes, you are read
 - Use a descriptive title
 - Link the issues that are related to your PR in the body
 
+## I want to add my app to the README
+
+If you want to add your app to the README, please do so in the ["Apps Using _BulletinBoard_"](https://github.com/alexaubry/BulletinBoard#apps-using-bulletinboard) section.
+
+Add your entry in alphabetical order. You need to respect this format when writing your entry:
+
+```
+- [App Name as it appears on the App Store](app store link)
+```
+
+Make sure you are using the "geo.itunes.apple.com" domain in your link. We won't accept submissions with a description or multiple links.
+
 ## Code of Conduct
 
 Help us keep _BulletinBoard_ open and inclusive. Please read and follow our [Code of Conduct](CODE_OF_CONDUCT.md).
