@@ -289,8 +289,9 @@ Make sure to read these guides before getting started:
 
 Feel free to submit a PR if you’re using this library in your apps.
 
+- [Bayes SMS](https://geo.itunes.apple.com/us/app/bayes-sms/id1281197214?mt=12)
 - [SpdrVision mobile](https://geo.itunes.apple.com/it/app/spdrvision-mobile/id1260166539?mt=8)
-- [Views • News Redesigned](https://geo.itunes.apple.com/us/app/views-news-redesigned/id1322754821?ls=1&mt=8) 
+- [Views • News Redesigned](https://geo.itunes.apple.com/us/app/views-news-redesigned/id1322754821?ls=1&mt=8)
 
 ## Author
 
