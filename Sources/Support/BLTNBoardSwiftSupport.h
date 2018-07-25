@@ -9,5 +9,5 @@
 #if __has_include("BLTNBoard-Swift.h")
 	#import "BLTNBoard-Swift.h"
 #else
-	#import "BLTNBoard/BLTNBoard-Swift.h"
+	#import <BLTNBoard/BLTNBoard-Swift.h>
 #endif
