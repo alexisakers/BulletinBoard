@@ -28,3 +28,4 @@ script:
   - carthage build --platform $PLATFORM --no-skip-current
   - pod lib lint --swift-version=3.0
   - pod lib lint --swift-version=4.0
+  - pod lib lint --swift-version=4.0 --use-libraries
