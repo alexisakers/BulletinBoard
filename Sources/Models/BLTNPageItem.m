@@ -4,7 +4,7 @@
  */
 
 #import "BLTNPageItem.h"
-#import <BLTNBoard/BLTNBoard-Swift.h>
+#import <BLTNBoardSwiftSupport.h>
 
 @interface BLTNPageItem ()
 
