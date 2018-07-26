@@ -14,6 +14,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "9.0"
   s.source       = { :git => "https://github.com/alexaubry/BulletinBoard.git", :tag => s.version.to_s }
   s.source_files  = "Sources/**/*"
+  s.private_header_files = "Sources/Support/**/*.h"
   s.frameworks  = "UIKit"
   s.documentation_url = "https://alexaubry.github.io/BulletinBoard"
   s.module_name = "BLTNBoard"

@@ -43,6 +43,7 @@
 		55E8621B20B8476000584EAC /* BLTNViewPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E8621A20B8476000584EAC /* BLTNViewPosition.swift */; };
 		55E8622020B84F3100584EAC /* BulletinCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E8621F20B84F3100584EAC /* BulletinCloseButton.swift */; };
 		55FA45CA1FED1DE40084B6A0 /* BLTNSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA45C91FED1DE40084B6A0 /* BLTNSpacing.swift */; };
+		5E9D326D2108FCED0032FB06 /* BLTNBoardSwiftSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E9D326C2108FCED0032FB06 /* BLTNBoardSwiftSupport.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -116,6 +117,8 @@
 		55E8621A20B8476000584EAC /* BLTNViewPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNViewPosition.swift; sourceTree = "<group>"; };
 		55E8621F20B84F3100584EAC /* BulletinCloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinCloseButton.swift; sourceTree = "<group>"; };
 		55FA45C91FED1DE40084B6A0 /* BLTNSpacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNSpacing.swift; sourceTree = "<group>"; };
+		5E9D32682108FB9A0032FB06 /* BulletinBoard.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BulletinBoard.podspec; sourceTree = "<group>"; };
+		5E9D326C2108FCED0032FB06 /* BLTNBoardSwiftSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLTNBoardSwiftSupport.h; sourceTree = "<group>"; };
 		AD2FAA261CD0B6D800659CF4 /* BLTNBoard.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BLTNBoard.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,6 +136,7 @@
 		52D6D9721BEFF229002C0205 = {
 			isa = PBXGroup;
 			children = (
+				5E9D32682108FB9A0032FB06 /* BulletinBoard.podspec */,
 				55E8621C20B84DE500584EAC /* Resources */,
 				8933C7811EB5B7E0000D00A4 /* Sources */,
 				52D6D99C1BEFF38C002C0205 /* Configs */,
@@ -244,6 +248,7 @@
 		55DADEB81F8153B3001B11A2 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				5E9D326C2108FCED0032FB06 /* BLTNBoardSwiftSupport.h */,
 				558A122C1F7D73CD005EC97C /* BulletinViewController.swift */,
 				55BDB0D220BAFB9C005A6C2B /* Helpers */,
 				55B3D1D21FDD645900737791 /* Views */,
@@ -297,6 +302,7 @@
 				55CB0F85204D6466001D0393 /* BLTNBoard.h in Headers */,
 				559F8E95204DB9BA00322949 /* BLTNItem.h in Headers */,
 				55CB0F82204D63CC001D0393 /* BLTNActionItem.h in Headers */,
+				5E9D326D2108FCED0032FB06 /* BLTNBoardSwiftSupport.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
