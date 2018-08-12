@@ -293,6 +293,7 @@ Feel free to submit a PR if you’re using this library in your apps.
 - [Fluidics](https://geo.itunes.apple.com/us/app/fluidics/id1330261345?lmt=8)
 - [SpdrVision mobile](https://geo.itunes.apple.com/it/app/spdrvision-mobile/id1260166539?mt=8)
 - [Views • News Redesigned](https://geo.itunes.apple.com/us/app/views-news-redesigned/id1322754821?ls=1&mt=8)
+- [nSuns 5/3/1](https://geo.itunes.apple.com/us/app/nsuns-5-3-1/id1265494052?mt=8)
 
 ## Author
 
