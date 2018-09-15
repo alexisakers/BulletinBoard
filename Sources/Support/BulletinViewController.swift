@@ -123,7 +123,7 @@ extension BulletinViewController {
         centerYConstraint.constant = 2500
 
         widthConstraint = contentView.widthAnchor.constraint(equalToConstant: 444)
-        widthConstraint.priority = UILayoutPriorityRequired
+        widthConstraint.priority = .required
 
         // Close button
 
@@ -149,7 +149,7 @@ extension BulletinViewController {
 
         minYConstraint = contentView.topAnchor.constraint(greaterThanOrEqualTo: view.safeTopAnchor)
         minYConstraint.isActive = true
-        minYConstraint.priority = UILayoutPriorityRequired
+        minYConstraint.priority = UILayoutPriority.required
 
         contentStackView.axis = .vertical
         contentStackView.alignment = .fill
@@ -165,7 +165,7 @@ extension BulletinViewController {
         activityIndicator.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         activityIndicator.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
 
-        activityIndicator.activityIndicatorViewStyle = .whiteLarge
+        activityIndicator.style = .whiteLarge
         activityIndicator.color = .black
         activityIndicator.isUserInteractionEnabled = false
 
@@ -184,7 +184,7 @@ extension BulletinViewController {
         configureContentView()
         setUpKeyboardLogic()
 
-        contentView.bringSubview(toFront: closeButton)
+        contentView.bringSubviewToFront(closeButton)
 
     }
 
@@ -221,7 +221,7 @@ extension BulletinViewController {
         maxWidthConstraint = contentView.widthAnchor.constraint(lessThanOrEqualTo: view.safeWidthAnchor,
                                                                 constant: -(cardPadding * 2))
 
-        maxWidthConstraint.priority = UILayoutPriorityRequired
+        maxWidthConstraint.priority = .required
         maxWidthConstraint.isActive = true
 
         if manager.hidesHomeIndicator {
@@ -394,7 +394,7 @@ extension BulletinViewController {
     }
 
     @available(iOS 11.0, *)
-    override func prefersHomeIndicatorAutoHidden() -> Bool {
+    override var prefersHomeIndicatorAutoHidden: Bool {
         return manager?.hidesHomeIndicator ?? false
     }
 
@@ -456,7 +456,7 @@ extension BulletinViewController {
         }
 
         UIView.animate(withDuration: 0.25, animations: animations) { _ in
-            UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self.activityIndicator)
+            UIAccessibility.post(notification: .screenChanged, argument: self.activityIndicator)
         }
 
     }
@@ -549,13 +549,13 @@ extension BulletinViewController: UIViewControllerTransitioningDelegate {
 
 extension BulletinViewController {
     func setUpKeyboardLogic() {
-        NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardShow), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardHide), name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     func cleanUpKeyboardLogic() {
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     @objc func onKeyboardShow(_ notification: Notification) {
@@ -565,15 +565,15 @@ extension BulletinViewController {
         }
 
         guard let userInfo = notification.userInfo,
-            let keyboardFrameFinal = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect,
-            let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double,
-            let curveInt = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? Int
+            let keyboardFrameFinal = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+            let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double,
+            let curveInt = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? Int
         else {
             return
         }
 
-        let animationCurve = UIViewAnimationCurve(rawValue: curveInt) ?? .linear
-        let animationOptions = UIViewAnimationOptions(curve: animationCurve)
+        let animationCurve = UIView.AnimationCurve(rawValue: curveInt) ?? .linear
+        let animationOptions = UIView.AnimationOptions(curve: animationCurve)
 
         UIView.animate(withDuration: duration, delay: 0, options: animationOptions, animations: {
             var bottomSpacing = -(keyboardFrameFinal.size.height + self.defaultBottomMargin)
@@ -602,14 +602,14 @@ extension BulletinViewController {
         }
 
         guard let userInfo = notification.userInfo,
-            let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double,
-            let curveInt = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? Int
+            let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double,
+            let curveInt = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? Int
         else {
             return
         }
 
-        let animationCurve = UIViewAnimationCurve(rawValue: curveInt) ?? .linear
-        let animationOptions = UIViewAnimationOptions(curve: animationCurve)
+        let animationCurve = UIView.AnimationCurve(rawValue: curveInt) ?? .linear
+        let animationOptions = UIView.AnimationOptions(curve: animationCurve)
 
         UIView.animate(withDuration: duration, delay: 0, options: animationOptions, animations: {
             self.minYConstraint.isActive = true
@@ -621,16 +621,8 @@ extension BulletinViewController {
     }
 }
 
-extension UIViewAnimationOptions {
-    init(curve: UIViewAnimationCurve) {
-        self = UIViewAnimationOptions(rawValue: UInt(curve.rawValue << 16))
+extension UIView.AnimationOptions {
+    init(curve: UIView.AnimationCurve) {
+        self = UIView.AnimationOptions(rawValue: UInt(curve.rawValue << 16))
     }
 }
-
-// MARK: - Swift Compatibility
-
-#if swift(>=4.0)
-let UILayoutPriorityRequired = UILayoutPriority.required
-let UILayoutPriorityDefaultHigh = UILayoutPriority.defaultHigh
-let UILayoutPriorityDefaultLow = UILayoutPriority.defaultLow
-#endif

@@ -42,7 +42,7 @@ class BulletinDismissAnimationController: NSObject, UIViewControllerAnimatedTran
         snapshotActivityIndicator.rightAnchor.constraint(equalTo: snapshot.rightAnchor).isActive = true
         snapshotActivityIndicator.bottomAnchor.constraint(equalTo: snapshot.bottomAnchor).isActive = true
 
-        snapshotActivityIndicator.activityIndicatorViewStyle = .whiteLarge
+        snapshotActivityIndicator.style = .whiteLarge
         snapshotActivityIndicator.color = .black
         snapshotActivityIndicator.isUserInteractionEnabled = false
 
@@ -58,7 +58,7 @@ class BulletinDismissAnimationController: NSObject, UIViewControllerAnimatedTran
         // Animate dismissal
 
         let duration = transitionDuration(using: transitionContext)
-        let options = UIViewAnimationOptions(rawValue: 6 << 16)
+        let options = UIView.AnimationOptions(rawValue: 6 << 16)
 
         let animations = {
             snapshot.frame.origin.y = rootView.frame.maxY + 12

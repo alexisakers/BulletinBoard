@@ -11,7 +11,7 @@ extension UIButton {
      * Sets a solid background color for the button.
      */
 
-    func setBackgroundColor(_ color: UIColor, forState controlState: UIControlState) {
+    func setBackgroundColor(_ color: UIColor, forState controlState: UIControl.State) {
 
         UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
         UIGraphicsGetCurrentContext()?.setFillColor(color.cgColor)
@@ -23,4 +23,3 @@ extension UIButton {
     }
 
 }
-

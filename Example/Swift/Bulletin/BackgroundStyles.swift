@@ -16,7 +16,7 @@ func BackgroundStyles() -> [(name: String, style: BLTNBackgroundViewStyle)] {
         styles.append(("Extra Light", .blurredExtraLight))
         styles.append(("Light", .blurredLight))
         styles.append(("Dark", .blurredDark))
-        styles.append(("Extra Dark", .blurred(style: UIBlurEffectStyle(rawValue: 3)!, isDark: true)))
+        styles.append(("Extra Dark", .blurred(style: UIBlurEffect.Style(rawValue: 3)!, isDark: true)))
     }
 
     return styles
