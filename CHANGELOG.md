@@ -1,5 +1,9 @@
 # _BulletinBoard_ Changelog
 
+## 🔖 v3.0.0
+
+- Upgrade to Swift 4.2
+
 ## 🔖 v2.0.1
 
 - Add missing resources to Podspec (this caused a crash)
