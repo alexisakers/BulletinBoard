@@ -1,5 +1,10 @@
 # _BulletinBoard_ Changelog
 
+## 🔖 v2.0.2
+
+- Fix setters and retain semantics
+- Fix Swift version in Podspec for compatibility with Xcode 10
+
 ## 🔖 v2.0.1
 
 - Add missing resources to Podspec (this caused a crash)
