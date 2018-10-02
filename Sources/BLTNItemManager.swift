@@ -106,6 +106,7 @@ import UIKit
     fileprivate let rootItem: BLTNItem
     fileprivate var itemsStack: [BLTNItem]
     fileprivate var previousItem: BLTNItem?
+    fileprivate var presentingWindow: UIWindow?
 
     fileprivate var isPrepared: Bool = false
     fileprivate var isPreparing: Bool = false
@@ -399,6 +400,27 @@ extension BLTNItemManager {
         presentingVC.present(bulletinController, animated: animated, completion: completion)
 
     }
+    
+    @objc(showBulletinInApplication:animated:completion:)
+    public func showBulletin(in application: UIApplication,
+                             animated: Bool = true,
+                             completion: (() -> Void)? = nil) {
+        
+        presentingWindow = UIWindow(frame: UIScreen.main.bounds)
+        presentingWindow?.rootViewController = UIViewController()
+        
+        // set alert window above current top window
+        if let topWindow = application.windows.last {
+            presentingWindow?.windowLevel = topWindow.windowLevel + 1
+        }
+        
+        presentingWindow?.makeKeyAndVisible()
+        
+        if let vc = presentingWindow?.rootViewController {
+            self.showBulletin(above: vc, animated: animated, completion: completion)
+        }
+        
+    }
 
     /**
      * Dismisses the bulletin and clears the current page. You will have to call `prepare` before
@@ -438,6 +460,9 @@ extension BLTNItemManager {
             bulletinController.contentStackView.removeArrangedSubview(arrangedSubview)
             arrangedSubview.removeFromSuperview()
         }
+        
+        presentingWindow?.isHidden = true
+        presentingWindow = nil
 
         bulletinController.backgroundView = nil
         bulletinController.manager = nil
