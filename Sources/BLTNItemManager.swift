@@ -401,6 +401,14 @@ extension BLTNItemManager {
 
     }
     
+    /**
+     * Presents the bulletin on top of your application window.
+     *
+     * - parameter application: The application in which to display the bulletin. (normally: UIApplication.shared)
+     * - parameter animated: Whether to animate presentation. Defaults to `true`.
+     * - parameter completion: An optional block to execute after presentation. Default to `nil`.
+     */
+    
     @objc(showBulletinInApplication:animated:completion:)
     public func showBulletin(in application: UIApplication,
                              animated: Bool = true,
