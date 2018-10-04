@@ -90,9 +90,9 @@ With this root item, you need to create a `BLTNManager`. We recommend putting it
 ~~~swift
 class ViewController: UIViewController {
 
-    lazy var bulletinManager: BLTNManager = {
+    lazy var bulletinManager: BLTNItemManager = {
         let rootItem: BLTNItem = // ... create your item here
-        return BLTNManager(rootItem: rootItem)
+        return BLTNItemManager(rootItem: rootItem)
     }()
 
 }
