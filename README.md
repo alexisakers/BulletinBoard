@@ -247,7 +247,7 @@ You can customize the background view by changing the `backgroundViewStyle` prop
 
 ~~~swift
 manager.backgroundViewStyle = .blurredExtraLight
-manager.prepare()
+manager.showBulletin(above: self)
 ~~~
 
 Several styles are available in the `BulletinBackgroundViewStyle` enum:
