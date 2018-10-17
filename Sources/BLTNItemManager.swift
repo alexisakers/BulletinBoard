@@ -106,6 +106,7 @@ import UIKit
     fileprivate let rootItem: BLTNItem
     fileprivate var itemsStack: [BLTNItem]
     fileprivate var previousItem: BLTNItem?
+    fileprivate var presentingWindow: UIWindow?
 
     fileprivate var isPrepared: Bool = false
     fileprivate var isPreparing: Bool = false
@@ -399,6 +400,35 @@ extension BLTNItemManager {
         presentingVC.present(bulletinController, animated: animated, completion: completion)
 
     }
+    
+    /**
+     * Presents the bulletin on top of your application window.
+     *
+     * - parameter application: The application in which to display the bulletin. (normally: UIApplication.shared)
+     * - parameter animated: Whether to animate presentation. Defaults to `true`.
+     * - parameter completion: An optional block to execute after presentation. Default to `nil`.
+     */
+    
+    @objc(showBulletinInApplication:animated:completion:)
+    public func showBulletin(in application: UIApplication,
+                             animated: Bool = true,
+                             completion: (() -> Void)? = nil) {
+        assert(presentingWindow == nil, "Attempt to present a Bulletin on top of another Bulletin window. Make sure to dismiss any existing bulletin before calling this method.")
+        presentingWindow = UIWindow(frame: UIScreen.main.bounds)
+        presentingWindow?.rootViewController = UIViewController()
+        
+        // set alert window above current top window
+        if let topWindow = application.windows.last {
+            presentingWindow?.windowLevel = topWindow.windowLevel + 1
+        }
+        
+        presentingWindow?.makeKeyAndVisible()
+        
+        if let vc = presentingWindow?.rootViewController {
+            self.showBulletin(above: vc, animated: animated, completion: completion)
+        }
+        
+    }
 
     /**
      * Dismisses the bulletin and clears the current page. You will have to call `prepare` before
@@ -438,6 +468,9 @@ extension BLTNItemManager {
             bulletinController.contentStackView.removeArrangedSubview(arrangedSubview)
             arrangedSubview.removeFromSuperview()
         }
+        
+        presentingWindow?.isHidden = true
+        presentingWindow = nil
 
         bulletinController.backgroundView = nil
         bulletinController.manager = nil
