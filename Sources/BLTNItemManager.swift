@@ -413,7 +413,7 @@ extension BLTNItemManager {
     public func showBulletin(in application: UIApplication,
                              animated: Bool = true,
                              completion: (() -> Void)? = nil) {
-        
+        assert(presentingWindow == nil, "Attempt to present a Bulletin on top of another Bulletin window. Make sure to dismiss any existing bulletin before calling this method.")
         presentingWindow = UIWindow(frame: UIScreen.main.bounds)
         presentingWindow?.rootViewController = UIViewController()
         
