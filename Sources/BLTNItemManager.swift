@@ -102,7 +102,9 @@ import UIKit
      * Tells us if a bulletin is currently being shown. Defaults to false
      */
 
-    @objc public var isShowingBulletin: Bool { return isPrepared }
+    @objc public var isShowingBulletin: Bool { 
+        return bulletinController?.presentingViewController != nil
+    }
 
     // MARK: - Private Properties
 
