@@ -289,6 +289,7 @@ Make sure to read these guides before getting started:
 
 Feel free to submit a PR if you’re using this library in your apps.
 
+- [Babelgum Translator](https://geo.itunes.apple.com/us/app/babelgum-translator/id1412706772?mt=8)
 - [Bayes SMS](https://geo.itunes.apple.com/us/app/bayes-sms/id1281197214?mt=12)
 - [Fluidics](https://geo.itunes.apple.com/us/app/fluidics/id1330261345?lmt=8)
 - [nSuns 5/3/1](https://geo.itunes.apple.com/us/app/nsuns-5-3-1/id1265494052?mt=8)
