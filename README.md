@@ -19,9 +19,9 @@ Here are some screenshots showing what you can build with BulletinBoard:
 
 ## Requirements
 
-- Xcode 9 and later
+- Xcode 10 and later
 - iOS 9 and later
-- Swift 3.2 and later
+- Swift 4.2 and later
 
 ## Demo
 

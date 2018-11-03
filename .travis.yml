@@ -1,4 +1,4 @@
-osx_image: xcode9
+osx_image: xcode10
 language: objective-c
 
 env:
@@ -19,12 +19,10 @@ before_script:
 script:
   - xcodebuild -workspace "$WORKSPACE" -list
   # Build Framework
-  - set -o pipefail && xcodebuild clean build -workspace "$WORKSPACE" -scheme "BLTNBoard" -destination "$DESTINATION" SWIFT_VERSION="3.0" | xcpretty
-  - set -o pipefail && xcodebuild clean build -workspace "$WORKSPACE" -scheme "BLTNBoard" -destination "$DESTINATION" SWIFT_VERSION="4.0" | xcpretty
+  - set -o pipefail && xcodebuild clean build -workspace "$WORKSPACE" -scheme "BLTNBoard" -destination "$DESTINATION" | xcpretty
   # Build Demo Project
   - set -o pipefail && xcodebuild clean build -workspace "$WORKSPACE" -scheme "BB-Swift" -destination "$DESTINATION" | xcpretty
   - set -o pipefail && xcodebuild clean build -workspace "$WORKSPACE" -scheme "BB-ObjC" -destination "$DESTINATION" | xcpretty
   # Build Project with Package Managers
   - carthage build --platform $PLATFORM --no-skip-current
-  - pod lib lint --swift-version=3.0
-  - pod lib lint --swift-version=4.0
+  - pod lib lint

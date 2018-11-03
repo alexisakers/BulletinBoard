@@ -81,7 +81,7 @@ public class AnimationChain {
         let animation = animations.removeFirst()
 
         let duration = animation.relativeDuration * self.duration
-        let options = UIViewAnimationOptions(rawValue: UInt(animation.curve.rawValue << 16))
+        let options = UIView.AnimationOptions(rawValue: UInt(animation.curve.rawValue << 16))
         let delay: TimeInterval = didFinishFirstAnimation ? 0 : initialDelay
 
         UIView.animate(withDuration: duration, delay: delay, options: options, animations: animation.block) { _ in
@@ -125,7 +125,7 @@ public class AnimationPhase {
      * The animation curve.
      */
 
-    public let curve: UIViewAnimationCurve
+    public let curve: UIView.AnimationCurve
 
     /**
      * The animation code.
@@ -149,7 +149,7 @@ public class AnimationPhase {
      * - parameter curve: The animation curve
      */
 
-    public init(relativeDuration: TimeInterval, curve: UIViewAnimationCurve) {
+    public init(relativeDuration: TimeInterval, curve: UIView.AnimationCurve) {
 
         self.relativeDuration = relativeDuration
         self.curve = curve
