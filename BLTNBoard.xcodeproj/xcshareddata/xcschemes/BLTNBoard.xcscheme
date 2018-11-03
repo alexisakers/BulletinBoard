@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "558D8085218DC5B5000ADAFD"
+               BuildableName = "BLTNBoardTests.xctest"
+               BlueprintName = "BLTNBoardTests"
+               ReferencedContainer = "container:BLTNBoard.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "52D6D97B1BEFF229002C0205"
+            BuildableName = "BLTNBoard.framework"
+            BlueprintName = "BLTNBoard"
+            ReferencedContainer = "container:BLTNBoard.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>

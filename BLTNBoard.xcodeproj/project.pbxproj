@@ -17,6 +17,8 @@
 		558A12301F7D73CD005EC97C /* BLTNItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122A1F7D73CD005EC97C /* BLTNItemManager.swift */; };
 		558A12321F7D73CD005EC97C /* BulletinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122C1F7D73CD005EC97C /* BulletinViewController.swift */; };
 		558A12331F7D73CD005EC97C /* HighlightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122D1F7D73CD005EC97C /* HighlightButton.swift */; };
+		558D8089218DC5B6000ADAFD /* BLTNBoardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558D8088218DC5B6000ADAFD /* BLTNBoardTests.swift */; };
+		558D808B218DC5B6000ADAFD /* BLTNBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D97C1BEFF229002C0205 /* BLTNBoard.framework */; };
 		5590C04B20B852150045C315 /* CloseGlyph.png in Resources */ = {isa = PBXBuildFile; fileRef = 5590C04820B852150045C315 /* CloseGlyph.png */; };
 		5590C04C20B852150045C315 /* CloseGlyph@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5590C04920B852150045C315 /* CloseGlyph@2x.png */; };
 		5590C04D20B852150045C315 /* CloseGlyph@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5590C04A20B852150045C315 /* CloseGlyph@3x.png */; };
@@ -46,6 +48,16 @@
 		5E9D326D2108FCED0032FB06 /* BLTNBoardSwiftSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E9D326C2108FCED0032FB06 /* BLTNBoardSwiftSupport.h */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		558D808C218DC5B6000ADAFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 52D6D9731BEFF229002C0205 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52D6D97B1BEFF229002C0205;
+			remoteInfo = BLTNBoard;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		52D6D97C1BEFF229002C0205 /* BLTNBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BLTNBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		550675681F90A0A500874D8B /* BLTNBackgroundViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNBackgroundViewStyle.swift; sourceTree = "<group>"; };
@@ -58,6 +70,9 @@
 		558A122A1F7D73CD005EC97C /* BLTNItemManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLTNItemManager.swift; sourceTree = "<group>"; };
 		558A122C1F7D73CD005EC97C /* BulletinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletinViewController.swift; sourceTree = "<group>"; };
 		558A122D1F7D73CD005EC97C /* HighlightButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighlightButton.swift; sourceTree = "<group>"; };
+		558D8086218DC5B5000ADAFD /* BLTNBoardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BLTNBoardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		558D8088218DC5B6000ADAFD /* BLTNBoardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNBoardTests.swift; sourceTree = "<group>"; };
+		558D808A218DC5B6000ADAFD /* BLTNBoardTests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = BLTNBoardTests.plist; sourceTree = "<group>"; };
 		5590C04820B852150045C315 /* CloseGlyph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseGlyph.png; sourceTree = "<group>"; };
 		5590C04920B852150045C315 /* CloseGlyph@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CloseGlyph@2x.png"; sourceTree = "<group>"; };
 		5590C04A20B852150045C315 /* CloseGlyph@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CloseGlyph@3x.png"; sourceTree = "<group>"; };
@@ -130,6 +145,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		558D8083218DC5B5000ADAFD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				558D808B218DC5B6000ADAFD /* BLTNBoard.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -140,6 +163,7 @@
 				55E8621C20B84DE500584EAC /* Resources */,
 				8933C7811EB5B7E0000D00A4 /* Sources */,
 				52D6D99C1BEFF38C002C0205 /* Configs */,
+				558D8087218DC5B6000ADAFD /* BLTNBoardTests */,
 				52D6D97D1BEFF229002C0205 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -148,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				52D6D97C1BEFF229002C0205 /* BLTNBoard.framework */,
+				558D8086218DC5B5000ADAFD /* BLTNBoardTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -156,8 +181,17 @@
 			isa = PBXGroup;
 			children = (
 				AD2FAA261CD0B6D800659CF4 /* BLTNBoard.plist */,
+				558D808A218DC5B6000ADAFD /* BLTNBoardTests.plist */,
 			);
 			path = Configs;
+			sourceTree = "<group>";
+		};
+		558D8087218DC5B6000ADAFD /* BLTNBoardTests */ = {
+			isa = PBXGroup;
+			children = (
+				558D8088218DC5B6000ADAFD /* BLTNBoardTests.swift */,
+			);
+			path = BLTNBoardTests;
 			sourceTree = "<group>";
 		};
 		5590C05720B93F610045C315 /* Strings */ = {
@@ -327,6 +361,24 @@
 			productReference = 52D6D97C1BEFF229002C0205 /* BLTNBoard.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		558D8085218DC5B5000ADAFD /* BLTNBoardTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 558D8090218DC5B6000ADAFD /* Build configuration list for PBXNativeTarget "BLTNBoardTests" */;
+			buildPhases = (
+				558D8082218DC5B5000ADAFD /* Sources */,
+				558D8083218DC5B5000ADAFD /* Frameworks */,
+				558D8084218DC5B5000ADAFD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				558D808D218DC5B6000ADAFD /* PBXTargetDependency */,
+			);
+			name = BLTNBoardTests;
+			productName = BLTNBoardTests;
+			productReference = 558D8086218DC5B5000ADAFD /* BLTNBoardTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -334,13 +386,17 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = BLTN;
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Bulletin;
 				TargetAttributes = {
 					52D6D97B1BEFF229002C0205 = {
 						CreatedOnToolsVersion = 7.1;
 						LastSwiftMigration = 1000;
+					};
+					558D8085218DC5B5000ADAFD = {
+						CreatedOnToolsVersion = 10.0;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -390,6 +446,7 @@
 			projectRoot = "";
 			targets = (
 				52D6D97B1BEFF229002C0205 /* BLTNBoard */,
+				558D8085218DC5B5000ADAFD /* BLTNBoardTests */,
 			);
 		};
 /* End PBXProject section */
@@ -403,6 +460,13 @@
 				5590C04B20B852150045C315 /* CloseGlyph.png in Resources */,
 				5590C05420B93F3A0045C315 /* Localizable.strings in Resources */,
 				5590C04C20B852150045C315 /* CloseGlyph@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		558D8084218DC5B5000ADAFD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,7 +508,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		558D8082218DC5B5000ADAFD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				558D8089218DC5B6000ADAFD /* BLTNBoardTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		558D808D218DC5B6000ADAFD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52D6D97B1BEFF229002C0205 /* BLTNBoard */;
+			targetProxy = 558D808C218DC5B6000ADAFD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		5590C05620B93F3A0045C315 /* Localizable.strings */ = {
@@ -654,6 +734,56 @@
 			};
 			name = Release;
 		};
+		558D808E218DC5B6000ADAFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Configs/BLTNBoardTests.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.alexaubry.BLTNBoardTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		558D808F218DC5B6000ADAFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Configs/BLTNBoardTests.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.alexaubry.BLTNBoardTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -671,6 +801,15 @@
 			buildConfigurations = (
 				52D6D9911BEFF229002C0205 /* Debug */,
 				52D6D9921BEFF229002C0205 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		558D8090218DC5B6000ADAFD /* Build configuration list for PBXNativeTarget "BLTNBoardTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				558D808E218DC5B6000ADAFD /* Debug */,
+				558D808F218DC5B6000ADAFD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
