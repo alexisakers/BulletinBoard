@@ -97,7 +97,14 @@ import UIKit
      */
 
     @objc public var allowsSwipeInteraction: Bool = true
+    
+    /**
+     * Tells us if a bulletin is currently being shown. Defaults to false
+     */
 
+    @objc public var isShowingBulletin: Bool { 
+        return bulletinController?.presentingViewController != nil
+    }
 
     // MARK: - Private Properties
 
