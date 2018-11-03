@@ -90,9 +90,9 @@ With this root item, you need to create a `BLTNManager`. We recommend putting it
 ~~~swift
 class ViewController: UIViewController {
 
-    lazy var bulletinManager: BLTNManager = {
+    lazy var bulletinManager: BLTNItemManager = {
         let rootItem: BLTNItem = // ... create your item here
-        return BLTNManager(rootItem: rootItem)
+        return BLTNItemManager(rootItem: rootItem)
     }()
 
 }
@@ -247,7 +247,7 @@ You can customize the background view by changing the `backgroundViewStyle` prop
 
 ~~~swift
 manager.backgroundViewStyle = .blurredExtraLight
-manager.prepare()
+manager.showBulletin(above: self)
 ~~~
 
 Several styles are available in the `BulletinBackgroundViewStyle` enum:
@@ -289,8 +289,10 @@ Make sure to read these guides before getting started:
 
 Feel free to submit a PR if you’re using this library in your apps.
 
+- [Babelgum Translator](https://geo.itunes.apple.com/us/app/babelgum-translator/id1412706772?mt=8)
 - [Bayes SMS](https://geo.itunes.apple.com/us/app/bayes-sms/id1281197214?mt=12)
 - [Fluidics](https://geo.itunes.apple.com/us/app/fluidics/id1330261345?lmt=8)
+- [nSuns 5/3/1](https://geo.itunes.apple.com/us/app/nsuns-5-3-1/id1265494052?mt=8)
 - [SpdrVision mobile](https://geo.itunes.apple.com/it/app/spdrvision-mobile/id1260166539?mt=8)
 - [Views • News Redesigned](https://geo.itunes.apple.com/us/app/views-news-redesigned/id1322754821?ls=1&mt=8)
 

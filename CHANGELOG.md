@@ -4,6 +4,12 @@
 
 - Upgrade to Swift 4.2
 
+## 🔖 v2.0.2
+
+- Fix setters and retain semantics
+- Add workaround to allow static library usage
+- Fix Swift version in Podspec for compatibility with Xcode 10
+
 ## 🔖 v2.0.1
 
 - Add missing resources to Podspec (this caused a crash)
