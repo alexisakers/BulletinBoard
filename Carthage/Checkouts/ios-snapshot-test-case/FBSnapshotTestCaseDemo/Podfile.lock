@@ -1,0 +1,20 @@
+PODS:
+  - iOSSnapshotTestCase (3.1.0):
+    - iOSSnapshotTestCase/SwiftSupport (= 3.1.0)
+  - iOSSnapshotTestCase/Core (3.1.0)
+  - iOSSnapshotTestCase/SwiftSupport (3.1.0):
+    - iOSSnapshotTestCase/Core
+
+DEPENDENCIES:
+  - iOSSnapshotTestCase (from `..`)
+
+EXTERNAL SOURCES:
+  iOSSnapshotTestCase:
+    :path: ".."
+
+SPEC CHECKSUMS:
+  iOSSnapshotTestCase: 037b2e86ebc1cea90a48578c364295cd853c24aa
+
+PODFILE CHECKSUM: 23fc15db0c3233d57acaa5dbafbc9f5f89f2f477
+
+COCOAPODS: 1.5.3

@@ -19,6 +19,8 @@
 		558A12331F7D73CD005EC97C /* HighlightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122D1F7D73CD005EC97C /* HighlightButton.swift */; };
 		558D8089218DC5B6000ADAFD /* BLTNBoardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558D8088218DC5B6000ADAFD /* BLTNBoardTests.swift */; };
 		558D808B218DC5B6000ADAFD /* BLTNBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D97C1BEFF229002C0205 /* BLTNBoard.framework */; };
+		558D8093218DCA81000ADAFD /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 558D8092218DCA81000ADAFD /* FBSnapshotTestCase.framework */; };
+		558D8095218DCA98000ADAFD /* FBSnapshotTestCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 558D8092218DCA81000ADAFD /* FBSnapshotTestCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5590C04B20B852150045C315 /* CloseGlyph.png in Resources */ = {isa = PBXBuildFile; fileRef = 5590C04820B852150045C315 /* CloseGlyph.png */; };
 		5590C04C20B852150045C315 /* CloseGlyph@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5590C04920B852150045C315 /* CloseGlyph@2x.png */; };
 		5590C04D20B852150045C315 /* CloseGlyph@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5590C04A20B852150045C315 /* CloseGlyph@3x.png */; };
@@ -58,6 +60,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		558D8094218DCA85000ADAFD /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				558D8095218DCA98000ADAFD /* FBSnapshotTestCase.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		52D6D97C1BEFF229002C0205 /* BLTNBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BLTNBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		550675681F90A0A500874D8B /* BLTNBackgroundViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNBackgroundViewStyle.swift; sourceTree = "<group>"; };
@@ -73,6 +89,7 @@
 		558D8086218DC5B5000ADAFD /* BLTNBoardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BLTNBoardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		558D8088218DC5B6000ADAFD /* BLTNBoardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNBoardTests.swift; sourceTree = "<group>"; };
 		558D808A218DC5B6000ADAFD /* BLTNBoardTests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = BLTNBoardTests.plist; sourceTree = "<group>"; };
+		558D8092218DCA81000ADAFD /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
 		5590C04820B852150045C315 /* CloseGlyph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseGlyph.png; sourceTree = "<group>"; };
 		5590C04920B852150045C315 /* CloseGlyph@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CloseGlyph@2x.png"; sourceTree = "<group>"; };
 		5590C04A20B852150045C315 /* CloseGlyph@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CloseGlyph@3x.png"; sourceTree = "<group>"; };
@@ -149,6 +166,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				558D8093218DCA81000ADAFD /* FBSnapshotTestCase.framework in Frameworks */,
 				558D808B218DC5B6000ADAFD /* BLTNBoard.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,6 +183,7 @@
 				52D6D99C1BEFF38C002C0205 /* Configs */,
 				558D8087218DC5B6000ADAFD /* BLTNBoardTests */,
 				52D6D97D1BEFF229002C0205 /* Products */,
+				558D8091218DCA81000ADAFD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -192,6 +211,14 @@
 				558D8088218DC5B6000ADAFD /* BLTNBoardTests.swift */,
 			);
 			path = BLTNBoardTests;
+			sourceTree = "<group>";
+		};
+		558D8091218DCA81000ADAFD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				558D8092218DCA81000ADAFD /* FBSnapshotTestCase.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		5590C05720B93F610045C315 /* Strings */ = {
@@ -367,6 +394,7 @@
 			buildPhases = (
 				558D8082218DC5B5000ADAFD /* Sources */,
 				558D8083218DC5B5000ADAFD /* Frameworks */,
+				558D8094218DCA85000ADAFD /* Embed Frameworks */,
 				558D8084218DC5B5000ADAFD /* Resources */,
 			);
 			buildRules = (
@@ -746,6 +774,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Configs/BLTNBoardTests.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -772,6 +804,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Configs/BLTNBoardTests.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
