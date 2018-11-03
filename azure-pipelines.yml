@@ -4,7 +4,7 @@ pool:
 steps:
 - script: |
     sudo xcode-select -switch /Applications/Xcode_10.app
-    carthage bootstrap
+    carthage bootstrap --no-checkout --platform iOS
   displayName: "Setup environment"
 
 - script: |
