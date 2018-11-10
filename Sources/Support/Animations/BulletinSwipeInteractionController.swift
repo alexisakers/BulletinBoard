@@ -147,11 +147,12 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
                 return
             }
 
+            isInteractionInProgress = false
+
             let translation = gestureRecognizer.translation(in: contentView).y
 
             if translation >= dismissThreshold {
                 isFinished = true
-                isInteractionInProgress = false
                 finish()
             } else {
                 resetCardViews()
