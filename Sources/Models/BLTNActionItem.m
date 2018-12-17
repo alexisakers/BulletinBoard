@@ -152,6 +152,10 @@
     self.actionButton = nil;
     self.alternativeButton = nil;
 }
+    
+- (void)willDisplay
+{
+}
 
 - (void)onDisplay
 {

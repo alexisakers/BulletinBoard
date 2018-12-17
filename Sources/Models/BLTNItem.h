@@ -105,6 +105,12 @@
  */
 
 - (void)tearDown;
+    
+/**
+* Called by the manager when bulletin item is about to be pushed onto the view.
+*/
+    
+- (void)willDisplay;
 
 /**
  * Called by the manager when bulletin item is pushed onto the view.

@@ -577,6 +577,10 @@ extension BLTNItemManager {
             }
 
         }
+        
+        displayNewItemsAnimationPhase.completionHandler = {
+            self.currentItem.willDisplay()
+        }
 
         let finalAnimationPhase = AnimationPhase(relativeDuration: 1/3, curve: .linear)
 
