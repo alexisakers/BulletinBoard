@@ -6,6 +6,7 @@
 
 - Add  `isShowingBulletin` property
 - Add `willDisplay` method to BLTNItem
+- Add option to show the bulletin above the whole application
 
 ### Fixes
 
