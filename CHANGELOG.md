@@ -2,7 +2,15 @@
 
 ## 🔖 v3.0.0
 
+### New Features
+
+- Add  `isShowingBulletin` property
+- Add `willDisplay` method to BLTNItem
+
+### Fixes
+
 - Upgrade to Swift 4.2
+- Fix frozen dismissal after initial interaction
 
 ## 🔖 v2.0.2
 
