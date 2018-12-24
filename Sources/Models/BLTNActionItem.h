@@ -30,7 +30,7 @@
  * (ex: haptic feedback).
  *
  * Use the `appearance` property to customize the appearance of the buttons. If you want to use a different interface
- * builder type, change the `InterfaceBuilderType` property.
+ * builder type, change the `interfaceBuilderType` property.
  */
 
 @interface BLTNActionItem : NSObject <BLTNItem>
