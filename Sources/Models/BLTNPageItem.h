@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  * implementations if you do.
  *
  * Use the `appearance` property to customize the appearance of the page. If you want to use a different interface
- * builder type, change the `InterfaceBuilderType` property.
+ * builder type, change the `interfaceBuilderType` property.
  */
 
 @interface BLTNPageItem : BLTNActionItem
