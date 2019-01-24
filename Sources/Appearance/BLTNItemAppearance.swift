@@ -15,6 +15,9 @@ import UIKit
 
     /// The tint color to apply to the action button (default blue).
     @objc public var actionButtonColor: UIColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+    
+    /// The button image to apply to the action button
+    @objc public var actionButtonImage: UIImage?
 
     /// The title color to apply to action button (default white).
     @objc public var actionButtonTitleColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
