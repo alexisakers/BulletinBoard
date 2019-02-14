@@ -43,18 +43,18 @@ enum BulletinDataSource {
         page.presentationHandler = { item in
 
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
-                item.manager?.hideActivityIndicator()
+                item.parent?.hideActivityIndicator()
             }
 
         }
 
         page.actionHandler = { item in
-            item.manager?.displayNextItem()
+            item.parent?.displayNextItem()
         }
 
         page.alternativeHandler = { item in
             let privacyPolicyVC = SFSafariViewController(url: URL(string: "https://example.com")!)
-            item.manager?.present(privacyPolicyVC, animated: true)
+            item.parent?.present(privacyPolicyVC, animated: true)
         }
 
         page.next = makeTextFieldPage()
@@ -80,7 +80,7 @@ enum BulletinDataSource {
         page.textInputHandler = { (item, text) in
             print("Text: \(text ?? "nil")")
             let datePage = self.makeDatePage(userName: text)
-            item.manager?.push(item: datePage)
+            item.parent?.push(item: datePage)
         }
 
         return page
@@ -110,7 +110,7 @@ enum BulletinDataSource {
 
         page.actionHandler = { item in
             print(page.datePicker.date)
-            item.manager?.displayNextItem()
+            item.parent?.displayNextItem()
         }
 
         page.next = makeNotitificationsPage()
@@ -143,11 +143,11 @@ enum BulletinDataSource {
 
         page.actionHandler = { item in
             PermissionsManager.shared.requestLocalNotifications()
-            item.manager?.displayNextItem()
+            item.parent?.displayNextItem()
         }
 
         page.alternativeHandler = { item in
-            item.manager?.displayNextItem()
+            item.parent?.displayNextItem()
         }
 
         page.next = makeLocationPage()
@@ -181,11 +181,11 @@ enum BulletinDataSource {
 
         page.actionHandler = { item in
             PermissionsManager.shared.requestWhenInUseLocation()
-            item.manager?.displayNextItem()
+            item.parent?.displayNextItem()
         }
 
         page.alternativeHandler = { item in
-            item.manager?.displayNextItem()
+            item.parent?.displayNextItem()
         }
 
         page.next = makeChoicePage()
@@ -248,11 +248,11 @@ enum BulletinDataSource {
         }
 
         page.actionHandler = { item in
-            item.manager?.dismissBulletin(animated: true)
+            item.parent?.dismiss(animated: true)
         }
 
         page.alternativeHandler = { item in
-            item.manager?.popToRootItem()
+            item.parent?.popToRootItem()
         }
 
         return page

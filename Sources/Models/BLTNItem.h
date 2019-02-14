@@ -5,7 +5,7 @@
 
 @import UIKit;
 
-@class BLTNItemManager;
+@class BLTNViewController;
 
 /**
  * An item that can be displayed inside a bulletin card.
@@ -16,7 +16,7 @@
 #pragma mark - Configuration
 
 /**
- * The current object managing the item.
+ * The current view controller presenting the item.
  *
  * This property is set when the item is currently being displayed. It will be set to `nil` when
  * the item is removed from view.
@@ -24,7 +24,7 @@
  * When implementing `BLTNItem`, you should mark this property `weak` to avoid retain cycles.
  */
 
-@property (nonatomic, nullable, weak) BLTNItemManager *manager;
+@property (nonatomic, nullable, weak) BLTNViewController *parent;
 
 /**
  * Whether the page can be dismissed.

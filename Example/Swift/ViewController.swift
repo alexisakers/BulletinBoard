@@ -35,27 +35,12 @@ class ViewController: UIViewController {
 
     // MARK: - Bulletin Manager
 
-    /**
-     * Configures the bulletin manager.
-     *
-     * We first need to create the first bulletin item we want to display. Then, we use it to create
-     * the bulletin manager.
-     */
-
-    lazy var bulletinManager: BLTNItemManager = {
-        let introPage = BulletinDataSource.makeIntroPage()
-        return BLTNItemManager(rootItem: introPage)
-    }()
-
     // MARK: - View
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
-        prepareForBulletin()
 
         // Set up the data
-
         let favoriteTab = BulletinDataSource.favoriteTabIndex
         segmentedControl.selectedSegmentIndex = favoriteTab
         dataSource = favoriteTab == 0 ? .cat : .dog
@@ -77,7 +62,11 @@ class ViewController: UIViewController {
 
         collectionView.contentInset.top = 8
         collectionView.contentInset.bottom = 8
+    }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        prepareForBulletin()
     }
 
     deinit {
@@ -91,9 +80,7 @@ class ViewController: UIViewController {
      */
 
     func prepareForBulletin() {
-
         // Register notification observers
-
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(setupDidComplete),
                                                name: .SetupDidComplete,
@@ -105,7 +92,6 @@ class ViewController: UIViewController {
                                                object: nil)
 
         // Add toolbar items
-
         let fontItem = UIBarButtonItem(title: BulletinDataSource.useAvenirFont ? "Avenir" : "San Francisco",
                                        style: .plain,
                                        target: self,
@@ -124,7 +110,6 @@ class ViewController: UIViewController {
         if !BulletinDataSource.userDidCompleteSetup {
             showBulletin()
         }
-
     }
 
     /**
@@ -132,25 +117,13 @@ class ViewController: UIViewController {
      */
 
     func showBulletin() {
-
-        reloadManager()
-
-//        Uncomment to customize interface
-//        bulletinManager.cardCornerRadius = 22
-//        bulletinManager.edgeSpacing = .none
-//        bulletinManager.allowsSwipeInteraction = false
-//        bulletinManager.hidesHomeIndicator = true
-//        bulletinManager.backgroundColor = .blue
-
-        bulletinManager.backgroundViewStyle = currentBackground.style
-        bulletinManager.statusBarAppearance = shouldHideStatusBar ? .hidden : .automatic
-        bulletinManager.showBulletin(above: self)
-
-    }
-
-    func reloadManager() {
         let introPage = BulletinDataSource.makeIntroPage()
-        bulletinManager = BLTNItemManager(rootItem: introPage)
+
+        let bulletin = BLTNViewController(rootItem: introPage)
+        bulletin.backgroundViewStyle = currentBackground.style
+        bulletin.statusBarAppearance = shouldHideStatusBar ? .hidden : .automatic
+
+        present(bulletin, animated: true)
     }
 
     // MARK: - Actions
@@ -194,13 +167,11 @@ class ViewController: UIViewController {
     @objc func fontButtonItemTapped(sender: UIBarButtonItem) {
         BulletinDataSource.useAvenirFont = !BulletinDataSource.useAvenirFont
         sender.title = BulletinDataSource.currentFontName()
-        reloadManager()
     }
 
     @objc func fullScreenButtonTapped(sender: UIBarButtonItem) {
         shouldHideStatusBar = !shouldHideStatusBar
         sender.title = shouldHideStatusBar ? "Status Bar: OFF" : "Status Bar: ON"
-        reloadManager()
     }
 
     // MARK: - Notifications

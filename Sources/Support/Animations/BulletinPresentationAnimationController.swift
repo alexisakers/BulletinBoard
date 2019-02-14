@@ -27,7 +27,7 @@ class BulletinPresentationAnimationController: NSObject, UIViewControllerAnimate
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
 
-        guard let toVC = transitionContext.viewController(forKey: .to) as? BulletinViewController else {
+        guard let toVC = transitionContext.viewController(forKey: .to) as? BLTNViewController else {
             return
         }
 
@@ -38,7 +38,7 @@ class BulletinPresentationAnimationController: NSObject, UIViewControllerAnimate
 
         let rootView = toVC.view!
         let contentView = toVC.contentView
-        let backgroundView = toVC.backgroundView!
+        let backgroundView = toVC.backgroundView
         let containerView = transitionContext.containerView
 
         // Add root view

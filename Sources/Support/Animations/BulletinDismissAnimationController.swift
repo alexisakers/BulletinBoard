@@ -15,14 +15,14 @@ class BulletinDismissAnimationController: NSObject, UIViewControllerAnimatedTran
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
 
-        guard let fromVC = transitionContext.viewController(forKey: .from) as? BulletinViewController else {
+        guard let fromVC = transitionContext.viewController(forKey: .from) as? BLTNViewController else {
             transitionContext.completeTransition(false)
             return
         }
 
         let rootView = fromVC.view!
         let contentView = fromVC.contentView
-        let backgroundView = fromVC.backgroundView!
+        let backgroundView = fromVC.backgroundView
         let activityIndicatorView = fromVC.activityIndicator
         let snapshotActivityIndicator = ActivityIndicator()
         snapshotActivityIndicator.startAnimating()

@@ -74,7 +74,7 @@ class PetValidationBLTNItem: FeedbackPageBLTNItem {
 
         // > Display the loading indicator
 
-        manager?.displayActivityIndicator()
+        parent?.displayActivityIndicator()
 
         // > Wait for a "task" to complete before displaying the next item
 
@@ -90,7 +90,7 @@ class PetValidationBLTNItem: FeedbackPageBLTNItem {
             // Display next item
 
             self.next = BulletinDataSource.makeCompletionPage()
-            self.manager?.displayNextItem()
+            self.parent?.displayNextItem()
 
         }
 
@@ -104,9 +104,7 @@ class PetValidationBLTNItem: FeedbackPageBLTNItem {
         selectionFeedbackGenerator.selectionChanged()
 
         // Display previous item
-
-        manager?.popItem()
-
+        parent?.popItem()
     }
 
 }

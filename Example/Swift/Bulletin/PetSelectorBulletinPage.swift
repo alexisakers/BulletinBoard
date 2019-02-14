@@ -190,14 +190,12 @@ class PetSelectorBulletinPage: FeedbackPageBLTNItem {
     }
 
     override func actionButtonTapped(sender: UIButton) {
-
         // Play haptic feedback
         selectionFeedbackGenerator.prepare()
         selectionFeedbackGenerator.selectionChanged()
 
         // Ask the manager to present the next item.
-        manager?.displayNextItem()
-
+        parent?.displayNextItem()
     }
 
 }

@@ -57,13 +57,13 @@
 #pragma mark - BLTNItem
 
 /**
- * The object managing the item.
+ * The view controller presenting the item.
  *
  * This property is set when the item is currently being displayed. It will be set to `nil` when
  * the item is removed from bulletin.
  */
 
-@property (nonatomic, nullable, weak) BLTNItemManager *manager;
+@property (nonatomic, nullable, weak) BLTNViewController *parent;
 
 /**
  * Whether the page can be dismissed.

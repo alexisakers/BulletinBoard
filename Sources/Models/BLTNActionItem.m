@@ -22,7 +22,7 @@
     if (self) {
         self.actionButtonTitle = nil;
         self.alternativeButtonTitle = nil;
-        self.manager = nil;
+        self.parent = nil;
         self.dismissable = YES;
         self.requiresCloseButton = YES;
         self.shouldStartWithActivityIndicator = NO;
