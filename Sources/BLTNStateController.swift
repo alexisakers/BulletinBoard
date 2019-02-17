@@ -26,6 +26,11 @@ class BLTNStateController {
         }
     }
 
+    /// Whether we need to display a close button for the current item.
+    var needsCloseButton: Bool {
+        return currentItem.isDismissable && currentItem.requiresCloseButton
+    }
+
     weak var delegate: BLTNStateControllerDelegate?
 
     init(rootItem: BLTNItem) {
@@ -54,15 +59,13 @@ class BLTNStateController {
     /// Removes the current item from the stack and displays the previous item.
     func popItem() {
         guard let previousItem = itemsStack.popLast() else {
-            popToRootItem()
-            return
+            return popToRootItem()
         }
 
         self.previousItem = previousItem
 
         guard let currentItem = itemsStack.last else {
-            popToRootItem()
-            return
+            return popToRootItem()
         }
 
         self.currentItem = currentItem

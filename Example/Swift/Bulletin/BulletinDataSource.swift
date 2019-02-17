@@ -41,11 +41,9 @@ enum BulletinDataSource {
         page.shouldStartWithActivityIndicator = true
 
         page.presentationHandler = { item in
-
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
                 item.parent?.hideActivityIndicator()
             }
-
         }
 
         page.actionHandler = { item in

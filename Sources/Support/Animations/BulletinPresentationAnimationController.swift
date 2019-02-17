@@ -65,8 +65,10 @@ class BulletinPresentationAnimationController: NSObject, UIViewControllerAnimate
         let duration = transitionDuration(using: transitionContext)
         let options = UIView.AnimationOptions(rawValue: 7 << 16)
 
+        contentView.transform = CGAffineTransform(translationX: 0, y: containerView.frame.height)
+
         let animations = {
-            toVC.moveIntoPlace()
+            contentView.transform = .identity
             backgroundView.show()
         }
 

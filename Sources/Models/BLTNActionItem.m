@@ -155,6 +155,7 @@
     
 - (void)willDisplay
 {
+    // no-op
 }
 
 - (void)onDisplay

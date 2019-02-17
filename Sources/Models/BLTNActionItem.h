@@ -7,7 +7,6 @@
 
 #import "BLTNItem.h"
 
-@class BLTNItemManager;
 @class BLTNItemAppearance;
 @class BLTNInterfaceBuilder;
 
@@ -92,7 +91,7 @@
  * Whether the page should start with an activity indicator.
  *
  * Set this value to `false` to display the elements right away. If you set it to `true`,
- * you'll need to call `manager?.hideActivityIndicator()` to show the UI.
+ * you'll need to call `parent?.hideActivityIndicator()` to show the UI.
  *
  * This defaults to `false`.
  */
@@ -192,7 +191,7 @@
  * in your implementation.
  */
 
-- (void)actionButtonTappedWithSender:(UIButton * _Nonnull)sender NS_SWIFT_NAME(actionButtonTapped(sender:));
+- (void)actionButtonTappedWithSender:(UIButton * _Nonnull)sender NS_SWIFT_NAME(actionButtonTapped(sender:)) NS_REQUIRES_SUPER;
 
 /**
  * Handles a tap on the alternative button.
@@ -201,7 +200,7 @@
  * in your implementation.
  */
 
-- (void)alternativeButtonTappedWithSender:(UIButton * _Nonnull)sender NS_SWIFT_NAME(alternativeButtonTapped(sender:));
+- (void)alternativeButtonTappedWithSender:(UIButton * _Nonnull)sender NS_SWIFT_NAME(alternativeButtonTapped(sender:)) NS_REQUIRES_SUPER;
 
 #pragma mark - View Management
 
@@ -245,16 +244,16 @@
 #pragma mark - Events
 
 /**
- * Called by the manager when the item was added to the bulletin.
+ * Called by the parent view controller when the item was added to the bulletin.
  *
  * Override this function to configure your managed views, and allocate any resources required
  * for this item. Make sure to call `super` if you override this method.
  */
 
-- (void)setUp;
+- (void)setUp NS_REQUIRES_SUPER;
 
 /**
- * Called by the manager when the item was removed from the bulletin view.
+ * Called by the parent view controller when the item was removed from the bulletin view.
  *
  * Override this method if elements you returned in `makeContentViews` need cleanup. Make sure
  * to call `super` if you override this method.
@@ -262,26 +261,26 @@
  * This is an implementation detail of `BLTNItem` and you should not call it directly.
  */
 
-- (void)tearDown;
+- (void)tearDown NS_REQUIRES_SUPER;
     
 /**
-* Called by the manager when bulletin item is about to be pushed onto the view.
+* Called by the parent view controller when bulletin item is about to be pushed onto the view.
 */
     
-- (void)willDisplay;
+- (void)willDisplay NS_REQUIRES_SUPER;
 
 /**
- * Called by the manager when bulletin item is pushed onto the view.
+ * Called by the parent view controller when bulletin item is pushed onto the view.
  *
  * By default, this method calls trhe `presentationHandler` of the action item. Override this
  * method if you need to perform additional preparation after presentation (although using
  * `setUp` is preferred).
  */
 
-- (void)onDisplay;
+- (void)onDisplay NS_REQUIRES_SUPER;
 
 /**
- * Called by the manager when bulletin item is dismissed. This is called after the bulletin
+ * Called by the parent view controller when bulletin item is dismissed. This is called after the bulletin
  * is moved out of view.
  *
  * By default, this method calls trhe `dismissalHandler` of the action item. Override this
@@ -289,6 +288,6 @@
  * `tearDown` is preferred).
  */
 
-- (void)onDismiss;
+- (void)onDismiss NS_REQUIRES_SUPER;
 
 @end

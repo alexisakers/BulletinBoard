@@ -214,7 +214,8 @@ import UIKit
     @objc public func displayActivityIndicator(color: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)) {
         assertIsPrepared()
         assertIsMainThread()
-        bulletinController.displayActivityIndicator(color: color)
+        bulletinController.activityIndicatorColor = color
+        bulletinController.displayActivityIndicator()
     }
 
     /**

@@ -65,7 +65,16 @@ import UIKit
     /// The home indicator for iPhone X should be hidden or not. Defaults to false.
     @objc public var hidesHomeIndicator: Bool = false {
         didSet {
-            updateHidesHomeIndicator()
+            if #available(iOS 11, *) {
+                setNeedsUpdateOfHomeIndicatorAutoHidden()
+            }
+        }
+    }
+
+    /// The tint color to use for the activity indicator.
+    @objc public var activityIndicatorColor: UIColor = .black {
+        didSet {
+            activityIndicator.color = activityIndicatorColor
         }
     }
 
@@ -85,22 +94,10 @@ import UIKit
         }
     }
 
-
     // MARK: - Internal Properties
 
     /// Controls the state of the items.
     let stateController: BLTNStateController
-
-    /// Whether the activity indicator should be displayed.
-    fileprivate var shouldDisplayActivityIndicator: Bool = false
-
-    /// Whether the bulletin is being prepared.
-    fileprivate var isPreparing: Bool = true
-
-    var needsCloseButton: Bool {
-        let currentItem = stateController.currentItem
-        return currentItem.isDismissable && currentItem.requiresCloseButton
-    }
 
     // MARK: - UI Elements
 
@@ -136,7 +133,6 @@ import UIKit
     fileprivate var leadingConstraint: NSLayoutConstraint!
     fileprivate var trailingConstraint: NSLayoutConstraint!
     fileprivate var centerXConstraint: NSLayoutConstraint!
-    fileprivate var maxWidthConstraint: NSLayoutConstraint!
 
     // Regular constraints
     fileprivate var widthConstraint: NSLayoutConstraint!
@@ -148,7 +144,6 @@ import UIKit
     fileprivate var stackBottomConstraint: NSLayoutConstraint!
 
     // Position constraints
-    fileprivate var minYConstraint: NSLayoutConstraint!
     fileprivate var contentTopConstraint: NSLayoutConstraint!
     fileprivate var contentBottomConstraint: NSLayoutConstraint!
 
@@ -165,9 +160,9 @@ import UIKit
 
     @objc public init(rootItem: BLTNItem) {
         self.stateController = BLTNStateController(rootItem: rootItem)
-        self.shouldDisplayActivityIndicator = rootItem.shouldStartWithActivityIndicator
         super.init(nibName: nil, bundle: nil)
 
+        stateController.delegate = self
         modalPresentationCapturesStatusBarAppearance = true
         modalPresentationStyle = .overFullScreen
         transitioningDelegate = self
@@ -187,6 +182,7 @@ import UIKit
 
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        contentBottomConstraint.constant = -bottomMargin()
         setUpLayout(with: traitCollection)
     }
 
@@ -217,12 +213,14 @@ import UIKit
         recognizer.delaysTouchesEnded = false
         view.addGestureRecognizer(recognizer)
 
+        // Background View
+        backgroundView.style = backgroundViewStyle
+
         // Content View
         contentView.accessibilityViewIsModal = true
         view.addSubview(contentView)
 
         // Close button
-        closeButton.isUserInteractionEnabled = true
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         contentView.addSubview(closeButton)
 
@@ -237,34 +235,17 @@ import UIKit
         activityIndicator.style = .whiteLarge
         activityIndicator.color = .black
         activityIndicator.isUserInteractionEnabled = false
-        view.addSubview(activityIndicator)
+        contentView.addSubview(activityIndicator)
+
+        configureConstraints()
 
         // Configuration
-        configureContentView()
-        configureConstraints()
+        updateBackgroundColor()
+        updateEdgeSpacing()
         setUpKeyboardLogic()
 
-        refreshInterface(currentItem: stateController.rootItem, elementsChanged: false)
+        refreshInterface(currentItem: stateController.rootItem)
         contentView.bringSubviewToFront(closeButton)
-    }
-
-    /// Configure content view with customizations.
-    private func configureContentView() {
-        // Colors
-        updateCornerRadius()
-        updateBackgroundColor()
-        backgroundView.style = backgroundViewStyle
-
-        // Edge Spacing
-        leadingConstraint = contentView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor)
-        trailingConstraint = contentView.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor)
-        maxWidthConstraint = contentView.widthAnchor.constraint(lessThanOrEqualTo: view.safeWidthAnchor)
-        updateEdgeSpacing()
-
-        maxWidthConstraint.priority = .required
-        maxWidthConstraint.isActive = true
-
-        updateHidesHomeIndicator()
     }
 
     /// Configure the constraints of the view.
@@ -274,26 +255,27 @@ import UIKit
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
 
+        // Card: Horizontal
+        leadingConstraint = contentView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor)
+        trailingConstraint = contentView.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor)
         centerXConstraint = contentView.centerXAnchor.constraint(equalTo: view.safeCenterXAnchor)
-        centerYConstraint = contentView.centerYAnchor.constraint(equalTo: view.safeCenterYAnchor)
-        centerYConstraint.constant = 2500
-
         widthConstraint = contentView.widthAnchor.constraint(equalToConstant: 444)
-        widthConstraint.priority = .required
 
         stackLeadingConstraint = contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
         stackTrailingConstraint = contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
 
-        minYConstraint = contentView.topAnchor.constraint(greaterThanOrEqualTo: view.safeTopAnchor)
-        minYConstraint.priority = UILayoutPriority.required
-
-        stackBottomConstraint = contentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        // Card: Vertical
         contentTopConstraint = contentView.topAnchor.constraint(equalTo: contentStackView.topAnchor)
+        stackBottomConstraint = contentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        contentBottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.safeBottomAnchor)
+
+        // Card: Vertical (Regular)
+        centerYConstraint = contentView.centerYAnchor.constraint(equalTo: view.safeCenterYAnchor)
 
         NSLayoutConstraint.activate([
             // activityIndicator
-            activityIndicator.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-            activityIndicator.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            activityIndicator.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            activityIndicator.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             activityIndicator.topAnchor.constraint(equalTo: contentView.topAnchor),
             activityIndicator.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
 
@@ -306,8 +288,8 @@ import UIKit
             // contentStackView
             stackLeadingConstraint,
             stackTrailingConstraint,
-            minYConstraint,
-            stackBottomConstraint
+            contentTopConstraint,
+            stackBottomConstraint,
         ])
     }
 
@@ -368,58 +350,58 @@ extension BLTNViewController: BLTNStateControllerDelegate {
 extension BLTNViewController {
 
     func stateController(_ controller: BLTNStateController, didUpdateCurrentItem currentItem: BLTNItem) {
-        shouldDisplayActivityIndicator = currentItem.shouldStartWithActivityIndicator
-        refreshInterface(currentItem: currentItem, elementsChanged: true)
+        refreshInterface(currentItem: currentItem)
     }
 
     /// Refreshes the interface for the current item.
-    fileprivate func refreshInterface(currentItem: BLTNItem, elementsChanged: Bool = true) {
+    fileprivate func refreshInterface(currentItem: BLTNItem) {
         isDismissable = false
         swipeInteractionController?.cancelIfNeeded()
         refreshSwipeInteractionController()
 
+        let isInitialLayout = contentStackView.arrangedSubviews.isEmpty
+
         // Prepare the loading indicator animation
-        let showActivityIndicator = self.shouldDisplayActivityIndicator
-        let contentAlpha: CGFloat = showActivityIndicator ? 0 : 1
+        let showActivityIndicator = currentItem.shouldStartWithActivityIndicator
 
         // Tear down old item
         let oldArrangedSubviews = contentStackView.arrangedSubviews
         let oldHideableArrangedSubviews = recursiveArrangedSubviews(in: oldArrangedSubviews)
 
         // Create new views
-        let newArrangedSubviews = stateController.currentItem.makeArrangedSubviews()
+        let newArrangedSubviews = currentItem.makeArrangedSubviews()
         let newHideableArrangedSubviews = recursiveArrangedSubviews(in: newArrangedSubviews)
 
-        if elementsChanged {
-            currentItem.setUp()
-            // currentItem.parent = self
+        currentItem.setUp()
+        currentItem.parent = self
 
-            for arrangedSubview in newHideableArrangedSubviews {
-                arrangedSubview.isHidden = isPreparing ? false : true
-            }
+        for arrangedSubview in newHideableArrangedSubviews {
+            arrangedSubview.isHidden = isInitialLayout ? false : true
+        }
 
-            for arrangedSubview in newArrangedSubviews {
-                contentStackView.addArrangedSubview(arrangedSubview)
-            }
+        for arrangedSubview in newArrangedSubviews {
+            contentStackView.addArrangedSubview(arrangedSubview)
         }
 
         // Animate transition
-        let animationDuration = isPreparing ? 0 : 0.75
+        let animationDuration = isInitialLayout ? 0 : 0.75
         let transitionAnimationChain = AnimationChain(duration: animationDuration)
 
         let hideSubviewsAnimationPhase = AnimationPhase(relativeDuration: 1/3, curve: .linear)
 
         hideSubviewsAnimationPhase.block = {
-            if !showActivityIndicator {
-                self.hideActivityIndicator()
-            }
-
             for arrangedSubview in oldArrangedSubviews {
                 arrangedSubview.alpha = 0
             }
 
             for arrangedSubview in newArrangedSubviews {
                 arrangedSubview.alpha = 0
+            }
+        }
+
+        hideSubviewsAnimationPhase.completionHandler = {
+            if !showActivityIndicator {
+                self.hideActivityIndicator()
             }
         }
 
@@ -442,38 +424,34 @@ extension BLTNViewController {
         let finalAnimationPhase = AnimationPhase(relativeDuration: 1/3, curve: .linear)
 
         finalAnimationPhase.block = {
-            let currentElements = elementsChanged ? newArrangedSubviews : oldArrangedSubviews
-            self.contentStackView.alpha = contentAlpha
-            self.updateCloseButton(isRequired: self.needsCloseButton && !showActivityIndicator)
+            self.contentStackView.alpha = showActivityIndicator ? 0 : 1
+            self.updateCloseButton(isRequired: self.stateController.needsCloseButton)
 
-            for arrangedSubview in currentElements {
-                arrangedSubview.alpha = contentAlpha
+            for arrangedSubview in newArrangedSubviews {
+                arrangedSubview.alpha = 1
             }
         }
 
         finalAnimationPhase.completionHandler = {
-            self.isDismissable = currentItem.isDismissable && !showActivityIndicator
+            self.isDismissable = currentItem.isDismissable
 
-            if elementsChanged {
-                currentItem.onDisplay()
+            currentItem.onDisplay()
 
-                for arrangedSubview in oldArrangedSubviews {
-                    self.contentStackView.removeArrangedSubview(arrangedSubview)
-                    arrangedSubview.removeFromSuperview()
-                }
+            for arrangedSubview in oldArrangedSubviews {
+                self.contentStackView.removeArrangedSubview(arrangedSubview)
+                arrangedSubview.removeFromSuperview()
             }
 
-            UIAccessibility.post(notification: .screenChanged, argument: newArrangedSubviews.first)
+            if showActivityIndicator {
+                self.displayActivityIndicator()
+            } else {
+                UIAccessibility.post(notification: .screenChanged, argument: newArrangedSubviews.first)
+            }
         }
 
         // Perform animation
-        if elementsChanged {
-            transitionAnimationChain.add(hideSubviewsAnimationPhase)
-            transitionAnimationChain.add(displayNewItemsAnimationPhase)
-        } else {
-            hideActivityIndicator()
-        }
-
+        transitionAnimationChain.add(hideSubviewsAnimationPhase)
+        transitionAnimationChain.add(displayNewItemsAnimationPhase)
         transitionAnimationChain.add(finalAnimationPhase)
         transitionAnimationChain.start()
     }
@@ -515,15 +493,6 @@ extension BLTNViewController {
             NSLayoutConstraint.deactivate([leadingConstraint, trailingConstraint, contentBottomConstraint])
             NSLayoutConstraint.activate([centerXConstraint, centerYConstraint, widthConstraint])
 
-        case .compact:
-            NSLayoutConstraint.deactivate([centerXConstraint, centerYConstraint, widthConstraint])
-            NSLayoutConstraint.activate([leadingConstraint, trailingConstraint, contentBottomConstraint])
-        default:
-            break
-        }
-
-        switch (traitCollection.verticalSizeClass, traitCollection.horizontalSizeClass) {
-        case (.regular, .regular):
             stackLeadingConstraint.constant = 32
             stackTrailingConstraint.constant = -32
             stackBottomConstraint.constant = -32
@@ -531,6 +500,9 @@ extension BLTNViewController {
             contentStackView.spacing = 32
 
         default:
+            NSLayoutConstraint.deactivate([centerXConstraint, centerYConstraint, widthConstraint])
+            NSLayoutConstraint.activate([leadingConstraint, trailingConstraint, contentBottomConstraint])
+
             stackLeadingConstraint.constant = 24
             stackTrailingConstraint.constant = -24
             stackBottomConstraint.constant = -24
@@ -542,31 +514,13 @@ extension BLTNViewController {
     // MARK: - Transition Adaptivity
 
     func bottomMargin() -> CGFloat {
+        var initialPadding: CGFloat = 0
+
         if #available(iOS 11, *) {
-            if view.safeAreaInsets.bottom > 0 {
-                // Do not add spacing above the home indicator is shown.
-                return 0
-            }
+            initialPadding = view.safeAreaInsets.bottom
         }
 
-        var bottomMargin: CGFloat = edgeSpacing.rawValue
-
-        if hidesHomeIndicator {
-            bottomMargin = bottomMargin == 0 ? 0 : 6
-        }
-
-        return bottomMargin
-
-    }
-
-    /// Moves the content view to its final location on the screen. Use during presentation.
-    func moveIntoPlace() {
-        contentBottomConstraint.constant = -bottomMargin()
-        centerYConstraint.constant = 0
-
-        view.layoutIfNeeded()
-        contentView.layoutIfNeeded()
-        backgroundView.layoutIfNeeded()
+        return edgeSpacing.rawValue - initialPadding
     }
 
     // MARK: - Presentation/Dismissal
@@ -655,33 +609,11 @@ extension BLTNViewController {
         let padding = edgeSpacing.rawValue
         leadingConstraint.constant = padding
         trailingConstraint.constant = -padding
-        maxWidthConstraint.constant = -(padding * 2)
     }
 
     private func updateBackgroundColor() {
         contentView.backgroundColor = backgroundColor
         closeButton.updateColors(isDarkBackground: backgroundColor.needsDarkText)
-    }
-
-    private func updateHidesHomeIndicator() {
-        // Reset the constraint
-        if let currentConstraint = contentTopConstraint {
-            contentTopConstraint?.isActive = false
-            contentView.removeConstraint(currentConstraint)
-        }
-
-        if hidesHomeIndicator {
-            contentBottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        } else {
-            contentBottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.safeBottomAnchor)
-        }
-
-        contentBottomConstraint.constant = 1000
-        contentBottomConstraint.isActive = true
-
-        if #available(iOS 11, *) {
-            setNeedsUpdateOfHomeIndicatorAutoHidden()
-        }
     }
 
 }
@@ -704,14 +636,13 @@ extension BLTNViewController {
      * Displaying the loading indicator does not change the height of the page or the current item.
      */
 
-    @objc public func displayActivityIndicator(color: UIColor = .black) {
-        activityIndicator.color = color
+    @objc public func displayActivityIndicator() {
+        activityIndicator.color = activityIndicatorColor
         activityIndicator.startAnimating()
 
         let animations = {
             self.activityIndicator.alpha = 1
             self.contentStackView.alpha = 0
-            self.closeButton.alpha = 0
         }
 
         UIView.animate(withDuration: 0.25, animations: animations) { _ in
@@ -732,7 +663,7 @@ extension BLTNViewController {
 
         let animations = {
             self.activityIndicator.alpha = 0
-            self.updateCloseButton(isRequired: self.needsCloseButton)
+            self.contentStackView.alpha = 1
         }
 
         UIView.animate(withDuration: 0.25, animations: animations)
@@ -831,15 +762,8 @@ extension BLTNViewController {
         let animationOptions = UIView.AnimationOptions(curve: animationCurve)
 
         UIView.animate(withDuration: duration, delay: 0, options: animationOptions, animations: {
-            var bottomSpacing = -(keyboardFrameFinal.size.height + /*self.defaultBottomMargin*/ 0)
+            let bottomSpacing = -(keyboardFrameFinal.size.height + self.bottomMargin())
 
-            if #available(iOS 11.0, *) {
-                if self.hidesHomeIndicator == false {
-                    bottomSpacing += self.view.safeAreaInsets.bottom
-                }
-            }
-
-            self.minYConstraint.isActive = false
             self.contentBottomConstraint.constant = bottomSpacing
             self.centerYConstraint.constant = -(keyboardFrameFinal.size.height + 12) / 2
             self.contentView.superview?.layoutIfNeeded()
@@ -864,7 +788,6 @@ extension BLTNViewController {
         let animationOptions = UIView.AnimationOptions(curve: animationCurve)
 
         UIView.animate(withDuration: duration, delay: 0, options: animationOptions, animations: {
-            self.minYConstraint.isActive = true
             self.contentBottomConstraint.constant = -self.bottomMargin()
             self.centerYConstraint.constant = 0
             self.contentView.superview?.layoutIfNeeded()
