@@ -23,12 +23,14 @@
 
 - (void)onDisplay
 {
+    [super onDisplay];
     // Uncomment to start typing when the bulletin item is presented
     // [self.textField becomeFirstResponder];
 }
 
 - (void)tearDown
 {
+    [super tearDown];
     [self.textField setDelegate:nil];
 }
 

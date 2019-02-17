@@ -14,7 +14,6 @@
 		5543848F1F92050300AFFBCD /* BulletinDismissAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5543848E1F92050300AFFBCD /* BulletinDismissAnimationController.swift */; };
 		5568227E1F864B270038E8DD /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568227D1F864B270038E8DD /* ActivityIndicator.swift */; };
 		5569CB7F1F920B72000F31EB /* BulletinSwipeInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5569CB7E1F920B72000F31EB /* BulletinSwipeInteractionController.swift */; };
-		558A12301F7D73CD005EC97C /* BLTNItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122A1F7D73CD005EC97C /* BLTNItemManager.swift */; };
 		558A12321F7D73CD005EC97C /* BLTNViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122C1F7D73CD005EC97C /* BLTNViewController.swift */; };
 		558A12331F7D73CD005EC97C /* HighlightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122D1F7D73CD005EC97C /* HighlightButton.swift */; };
 		558D8089218DC5B6000ADAFD /* BLTNBoardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558D8088218DC5B6000ADAFD /* BLTNBoardTests.swift */; };
@@ -80,7 +79,6 @@
 		5543848E1F92050300AFFBCD /* BulletinDismissAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinDismissAnimationController.swift; sourceTree = "<group>"; };
 		5568227D1F864B270038E8DD /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		5569CB7E1F920B72000F31EB /* BulletinSwipeInteractionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinSwipeInteractionController.swift; sourceTree = "<group>"; };
-		558A122A1F7D73CD005EC97C /* BLTNItemManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLTNItemManager.swift; sourceTree = "<group>"; };
 		558A122C1F7D73CD005EC97C /* BLTNViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLTNViewController.swift; sourceTree = "<group>"; };
 		558A122D1F7D73CD005EC97C /* HighlightButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighlightButton.swift; sourceTree = "<group>"; };
 		558D8086218DC5B5000ADAFD /* BLTNBoardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BLTNBoardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -262,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				5E9D326C2108FCED0032FB06 /* BLTNBoardSwiftSupport.h */,
+				55F112CD22107B5100651A85 /* BLTNStateController.swift */,
 				55BDB0D220BAFB9C005A6C2B /* Helpers */,
 				55B3D1D21FDD645900737791 /* Views */,
 				55B3D1D31FDD646400737791 /* Animations */,
@@ -283,9 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				55CB0F84204D6466001D0393 /* BLTNBoard.h */,
-				558A122A1F7D73CD005EC97C /* BLTNItemManager.swift */,
 				558A122C1F7D73CD005EC97C /* BLTNViewController.swift */,
-				55F112CD22107B5100651A85 /* BLTNStateController.swift */,
 				55BDB08820B9BF25005A6C2B /* Deprecations.swift */,
 				55B3D1D11FDD644300737791 /* Models */,
 				55B3D1D01FDD643B00737791 /* Appearance */,
@@ -456,7 +453,6 @@
 				55E8621920B844F800584EAC /* BLTNContainerView.swift in Sources */,
 				5543848D1F92026200AFFBCD /* BulletinBackgroundView.swift in Sources */,
 				55E8621720B7F23A00584EAC /* RoundedViewProtocol.swift in Sources */,
-				558A12301F7D73CD005EC97C /* BLTNItemManager.swift in Sources */,
 				55BF9C021F962FD700347D45 /* UIView+SafeAnchors.swift in Sources */,
 				55E8621B20B8476000584EAC /* BLTNViewPosition.swift in Sources */,
 				550675691F90A0A500874D8B /* BLTNBackgroundViewStyle.swift in Sources */,

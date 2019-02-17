@@ -28,3 +28,6 @@ import Foundation
 
 @available(*, unavailable, renamed: "BLTNHighlightButtonWrapper")
 @objc public class HighlightButtonWrapper: UIView {}
+
+@available(*, unavailable, renamed: "BLTNViewController")
+@objc public class BLTNItemManager: NSObject {}

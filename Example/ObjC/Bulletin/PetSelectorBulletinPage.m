@@ -105,6 +105,7 @@
 
 - (void)tearDown
 {
+    [super tearDown];
     [self.catButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [self.dogButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 }
@@ -151,12 +152,14 @@
 
 - (void)actionButtonTappedWithSender:(UIButton *)sender
 {
+    [super actionButtonTappedWithSender:sender];
+    
     // Play haptic feedback
     [self.feedbackGenerator prepare];
     [self.feedbackGenerator selectionChanged];
 
     // Ask the manager to present the next item
-    [self.manager displayNextItem];
+    [self.parent displayNextItem];
 }
 
 @end

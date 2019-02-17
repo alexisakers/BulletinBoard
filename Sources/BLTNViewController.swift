@@ -427,6 +427,10 @@ extension BLTNViewController {
             self.contentStackView.alpha = showActivityIndicator ? 0 : 1
             self.updateCloseButton(isRequired: self.stateController.needsCloseButton)
 
+            if showActivityIndicator {
+                self.displayActivityIndicator()
+            }
+
             for arrangedSubview in newArrangedSubviews {
                 arrangedSubview.alpha = 1
             }
@@ -442,9 +446,7 @@ extension BLTNViewController {
                 arrangedSubview.removeFromSuperview()
             }
 
-            if showActivityIndicator {
-                self.displayActivityIndicator()
-            } else {
+            if !showActivityIndicator {
                 UIAccessibility.post(notification: .screenChanged, argument: newArrangedSubviews.first)
             }
         }

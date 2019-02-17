@@ -65,6 +65,7 @@
 
 - (void)tearDown
 {
+    [super tearDown];
     self.collectionView.dataSource = nil;
     self.collectionView.delegate = nil;
 }
@@ -73,12 +74,14 @@
 
 - (void)actionButtonTappedWithSender:(UIButton *)sender
 {
+    [super actionButtonTappedWithSender:sender];
+
     // Play selection haptic feedback
     [self.selectionFeedbackGenerator prepare];
     [self.selectionFeedbackGenerator selectionChanged];
 
     // Display the loading indicator
-    [self.manager displayActivityIndicatorWithColor:[UIColor blackColor]];
+    [self.parent displayActivityIndicator];
 
     // Wait for a "task" to complete before displaying the next item
 
@@ -89,18 +92,20 @@
 
         // Display next item
         self.nextItem = [BulletinDataSource makeCompletionPage];
-        [self.manager displayNextItem];
+        [self.parent displayNextItem];
     });
 }
 
 -(void)alternativeButtonTappedWithSender:(UIButton *)sender
 {
+    [super alternativeButtonTappedWithSender:sender];
+
     // Play selection haptic feedback
     [self.selectionFeedbackGenerator prepare];
     [self.selectionFeedbackGenerator selectionChanged];
 
     // Display previous item
-    [self.manager popItem];
+    [self.parent popItem];
 }
 
 #pragma mark - Collection View

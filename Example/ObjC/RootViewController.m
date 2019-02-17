@@ -12,7 +12,6 @@
 @interface RootViewController ()
 
 @property (nonatomic, strong) CollectionDataSource *dataSource;
-@property (nonatomic, strong) BLTNItemManager *bulletinManager;
 @property (nonatomic, strong) NSArray<BackgroundViewStyle *> *backgroundStyles;
 @property (nonatomic, strong) BackgroundViewStyle *currentBackground;
 @property (nonatomic) BOOL shouldHideStatusBar;
@@ -27,7 +26,6 @@
 {
     [super viewDidLoad];
 
-    [self reloadManager];
     self.backgroundStyles = BackgroundViewStyle.allStyles;
     self.currentBackground = BackgroundViewStyle.defaultStyle;
     self.shouldHideStatusBar = NO;
@@ -114,21 +112,18 @@
 
 - (void)showBulletin
 {
-    self.bulletinManager.backgroundViewStyle = self.currentBackground.style;
+    BLTNPageItem *introPage = [BulletinDataSource makeIntroPage];
+
+    BLTNViewController *bulletin = [[BLTNViewController alloc] initWithRootItem:introPage];
+    bulletin.backgroundViewStyle = self.currentBackground.style;
 
     if (self.shouldHideStatusBar == YES) {
-        self.bulletinManager.statusBarAppearance = BLTNStatusBarAppearanceHidden;
+        bulletin.statusBarAppearance = BLTNStatusBarAppearanceHidden;
     } else {
-        self.bulletinManager.statusBarAppearance = BLTNStatusBarAppearanceAutomatic;
+        bulletin.statusBarAppearance = BLTNStatusBarAppearanceAutomatic;
     }
 
-    [self.bulletinManager showBulletinAboveViewController:self animated:YES completion:NULL];
-}
-
-- (void)reloadManager
-{
-    BLTNPageItem *introPage = [BulletinDataSource makeIntroPage];
-    self.bulletinManager = [[BLTNItemManager alloc] initWithRootItem:introPage];
+    [self presentViewController:bulletin animated:YES completion:nil];
 }
 
 #pragma mark Notifications
@@ -212,14 +207,12 @@
 {
     [BulletinDataSource setUseAvenirFont:![BulletinDataSource useAvenirFont]];
     sender.title = BulletinDataSource.currentFontName;
-    [self reloadManager];
 }
 
 - (void)fullScreenButtonTapped:(UIBarButtonItem *)sender
 {
     self.shouldHideStatusBar = !(self.shouldHideStatusBar);
     sender.title = self.shouldHideStatusBar ? @"Status Bar: OFF" : @"Status Bar: On";
-    [self reloadManager];
 }
 
 #pragma mark Collection View

@@ -26,15 +26,13 @@
 
     // After the item is presented, show the contents after 3 seconds
     page.presentationHandler = ^(id<BLTNItem> _Nonnull _item) {
-
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [_item.manager hideActivityIndicator];
+            [_item.parent hideActivityIndicator];
         });
-
     };
 
     page.actionHandler = ^(BLTNActionItem * _Nonnull _item) {
-        [[_item manager] displayNextItem];
+        [_item.parent displayNextItem];
     };
 
     page.nextItem = [self makeTextFieldPage];
@@ -55,7 +53,7 @@
 
     page.textInputHandler = ^(TextFieldBulletinPage * item, NSString * _Nullable text) {
         NSLog(@"Text: %@", text);
-        [item.manager displayNextItem];
+        [item.parent displayNextItem];
     };
 
     page.nextItem = [self makeNotificationsPage];
@@ -79,11 +77,11 @@
 
     page.actionHandler = ^(BLTNActionItem * _Nonnull _item) {
         [[PermissionsManager sharedManager] requestLocalNotifications];
-        [[_item manager] displayNextItem];
+        [_item.parent displayNextItem];
     };
 
     page.alternativeHandler = ^(BLTNActionItem * _Nonnull _item) {
-        [[_item manager] displayNextItem];
+        [_item.parent displayNextItem];
     };
 
     page.nextItem = [self makeLocationPage];
@@ -108,11 +106,11 @@
 
     page.actionHandler = ^(BLTNActionItem * _Nonnull _item) {
         [[PermissionsManager sharedManager] requestWhenInUseLocation];
-        [[_item manager] displayNextItem];
+        [_item.parent displayNextItem];
     };
 
     page.alternativeHandler = ^(BLTNActionItem * _Nonnull _item) {
-        [[_item manager] displayNextItem];
+        [_item.parent displayNextItem];
     };
 
     page.nextItem = [self makeChoicePage];
@@ -156,11 +154,11 @@
     page.dismissable = NO;
 
     page.actionHandler = ^(BLTNActionItem * _Nonnull _item) {
-        [[_item manager] dismissBulletinAnimated:YES];
+        [_item.parent dismissViewControllerAnimated:YES completion:nil];
     };
 
     page.alternativeHandler = ^(BLTNActionItem * _Nonnull _item) {
-        [[_item manager] popToRootItem];
+        [_item.parent popToRootItem];
     };
 
     page.dismissalHandler = ^(id<BLTNItem> _Nonnull _item) {
