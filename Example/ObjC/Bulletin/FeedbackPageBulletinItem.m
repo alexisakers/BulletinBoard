@@ -8,7 +8,7 @@
 
 @interface FeedbackPageBulletinItem ()
 
-@property (nonatomic, strong) SelectionFeedbackGenerator *feedbackGenerator;
+@property (nonatomic, strong) UISelectionFeedbackGenerator *feedbackGenerator;
 
 @end
 

@@ -19,7 +19,6 @@ import UIKit
 
     /**
      * A custom spacing.
-     *
      * - parameter value: The spacing to apply.
      */
 
@@ -29,7 +28,6 @@ import UIKit
 
     /**
      * No spacing is applied. (value: 0)
-     *
      * If you use this padding, corner radii will be ignored.
      */
 

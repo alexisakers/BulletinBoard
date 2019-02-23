@@ -85,7 +85,7 @@
  * such as an action button.
  */
 
-@property (nonatomic) BOOL requiresCloseButton;
+@property (nonatomic) BOOL showsCloseButton;
 
 /**
  * Whether the page should start with an activity indicator.
@@ -272,7 +272,7 @@
 /**
  * Called by the parent view controller when bulletin item is pushed onto the view.
  *
- * By default, this method calls trhe `presentationHandler` of the action item. Override this
+ * By default, this method calls the `presentationHandler` of the action item. Override this
  * method if you need to perform additional preparation after presentation (although using
  * `setUp` is preferred).
  */
@@ -280,10 +280,16 @@
 - (void)onDisplay NS_REQUIRES_SUPER;
 
 /**
+ * Called by the parent view controller when bulletin item is about to be dismissed.
+ */
+
+- (void)willDismiss;
+
+/**
  * Called by the parent view controller when bulletin item is dismissed. This is called after the bulletin
  * is moved out of view.
  *
- * By default, this method calls trhe `dismissalHandler` of the action item. Override this
+ * By default, this method calls the `dismissalHandler` of the action item. Override this
  * method if you need to perform additional cleanup after dismissal (although using
  * `tearDown` is preferred).
  */

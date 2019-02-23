@@ -98,23 +98,19 @@ class BulletinCloseButton: UIControl, HighlighterTarget {
     }
 
     func highlight() {
-
         let animations = {
             self.alpha = 0.5
         }
 
         UIView.transition(with: self, duration: 0.1, animations: animations)
-
     }
 
     func unhighlight() {
-
         let animations = {
             self.alpha = 1
         }
 
         UIView.transition(with: self, duration: 0.1, animations: animations)
-
     }
 
 }

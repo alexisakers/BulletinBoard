@@ -65,7 +65,6 @@ class Highlighter {
      */
 
     func handleTouchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-
         guard let mainTouch = touches.first else {
             return
         }
@@ -84,7 +83,6 @@ class Highlighter {
         } else if isExiting {
             target?.unhighlight()
         }
-
     }
 
     /**
@@ -92,7 +90,6 @@ class Highlighter {
      */
 
     func handleTouchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-
         guard let mainTouch = touches.first else {
             return
         }
@@ -104,7 +101,6 @@ class Highlighter {
         }
 
         target?.unhighlight()
-
     }
 
 }

@@ -63,16 +63,13 @@ public class AnimationChain {
      */
 
     public func start() {
-
         precondition(!isRunning, "Animation chain already running.")
 
         isRunning = true
         performNextAnimation()
-
     }
 
     private func performNextAnimation() {
-
         guard animations.count > 0 else {
             completeGroup()
             return
@@ -92,7 +89,6 @@ public class AnimationChain {
             self.performNextAnimation()
 
         }
-
     }
 
     private func completeGroup() {

@@ -1,15 +1,12 @@
-//
-//  BLTNStateController.swift
-//  BLTNBoard
-//
-//  Created by Alexis AUBRY on 2/10/19.
-//  Copyright © 2019 Bulletin. All rights reserved.
-//
+/**
+ *  BulletinBoard
+ *  Copyright (c) 2017 - present Alexis Aubry. Licensed under the MIT license.
+ */
 
 import Foundation
 
 protocol BLTNStateControllerDelegate: class {
-    func stateController(_ controller: BLTNStateController, didUpdateCurrentItem currentItem: BLTNItem)
+    func stateController(_ controller: BLTNStateController, didUpdateCurrentItem currentItem: BLTNItem, previousItem: BLTNItem?)
 }
 
 class BLTNStateController {
@@ -28,7 +25,7 @@ class BLTNStateController {
 
     /// Whether we need to display a close button for the current item.
     var needsCloseButton: Bool {
-        return currentItem.isDismissable && currentItem.requiresCloseButton
+        return currentItem.isDismissable && currentItem.showsCloseButton
     }
 
     weak var delegate: BLTNStateControllerDelegate?
@@ -53,7 +50,7 @@ class BLTNStateController {
         previousItem = currentItem
         itemsStack.append(item)
         currentItem = item
-        delegate?.stateController(self, didUpdateCurrentItem: currentItem)
+        delegate?.stateController(self, didUpdateCurrentItem: currentItem, previousItem: previousItem)
     }
 
     /// Removes the current item from the stack and displays the previous item.
@@ -69,19 +66,15 @@ class BLTNStateController {
         }
 
         self.currentItem = currentItem
-        delegate?.stateController(self, didUpdateCurrentItem: currentItem)
+        delegate?.stateController(self, didUpdateCurrentItem: currentItem, previousItem: previousItem)
     }
 
     /// Removes all the items from the stack and displays the root item.
     func popToRootItem() {
-        guard currentItem !== rootItem else {
-            return
-        }
-
-        previousItem = currentItem
+        previousItem = currentItem === rootItem ? nil : currentItem
         itemsStack = []
         currentItem = rootItem
-        delegate?.stateController(self, didUpdateCurrentItem: currentItem)
+        delegate?.stateController(self, didUpdateCurrentItem: currentItem, previousItem: previousItem)
     }
 
     /**

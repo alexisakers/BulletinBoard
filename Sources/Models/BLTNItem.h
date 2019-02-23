@@ -21,7 +21,7 @@
  * This property is set when the item is currently being displayed. It will be set to `nil` when
  * the item is removed from view.
  *
- * When implementing `BLTNItem`, you should mark this property `weak` to avoid retain cycles.
+ * When implementing `BLTNItem`, you should mark this property as `weak` to avoid retain cycles.
  */
 
 @property (nonatomic, nullable, weak) BLTNViewController *parent;
@@ -41,20 +41,17 @@
 /**
  * Whether the page can be dismissed with a close button.
  *
- * The default value is `true`. The user will be able to dismiss the bulletin by tapping on a button
+ * The default value is `true`, the user will be able to dismiss the bulletin by tapping on a button
  * in the corner of the screen.
- *
- * You should set it to `false` if the interface of the bulletin already has buttons to dismiss the item,
- * such as an action button.
  */
 
-@property (nonatomic) BOOL requiresCloseButton;
+@property (nonatomic) BOOL showsCloseButton;
 
 /**
  * Whether the card should start with an activity indicator.
  *
  * Set this value to `false` to display the elements right away. If you set it to `true`,
- * you'll need to call `manager?.hideActivityIndicator()` to show the UI.
+ * you'll need to call `parent?.hideActivityIndicator()` to show the UI.
  */
 
 @property (nonatomic) BOOL shouldStartWithActivityIndicator;
@@ -72,7 +69,7 @@
 /**
  * The item to display after this one.
  *
- * If you set this value, you'll be able to call `manager?.displayNextItem()` to push the next item to
+ * If you set this value, you'll be able to call `parent?.displayNextItem()` to push the next item to
  * the stack.
  */
 
@@ -89,7 +86,7 @@
 - (NSArray<UIView *> * _Nonnull)makeArrangedSubviews;
 
 /**
- * Called by the manager when the item was added to the bulletin.
+ * Called by the parent controller when the item was added to the bulletin.
  *
  * Use this function to configure your managed views, and allocate any resources required
  * for this item.
@@ -98,7 +95,7 @@
 - (void)setUp;
 
 /**
- * Called by the manager when the item was removed from the bulletin.
+ * Called by the parent controller when the item was removed from the bulletin.
  *
  * Use this function to remove any button target or gesture recognizers from your managed views, and
  * deallocate any resources created for this item that are no longer needed.
@@ -107,16 +104,22 @@
 - (void)tearDown;
     
 /**
-* Called by the manager when bulletin item is about to be pushed onto the view.
+* Called by the parent controller when bulletin item is about to be pushed onto the view.
 */
     
 - (void)willDisplay;
 
 /**
- * Called by the manager when bulletin item is pushed onto the view.
+ * Called by the parent controller when bulletin item is pushed onto the view.
  */
 
 - (void)onDisplay;
+
+/**
+ * Called by the parent controller when bulletin item is about to be dismissed.
+ */
+
+- (void)willDismiss;
 
 /**
  * Called by the manager when bulletin item is dismissed. This is called after the bulletin

@@ -26,7 +26,6 @@ class BulletinPresentationAnimationController: NSObject, UIViewControllerAnimate
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-
         guard let toVC = transitionContext.viewController(forKey: .to) as? BLTNViewController else {
             return
         }
@@ -75,7 +74,6 @@ class BulletinPresentationAnimationController: NSObject, UIViewControllerAnimate
         UIView.animate(withDuration: duration, delay: 0, options: options, animations: animations) { _ in
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
-
     }
 
 }

@@ -14,7 +14,6 @@ class BulletinDismissAnimationController: NSObject, UIViewControllerAnimatedTran
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-
         guard let fromVC = transitionContext.viewController(forKey: .from) as? BLTNViewController else {
             transitionContext.completeTransition(false)
             return
@@ -84,7 +83,6 @@ class BulletinDismissAnimationController: NSObject, UIViewControllerAnimatedTran
             transitionContext.completeTransition(!isCancelled)
 
         }
-
     }
 
 }

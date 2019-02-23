@@ -24,7 +24,7 @@
         self.alternativeButtonTitle = nil;
         self.parent = nil;
         self.dismissable = YES;
-        self.requiresCloseButton = YES;
+        self.showsCloseButton = YES;
         self.shouldStartWithActivityIndicator = NO;
         self.shouldRespondToKeyboardChanges = YES;
         self.nextItem = nil;
@@ -163,6 +163,11 @@
     if (self.presentationHandler) {
         self.presentationHandler(self);
     }
+}
+
+- (void)willDismiss
+{
+    // no-op
 }
 
 - (void)onDismiss

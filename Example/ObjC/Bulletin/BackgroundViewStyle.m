@@ -29,25 +29,22 @@
     [styles addObject:none];
     [styles addObject:dimmed];
 
-    if (@available(iOS 10.0, *)) {
-
-        BackgroundViewStyle *extraLight = [[BackgroundViewStyle alloc] initWithName:@"Light"
+    BackgroundViewStyle *extraLight = [[BackgroundViewStyle alloc] initWithName:@"Light"
                                                                               style:[BLTNBackgroundViewStyle blurredLight]];
 
-        BackgroundViewStyle *light = [[BackgroundViewStyle alloc] initWithName:@"Extra Light"
+    BackgroundViewStyle *light = [[BackgroundViewStyle alloc] initWithName:@"Extra Light"
                                                                          style:[BLTNBackgroundViewStyle blurredExtraLight]];
 
-        BackgroundViewStyle *dark = [[BackgroundViewStyle alloc] initWithName:@"Dark"
+    BackgroundViewStyle *dark = [[BackgroundViewStyle alloc] initWithName:@"Dark"
                                                                          style:[BLTNBackgroundViewStyle blurredDark]];
 
-        BackgroundViewStyle *extraDark = [[BackgroundViewStyle alloc] initWithName:@"Extra Dark"
+    BackgroundViewStyle *extraDark = [[BackgroundViewStyle alloc] initWithName:@"Extra Dark"
                                                                              style:[BLTNBackgroundViewStyle blurredWithStyle:3 isDark:YES]];
 
-        [styles addObject:extraLight];
-        [styles addObject:light];
-        [styles addObject:dark];
-        [styles addObject:extraDark];
-    }
+    [styles addObject:extraLight];
+    [styles addObject:light];
+    [styles addObject:dark];
+    [styles addObject:extraDark];
 
     return (NSArray<BackgroundViewStyle*> *)styles;
 }

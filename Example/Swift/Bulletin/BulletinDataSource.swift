@@ -90,15 +90,11 @@ enum BulletinDataSource {
         var greeting = userName ?? "Lone Ranger"
 
         if let name = userName {
-
             let formatter = PersonNameComponentsFormatter()
 
-            if #available(iOS 10.0, *) {
-                if let components = formatter.personNameComponents(from: name) {
-                    greeting = components.givenName ?? name
-                }
+            if let components = formatter.personNameComponents(from: name) {
+                greeting = components.givenName ?? name
             }
-
         }
 
         let page = DatePickerBLTNItem(title: "Enter Birth Date")

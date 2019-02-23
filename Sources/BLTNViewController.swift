@@ -9,25 +9,31 @@ import UIKit
  * A view controller that displays a BulletinBoard card on top of the current context.
  *
  * You create a bulletin view controller using the `init(rootItem:)` initializer, where `rootItem` is the
- * first bulletin item to display. An item represents the contents displayed on a single card.
+ * first bulletin item to display. An item represents the contents displayed on a single card. You present
+ * the view controller like a normal view controller.
  *
  * To change the displayed card, you can push new items to the stack to display them, and pop existing
- * ones to go back.
+ * ones to go back. It also possible to display and hide an activity indicator while you are performing
+ * long tasks and want to hide the content.
+ *
+ * You can configure the appearance and behavior of the `BLTNViewController` with properties such as
+ * the background color, status bar appearance and swiping interactions. These properties also support
+ * the `UIAppearance` proxy.
  */
 
 @objc public final class BLTNViewController: UIViewController, UIGestureRecognizerDelegate {
 
     /**
-     * Whether swipe to dismiss should be allowed. Defaults to true.
+     * Whether swipe-to-dismiss should be allowed. Defaults to `true`.
      *
      * If you set this value to true, the user will be able to drag the card, and swipe down to
      * dismiss it (if allowed by the current item).
      *
-     * If you set this value to false, no pan gesture will be recognized, and swipe to dismiss
+     * If you set this value to `false`, no pan gesture will be recognized, and swipe to dismiss
      * won't be available.
      */
 
-    @objc public var allowsSwipeInteraction: Bool = true
+    @objc public dynamic var allowsSwipeInteraction: Bool = true
 
     /// The view that displays the card.
     @objc public var card: UIView {
@@ -37,14 +43,14 @@ import UIKit
     // MARK: - Customizing the Appearance
 
     /// The background color of the bulletin card. Defaults to white.
-    @objc public var backgroundColor: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0) {
+    @objc public dynamic var backgroundColor: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0) {
         didSet {
             updateBackgroundColor()
         }
     }
 
     /// The style of the view covering the content. Defaults to `.dimmed`.
-    @objc public var backgroundViewStyle: BLTNBackgroundViewStyle = .dimmed {
+    @objc public dynamic var backgroundViewStyle: BLTNBackgroundViewStyle = .dimmed {
         didSet {
             backgroundView.style = backgroundViewStyle
         }
@@ -53,17 +59,17 @@ import UIKit
     // MARK: - Customizing the Status Bar
 
     /// The style of status bar to use with the bulltin. Defaults to `.automatic`.
-    @objc public var statusBarAppearance: BLTNStatusBarAppearance = .automatic {
+    @objc public dynamic var statusBarAppearance: BLTNStatusBarAppearance = .automatic {
         didSet {
             setNeedsStatusBarAppearanceUpdate()
         }
     }
 
     /// The style of status bar animation. Defaults to `.fade`.
-    @objc public var statusBarAnimation: UIStatusBarAnimation = .fade
+    @objc public dynamic var statusBarAnimation: UIStatusBarAnimation = .fade
 
     /// The home indicator for iPhone X should be hidden or not. Defaults to false.
-    @objc public var hidesHomeIndicator: Bool = false {
+    @objc public dynamic var hidesHomeIndicator: Bool = false {
         didSet {
             if #available(iOS 11, *) {
                 setNeedsUpdateOfHomeIndicatorAutoHidden()
@@ -72,7 +78,7 @@ import UIKit
     }
 
     /// The tint color to use for the activity indicator.
-    @objc public var activityIndicatorColor: UIColor = .black {
+    @objc public dynamic var activityIndicatorColor: UIColor = .black {
         didSet {
             activityIndicator.color = activityIndicatorColor
         }
@@ -81,14 +87,14 @@ import UIKit
     // MARK: - Customizing the Card Presentation
 
     /// The spacing between the edge of the screen and the edge of the card. Defaults to regular.
-    @objc public var edgeSpacing: BLTNSpacing = .regular {
+    @objc public dynamic var edgeSpacing: BLTNSpacing = .regular {
         didSet {
             updateEdgeSpacing()
         }
     }
 
     /// The rounded corner radius of the bulletin card. Defaults to 12, and 36 on iPhone X.
-    @objc public var cardCornerRadius: NSNumber? {
+    @objc public dynamic var cardCornerRadius: NSNumber? {
         didSet {
             updateCornerRadius()
         }
@@ -244,7 +250,7 @@ import UIKit
         updateEdgeSpacing()
         setUpKeyboardLogic()
 
-        refreshInterface(currentItem: stateController.rootItem)
+        refreshInterface(currentItem: stateController.rootItem, previousItem: nil)
         contentView.bringSubviewToFront(closeButton)
     }
 
@@ -267,7 +273,7 @@ import UIKit
         // Card: Vertical
         contentTopConstraint = contentView.topAnchor.constraint(equalTo: contentStackView.topAnchor)
         stackBottomConstraint = contentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        contentBottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.safeBottomAnchor)
+        contentBottomConstraint = contentView.bottomAnchor.constraint(equalTo: safeBottomAnchor)
 
         // Card: Vertical (Regular)
         centerYConstraint = contentView.centerYAnchor.constraint(equalTo: view.safeCenterYAnchor)
@@ -336,7 +342,7 @@ extension BLTNViewController: BLTNStateControllerDelegate {
 
     /**
      * Displays the next item, if the `next` property of the current item is set.
-     * - warning: If you call this method but `next` is `nil`, an exception will be raised.
+     * - warning: If you call this method but `next` is `nil`, it will cause a crash.
      */
 
     @objc public func displayNextItem() {
@@ -349,13 +355,14 @@ extension BLTNViewController: BLTNStateControllerDelegate {
 
 extension BLTNViewController {
 
-    func stateController(_ controller: BLTNStateController, didUpdateCurrentItem currentItem: BLTNItem) {
-        refreshInterface(currentItem: currentItem)
+    func stateController(_ controller: BLTNStateController, didUpdateCurrentItem currentItem: BLTNItem, previousItem: BLTNItem?) {
+        refreshInterface(currentItem: currentItem, previousItem: previousItem)
     }
 
     /// Refreshes the interface for the current item.
-    fileprivate func refreshInterface(currentItem: BLTNItem) {
+    fileprivate func refreshInterface(currentItem: BLTNItem, previousItem: BLTNItem?) {
         isDismissable = false
+        updateCloseButton(isRequired: false)
         swipeInteractionController?.cancelIfNeeded()
         refreshSwipeInteractionController()
 
@@ -375,8 +382,9 @@ extension BLTNViewController {
         currentItem.setUp()
         currentItem.parent = self
 
+        // Hide the new views if needed before we transition
         for arrangedSubview in newHideableArrangedSubviews {
-            arrangedSubview.isHidden = isInitialLayout ? false : true
+            arrangedSubview.isHidden = !isInitialLayout
         }
 
         for arrangedSubview in newArrangedSubviews {
@@ -387,6 +395,7 @@ extension BLTNViewController {
         let animationDuration = isInitialLayout ? 0 : 0.75
         let transitionAnimationChain = AnimationChain(duration: animationDuration)
 
+        // 1) Hide the previous subviews
         let hideSubviewsAnimationPhase = AnimationPhase(relativeDuration: 1/3, curve: .linear)
 
         hideSubviewsAnimationPhase.block = {
@@ -405,6 +414,7 @@ extension BLTNViewController {
             }
         }
 
+        // 2) Relayout the stack with the new views
         let displayNewItemsAnimationPhase = AnimationPhase(relativeDuration: 1/3, curve: .linear)
 
         displayNewItemsAnimationPhase.block = {
@@ -419,8 +429,10 @@ extension BLTNViewController {
 
         displayNewItemsAnimationPhase.completionHandler = {
             currentItem.willDisplay()
+            previousItem?.willDismiss()
         }
 
+        // 3) Uncover the new views
         let finalAnimationPhase = AnimationPhase(relativeDuration: 1/3, curve: .linear)
 
         finalAnimationPhase.block = {
@@ -436,10 +448,12 @@ extension BLTNViewController {
             }
         }
 
+        // 4) Remove the old subviews
         finalAnimationPhase.completionHandler = {
             self.isDismissable = currentItem.isDismissable
 
             currentItem.onDisplay()
+            previousItem?.onDismiss()
 
             for arrangedSubview in oldArrangedSubviews {
                 self.contentStackView.removeArrangedSubview(arrangedSubview)
@@ -515,6 +529,7 @@ extension BLTNViewController {
 
     // MARK: - Transition Adaptivity
 
+    /// Returns the current bottom margin.
     func bottomMargin() -> CGFloat {
         var initialPadding: CGFloat = 0
 
@@ -620,7 +635,6 @@ extension BLTNViewController {
 
 }
 
-
 // MARK: - Activity Indicator
 
 extension BLTNViewController {
@@ -632,10 +646,6 @@ extension BLTNViewController {
      *
      * Displaying the loading indicator does not change the height of the page or the current item. It will disable
      * dismissal by tapping and swiping to allow the task to complete and avoid resource deallocation.
-     *
-     * - parameter color: The color of the activity indicator to display. Defaults to black.
-     *
-     * Displaying the loading indicator does not change the height of the page or the current item.
      */
 
     @objc public func displayActivityIndicator() {
@@ -643,8 +653,8 @@ extension BLTNViewController {
         activityIndicator.startAnimating()
 
         let animations = {
-            self.activityIndicator.alpha = 1
             self.contentStackView.alpha = 0
+            self.activityIndicator.alpha = 1
         }
 
         UIView.animate(withDuration: 0.25, animations: animations) { _ in
@@ -661,7 +671,6 @@ extension BLTNViewController {
 
     @objc public func hideActivityIndicator() {
         activityIndicator.stopAnimating()
-        activityIndicator.alpha = 0
 
         let animations = {
             self.activityIndicator.alpha = 0
@@ -677,18 +686,12 @@ extension BLTNViewController {
 
 extension BLTNViewController {
 
+    /// Updates the visibility of the close button.
     func updateCloseButton(isRequired: Bool) {
-        isRequired ? showCloseButton() : hideCloseButton()
+        closeButton.alpha = isRequired ? 1 : 0
     }
 
-    private func showCloseButton() {
-        closeButton.alpha = 1
-    }
-
-    private func hideCloseButton() {
-        closeButton.alpha = 0
-    }
-
+    /// Handles a tap on the close button.
     @objc private func closeButtonTapped() {
         dismissIfPossible()
     }
@@ -737,16 +740,20 @@ extension BLTNViewController: UIViewControllerTransitioningDelegate {
 // MARK: - Keyboard
 
 extension BLTNViewController {
+
+    /// Adds observers for the keyboard frame changes.
     func setUpKeyboardLogic() {
         NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
+    /// Removes observers for the keyboard frame changes.
     func cleanUpKeyboardLogic() {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
+    /// Handles keyboard presentation.
     @objc func onKeyboardShow(_ notification: Notification) {
         guard stateController.currentItem.shouldRespondToKeyboardChanges == true else {
             return
@@ -774,6 +781,7 @@ extension BLTNViewController {
 
     }
 
+    /// Handles keyboard dismissal.
     @objc func onKeyboardHide(_ notification: Notification) {
         guard stateController.currentItem.shouldRespondToKeyboardChanges == true else {
             return
@@ -798,8 +806,12 @@ extension BLTNViewController {
     }
 }
 
+// MARK: - Helpers
+
 extension UIView.AnimationOptions {
-    init(curve: UIView.AnimationCurve) {
+
+    /// Creates an animation option with the appropriate curve.
+    @nonobjc init(curve: UIView.AnimationCurve) {
         self = UIView.AnimationOptions(rawValue: UInt(curve.rawValue << 16))
     }
 }

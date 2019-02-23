@@ -20,6 +20,7 @@
 
     page.descriptionText = @"Discover curated images of the best pets in the world.";
     page.actionButtonTitle = @"Configure";
+    page.alternativeButtonTitle = @"Reload";
 
     page.dismissable = [self userDidCompleteSetup];
     page.shouldStartWithActivityIndicator = YES;
@@ -33,6 +34,10 @@
 
     page.actionHandler = ^(BLTNActionItem * _Nonnull _item) {
         [_item.parent displayNextItem];
+    };
+
+    page.alternativeHandler = ^(BLTNActionItem * _Nonnull _item) {
+        [_item.parent popToRootItem];
     };
 
     page.nextItem = [self makeTextFieldPage];

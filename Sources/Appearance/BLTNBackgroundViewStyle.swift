@@ -12,22 +12,21 @@ import UIKit
 @objc public class BLTNBackgroundViewStyle: NSObject {
 
     enum Style {
-
         case none
         case dimmed
         case blurred(style: UIBlurEffect.Style, isDark: Bool)
 
+        /// Whether the style is dark.
         var isDark: Bool {
-
             switch self {
             case .none, .dimmed: return true
             case .blurred(_, let isDarkBlur): return isDarkBlur
             }
-
         }
 
     }
 
+    /// The internal style value.
     let rawValue: Style
 
     init(rawValue: Style) {
@@ -67,21 +66,17 @@ extension BLTNBackgroundViewStyle {
      * - parameter isDark: Whether the blur effect is dark.
      */
 
-    @available(iOS 10, *)
     @objc public static func blurred(style: UIBlurEffect.Style, isDark: Bool) -> BLTNBackgroundViewStyle {
         return BLTNBackgroundViewStyle(rawValue: .blurred(style: style, isDark: isDark))
     }
 
     /// The background blurred with a light style.
-    @available(iOS 10, *)
     @objc public static let blurredLight: BLTNBackgroundViewStyle = .blurred(style: .light, isDark: false)
 
     /// The background blurred with an extra light style.
-    @available(iOS 10, *)
     @objc public static let blurredExtraLight: BLTNBackgroundViewStyle = .blurred(style: .extraLight, isDark: false)
 
     /// The background blurred with a dark style.
-    @available(iOS 10, *)
     @objc public static let blurredDark: BLTNBackgroundViewStyle = .blurred(style: .dark, isDark: true)
 
 }
