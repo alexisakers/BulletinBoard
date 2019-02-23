@@ -17,7 +17,7 @@ class PetSelectorBulletinPage: FeedbackPageBLTNItem {
 
     private var catButtonContainer: UIButton!
     private var dogButtonContainer: UIButton!
-    private var selectionFeedbackGenerator = SelectionFeedbackGenerator()
+    private var selectionFeedbackGenerator = UISelectionFeedbackGenerator()
 
     // MARK: - BLTNItem
 

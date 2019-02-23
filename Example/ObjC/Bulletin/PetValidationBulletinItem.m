@@ -12,8 +12,8 @@
 @interface PetValidationBulletinItem ()
 
 @property (nonatomic, strong) CollectionDataSource *dataSource;
-@property (nonatomic, strong) SelectionFeedbackGenerator *selectionFeedbackGenerator;
-@property (nonatomic, strong) SuccessFeedbackGenerator *successFeedbackGenerator;
+@property (nonatomic, strong) UISelectionFeedbackGenerator *selectionFeedbackGenerator;
+@property (nonatomic, strong) UINotificationFeedbackGenerator *successFeedbackGenerator;
 @property (nonatomic, strong, nullable) UICollectionView *collectionView;
 
 @end
@@ -29,8 +29,8 @@
     self = [super initWithTitle:@"Choose your Favorite"];
     if (self) {
         self.dataSource = data;
-        self.selectionFeedbackGenerator = [[SelectionFeedbackGenerator alloc] init];
-        self.successFeedbackGenerator = [[SuccessFeedbackGenerator alloc] init];
+        self.selectionFeedbackGenerator = [[UISelectionFeedbackGenerator alloc] init];
+        self.successFeedbackGenerator = [[UINotificationFeedbackGenerator alloc] init];
         self.collectionView = nil;
         self.descriptionText = [[NSString alloc] initWithFormat:@"You chose %@ as your favorite animal type. Here are a few examples of posts in this category.", [[data pluralizedPetName] lowercaseString]];
         self.actionButtonTitle = @"Validate";
@@ -88,7 +88,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // Play success haptic feedback
         [self.successFeedbackGenerator prepare];
-        [self.successFeedbackGenerator notifySuccess];
+        [self.successFeedbackGenerator notificationOccurred:UINotificationFeedbackTypeSuccess];
 
         // Display next item
         self.nextItem = [BulletinDataSource makeCompletionPage];

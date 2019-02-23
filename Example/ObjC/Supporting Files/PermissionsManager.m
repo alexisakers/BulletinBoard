@@ -5,6 +5,8 @@
 
 #import "PermissionsManager.h"
 
+@import UserNotifications;
+
 @interface PermissionsManager ()
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
@@ -36,9 +38,10 @@
 
 -(void)requestLocalNotifications
 {
-    UIUserNotificationSettings* settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound) categories:NULL];
-
-    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    UNAuthorizationOptions options = UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionSound;
+    [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:options completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        // no-op
+    }];
 }
 
 -(void)requestWhenInUseLocation

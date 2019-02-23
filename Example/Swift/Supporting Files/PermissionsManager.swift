@@ -5,6 +5,7 @@
 
 import UIKit
 import CoreLocation
+import UserNotifications
 
 /**
  * Requests permission for system features.
@@ -17,8 +18,10 @@ class PermissionsManager {
     let locationManager = CLLocationManager()
 
     func requestLocalNotifications() {
-        let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-        UIApplication.shared.registerUserNotificationSettings(settings)
+        let options: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(options: options) { _, _ in
+            // no-op
+        }
     }
 
     func requestWhenInUseLocation() {

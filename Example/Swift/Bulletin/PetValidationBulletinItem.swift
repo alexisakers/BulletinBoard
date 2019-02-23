@@ -17,8 +17,8 @@ class PetValidationBLTNItem: FeedbackPageBLTNItem {
     let dataSource: CollectionDataSource
     let animalType: String
 
-    let selectionFeedbackGenerator = SelectionFeedbackGenerator()
-    let successFeedbackGenerator = SuccessFeedbackGenerator()
+    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+    let successFeedbackGenerator = UINotificationFeedbackGenerator()
 
     init(dataSource: CollectionDataSource, animalType: String) {
 
@@ -85,7 +85,7 @@ class PetValidationBLTNItem: FeedbackPageBLTNItem {
             // Play success haptic feedback
 
             self.successFeedbackGenerator.prepare()
-            self.successFeedbackGenerator.success()
+            self.successFeedbackGenerator.notificationOccurred(.success)
 
             // Display next item
 

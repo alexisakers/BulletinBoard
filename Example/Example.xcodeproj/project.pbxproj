@@ -29,8 +29,6 @@
 		550A8C54208DEA590056F3C7 /* BLTNBoard.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 550A8C52208DEA590056F3C7 /* BLTNBoard.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		551CF5E01FBF471A007DFEEA /* ImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 551CF5DF1FBF471A007DFEEA /* ImageCollectionViewCell.m */; };
 		551CF5E31FBF4985007DFEEA /* CollectionDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 551CF5E21FBF4985007DFEEA /* CollectionDataSource.m */; };
-		551CF5E61FBF4D14007DFEEA /* SelectionFeedbackGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 551CF5E51FBF4D14007DFEEA /* SelectionFeedbackGenerator.m */; };
-		551CF5E91FBF4E3F007DFEEA /* SuccessFeedbackGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 551CF5E81FBF4E3F007DFEEA /* SuccessFeedbackGenerator.m */; };
 		551CF5EC1FBF680D007DFEEA /* BackgroundViewStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 551CF5EB1FBF680D007DFEEA /* BackgroundViewStyle.m */; };
 		551CF5F21FBF6BCC007DFEEA /* TextFieldBulletinPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 551CF5F11FBF6BCC007DFEEA /* TextFieldBulletinPage.m */; };
 		551CF5F81FBF8492007DFEEA /* Main-Swift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55D7021C1FBCCA1A00835D8A /* Main-Swift.storyboard */; };
@@ -53,7 +51,6 @@
 		55D7BA7C1FBC783E0008A602 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D7BA7B1FBC783E0008A602 /* main.m */; };
 		55DADE761F7D7AEA001B11A2 /* BulletinDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DADE751F7D7AEA001B11A2 /* BulletinDataSource.swift */; };
 		55DADE781F7D8B29001B11A2 /* PetSelectorBulletinPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DADE771F7D8B29001B11A2 /* PetSelectorBulletinPage.swift */; };
-		55DADE7C1F7E3A53001B11A2 /* FeedbackGenerators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DADE7B1F7E3A53001B11A2 /* FeedbackGenerators.swift */; };
 		55DADE811F7E3C0B001B11A2 /* FeedbackPageBulletinItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DADE801F7E3C0B001B11A2 /* FeedbackPageBulletinItem.swift */; };
 		55DADE831F7E4204001B11A2 /* PermissionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DADE821F7E4204001B11A2 /* PermissionsManager.swift */; };
 		55DADE851F7E592F001B11A2 /* CollectionUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DADE841F7E592F001B11A2 /* CollectionUtilities.swift */; };
@@ -110,10 +107,6 @@
 		551CF5DF1FBF471A007DFEEA /* ImageCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ImageCollectionViewCell.m; path = "Supporting Files/ImageCollectionViewCell.m"; sourceTree = "<group>"; };
 		551CF5E11FBF4985007DFEEA /* CollectionDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CollectionDataSource.h; path = "Supporting Files/CollectionDataSource.h"; sourceTree = "<group>"; };
 		551CF5E21FBF4985007DFEEA /* CollectionDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CollectionDataSource.m; path = "Supporting Files/CollectionDataSource.m"; sourceTree = "<group>"; };
-		551CF5E41FBF4D14007DFEEA /* SelectionFeedbackGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SelectionFeedbackGenerator.h; path = "Supporting Files/SelectionFeedbackGenerator.h"; sourceTree = "<group>"; };
-		551CF5E51FBF4D14007DFEEA /* SelectionFeedbackGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SelectionFeedbackGenerator.m; path = "Supporting Files/SelectionFeedbackGenerator.m"; sourceTree = "<group>"; };
-		551CF5E71FBF4E3F007DFEEA /* SuccessFeedbackGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SuccessFeedbackGenerator.h; path = "Supporting Files/SuccessFeedbackGenerator.h"; sourceTree = "<group>"; };
-		551CF5E81FBF4E3F007DFEEA /* SuccessFeedbackGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SuccessFeedbackGenerator.m; path = "Supporting Files/SuccessFeedbackGenerator.m"; sourceTree = "<group>"; };
 		551CF5EA1FBF680D007DFEEA /* BackgroundViewStyle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BackgroundViewStyle.h; sourceTree = "<group>"; };
 		551CF5EB1FBF680D007DFEEA /* BackgroundViewStyle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BackgroundViewStyle.m; sourceTree = "<group>"; };
 		551CF5F01FBF6BCC007DFEEA /* TextFieldBulletinPage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextFieldBulletinPage.h; sourceTree = "<group>"; };
@@ -153,7 +146,6 @@
 		55D7BA7B1FBC783E0008A602 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		55DADE751F7D7AEA001B11A2 /* BulletinDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinDataSource.swift; sourceTree = "<group>"; };
 		55DADE771F7D8B29001B11A2 /* PetSelectorBulletinPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSelectorBulletinPage.swift; sourceTree = "<group>"; };
-		55DADE7B1F7E3A53001B11A2 /* FeedbackGenerators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackGenerators.swift; sourceTree = "<group>"; };
 		55DADE801F7E3C0B001B11A2 /* FeedbackPageBulletinItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackPageBulletinItem.swift; sourceTree = "<group>"; };
 		55DADE821F7E4204001B11A2 /* PermissionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsManager.swift; sourceTree = "<group>"; };
 		55DADE841F7E592F001B11A2 /* CollectionUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionUtilities.swift; sourceTree = "<group>"; };
@@ -251,10 +243,6 @@
 				551CF5DF1FBF471A007DFEEA /* ImageCollectionViewCell.m */,
 				551CF5E11FBF4985007DFEEA /* CollectionDataSource.h */,
 				551CF5E21FBF4985007DFEEA /* CollectionDataSource.m */,
-				551CF5E41FBF4D14007DFEEA /* SelectionFeedbackGenerator.h */,
-				551CF5E51FBF4D14007DFEEA /* SelectionFeedbackGenerator.m */,
-				551CF5E71FBF4E3F007DFEEA /* SuccessFeedbackGenerator.h */,
-				551CF5E81FBF4E3F007DFEEA /* SuccessFeedbackGenerator.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -301,7 +289,6 @@
 			isa = PBXGroup;
 			children = (
 				55DADE841F7E592F001B11A2 /* CollectionUtilities.swift */,
-				55DADE7B1F7E3A53001B11A2 /* FeedbackGenerators.swift */,
 				55DADE821F7E4204001B11A2 /* PermissionsManager.swift */,
 			);
 			path = "Supporting Files";
@@ -426,7 +413,6 @@
 				55DADE851F7E592F001B11A2 /* CollectionUtilities.swift in Sources */,
 				5506756B1F90ADEF00874D8B /* BackgroundStyles.swift in Sources */,
 				55DADE831F7E4204001B11A2 /* PermissionsManager.swift in Sources */,
-				55DADE7C1F7E3A53001B11A2 /* FeedbackGenerators.swift in Sources */,
 				55A7B1DB1FE3D858000F80DE /* DatePickerBulletinItem.swift in Sources */,
 				55DADE781F7D8B29001B11A2 /* PetSelectorBulletinPage.swift in Sources */,
 				558A12451F7D7865005EC97C /* AppDelegate.swift in Sources */,
@@ -442,9 +428,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				551CF5E31FBF4985007DFEEA /* CollectionDataSource.m in Sources */,
-				551CF5E91FBF4E3F007DFEEA /* SuccessFeedbackGenerator.m in Sources */,
 				551CF5EC1FBF680D007DFEEA /* BackgroundViewStyle.m in Sources */,
-				551CF5E61FBF4D14007DFEEA /* SelectionFeedbackGenerator.m in Sources */,
 				559F8E8A204D98DC00322949 /* FeedbackPageBulletinItem.m in Sources */,
 				55B25EFF1FC02AEC003DC295 /* RootViewController.m in Sources */,
 				55D7BA7C1FBC783E0008A602 /* main.m in Sources */,
@@ -627,7 +611,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Configs/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.BulletinBoard.BB-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -643,7 +627,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Configs/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.BulletinBoard.BB-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -679,7 +663,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Configs/Info-ObjC.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.BulletinBoard.BB-ObjC";
 				PRODUCT_MODULE_NAME = BBObjC;
@@ -700,7 +684,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Configs/Info-ObjC.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.BulletinBoard.BB-ObjC";
 				PRODUCT_MODULE_NAME = BBObjC;

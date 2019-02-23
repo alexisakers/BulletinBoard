@@ -13,7 +13,7 @@
 
 @property (nonatomic, strong) UIButton *catButton;
 @property (nonatomic, strong) UIButton *dogButton;
-@property (nonatomic, strong) SelectionFeedbackGenerator *feedbackGenerator;
+@property (nonatomic, strong) UISelectionFeedbackGenerator *feedbackGenerator;
 
 @end
 
@@ -25,7 +25,7 @@
     if (self) {
         self.dismissable = NO;
         self.descriptionText = @"Your favorite pets will appear when you open the app.";
-        self.feedbackGenerator = [[SelectionFeedbackGenerator alloc] init];
+        self.feedbackGenerator = [[UISelectionFeedbackGenerator alloc] init];
     }
     return self;
 }
