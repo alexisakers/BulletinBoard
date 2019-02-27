@@ -151,7 +151,7 @@ You can customize both color and fonts. You need to change these before you pres
 ~~~swift
 let greenColor = UIColor(red: 0.294, green: 0.85, blue: 0.392, alpha: 1)
 page.appearance.actionButtonColor = greenColor
-page.appearance.alternativeButtonColor = greenColor
+page.appearance.alternativeButtonTitleColor = greenColor
 page.appearance.actionButtonTitleColor = .white
 ~~~
 
