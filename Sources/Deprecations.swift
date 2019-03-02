@@ -31,3 +31,12 @@ import Foundation
 
 @available(*, unavailable, renamed: "BLTNViewController")
 @objc public class BLTNItemManager: NSObject {}
+
+extension BLTNActionItem {
+
+    @available(*, unavailable, renamed: "parent")
+    @objc public var manager: BLTNViewController? {
+        return parent
+    }
+
+}
