@@ -140,7 +140,6 @@ class BulletinSwipeInteractionController: UIPercentDrivenInteractiveTransition, 
                 finish()
             } else {
                 resetCardViews()
-                cancel()
                 isFinished = false
             }
 
