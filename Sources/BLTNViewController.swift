@@ -188,7 +188,7 @@ import UIKit
 
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        contentBottomConstraint.constant = -bottomMargin()
+        contentBottomConstraint.constant = -bottomMargin
         setUpLayout(with: traitCollection)
     }
 
@@ -199,6 +199,11 @@ import UIKit
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
             self.setNeedsStatusBarAppearanceUpdate()
         })
+    }
+
+    override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        setUpLayout(with: traitCollection)
     }
 
     @available(iOS 11.0, *)
@@ -530,14 +535,8 @@ extension BLTNViewController {
     // MARK: - Transition Adaptivity
 
     /// Returns the current bottom margin.
-    func bottomMargin() -> CGFloat {
-        var initialPadding: CGFloat = 0
-
-        if #available(iOS 11, *) {
-            initialPadding = view.safeAreaInsets.bottom
-        }
-
-        return edgeSpacing.rawValue - initialPadding
+    var bottomMargin: CGFloat {
+        return edgeSpacing.rawValue
     }
 
     // MARK: - Presentation/Dismissal
@@ -779,7 +778,7 @@ extension BLTNViewController {
         let animationOptions = UIView.AnimationOptions(curve: animationCurve)
 
         UIView.animate(withDuration: duration, delay: 0, options: animationOptions, animations: {
-            let bottomSpacing = -(keyboardFrameFinal.size.height + self.bottomMargin())
+            let bottomSpacing = -(keyboardFrameFinal.size.height + self.bottomMargin)
 
             self.contentBottomConstraint.constant = bottomSpacing
             self.centerYConstraint.constant = -(keyboardFrameFinal.size.height + 12) / 2
@@ -806,7 +805,7 @@ extension BLTNViewController {
         let animationOptions = UIView.AnimationOptions(curve: animationCurve)
 
         UIView.animate(withDuration: duration, delay: 0, options: animationOptions, animations: {
-            self.contentBottomConstraint.constant = -self.bottomMargin()
+            self.contentBottomConstraint.constant = -self.bottomMargin
             self.centerYConstraint.constant = 0
             self.contentView.superview?.layoutIfNeeded()
         }, completion: nil)
