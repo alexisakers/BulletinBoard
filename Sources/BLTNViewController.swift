@@ -542,6 +542,14 @@ extension BLTNViewController {
 
     // MARK: - Presentation/Dismissal
 
+    public override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        self.stateController.currentItem.willDismiss()
+        super.dismiss(animated: flag) {
+            self.stateController.currentItem.onDismiss()
+            completion?()
+        }
+    }
+
     /// Dismisses the presnted BulletinViewController if `isDissmisable` is set to `true`.
     @discardableResult func dismissIfPossible() -> Bool {
         guard isDismissable else {
