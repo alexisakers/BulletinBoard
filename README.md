@@ -269,8 +269,6 @@ By default, a close button will be displayed when the item can be dismissed. If 
 
 To create custom bulletin items, create a class that implements the `BLTNItem` protocol. It is usually easier to subclass `BLTNPageItem` and implement one of the hook methods to provide your custom views to display with standard elements.
 
-See the [Creating a Custom Item](guides/Creating%20a%20Custom%20Item.md) guide to learn more.
-
 ## Internals
 
 BulletinBoard uses stack views and Auto Layout to display and manage cards. It automatically adapts to changes in width and height. iPad and iPhone X are supported out of the box.
