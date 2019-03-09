@@ -21,9 +21,9 @@
     return @[self.textField];
 }
 
-- (void)onDisplay
+- (void)didPresent
 {
-    [super onDisplay];
+    [super didPresent];
     // Uncomment to start typing when the bulletin item is presented
     // [self.textField becomeFirstResponder];
 }

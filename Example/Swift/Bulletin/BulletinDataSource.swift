@@ -34,13 +34,13 @@ enum BulletinDataSource {
         page.appearance = makeLightAppearance()
 
         page.descriptionText = "Discover curated images of the best pets in the world."
-        page.actionButtonTitle = "Configure"
-        page.alternativeButtonTitle = "Privacy Policy"
+        page.actionTitle = "Configure"
+        page.alternateActionTitle = "Privacy Policy"
 
         page.isDismissable = true
         page.shouldStartWithActivityIndicator = true
 
-        page.presentationHandler = { item in
+        page.didPresentHandler = { item in
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
                 item.parent?.hideActivityIndicator()
             }
@@ -50,7 +50,7 @@ enum BulletinDataSource {
             item.parent?.displayNextItem()
         }
 
-        page.alternativeHandler = { item in
+        page.alternateActionHandler = { item in
             let privacyPolicyVC = SFSafariViewController(url: URL(string: "https://example.com")!)
             item.parent?.present(privacyPolicyVC, animated: true)
         }
@@ -73,7 +73,7 @@ enum BulletinDataSource {
         let page = TextFieldBulletinPage(title: "Enter your Name")
         page.isDismissable = false
         page.descriptionText = "To create your profile, please tell us your name. We will use it to customize your feed."
-        page.actionButtonTitle = "Sign Up"
+        page.actionTitle = "Sign Up"
 
         page.textInputHandler = { (item, text) in
             print("Text: \(text ?? "nil")")
@@ -100,7 +100,7 @@ enum BulletinDataSource {
         let page = DatePickerBLTNItem(title: "Enter Birth Date")
         page.descriptionText = "When were you born, \(greeting)?"
         page.isDismissable = false
-        page.actionButtonTitle = "Done"
+        page.actionTitle = "Done"
 
         page.actionHandler = { item in
             print(page.datePicker.date)
@@ -130,8 +130,8 @@ enum BulletinDataSource {
         page.imageAccessibilityLabel = "Notifications Icon"
 
         page.descriptionText = "Receive push notifications when new photos of pets are available."
-        page.actionButtonTitle = "Subscribe"
-        page.alternativeButtonTitle = "Not now"
+        page.actionTitle = "Subscribe"
+        page.alternateActionTitle = "Not now"
 
         page.isDismissable = false
 
@@ -140,7 +140,7 @@ enum BulletinDataSource {
             item.parent?.displayNextItem()
         }
 
-        page.alternativeHandler = { item in
+        page.alternateActionHandler = { item in
             item.parent?.displayNextItem()
         }
 
@@ -167,8 +167,8 @@ enum BulletinDataSource {
         page.imageAccessibilityLabel = "Location Icon"
 
         page.descriptionText = "We can use your location to customize the feed. This data will be sent to our servers anonymously. You can update your choice later in the app settings."
-        page.actionButtonTitle = "Send location data"
-        page.alternativeButtonTitle = "No thanks"
+        page.actionTitle = "Send location data"
+        page.alternateActionTitle = "No thanks"
 
         page.appearance.shouldUseCompactDescriptionText = true
         page.isDismissable = false
@@ -178,7 +178,7 @@ enum BulletinDataSource {
             item.parent?.displayNextItem()
         }
 
-        page.alternativeHandler = { item in
+        page.alternateActionHandler = { item in
             item.parent?.displayNextItem()
         }
 
@@ -199,7 +199,7 @@ enum BulletinDataSource {
         let page = PetSelectorBulletinPage(title: "Choose your Favorite")
         page.isDismissable = false
         page.descriptionText = "Your favorite pets will appear when you open the app."
-        page.actionButtonTitle = "Select"
+        page.actionTitle = "Select"
 
         return page
 
@@ -232,12 +232,12 @@ enum BulletinDataSource {
         page.appearance.actionButtonTitleColor = .white
 
         page.descriptionText = "PetBoard is ready for you to use. Happy browsing!"
-        page.actionButtonTitle = "Get started"
-        page.alternativeButtonTitle = "Replay"
+        page.actionTitle = "Get started"
+        page.alternateActionTitle = "Replay"
 
         page.isDismissable = true
 
-        page.dismissalHandler = { item in
+        page.onDismissHandler = { item in
             NotificationCenter.default.post(name: .SetupDidComplete, object: item)
         }
 
@@ -245,7 +245,7 @@ enum BulletinDataSource {
             item.parent?.dismiss(animated: true)
         }
 
-        page.alternativeHandler = { item in
+        page.alternateActionHandler = { item in
             item.parent?.popToRootItem()
         }
 

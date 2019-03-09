@@ -4,7 +4,6 @@
  */
 
 #import "FeedbackPageBulletinItem.h"
-#import "SelectionFeedbackGenerator.h"
 
 @interface FeedbackPageBulletinItem ()
 
@@ -24,14 +23,14 @@
     [super actionButtonTappedWithSender:sender];
 }
 
-- (void)alternativeButtonTappedWithSender:(UIButton *)sender
+- (void)alternateActionButtonTappedWithSender:(UIButton *)sender
 {
     // Play an haptic feedback
     [self.feedbackGenerator prepare];
     [self.feedbackGenerator selectionChanged];
 
     // Call super
-    [super alternativeButtonTappedWithSender:sender];
+    [super alternateActionButtonTappedWithSender:sender];
 }
 
 @end

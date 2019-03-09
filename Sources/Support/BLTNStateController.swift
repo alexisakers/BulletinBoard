@@ -92,7 +92,7 @@ class BLTNStateController {
 
     /// Resets the state of the bulletin for reuse.
     func reset() {
-        currentItem.onDismiss()
+        currentItem.didDismiss()
         currentItem = rootItem
         itemsStack.removeAll()
     }

@@ -4,7 +4,6 @@
  */
 
 #import "PetSelectorBulletinPage.h"
-#import "SelectionFeedbackGenerator.h"
 #import "BulletinDataSource.h"
 #import "CollectionDataSource.h"
 #import "PetValidationBulletinItem.h"

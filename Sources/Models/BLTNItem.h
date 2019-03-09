@@ -9,9 +9,12 @@
 
 /**
  * An item that can be displayed inside a bulletin card.
+ *
+ * You don't use this class directly, but one of its subclasses. You need to override
+ * `makeArrangedSubviews` in order to provide the list of views to display.
  */
 
-@protocol BLTNItem <NSObject>
+@interface BLTNItem : NSObject
 
 #pragma mark - Configuration
 
@@ -73,7 +76,7 @@
  * the stack.
  */
 
-@property (nonatomic, nullable, strong) id<BLTNItem> nextItem;
+@property (nonatomic, nullable, strong) BLTNItem *nextItem;
 
 // MARK: - Interface
 
@@ -81,51 +84,62 @@
  * Creates the list of views to display inside the bulletin card.
  *
  * The views will be arranged vertically, in the order they are stored in the return array.
+ * @warning You need to override this method in your subclasses.
  */
 
 - (NSArray<UIView *> * _Nonnull)makeArrangedSubviews;
 
 /**
- * Called by the parent controller when the item was added to the bulletin.
+ * Called by the parent view controller when the item was added to the bulletin.
  *
- * Use this function to configure your managed views, and allocate any resources required
- * for this item.
+ * Override this function to configure your managed views, and allocate any resources required
+ * for this item. Make sure to call `super` if you override this method.
  */
 
-- (void)setUp;
+- (void)setUp NS_REQUIRES_SUPER;
 
 /**
- * Called by the parent controller when the item was removed from the bulletin.
+ * Called by the parent view controller when the item was removed from the bulletin view.
  *
- * Use this function to remove any button target or gesture recognizers from your managed views, and
- * deallocate any resources created for this item that are no longer needed.
+ * Override this method if elements you returned in `makeContentViews` need cleanup. Make sure
+ * to call `super` if you override this method.
+ *
+ * This is an implementation detail of `BLTNItem` and you should not call it directly.
  */
 
-- (void)tearDown;
-    
-/**
-* Called by the parent controller when bulletin item is about to be pushed onto the view.
-*/
-    
-- (void)willDisplay;
+- (void)tearDown NS_REQUIRES_SUPER;
 
 /**
- * Called by the parent controller when bulletin item is pushed onto the view.
+ * Called by the parent controller when the bulletin item is about to be presented.
  */
 
-- (void)onDisplay;
+- (void)willPresent NS_REQUIRES_SUPER;
 
 /**
- * Called by the parent controller when bulletin item is about to be dismissed.
+ * Called by the parent view controller when the bulletin item is pushed onto the view.
+ *
+ * By default, this method calls the `presentationHandler` of the action item, if you are using a
+ * `BLTNActionItem`. Override this method if you need to perform additional preparation after presentation
+ * (although using `setUp` is preferred).
  */
 
-- (void)willDismiss;
+- (void)didPresent NS_REQUIRES_SUPER;
 
 /**
- * Called by the manager when bulletin item is dismissed. This is called after the bulletin
+ * Called by the parent controller when the bulletin item is about to be dismissed.
+ */
+
+- (void)willDismiss NS_REQUIRES_SUPER;
+
+/**
+ * Called by the parent view controller when the bulletin item is dismissed. This is called after the bulletin
  * is moved out of view.
+ *
+ * By default, this method calls the `dismissalHandler` of the action item, if you are using a
+ * `BLTNActionItem`. Override this method if you need to perform additional cleanup after dismissal
+ * (although using `tearDown` is preferred).
  */
 
-- (void)onDismiss;
+- (void)didDismiss NS_REQUIRES_SUPER;
 
 @end

@@ -32,7 +32,7 @@
  * builder type, change the `interfaceBuilderType` property.
  */
 
-@interface BLTNActionItem : NSObject <BLTNItem>
+@interface BLTNActionItem : BLTNItem
 
 #pragma mark - Page Contents
 
@@ -42,7 +42,7 @@
  * If you set this property to `nil`, no action button will be added (this is the default).
  */
 
-@property (nonatomic, strong, nullable) NSString *actionButtonTitle;
+@property (nonatomic, strong, nullable) NSString *actionTitle;
 
 /**
  * The title of the alternative button. The alternative button represents a second option for
@@ -51,72 +51,18 @@
  * If you set this property to `nil`, no alternative button will be added (this is the default).
  */
 
-@property (nonatomic, strong, nullable) NSString *alternativeButtonTitle;
+@property (nonatomic, strong, nullable) NSString *alternateActionTitle;
 
 #pragma mark - BLTNItem
 
 /**
- * The view controller presenting the item.
+ * The block of code to execute when the bulletin item is about to be presented. This is called before the
+ * bulletin is moved onto the view.
  *
- * This property is set when the item is currently being displayed. It will be set to `nil` when
- * the item is removed from bulletin.
+ * - parameter item: The item that is being presented.
  */
 
-@property (nonatomic, nullable, weak) BLTNViewController *parent;
-
-/**
- * Whether the page can be dismissed.
- *
- * If you set this value to `true`, the user will be able to dismiss the bulletin by tapping outside
- * of the card or by swiping down.
- *
- * You should set it to `true` for the last item you want to display.
- */
-
-@property (nonatomic, getter=isDismissable) BOOL dismissable;
-
-/**
- * Whether the page can be dismissed with a close button.
- *
- * The default value is `true`. The user will be able to dismiss the bulletin by tapping on a button
- * in the corner of the screen.
- *
- * You should set it to `false` if the interface of the bulletin already has buttons to dismiss the item,
- * such as an action button.
- */
-
-@property (nonatomic) BOOL showsCloseButton;
-
-/**
- * Whether the page should start with an activity indicator.
- *
- * Set this value to `false` to display the elements right away. If you set it to `true`,
- * you'll need to call `parent?.hideActivityIndicator()` to show the UI.
- *
- * This defaults to `false`.
- */
-
-@property (nonatomic) BOOL shouldStartWithActivityIndicator;
-
-/**
- * Whether the item should move with the keyboard.
- *
- * You must set it to `true` if the item displays a text field. Otherwise, you can set it to `false` if you
- * don't want the bulletin to move when system alerts are displayed.
- *
- * This value defaults to `true`.
- */
-
-@property (nonatomic) BOOL shouldRespondToKeyboardChanges;
-
-/**
- * The item to display after this one.
- *
- * If you set this value, you'll be able to call `displayNextItem()` to push the next item to
- * the stack.
- */
-
-@property (nonatomic, strong, nullable) id<BLTNItem> nextItem;
+@property (nonatomic, nullable) void(^willPresentHandler)(BLTNItem * _Nonnull);
 
 /**
  * The block of code to execute when the bulletin item is presented. This is called after the
@@ -125,7 +71,7 @@
  * - parameter item: The item that is being presented.
  */
 
-@property (nonatomic, nullable) void(^presentationHandler)(id<BLTNItem> _Nonnull);
+@property (nonatomic, nullable) void(^didPresentHandler)(BLTNItem * _Nonnull);
 
 /**
  * The block of code to execute when the bulletin item is dismissed. This is called when the bulletin
@@ -134,7 +80,16 @@
  * You can leave it `nil` if `isDismissable` is set to false.
  */
 
-@property (nonatomic, nullable) void(^dismissalHandler)(id<BLTNItem> _Nonnull);
+@property (nonatomic, nullable) void(^willDismissHandler)(BLTNItem * _Nonnull);
+
+/**
+ * The block of code to execute when the bulletin item is dismissed. This is called when the bulletin
+ * is moved out of view.
+ *
+ * You can leave it `nil` if `isDismissable` is set to false.
+ */
+
+@property (nonatomic, nullable) void(^didDismissHandler)(BLTNItem * _Nonnull);
 
 #pragma mark - Customization
 
@@ -161,16 +116,17 @@
 #pragma mark - Buttons
 
 /**
- * The action button managed by the item.
+ * The button for the main action managed by the item.
+ * @note You can configure this button before displaying
  */
 
 @property (nonatomic, strong, nullable, readonly) UIButton *actionButton;
 
 /**
- * The alternative button managed by the item.
+ * The button for the alternate action managed by the item.
  */
 
-@property (nonatomic, strong, nullable, readonly) UIButton *alternativeButton;
+@property (nonatomic, strong, nullable, readonly) UIButton *alternateActionButton;
 
 /**
  * The code to execute when the action button is tapped.
@@ -179,10 +135,10 @@
 @property (nonatomic, nullable) void(^actionHandler)(BLTNActionItem * _Nonnull);
 
 /**
- * The code to execute when the alternative button is tapped.
+ * The code to execute when the alternate button is tapped.
  */
 
-@property (nonatomic, nullable) void(^alternativeHandler)(BLTNActionItem * _Nonnull);
+@property (nonatomic, nullable) void(^alternateActionHandler)(BLTNActionItem * _Nonnull);
 
 /**
  * Handles a tap on the action button.
@@ -194,13 +150,13 @@
 - (void)actionButtonTappedWithSender:(UIButton * _Nonnull)sender NS_SWIFT_NAME(actionButtonTapped(sender:)) NS_REQUIRES_SUPER;
 
 /**
- * Handles a tap on the alternative button.
+ * Handles a tap on the alternate action button.
  *
  * You can override this method to add custom tap handling. You have to call `super.alternativeButtonTapped(sender:)`
  * in your implementation.
  */
 
-- (void)alternativeButtonTappedWithSender:(UIButton * _Nonnull)sender NS_SWIFT_NAME(alternativeButtonTapped(sender:)) NS_REQUIRES_SUPER;
+- (void)alternateActionButtonTappedWithSender:(UIButton * _Nonnull)sender NS_SWIFT_NAME(alternateActionButtonTapped(sender:)) NS_REQUIRES_SUPER;
 
 #pragma mark - View Management
 
@@ -231,69 +187,5 @@
  */
 
 - (NSArray<UIView*> * _Nonnull)makeContentViewsWithInterfaceBuilder:(BLTNInterfaceBuilder * _Nonnull)interfaceBuilder;
-
-/**
- * Creates the list of views to display on the bulletin.
- *
- * This is an implementation detail of `BLTNItem` and you should not call it directly. Subclasses should not override this method, and should
- * implement `makeContentViewsWithInterfaceBuilder:` instead.
- */
-
-- (NSArray<UIView*> * _Nonnull)makeArrangedSubviews;
-
-#pragma mark - Events
-
-/**
- * Called by the parent view controller when the item was added to the bulletin.
- *
- * Override this function to configure your managed views, and allocate any resources required
- * for this item. Make sure to call `super` if you override this method.
- */
-
-- (void)setUp NS_REQUIRES_SUPER;
-
-/**
- * Called by the parent view controller when the item was removed from the bulletin view.
- *
- * Override this method if elements you returned in `makeContentViews` need cleanup. Make sure
- * to call `super` if you override this method.
- *
- * This is an implementation detail of `BLTNItem` and you should not call it directly.
- */
-
-- (void)tearDown NS_REQUIRES_SUPER;
-    
-/**
-* Called by the parent view controller when bulletin item is about to be pushed onto the view.
-*/
-    
-- (void)willDisplay NS_REQUIRES_SUPER;
-
-/**
- * Called by the parent view controller when bulletin item is pushed onto the view.
- *
- * By default, this method calls the `presentationHandler` of the action item. Override this
- * method if you need to perform additional preparation after presentation (although using
- * `setUp` is preferred).
- */
-
-- (void)onDisplay NS_REQUIRES_SUPER;
-
-/**
- * Called by the parent view controller when bulletin item is about to be dismissed.
- */
-
-- (void)willDismiss;
-
-/**
- * Called by the parent view controller when bulletin item is dismissed. This is called after the bulletin
- * is moved out of view.
- *
- * By default, this method calls the `dismissalHandler` of the action item. Override this
- * method if you need to perform additional cleanup after dismissal (although using
- * `tearDown` is preferred).
- */
-
-- (void)onDismiss NS_REQUIRES_SUPER;
 
 @end

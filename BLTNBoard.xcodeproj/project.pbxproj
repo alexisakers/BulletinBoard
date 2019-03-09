@@ -25,6 +25,7 @@
 		5590C05320B93B350045C315 /* UIColor+Luminance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590C05220B93B350045C315 /* UIColor+Luminance.swift */; };
 		559F8E95204DB9BA00322949 /* BLTNItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 559F8E94204DB9BA00322949 /* BLTNItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		559F8EA3204DC42D00322949 /* UIView+RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F8EA2204DC42D00322949 /* UIView+RoundedView.swift */; };
+		55A109EA22344907002B5C03 /* BLTNItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A109E822344907002B5C03 /* BLTNItem.m */; };
 		55B3D1CF1FDADA8E00737791 /* AnimationChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B3D1CE1FDADA8E00737791 /* AnimationChain.swift */; };
 		55BDB08920B9BF25005A6C2B /* Deprecations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BDB08820B9BF25005A6C2B /* Deprecations.swift */; };
 		55BDB0CE20BAF845005A6C2B /* BLTNHighlightButtonWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BDB0CD20BAF845005A6C2B /* BLTNHighlightButtonWrapper.swift */; };
@@ -90,6 +91,7 @@
 		5590C05220B93B350045C315 /* UIColor+Luminance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Luminance.swift"; sourceTree = "<group>"; };
 		559F8E94204DB9BA00322949 /* BLTNItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLTNItem.h; sourceTree = "<group>"; };
 		559F8EA2204DC42D00322949 /* UIView+RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+RoundedView.swift"; sourceTree = "<group>"; };
+		55A109E822344907002B5C03 /* BLTNItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLTNItem.m; sourceTree = "<group>"; };
 		55B3D1CE1FDADA8E00737791 /* AnimationChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationChain.swift; sourceTree = "<group>"; };
 		55BDB08820B9BF25005A6C2B /* Deprecations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deprecations.swift; sourceTree = "<group>"; };
 		55BDB0CD20BAF845005A6C2B /* BLTNHighlightButtonWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNHighlightButtonWrapper.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				559F8E94204DB9BA00322949 /* BLTNItem.h */,
+				55A109E822344907002B5C03 /* BLTNItem.m */,
 				55CB0F80204D63CC001D0393 /* BLTNActionItem.h */,
 				55CB0F81204D63CC001D0393 /* BLTNActionItem.m */,
 				55C8EF3C204D8A010050E1C2 /* BLTNPageItem.h */,
@@ -444,6 +447,7 @@
 				558A12331F7D73CD005EC97C /* HighlightButton.swift in Sources */,
 				55DADE7A1F7D9428001B11A2 /* BLTNInterfaceBuilder.swift in Sources */,
 				55B3D1CF1FDADA8E00737791 /* AnimationChain.swift in Sources */,
+				55A109EA22344907002B5C03 /* BLTNItem.m in Sources */,
 				5590C04F20B85BCE0045C315 /* BLTNTitleLabelContainer.swift in Sources */,
 				55BDB08920B9BF25005A6C2B /* Deprecations.swift in Sources */,
 				55BDB0D120BAFB95005A6C2B /* UIButton+BackgroundColor.swift in Sources */,

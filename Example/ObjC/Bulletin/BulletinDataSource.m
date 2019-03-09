@@ -19,14 +19,14 @@
     page.imageAccessibilityLabel = @"😻";
 
     page.descriptionText = @"Discover curated images of the best pets in the world.";
-    page.actionButtonTitle = @"Configure";
-    page.alternativeButtonTitle = @"Reload";
+    page.actionTitle = @"Configure";
+    page.alternateActionTitle = @"Reload";
 
     page.dismissable = [self userDidCompleteSetup];
     page.shouldStartWithActivityIndicator = YES;
 
     // After the item is presented, show the contents after 3 seconds
-    page.presentationHandler = ^(id<BLTNItem> _Nonnull _item) {
+    page.didPresentHandler = ^(BLTNItem * _Nonnull _item) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [_item.parent hideActivityIndicator];
         });
@@ -36,7 +36,7 @@
         [_item.parent displayNextItem];
     };
 
-    page.alternativeHandler = ^(BLTNActionItem * _Nonnull _item) {
+    page.alternateActionHandler = ^(BLTNActionItem * _Nonnull _item) {
         [_item.parent popToRootItem];
     };
 
@@ -52,7 +52,7 @@
     page.appearance = [self makeLightAppearance];
 
     page.descriptionText = @"To create your profile, please tell us your name. We will use it to customize your feed.";
-    page.actionButtonTitle = @"Sign Up";
+    page.actionTitle = @"Sign Up";
 
     page.dismissable = NO;
 
@@ -75,8 +75,8 @@
     page.imageAccessibilityLabel = @"Notifications Icon";
 
     page.descriptionText = @"Receive push notifications when new photos of pets are available.";
-    page.actionButtonTitle = @"Subscribe";
-    page.alternativeButtonTitle = @"Not now";
+    page.actionTitle = @"Subscribe";
+    page.alternateActionTitle = @"Not now";
 
     page.dismissable = NO;
 
@@ -85,7 +85,7 @@
         [_item.parent displayNextItem];
     };
 
-    page.alternativeHandler = ^(BLTNActionItem * _Nonnull _item) {
+    page.alternateActionHandler = ^(BLTNActionItem * _Nonnull _item) {
         [_item.parent displayNextItem];
     };
 
@@ -104,8 +104,8 @@
     page.imageAccessibilityLabel = @"Location Icon";
 
     page.descriptionText = @"We can use your location to customize the feed. This data will be sent to our servers anonymously. You can update your choice later in the app settings.";
-    page.actionButtonTitle = @"Send location data";
-    page.alternativeButtonTitle = @"No thanks";
+    page.actionTitle = @"Send location data";
+    page.alternateActionTitle = @"No thanks";
 
     page.dismissable = NO;
 
@@ -114,7 +114,7 @@
         [_item.parent displayNextItem];
     };
 
-    page.alternativeHandler = ^(BLTNActionItem * _Nonnull _item) {
+    page.alternateActionHandler = ^(BLTNActionItem * _Nonnull _item) {
         [_item.parent displayNextItem];
     };
 
@@ -128,7 +128,7 @@
     PetSelectorBulletinPage* page = [PetSelectorBulletinPage new];
     page.appearance = [self makeLightAppearance];
 
-    page.actionButtonTitle = @"Select";
+    page.actionTitle = @"Select";
 
     page.dismissable = NO;
 
@@ -153,8 +153,8 @@
     page.imageAccessibilityLabel = @"Checkmark";
 
     page.descriptionText = @"PetBoard is ready for you to use. Happy browsing!.";
-    page.actionButtonTitle = @"Get started";
-    page.alternativeButtonTitle = @"Replay";
+    page.actionTitle = @"Get started";
+    page.alternateActionTitle = @"Replay";
 
     page.dismissable = NO;
 
@@ -162,11 +162,11 @@
         [_item.parent dismissViewControllerAnimated:YES completion:nil];
     };
 
-    page.alternativeHandler = ^(BLTNActionItem * _Nonnull _item) {
+    page.alternateActionHandler = ^(BLTNActionItem * _Nonnull _item) {
         [_item.parent popToRootItem];
     };
 
-    page.dismissalHandler = ^(id<BLTNItem> _Nonnull _item) {
+    page.didDismissHandler = ^(BLTNItem * _Nonnull _item) {
         [[NSNotificationCenter defaultCenter] postNotificationName:SetupDidCompleteNotificationName object:_item];
     };
 

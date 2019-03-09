@@ -73,8 +73,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - View Management
 
+/// The title label. Available in `willDisplayHandler` and after.
 @property (nonatomic, nonnull, readonly) BLTNTitleLabelContainer *titleLabel;
+
+/// The description label. Available in `willDisplayHandler` and after.
 @property (nonatomic, nullable, readonly) UILabel *descriptionLabel;
+
+/// The image view that displays the icon. Available in `willDisplayHandler` and after.
 @property (nonatomic, nullable, readonly) UIImageView *imageView;
 
 #pragma mark - Customization

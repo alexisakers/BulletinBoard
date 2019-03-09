@@ -428,7 +428,7 @@ extension BLTNViewController {
         }
 
         displayNewItemsAnimationPhase.completionHandler = {
-            currentItem.willDisplay()
+            currentItem.willPresent()
             previousItem?.willDismiss()
         }
 
@@ -452,8 +452,8 @@ extension BLTNViewController {
         finalAnimationPhase.completionHandler = {
             self.isDismissable = currentItem.isDismissable
 
-            currentItem.onDisplay()
-            previousItem?.onDismiss()
+            currentItem.didPresent()
+            previousItem?.didDismiss()
 
             for arrangedSubview in oldArrangedSubviews {
                 self.contentStackView.removeArrangedSubview(arrangedSubview)
@@ -545,7 +545,7 @@ extension BLTNViewController {
     public override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
         self.stateController.currentItem.willDismiss()
         super.dismiss(animated: flag) {
-            self.stateController.currentItem.onDismiss()
+            self.stateController.currentItem.didDismiss()
             completion?()
         }
     }

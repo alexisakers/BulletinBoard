@@ -22,12 +22,6 @@
     self = [super init];
     if (self) {
         self.title = title;
-        self.image = nil;
-        self.imageAccessibilityLabel = nil;
-        self.descriptionText = nil;
-        self.titleLabel = nil;
-        self.descriptionLabel = nil;
-        self.imageView = nil;
     }
     return self;
 }
@@ -76,18 +70,15 @@
 {
     NSMutableArray<UIView *> *contentViews = [[NSMutableArray alloc] init];
 
-    void (^insertComplementaryViews)(SEL) = ^(SEL generator) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        NSObject *result = [self performSelector:generator withObject:interfaceBuilder];
-#pragma clang diagnostic pop
-        
-        if ([result isKindOfClass:[NSArray<UIView *> class]]) {
-            [contentViews addObjectsFromArray:(NSArray<UIView *> *)result];
+    void (^insertComplementaryViews)(NSArray<UIView *> * (^)(void)) = ^(NSArray<UIView *> * (^insertBlock)(void)) {
+        NSArray<UIView *> *views = insertBlock();
+
+        if (views) {
+            [contentViews addObjectsFromArray:(NSArray<UIView *> *)views];
         }
     };
 
-    insertComplementaryViews(@selector(makeHeaderViewsWithInterfaceBuilder:));
+    insertComplementaryViews(^{ return [self makeHeaderViewsWithInterfaceBuilder:interfaceBuilder]; });
 
     // Title label
 
@@ -95,12 +86,11 @@
     self.titleLabel.label.text = self.title;
 
     [contentViews addObject:self.titleLabel];
-    insertComplementaryViews(@selector(makeViewsUnderTitleWithInterfaceBuilder:));
+    insertComplementaryViews(^{ return [self makeViewsUnderTitleWithInterfaceBuilder:interfaceBuilder]; });
 
     // Image View
 
     if (self.image) {
-
         UIImageView *imageView = [[UIImageView alloc] init];
         imageView.image = self.image;
         imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -113,9 +103,7 @@
 
         self.imageView = imageView;
         [contentViews addObject:imageView];
-
-        insertComplementaryViews(@selector(makeViewsUnderImageWithInterfaceBuilder:));
-
+        insertComplementaryViews(^{ return [self makeViewsUnderImageWithInterfaceBuilder:interfaceBuilder]; });
     }
 
     // Description Label
@@ -124,13 +112,13 @@
         self.descriptionLabel = [interfaceBuilder makeDescriptionLabel];
         self.descriptionLabel.attributedText = self.attributedDescriptionText;
         [contentViews addObject:self.descriptionLabel];
-        insertComplementaryViews(@selector(makeViewsUnderDescriptionWithInterfaceBuilder:));
+        insertComplementaryViews(^{ return [self makeViewsUnderDescriptionWithInterfaceBuilder:interfaceBuilder]; });
 
     } else if (self.descriptionText) {
         self.descriptionLabel = [interfaceBuilder makeDescriptionLabel];
         self.descriptionLabel.text = self.descriptionText;
         [contentViews addObject:self.descriptionLabel];
-        insertComplementaryViews(@selector(makeViewsUnderDescriptionWithInterfaceBuilder:));
+        insertComplementaryViews(^{ return [self makeViewsUnderDescriptionWithInterfaceBuilder:interfaceBuilder]; });
     }
 
     return contentViews;

@@ -17,29 +17,21 @@ class FeedbackPageBLTNItem: BLTNPageItem {
     private let feedbackGenerator = UISelectionFeedbackGenerator()
 
     override func actionButtonTapped(sender: UIButton) {
-
         // Play an haptic feedback
-
         feedbackGenerator.prepare()
         feedbackGenerator.selectionChanged()
 
         // Call super
-
         super.actionButtonTapped(sender: sender)
-
     }
 
-    override func alternativeButtonTapped(sender: UIButton) {
-
+    override func alternateActionButtonTapped(sender: UIButton) {
         // Play an haptic feedback
-
         feedbackGenerator.prepare()
         feedbackGenerator.selectionChanged()
 
         // Call super
-
-        super.alternativeButtonTapped(sender: sender)
-
+        super.alternateActionButtonTapped(sender: sender)
     }
 
 }

@@ -21,16 +21,14 @@ class PetValidationBLTNItem: FeedbackPageBLTNItem {
     let successFeedbackGenerator = UINotificationFeedbackGenerator()
 
     init(dataSource: CollectionDataSource, animalType: String) {
-
         self.dataSource = dataSource
         self.animalType = animalType
         super.init(title: "Choose your Favorite")
 
         isDismissable = false
         descriptionText = "You chose \(animalType) as your favorite animal type. Here are a few examples of posts in this category."
-        actionButtonTitle = "Validate"
-        alternativeButtonTitle = "Change"
-
+        actionTitle = "Validate"
+        alternateActionTitle = "Change"
     }
 
     // MARK: - Interface
@@ -96,10 +94,8 @@ class PetValidationBLTNItem: FeedbackPageBLTNItem {
 
     }
 
-    override func alternativeButtonTapped(sender: UIButton) {
-
+    override func alternateActionButtonTapped(sender: UIButton) {
         // Play selection haptic feedback
-
         selectionFeedbackGenerator.prepare()
         selectionFeedbackGenerator.selectionChanged()
 

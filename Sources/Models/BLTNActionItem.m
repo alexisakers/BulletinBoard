@@ -5,12 +5,11 @@
 
 #import "BLTNActionItem.h"
 #import "BLTNBoardSwiftSupport.h"
-#import <objc/message.h>
 
 @interface BLTNActionItem ()
 
 @property (nonatomic, strong, nullable, readwrite) UIButton *actionButton;
-@property (nonatomic, strong, nullable, readwrite) UIButton *alternativeButton;
+@property (nonatomic, strong, nullable, readwrite) UIButton *alternateActionButton;
 
 @end
 
@@ -20,41 +19,31 @@
 {
     self = [super init];
     if (self) {
-        self.actionButtonTitle = nil;
-        self.alternativeButtonTitle = nil;
-        self.parent = nil;
         self.dismissable = YES;
         self.showsCloseButton = YES;
         self.shouldStartWithActivityIndicator = NO;
         self.shouldRespondToKeyboardChanges = YES;
-        self.nextItem = nil;
-        self.presentationHandler = nil;
-        self.dismissalHandler = nil;
         self.appearance = [[BLTNItemAppearance alloc] init];
         self.interfaceBuilderType = [BLTNInterfaceBuilder class];
-        self.actionButton = nil;
-        self.alternativeButton = nil;
-        self.actionHandler = nil;
-        self.alternativeHandler = nil;
     }
     return self;
 }
 
 #pragma mark - Properties
 
-- (void)setActionButtonTitle:(NSString *)actionButtonTitle
+- (void)setActionTitle:(NSString *)actionTitle
 {
-    _actionButtonTitle = actionButtonTitle;
+    _actionTitle = actionTitle;
     if (self.actionButton) {
-        [self.actionButton setTitle:actionButtonTitle forState:UIControlStateNormal];
+        [self.actionButton setTitle:actionTitle forState:UIControlStateNormal];
     }
 }
 
-- (void)setAlternativeButtonTitle:(NSString *)alternativeButtonTitle
+- (void)setAlternateActionTitle:(NSString *)alternateActionTitle
 {
-    _alternativeButtonTitle = alternativeButtonTitle;
-    if (self.alternativeButton) {
-        [self.alternativeButton setTitle:alternativeButtonTitle forState:UIControlStateNormal];
+    _alternateActionTitle = alternateActionTitle;
+    if (self.alternateActionButton) {
+        [self.alternateActionButton setTitle:alternateActionTitle forState:UIControlStateNormal];
     }
 }
 
@@ -67,10 +56,10 @@
     }
 }
 
-- (void)alternativeButtonTappedWithSender:(UIButton *)sender
+- (void)alternateActionButtonTappedWithSender:(UIButton *)sender
 {
-    if (self.alternativeHandler) {
-        self.alternativeHandler(self);
+    if (self.alternateActionHandler) {
+        self.alternateActionHandler(self);
     }
 }
 
@@ -101,22 +90,22 @@
 
     // Buttons stack
 
-    if (self.actionButtonTitle == nil && self.alternativeButtonTitle == nil) {
+    if (self.actionTitle == nil && self.alternateActionTitle == nil) {
         return arrangedSubviews;
     }
 
     UIStackView *buttonsStack = [interfaceBuilder makeGroupStackWithSpacing:10];
 
-    if (self.actionButtonTitle) {
-        BLTNHighlightButtonWrapper *buttonWrapper = [interfaceBuilder makeActionButtonWithTitle:self.actionButtonTitle];
+    if (self.actionTitle) {
+        BLTNHighlightButtonWrapper *buttonWrapper = [interfaceBuilder makeActionButtonWithTitle:self.actionTitle];
         [buttonsStack addArrangedSubview:buttonWrapper];
         self.actionButton = buttonWrapper.button;
     }
 
-    if (self.alternativeButtonTitle) {
-        UIButton *button = [interfaceBuilder makeAlternativeButtonWithTitle:self.alternativeButtonTitle];
+    if (self.alternateActionTitle) {
+        UIButton *button = [interfaceBuilder makeAlternativeButtonWithTitle:self.alternateActionTitle];
         [buttonsStack addArrangedSubview:button];
-        self.alternativeButton = button;
+        self.alternateActionButton = button;
     }
 
     [arrangedSubviews addObject:buttonsStack];
@@ -136,44 +125,54 @@
 
 - (void)setUp
 {
+    [super setUp];
     [self.actionButton addTarget:self
                           action:@selector(actionButtonTappedWithSender:)
                 forControlEvents:UIControlEventTouchUpInside];
 
-    [self.alternativeButton addTarget:self
-                               action:@selector(alternativeButtonTappedWithSender:)
-                     forControlEvents:UIControlEventTouchUpInside];
+    [self.alternateActionButton addTarget:self
+                                   action:@selector(alternateActionButtonTappedWithSender:)
+                         forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)tearDown
 {
+    [super tearDown];
     [self.actionButton removeTarget:self action:NULL forControlEvents:UIControlEventTouchUpInside];
-    [self.alternativeButton removeTarget:self action:NULL forControlEvents:UIControlEventTouchUpInside];
     self.actionButton = nil;
-    self.alternativeButton = nil;
+    [self.alternateActionButton removeTarget:self action:NULL forControlEvents:UIControlEventTouchUpInside];
+    self.alternateActionButton = nil;
 }
     
-- (void)willDisplay
+- (void)willPresent
 {
-    // no-op
+    [super willPresent];
+    if (self.willPresentHandler) {
+        self.willPresentHandler(self);
+    }
 }
 
-- (void)onDisplay
+- (void)didPresent
 {
-    if (self.presentationHandler) {
-        self.presentationHandler(self);
+    [super didPresent];
+    if (self.didPresentHandler) {
+        self.didPresentHandler(self);
     }
 }
 
 - (void)willDismiss
 {
-    // no-op
+    [super willDismiss];
+    if (self.willDismissHandler) {
+        self.willDismissHandler(self);
+    }
 }
 
-- (void)onDismiss
+- (void)didDismiss
 {
-    if (self.dismissalHandler) {
-        self.dismissalHandler(self);
+    [super didDismiss];
+    if (self.didDismissHandler) {
+        self.didDismissHandler(self);
     }
 }
 

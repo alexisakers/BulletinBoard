@@ -6,8 +6,6 @@
 #import "PetValidationBulletinItem.h"
 #import "BulletinDataSource.h"
 #import "ImageCollectionViewCell.h"
-#import "SelectionFeedbackGenerator.h"
-#import "SuccessFeedbackGenerator.h"
 
 @interface PetValidationBulletinItem ()
 
@@ -33,8 +31,8 @@
         self.successFeedbackGenerator = [[UINotificationFeedbackGenerator alloc] init];
         self.collectionView = nil;
         self.descriptionText = [[NSString alloc] initWithFormat:@"You chose %@ as your favorite animal type. Here are a few examples of posts in this category.", [[data pluralizedPetName] lowercaseString]];
-        self.actionButtonTitle = @"Validate";
-        self.alternativeButtonTitle = @"Change";
+        self.actionTitle = @"Validate";
+        self.alternateActionTitle = @"Change";
     }
     return self;
 }
@@ -96,9 +94,9 @@
     });
 }
 
--(void)alternativeButtonTappedWithSender:(UIButton *)sender
+- (void)alternateActionButtonTappedWithSender:(UIButton *)sender
 {
-    [super alternativeButtonTappedWithSender:sender];
+    [super alternateActionButtonTappedWithSender:sender];
 
     // Play selection haptic feedback
     [self.selectionFeedbackGenerator prepare];
