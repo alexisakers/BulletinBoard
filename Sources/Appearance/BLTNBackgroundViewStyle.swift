@@ -48,14 +48,18 @@ extension BLTNBackgroundViewStyle {
      * The background content is not covered.
      */
 
-    @objc public static let none = BLTNBackgroundViewStyle(rawValue: .none)
+    @objc public static var none: BLTNBackgroundViewStyle {
+        return BLTNBackgroundViewStyle(rawValue: .none)
+    }
 
     /**
      * The background is covered with a semi-transparent view similar to the view displayed behind
      * UIKit alerts and action sheets.
      */
 
-    @objc public static let dimmed = BLTNBackgroundViewStyle(rawValue: .dimmed)
+    @objc public static var dimmed: BLTNBackgroundViewStyle {
+        return BLTNBackgroundViewStyle(rawValue: .dimmed)
+    }
 
     /**
      * The background is blurred with the specified effect.
@@ -71,12 +75,18 @@ extension BLTNBackgroundViewStyle {
     }
 
     /// The background blurred with a light style.
-    @objc public static let blurredLight: BLTNBackgroundViewStyle = .blurred(style: .light, isDark: false)
+    @objc public static var blurredLight: BLTNBackgroundViewStyle {
+        return .blurred(style: .light, isDark: false)
+    }
 
     /// The background blurred with an extra light style.
-    @objc public static let blurredExtraLight: BLTNBackgroundViewStyle = .blurred(style: .extraLight, isDark: false)
+    @objc public static var blurredExtraLight: BLTNBackgroundViewStyle {
+        return .blurred(style: .extraLight, isDark: false)
+    }
 
     /// The background blurred with a dark style.
-    @objc public static let blurredDark: BLTNBackgroundViewStyle = .blurred(style: .dark, isDark: true)
+    @objc public static var blurredDark: BLTNBackgroundViewStyle {
+        return .blurred(style: .dark, isDark: true)
+    }
 
 }
