@@ -242,7 +242,7 @@ This creates the following interaction:
 
 By default, the content behind the card is covered with a semi-opaque view (known as the `.dimming` style).
 
-You can customize the background view by changing the `backgroundViewStyle` property of the manager before calling `prepare()`.
+You can customize the background view by changing the `backgroundViewStyle` property of the manager before calling `showBulletin()`.
 
 **Example**:
 
