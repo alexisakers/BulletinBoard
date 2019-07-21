@@ -1,5 +1,9 @@
 # _BulletinBoard_ Changelog
 
+## 🔖 v4.0.0
+### Fixes
+- Upgrade to Swift 5
+
 ## 🔖 v3.0.0
 
 ### New Features
