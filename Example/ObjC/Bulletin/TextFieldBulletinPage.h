@@ -16,7 +16,7 @@
 @property (nonatomic, nullable) void (^textInputHandler)(TextFieldBulletinPage * _Nonnull, NSString * _Nullable);
 
 /// The text field presented by the page.
-@property (nonatomic, strong, readonly) UITextField * _Nonnull textField;
+@property (nonatomic, strong, readonly, nullable) UITextField *textField;
 
 /**
  * The method called to determine if the text is valid, and if the user can continue.
