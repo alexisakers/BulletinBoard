@@ -331,6 +331,40 @@ extension BLTNItemManager {
     }
 
     /**
+     * Removes items from the stack until a specific item is found.
+     * - parameter item: The item to seek.
+     * - parameter orDismiss: If true, dismiss bullein if not found. Otherwise popToRootItem()
+     */
+    
+    @objc public func popTo(item: BLTNItem, orDismiss: Bool) {
+        
+        assertIsPrepared()
+        assertIsMainThread()
+        
+        for index in 0..<itemsStack.count  {
+            
+            if itemsStack[index] === item {
+                
+                self.currentItem = itemsStack[index]
+                shouldDisplayActivityIndicator = currentItem.shouldStartWithActivityIndicator
+                refreshCurrentItemInterface()
+                
+                for removeIndex in (index+1..<itemsStack.count).reversed() {
+                    let removeItem = itemsStack.remove(at: removeIndex)
+                    tearDownItemsChain (startingAt: removeItem)
+                }
+                return
+            }
+        }
+        
+        if item !== rootItem, orDismiss {
+            dismissBulletin(animated: true)
+        } else {
+            popToRootItem()
+        }
+    }
+    
+    /**
      * Removes all the items from the stack and displays the root item.
      */
 
