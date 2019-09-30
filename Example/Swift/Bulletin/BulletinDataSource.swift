@@ -225,8 +225,16 @@ enum BulletinDataSource {
         let page = BLTNPageItem(title: "Setup Completed")
         page.image = #imageLiteral(resourceName: "IntroCompletion")
         page.imageAccessibilityLabel = "Checkmark"
-        page.appearance.actionButtonColor = #colorLiteral(red: 0.2980392157, green: 0.8509803922, blue: 0.3921568627, alpha: 1)
-        page.appearance.imageViewTintColor = #colorLiteral(red: 0.2980392157, green: 0.8509803922, blue: 0.3921568627, alpha: 1)
+
+        let tintColor: UIColor
+        if #available(iOS 13.0, *) {
+            tintColor = .systemGreen
+        } else {
+            tintColor = #colorLiteral(red: 0.2980392157, green: 0.8509803922, blue: 0.3921568627, alpha: 1)
+        }
+        page.appearance.actionButtonColor = tintColor
+        page.appearance.imageViewTintColor = tintColor
+
         page.appearance.actionButtonTitleColor = .white
 
         page.descriptionText = "PetBoard is ready for you to use. Happy browsing!"
