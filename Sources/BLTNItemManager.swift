@@ -27,12 +27,19 @@ import UIKit
     // MARK: - Background
 
     /**
-     * The background color of the bulletin card. Defaults to white.
+     * The background color of the bulletin card. Defaults to `systemBackground` on iOS 13
+     * and white on older versions of the OS.
      *
      * Set this value before presenting the bulletin. Changing it after will have no effect.
      */
 
-    @objc public var backgroundColor: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    @objc public var backgroundColor: UIColor = {
+        if #available(iOS 13.0, *) {
+            return .systemBackground
+        } else {
+            return .white
+        }
+    }()
 
     /**
      * The style of the view covering the content. Defaults to `.dimmed`.
@@ -247,21 +254,30 @@ extension BLTNItemManager {
      * Displaying the loading indicator does not change the height of the page or the current item. It will disable
      * dismissal by tapping and swiping to allow the task to complete and avoid resource deallocation.
      *
-     * - parameter color: The color of the activity indicator to display. Defaults to black.
+     * - parameter color: The color of the activity indicator to display. Defaults to .label on iOS 13 and .black on older systems.
      *
      * Displaying the loading indicator does not change the height of the page or the current item.
      */
 
-    @objc public func displayActivityIndicator(color: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)) {
+    @objc public func displayActivityIndicator(color: UIColor? = nil) {
 
         assertIsPrepared()
         assertIsMainThread()
 
         shouldDisplayActivityIndicator = true
-        lastActivityIndicatorColor = color
+        lastActivityIndicatorColor = color ?? defaultActivityIndicatorColor
 
-        bulletinController.displayActivityIndicator(color: color)
+        bulletinController.displayActivityIndicator(color: lastActivityIndicatorColor)
+    }
 
+    /// Provides a default color for activity indicator views.
+    /// Defaults to .label on iOS 13 and .black on older systems.
+    private var defaultActivityIndicatorColor: UIColor {
+        if #available(iOS 13.0, *) {
+            return .label
+        } else {
+            return .black
+        }
     }
 
     /**
