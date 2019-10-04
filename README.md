@@ -67,7 +67,7 @@ github "alexaubry/BulletinBoard"
 ## Documentation
 
 - The full library documentation is available [here](https://alexaubry.github.io/BulletinBoard).
-- To learn how to start using `BulletinBoard`, check our our [Getting Started](https://alexaubry.github.io/BulletinBoard/getting-started.html) guide.
+- To learn how to start using `BulletinBoard`, check out our [Getting Started](https://alexaubry.github.io/BulletinBoard/getting-started.html) guide.
 
 ## Contributing
 
