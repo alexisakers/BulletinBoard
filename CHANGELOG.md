@@ -1,5 +1,16 @@
 # _BulletinBoard_ Changelog
 
+## 🔖 v4.1.0
+### New Features
+- iOS 13 Dark Mode support
+[#170](https://github.com/alexaubry/BulletinBoard/issues/170)
+- Add mechanism to pop to item
+[#165](https://github.com/alexaubry/BulletinBoard/pull/165)
+
+### Fixes
+- Remove testing dependencies from the Cartfile 
+[#166](https://github.com/alexaubry/BulletinBoard/pull/166)
+
 ## 🔖 v4.0.0
 ### Fixes
 - Upgrade to Swift 5
