@@ -13,7 +13,7 @@
     <a title="BLTNBoard  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">BLTNBoard Docs</a> (100% documented)</p>
+        <p><a href="index.html">BLTNBoard 4.1.0 Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/alexaubry/BulletinBoard"><img src="img/gh.png"/>View on GitHub</a></p>
         <p class="header-right"><a href="dash-feed://https%3A%2F%2Falexaubry%2Egithub%2Eio%2Fdocsets%2FBLTNBoard%2Exml"><img src="img/dash.png"/>Install in Dash</a></p>
       </div>
@@ -75,7 +75,8 @@
             
             <h1 id='bulletinboard' class='heading'>BulletinBoard</h1>
 
-<p><a href="https://travis-ci.org/alexaubry/BulletinBoard"><img src="https://travis-ci.org/alexaubry/BulletinBoard.svg?branch=master" alt="CI Status"></a>
+<p><a href="https://dev.azure.com/alexaubry/BulletinBoard/_build/latest?definitionId=3"><img src="https://dev.azure.com/alexaubry/BulletinBoard/_apis/build/status/alexaubry.BulletinBoard" alt="CI Status"></a>
+<a href="https://travis-ci.org/alexaubry/BulletinBoard"><img src="https://travis-ci.org/alexaubry/BulletinBoard.svg?branch=master" alt="CI Status"></a>
 <a href="https://cocoapods.org/pods/BulletinBoard"><img src="https://img.shields.io/cocoapods/v/BulletinBoard.svg?style=flat" alt="Version"></a>
 <a href="https://cocoapods.org/pods/BulletinBoard"><img src="https://img.shields.io/cocoapods/l/BulletinBoard.svg?style=flat" alt="License"></a>
 <a href="https://cocoapods.org/pods/BulletinBoard"><img src="https://img.shields.io/cocoapods/p/BulletinBoard.svg?style=flat" alt="Platform"></a>
@@ -94,13 +95,13 @@
 <h2 id='requirements' class='heading'>Requirements</h2>
 
 <ul>
-<li>Xcode 9 and later</li>
+<li>Xcode 11 and later</li>
 <li>iOS 9 and later</li>
-<li>Swift 3.2 and later</li>
+<li>Swift 5 and later</li>
 </ul>
 <h2 id='demo' class='heading'>Demo</h2>
 
-<p>A demo project is included in the <code>BulletinBoard</code> workspace. It demonstrates how to: </p>
+<p>A demo project is included in the <code>BulletinBoard</code> workspace. It demonstrates how to:</p>
 
 <ul>
 <li>integrate the library (setup, data flow)</li>
@@ -139,7 +140,7 @@
 <p>BulletinBoard is fully compatible with Objective-C.</p>
 
 <p>To import it in your Objective-C app, just add this line at the top of your files:</p>
-<pre class="highlight objective_c"><code><span class="k">@import</span> <span class="n">BLTNBoard</span><span class="p">;</span> 
+<pre class="highlight objective_c"><code><span class="k">@import</span> <span class="n">BLTNBoard</span><span class="p">;</span>
 </code></pre>
 <h2 id='usage' class='heading'>Usage</h2>
 <h2 id='the-basics' class='heading'>The Basics</h2>
@@ -154,9 +155,9 @@
 <p>With this root item, you need to create a <code>BLTNManager</code>. We recommend putting it in the view controller that will display the bulletin.</p>
 <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">ViewController</span><span class="p">:</span> <span class="kt">UIViewController</span> <span class="p">{</span>
 
-    <span class="kd">lazy</span> <span class="k">var</span> <span class="nv">bulletinManager</span><span class="p">:</span> <span class="kt">BLTNManager</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="kd">lazy</span> <span class="k">var</span> <span class="nv">bulletinManager</span><span class="p">:</span> <span class="kt">BLTNItemManager</span> <span class="o">=</span> <span class="p">{</span>
         <span class="k">let</span> <span class="nv">rootItem</span><span class="p">:</span> <span class="kt">BLTNItem</span> <span class="o">=</span> <span class="c1">// ... create your item here</span>
-        <span class="k">return</span> <span class="kt">BLTNManager</span><span class="p">(</span><span class="nv">rootItem</span><span class="p">:</span> <span class="n">rootItem</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kt">BLTNItemManager</span><span class="p">(</span><span class="nv">rootItem</span><span class="p">:</span> <span class="n">rootItem</span><span class="p">)</span>
     <span class="p">}()</span>
 
 <span class="p">}</span>
@@ -208,7 +209,7 @@
 <p><strong>Example</strong></p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">greenColor</span> <span class="o">=</span> <span class="kt">UIColor</span><span class="p">(</span><span class="nv">red</span><span class="p">:</span> <span class="mf">0.294</span><span class="p">,</span> <span class="nv">green</span><span class="p">:</span> <span class="mf">0.85</span><span class="p">,</span> <span class="nv">blue</span><span class="p">:</span> <span class="mf">0.392</span><span class="p">,</span> <span class="nv">alpha</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">page</span><span class="o">.</span><span class="n">appearance</span><span class="o">.</span><span class="n">actionButtonColor</span> <span class="o">=</span> <span class="n">greenColor</span>
-<span class="n">page</span><span class="o">.</span><span class="n">appearance</span><span class="o">.</span><span class="n">alternativeButtonColor</span> <span class="o">=</span> <span class="n">greenColor</span>
+<span class="n">page</span><span class="o">.</span><span class="n">appearance</span><span class="o">.</span><span class="n">alternativeButtonTitleColor</span> <span class="o">=</span> <span class="n">greenColor</span>
 <span class="n">page</span><span class="o">.</span><span class="n">appearance</span><span class="o">.</span><span class="n">actionButtonTitleColor</span> <span class="o">=</span> <span class="o">.</span><span class="n">white</span>
 </code></pre>
 
@@ -244,9 +245,10 @@
 <p>You can use it to interact with the presented bulletin. Call:</p>
 
 <ul>
+<li><code>manager?.push(item:)</code> with a <code>BulletinItem</code> to present a new item</li>
 <li><code>manager?.popItem()</code> to go back to the previous item</li>
 <li><code>manager?.popToRootItem()</code> to go back to the first item</li>
-<li><code>manager?.push(item:)</code> with a <code>BulletinItem</code> to present a new item</li>
+<li><code>manager?.popTo(item:orDismiss:)</code> to go back to a specific item</li>
 <li><code>manager?.dismissBulletin(animated:)</code> to dismiss the bulletin</li>
 <li><code>manager?.displayNextItem()</code> to display the next item (see below)</li>
 </ul>
@@ -291,11 +293,11 @@
 
 <p>By default, the content behind the card is covered with a semi-opaque view (known as the <code>.dimming</code> style).</p>
 
-<p>You can customize the background view by changing the <code>backgroundViewStyle</code> property of the manager before calling <code>prepare()</code>.</p>
+<p>You can customize the background view by changing the <code>backgroundViewStyle</code> property of the manager before calling <code>showBulletin()</code>.</p>
 
 <p><strong>Example</strong>:</p>
 <pre class="highlight swift"><code><span class="n">manager</span><span class="o">.</span><span class="n">backgroundViewStyle</span> <span class="o">=</span> <span class="o">.</span><span class="n">blurredExtraLight</span>
-<span class="n">manager</span><span class="o">.</span><span class="nf">prepare</span><span class="p">()</span>
+<span class="n">manager</span><span class="o">.</span><span class="nf">showBulletin</span><span class="p">(</span><span class="nv">above</span><span class="p">:</span> <span class="k">self</span><span class="p">)</span>
 </code></pre>
 
 <p>Several styles are available in the <code>BulletinBackgroundViewStyle</code> enum:</p>
@@ -307,7 +309,7 @@
 </blockquote>
 <h2 id='dismissal' class='heading'>Dismissal</h2>
 
-<p>If you set the <code>isDismissable</code> property to <code>true</code>, the user will be able to dismiss the bulletin by tapping outside of the card or by swiping the card down. This property defaults to <code>true</code>. You should set this property to <code>false</code> if completing the task is required, and should not be avoided by the user. </p>
+<p>If you set the <code>isDismissable</code> property to <code>true</code>, the user will be able to dismiss the bulletin by tapping outside of the card or by swiping the card down. This property defaults to <code>true</code>. You should set this property to <code>false</code> if completing the task is required, and should not be avoided by the user.</p>
 
 <p>By default, a close button will be displayed when the item can be dismissed. If you don&rsquo;t want this behavior, you can set the <code>requiresCloseButton</code> property to <code>false</code>. This is useful when the bulletin already provides an action button to close the item (such as a “Done“ button).</p>
 
@@ -315,8 +317,6 @@
 <h2 id='creating-custom-items' class='heading'>Creating Custom Items</h2>
 
 <p>To create custom bulletin items, create a class that implements the <code>BLTNItem</code> protocol. It is usually easier to subclass <code>BLTNPageItem</code> and implement one of the hook methods to provide your custom views to display with standard elements.</p>
-
-<p>See the <a href="guides/Creating%20a%20Custom%20Item.md">Creating a Custom Item</a> guide to learn more.</p>
 <h2 id='internals' class='heading'>Internals</h2>
 
 <p>BulletinBoard uses stack views and Auto Layout to display and manage cards. It automatically adapts to changes in width and height. iPad and iPhone X are supported out of the box.</p>
@@ -332,13 +332,6 @@
 <li><a href="https://github.com/alexaubry/BulletinBoard/blob/master/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
 <li><a href="https://github.com/alexaubry/BulletinBoard/blob/master/CONTRIBUTING.md">Contribution Guidelines</a></li>
 </ul>
-<h2 id='apps-using-em-bulletinboard-em' class='heading'>Apps Using <em>BulletinBoard</em></h2>
-
-<p>Feel free to submit a PR if you’re using this library in your apps.</p>
-
-<ul>
-<li><a href="https://itunes.apple.com/it/app/spdrvision-mobile/id1260166539?mt=8">SpdrVision mobile</a> - A simple way to watch Italian television on macOS and iOS by Gianpiero Spinelli</li>
-</ul>
 <h2 id='author' class='heading'>Author</h2>
 
 <p>Written by Alexis Aubry. You can <a href="https://twitter.com/_alexaubry">find me on Twitter</a>.</p>
@@ -350,7 +343,7 @@
         </section>
         <section id="footer">
           <p>Copyright © 2017 - present Alexis Aubry. Available under the MIT License.</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
