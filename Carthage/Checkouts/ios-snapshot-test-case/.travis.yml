@@ -1,6 +1,0 @@
-language: objective-c
-osx_image: xcode9.4
-before_script:
-  - gem install cocoapods -v 1.5.3 --no-ri --no-rdoc
-script:
-  ./build.sh

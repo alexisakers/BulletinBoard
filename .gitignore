@@ -38,3 +38,4 @@ Package.pins
 
 # Carthage
 Carthage/Build
+Carthage/Checkouts
