@@ -190,9 +190,10 @@ The `BLTNItem` protocol exposes a `manager` property that is set when the item i
 
 You can use it to interact with the presented bulletin. Call:
 
+- `manager?.push(item:)` with a `BulletinItem` to present a new item
 - `manager?.popItem()` to go back to the previous item
 - `manager?.popToRootItem()` to go back to the first item
-- `manager?.push(item:)` with a `BulletinItem` to present a new item
+- `manager?.popTo(item:orDismiss:)` to go back to a specific item
 - `manager?.dismissBulletin(animated:)` to dismiss the bulletin
 - `manager?.displayNextItem()` to display the next item (see below)
 
