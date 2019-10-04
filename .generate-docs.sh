@@ -11,7 +11,7 @@ COPYRIGHT="Copyright © 2017 - present $AUTHOR. Available under the MIT License.
 GITHUB_URL="https://github.com/alexaubry/BulletinBoard"
 GH_PAGES_URL="https://alexaubry.github.io/BulletinBoard"
 
-jazzy \
+bundle exec jazzy \
     --swift-version $SWIFT_VERSION \
     -a "$AUTHOR" \
     -u "$AUTHOR_URL" \

@@ -22,6 +22,8 @@ To develop _BulletinBoard_, you will need to use an Xcode version compatible wit
 
 ### Checking out the repository
 
+We use gitflow for PRs. The `master` branch contains the state of the latest released version. `develop` contains the changes from the current unreleased state. You create your PRs againts the `develop` branch.
+
 - Click the “Fork” button in the upper right corner of repo
 - Clone your fork:
     - `git clone https://github.com/<YOUR_GITHUB_USERNAME>/BulletinBoard.git`
@@ -45,22 +47,24 @@ Before opening a pull request, please make sure your changes don't break things.
 
 ### Submitting the PR
 
-When the coding is done and you’ve finished testing your changes, you are ready to submit the PR to the [main repo](https://github.com/alexaubry/BulletinBoard). Some best practices are:
+When the coding is done and you’ve finished testing your changes, you are ready to submit the PR to the [main repo](https://github.com/alexaubry/BulletinBoard), towards the `develop` branch. Some best practices are:
 
 - Use a descriptive title
 - Link the issues that are related to your PR in the body
 
-## I want to add my app to the README
-
-If you want to add your app to the README, please do so in the ["Apps Using _BulletinBoard_"](https://github.com/alexaubry/BulletinBoard#apps-using-bulletinboard) section.
-
-Add your entry in alphabetical order. You need to respect this format when writing your entry:
+After you open your PR, please update the CHANGELOG under the "Unreleased" tab with a link to your changes, under the appropriate section, and following this format:
 
 ```
-- [App Name as it appears on the App Store](app store link)
+- (Your changes, usually your PR title)
+[#XXX](https://github.com/alexaubry/BulletinBoard/pulls/XXX)
 ```
 
-Make sure you are using the "geo.itunes.apple.com" domain in your link. We won't accept submissions with a description or multiple links.
+The sections are:
+- `### New Features`
+- `### Changed Behavior`
+- `### Fixes`
+
+If you don't see the section under Unreleased, you can add it.
 
 ## Code of Conduct
 
