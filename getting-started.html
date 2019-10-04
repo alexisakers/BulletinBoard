@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Getting Started  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="Getting Started  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">BLTNBoard 4.1.0 Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/alexaubry/BulletinBoard"><img src="img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right"><a href="dash-feed://https%3A%2F%2Falexaubry%2Egithub%2Eio%2Fdocsets%2FBLTNBoard%2Exml"><img src="img/dash.png"/>Install in Dash</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">BLTNBoard Reference</a>
+        <img id="carat" src="img/carat.png" />
+        Getting Started  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="getting-started.html">Getting Started</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="migrating-to-v2.html">Migrating To V2</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/BLTNBackgroundViewStyle.html">BLTNBackgroundViewStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/BLTNInterfaceBuilder.html">BLTNInterfaceBuilder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/BLTNItemAppearance.html">BLTNItemAppearance</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/BLTNItemManager.html">BLTNItemManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/BLTNSpacing.html">BLTNSpacing</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/BLTNStatusBarAppearance.html">BLTNStatusBarAppearance</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/BLTNViewPosition.html">BLTNViewPosition</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <h1 id='getting-started-with-bulletinboard' class='heading'>Getting Started with BulletinBoard</h1>
+<h2 id='the-basics' class='heading'>The Basics</h2>
+
+<p>The <code>BLTNManager</code> class generates, manages and displays bulletin cards. Cards are created using bulletin items. Bulletin items are objects that conform to the <code>BLTNItem</code> protocol.</p>
+
+<p>The library provides a standard item type: <code>BLTNPageItem</code>. If you need to customize the items, you can override this class, or create new item types from scratch.</p>
+<h2 id='displaying-bulletins' class='heading'>Displaying Bulletins</h2>
+
+<p>To display bulletins you first need to create the root item to display (explained in the next sections).</p>
+
+<p>With this root item, you need to create a <code>BLTNManager</code>. We recommend putting it in the view controller that will display the bulletin.</p>
+<pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">ViewController</span><span class="p">:</span> <span class="kt">UIViewController</span> <span class="p">{</span>
+
+    <span class="kd">lazy</span> <span class="k">var</span> <span class="nv">bulletinManager</span><span class="p">:</span> <span class="kt">BLTNItemManager</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">rootItem</span><span class="p">:</span> <span class="kt">BLTNItem</span> <span class="o">=</span> <span class="c1">// ... create your item here</span>
+        <span class="k">return</span> <span class="kt">BLTNItemManager</span><span class="p">(</span><span class="nv">rootItem</span><span class="p">:</span> <span class="n">rootItem</span><span class="p">)</span>
+    <span class="p">}()</span>
+
+<span class="p">}</span>
+</code></pre>
+
+<p>To present your bulletin, call this method:</p>
+<pre class="highlight swift"><code><span class="n">bulletinManager</span><span class="o">.</span><span class="nf">showBulletin</span><span class="p">(</span><span class="nv">above</span><span class="p">:</span> <span class="k">self</span><span class="p">)</span>
+</code></pre>
+
+<p>For the case of onboarding, you can call it in <code>viewWillAppear(animated:)</code> after checking if the user has already completed onboarding.</p>
+<h2 id='creating-page-items' class='heading'>Creating Page Items</h2>
+
+<p>You can create standard page items using the <code>BLTNPageItem</code> class.</p>
+
+<p>It takes care of generating a user interface with standard components:</p>
+
+<ul>
+<li>a title (required)</li>
+<li>an icon image (should be 128x128px or less)</li>
+<li>a description text (plain or attributed)</li>
+<li>a large action button</li>
+<li>a smaller alternative button</li>
+</ul>
+
+<p>For example, this interface was created using a <code>BLTNPageItem</code>:</p>
+
+<p><img src="https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/page_customization.png" alt="Customizing BLTNPageItem"></p>
+
+<p>To recreate this interface, use this code:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">page</span> <span class="o">=</span> <span class="kt">BLTNPageItem</span><span class="p">(</span><span class="nv">title</span><span class="p">:</span> <span class="s">"Push Notifications"</span><span class="p">)</span>
+<span class="n">page</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="kt">UIImage</span><span class="p">(</span><span class="nv">named</span><span class="p">:</span> <span class="s">"..."</span><span class="p">)</span>
+
+<span class="n">page</span><span class="o">.</span><span class="n">descriptionText</span> <span class="o">=</span> <span class="s">"Receive push notifications when new photos of pets are available."</span>
+<span class="n">page</span><span class="o">.</span><span class="n">actionButtonTitle</span> <span class="o">=</span> <span class="s">"Subscribe"</span>
+<span class="n">page</span><span class="o">.</span><span class="n">alternativeButtonTitle</span> <span class="o">=</span> <span class="s">"Not now"</span>
+</code></pre>
+
+<p>If you omit an optional property, the page won&rsquo;t generate a view for it. For instance, if you set <code>alternativeButtonTitle</code> to <code>nil</code>, the card won&rsquo;t display an alternative button.</p>
+
+<p>You can also set the <code>attributedDescriptionText</code> if you want to use an attributed string.</p>
+<h3 id='customizing-the-appearance' class='heading'>Customizing the Appearance</h3>
+
+<p>The <code>BLTNPageItem</code> class exposes a <code>appearance</code> property that allows you to fully customize the appearance of the generated interface.</p>
+
+<p>This property references a <code>BLTNAppearance</code>, which is used to generate the standard components (more on this later).</p>
+
+<p>You can customize both color and fonts. You need to change these before you present / push the item. Changing them after presentation will have no effect.</p>
+
+<p><strong>Example</strong></p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">greenColor</span> <span class="o">=</span> <span class="kt">UIColor</span><span class="p">(</span><span class="nv">red</span><span class="p">:</span> <span class="mf">0.294</span><span class="p">,</span> <span class="nv">green</span><span class="p">:</span> <span class="mf">0.85</span><span class="p">,</span> <span class="nv">blue</span><span class="p">:</span> <span class="mf">0.392</span><span class="p">,</span> <span class="nv">alpha</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">page</span><span class="o">.</span><span class="n">appearance</span><span class="o">.</span><span class="n">actionButtonColor</span> <span class="o">=</span> <span class="n">greenColor</span>
+<span class="n">page</span><span class="o">.</span><span class="n">appearance</span><span class="o">.</span><span class="n">alternativeButtonTitleColor</span> <span class="o">=</span> <span class="n">greenColor</span>
+<span class="n">page</span><span class="o">.</span><span class="n">appearance</span><span class="o">.</span><span class="n">actionButtonTitleColor</span> <span class="o">=</span> <span class="o">.</span><span class="n">white</span>
+</code></pre>
+
+<p>This produces a card with the following appearance:</p>
+
+<p><img src="https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_tint_color.png" alt="Demo Tint Color"></p>
+<h3 id='handling-button-taps' class='heading'>Handling Button Taps</h3>
+
+<p>To handle taps on buttons, set a closure for these properties:</p>
+
+<ul>
+<li><code>actionHandler</code> - called when the action button is tapped.</li>
+<li><code>alternativeHandler</code> - called when the alternative button is tapped.</li>
+</ul>
+<pre class="highlight swift"><code><span class="n">page</span><span class="o">.</span><span class="n">actionHandler</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="kt">BLTNActionItem</span><span class="p">)</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Action button tapped"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>This prints <code>&quot;Action button tapped&quot;</code> when the action button is tapped.</p>
+<pre class="highlight swift"><code><span class="n">page</span><span class="o">.</span><span class="n">alternativeHandler</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="kt">BLTNActionItem</span><span class="p">)</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Alternative button tapped"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>This prints <code>&quot;Alternative button tapped&quot;</code> when the alternative button is tapped.</p>
+
+<p>Use these handlers as an opportunity to change the presented item, dismiss the bulletin and/or pass data to your model.</p>
+<h2 id='changing-the-presented-item' class='heading'>Changing the Presented Item</h2>
+
+<p>The <code>BLTNItem</code> protocol exposes a <code>manager</code> property that is set when the item is currently being displayed by a manager.</p>
+
+<p>You can use it to interact with the presented bulletin. Call:</p>
+
+<ul>
+<li><code>manager?.push(item:)</code> with a <code>BulletinItem</code> to present a new item</li>
+<li><code>manager?.popItem()</code> to go back to the previous item</li>
+<li><code>manager?.popToRootItem()</code> to go back to the first item</li>
+<li><code>manager?.popTo(item:orDismiss:)</code> to go back to a specific item</li>
+<li><code>manager?.dismissBulletin(animated:)</code> to dismiss the bulletin</li>
+<li><code>manager?.displayNextItem()</code> to display the next item (see below)</li>
+</ul>
+
+<p>You need to call these methods from the main thread. Never force unwrap <code>manager</code>, as this property will be unset as soon as the item is removed from the bulletin.</p>
+
+<p>It is also possible to set the <code>nextItem</code> property to the <code>BLTNItem</code> that should be displayed next and call the <code>displayNextItem()</code> method when you want to display it.</p>
+
+<p>For instance, to present a new card when the user taps the action button:</p>
+<pre class="highlight swift"><code><span class="n">page</span><span class="o">.</span><span class="n">nextItem</span> <span class="o">=</span> <span class="nf">makeLocationPage</span><span class="p">()</span> <span class="c1">// Creates a new PageBulletinItem</span>
+
+<span class="n">page</span><span class="o">.</span><span class="n">actionHandler</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="kt">PageBulletinItem</span><span class="p">)</span> <span class="k">in</span>
+    <span class="n">item</span><span class="o">.</span><span class="n">manager</span><span class="p">?</span><span class="o">.</span><span class="nf">displayNextItem</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>This creates the following interaction:</p>
+
+<p><img src="https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_segue.png" alt="Next Item"></p>
+<h2 id='displaying-an-activity-indicator' class='heading'>Displaying an Activity Indicator</h2>
+
+<p>If you need to perform a task between the moment the user taps a button and the moment you&rsquo;ll be able to change the presented item, you can call <code>displayActivityIndicator()</code> method on the item manager to hide the current card and display an activity indicator.</p>
+
+<p>This is especially useful if you need to fetch data from a server (in-app purchase price, subscription status, &hellip;) or save data (e.g. Core Data).</p>
+
+<p>Once your task is finished, you call one of the methods described in <a href="#changing-the-presented-item">Changing the Presented Item</a> to display the new item, or call <code>hideActivityIndicator()</code> to hide the indicator without changing the item.</p>
+
+<p><strong>Example</strong>:</p>
+<pre class="highlight swift"><code><span class="n">page</span><span class="o">.</span><span class="n">actionHandler</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="kt">BLTNActionItem</span><span class="p">)</span> <span class="k">in</span>
+    <span class="n">item</span><span class="o">.</span><span class="n">manager</span><span class="p">?</span><span class="o">.</span><span class="nf">displayActivityIndicator</span><span class="p">()</span>
+    <span class="c1">// do your task</span>
+    <span class="c1">// ...</span>
+    <span class="c1">// when your task is finished, transition to the appropriate bulletin item</span>
+    <span class="n">item</span><span class="o">.</span><span class="n">manager</span><span class="p">?</span><span class="o">.</span><span class="nf">displayNextItem</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>This creates the following interaction:</p>
+
+<p><img src="https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_activity.png" alt="Activity Indicator"></p>
+<h2 id='customizing-the-background-view' class='heading'>Customizing the Background View</h2>
+
+<p>By default, the content behind the card is covered with a semi-opaque view (known as the <code>.dimming</code> style).</p>
+
+<p>You can customize the background view by changing the <code>backgroundViewStyle</code> property of the manager before calling <code>showBulletin()</code>.</p>
+
+<p><strong>Example</strong>:</p>
+<pre class="highlight swift"><code><span class="n">manager</span><span class="o">.</span><span class="n">backgroundViewStyle</span> <span class="o">=</span> <span class="o">.</span><span class="n">blurredExtraLight</span>
+<span class="n">manager</span><span class="o">.</span><span class="nf">showBulletin</span><span class="p">(</span><span class="nv">above</span><span class="p">:</span> <span class="k">self</span><span class="p">)</span>
+</code></pre>
+
+<p>Several styles are available in the <code>BulletinBackgroundViewStyle</code> enum:</p>
+
+<p><img src="https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_background_styles.png" alt="Dimming View"></p>
+
+<blockquote>
+<p>Note: blurred backgrounds are available in iOS 10.0 and later.</p>
+</blockquote>
+<h2 id='dismissal' class='heading'>Dismissal</h2>
+
+<p>If you set the <code>isDismissable</code> property to <code>true</code>, the user will be able to dismiss the bulletin by tapping outside of the card or by swiping the card down. This property defaults to <code>true</code>. You should set this property to <code>false</code> if completing the task is required, and should not be avoided by the user.</p>
+
+<p>By default, a close button will be displayed when the item can be dismissed. If you don&rsquo;t want this behavior, you can set the <code>requiresCloseButton</code> property to <code>false</code>. This is useful when the bulletin already provides an action button to close the item (such as a “Done“ button).</p>
+
+<p><img src="https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_close_button.png" alt="Dismissal"></p>
+<h2 id='creating-custom-items' class='heading'>Creating Custom Items</h2>
+
+<p>To create custom bulletin items, create a class that implements the <code>BLTNItem</code> protocol. It is usually easier to subclass <code>BLTNPageItem</code> and implement one of the hook methods to provide your custom views to display with standard elements.</p>
+<h2 id='internals' class='heading'>Internals</h2>
+
+<p>BulletinBoard uses stack views and Auto Layout to display and manage cards. It automatically adapts to changes in width and height. iPad and iPhone X are supported out of the box.</p>
+
+<p>If you are interested in learning how it works in more details, look at the implementation of <code>BLTNManager</code>, <code>BulletinViewController</code> and <code><a href="Classes/BLTNInterfaceBuilder.html">BLTNInterfaceBuilder</a></code>.</p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>Copyright © 2017 - present Alexis Aubry. Available under the MIT License.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
