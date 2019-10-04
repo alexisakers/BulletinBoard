@@ -3,7 +3,7 @@ set -e
 
 MODULE_VERSION=$1
 OUTPUT=$2
-SWIFT_VERSION="4.2"
+SWIFT_VERSION="5.0"
 AUTHOR="Alexis Aubry"
 AUTHOR_URL="https://twitter.com/_alexaubry"
 MODULE_NAME="BLTNBoard"
