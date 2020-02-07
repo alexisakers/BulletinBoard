@@ -1,5 +1,10 @@
 # _BulletinBoard_ Changelog
 
+## Unreleased
+### Fixes
+- Fix for iPad split view bug
+[#173] (https://github.com/alexaubry/BulletinBoard/pull/173)
+
 ## 🔖 v4.0.0
 ### Fixes
 - Upgrade to Swift 5
