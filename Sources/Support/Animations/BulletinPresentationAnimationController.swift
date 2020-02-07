@@ -31,6 +31,11 @@ class BulletinPresentationAnimationController: NSObject, UIViewControllerAnimate
             return
         }
 
+        // Fix the frame (Needed for iPad app running in split view)
+        if let fromFrame = transitionContext.viewController(forKey: .from)?.view.frame {
+            toVC.view.frame = fromFrame
+        }
+
         let rootView = toVC.view!
         let contentView = toVC.contentView
         let backgroundView = toVC.backgroundView!
