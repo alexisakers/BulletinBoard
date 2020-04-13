@@ -24,10 +24,21 @@ private class AnimatingShapeLayer: CAShapeLayer {
 }
 
 /**
- * A layer whose corners are rounded with a continuous mask (“squircle“).
+ * A layer whose corners are rounded with a continuous mask (“squircle“). For the button
  */
 
-class ContinuousMaskLayer: CALayer {
+
+protocol ContinuousMaskLayer {
+    var continuousCornerRadius: CGFloat { get set }
+    
+    var roundedCorners: UIRectCorner { get set }
+}
+
+/**
+ * A layer whose corners are rounded with a continuous mask (“squircle“). For the button
+ */
+
+class ContinuousMaskLayerButton: CALayer, ContinuousMaskLayer {
 
     /// The corner radius.
     var continuousCornerRadius: CGFloat = 0 {
@@ -38,6 +49,63 @@ class ContinuousMaskLayer: CALayer {
 
     /// The corners to round.
     var roundedCorners: UIRectCorner = .allCorners {
+        didSet {
+            refreshMask()
+        }
+    }
+
+    // MARK: - Initialization
+
+    override init(layer: Any) {
+        super.init(layer: layer)
+    }
+
+    override init() {
+        super.init()
+        self.mask = AnimatingShapeLayer()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Layout
+
+    override func layoutSublayers() {
+        super.layoutSublayers()
+        refreshMask()
+    }
+
+    private func refreshMask() {
+
+        guard let mask = mask as? CAShapeLayer else {
+            return
+        }
+
+        let radii = CGSize(width: continuousCornerRadius, height: continuousCornerRadius)
+        let roundedPath = UIBezierPath(roundedRect: bounds, byRoundingCorners: roundedCorners, cornerRadii: radii)
+
+        mask.path = roundedPath.cgPath
+
+    }
+
+}
+
+/**
+ * A layer whose corners are rounded with a continuous mask (“squircle“). For the main view
+ */
+
+class ContinuousMaskLayerView: CALayer, ContinuousMaskLayer {
+
+    /// The corner radius.
+    var continuousCornerRadius: CGFloat = 0 {
+        didSet {
+            refreshMask()
+        }
+    }
+
+    /// The corners to round.
+    var roundedCorners: UIRectCorner = [.topRight, .topLeft] {
         didSet {
             refreshMask()
         }

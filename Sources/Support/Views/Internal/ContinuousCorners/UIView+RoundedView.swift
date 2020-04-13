@@ -12,7 +12,7 @@ import UIKit
 class RoundedView: UIView, RoundedViewProtocol {
 
     override class var layerClass: AnyClass {
-        return ContinuousMaskLayer.self
+        return ContinuousMaskLayerView.self
     }
 
 }
@@ -24,7 +24,7 @@ class RoundedView: UIView, RoundedViewProtocol {
 class RoundedButton: UIButton, RoundedViewProtocol {
 
     override class var layerClass: AnyClass {
-        return ContinuousMaskLayer.self
+        return ContinuousMaskLayerButton.self
     }
 
 }

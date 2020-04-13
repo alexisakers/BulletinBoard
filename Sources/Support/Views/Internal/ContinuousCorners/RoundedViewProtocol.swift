@@ -16,30 +16,30 @@ protocol RoundedViewProtocol: NSObjectProtocol {
     var layer: CALayer { get }
 }
 
-extension RoundedViewProtocol {
-
-    /// The corner radius of the view.
-    var cornerRadius: CGFloat {
-        get {
-            return roundedLayer.continuousCornerRadius
-        }
-        set {
-            roundedLayer.continuousCornerRadius = newValue
-        }
-    }
-
-    /// The corners to round.
-    var roundedCorners: UIRectCorner {
-        get {
-            return roundedLayer.roundedCorners
-        }
-        set {
-            roundedLayer.roundedCorners = newValue
-        }
-    }
-
-    private var roundedLayer: ContinuousMaskLayer {
-        return layer as! ContinuousMaskLayer
-    }
-
-}
+//extension RoundedViewProtocol {
+//
+//    /// The corner radius of the view.
+//    var cornerRadius: CGFloat {
+//        get {
+//            return roundedLayer.continuousCornerRadius
+//        }
+//        set {
+//            roundedLayer.continuousCornerRadius = newValue
+//        }
+//    }
+//
+//    /// The corners to round.
+//    var roundedCorners: UIRectCorner {
+//        get {
+//            return roundedLayer.roundedCorners
+//        }
+//        set {
+//            roundedLayer.roundedCorners = newValue
+//        }
+//    }
+//
+//    private var roundedLayer: ContinuousMaskLayer {
+//        return layer as! ContinuousMaskLayer
+//    }
+//
+//}
