@@ -18,6 +18,5 @@ Pod::Spec.new do |s|
   s.frameworks  = "UIKit"
   s.documentation_url = "https://alexaubry.github.io/BulletinBoard"
   s.module_name = "BLTNBoard"
-  s.resources = "Resources/**/*.{lproj,png}"
   s.swift_version = "5.0"
 end

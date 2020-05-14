@@ -165,7 +165,11 @@ extension BulletinViewController {
         activityIndicator.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         activityIndicator.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
 
-        activityIndicator.style = .whiteLarge
+        if #available(iOS 13.0, *) {
+            activityIndicator.style = UIActivityIndicatorView.Style.large
+        } else {
+            activityIndicator.style = .whiteLarge
+        }
         activityIndicator.color = .black
         activityIndicator.isUserInteractionEnabled = false
 
