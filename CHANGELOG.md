@@ -1,6 +1,14 @@
 # _BulletinBoard_ Changelog
 ## Unreleased
 
+## 🔖 v4.1.1
+### Changes
+- Do not use external resources for close button
+
+### Fixes
+- Fix for iPad split view bug
+[#173](https://github.com/alexaubry/BulletinBoard/pull/173)
+
 ## 🔖 v4.1.0
 ### New Features
 - iOS 13 Dark Mode support
@@ -11,11 +19,6 @@
 ### Fixes
 - Remove testing dependencies from the Cartfile 
 [#166](https://github.com/alexaubry/BulletinBoard/pull/166)
-
-## Unreleased
-### Fixes
-- Fix for iPad split view bug
-[#173] (https://github.com/alexaubry/BulletinBoard/pull/173)
 
 ## 🔖 v4.0.0
 ### Fixes
