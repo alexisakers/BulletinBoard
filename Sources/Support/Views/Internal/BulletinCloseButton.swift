@@ -121,7 +121,7 @@ class BulletinCloseButton: UIControl, HighlighterTarget {
 
 extension Bundle {
     fileprivate static var UIKitCore: Bundle {
-        return Bundle(identifier: "com.apple.UIKitCore")!
+        return Bundle(for: UIApplication.self)
     }
 }
 
