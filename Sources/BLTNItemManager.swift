@@ -19,7 +19,7 @@ import UIKit
  * `BLTNItemManager` must only be used from the main thread.
  */
 
-@objc public final class BLTNItemManager: NSObject {
+@objc public final class BLTNItemManager: NSObject, BLTNItemManagerProtocol {
 
     /// Bulletin view controller.
     fileprivate var bulletinController: BulletinViewController!

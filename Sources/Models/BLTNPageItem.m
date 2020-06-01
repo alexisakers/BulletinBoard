@@ -4,7 +4,12 @@
  */
 
 #import "BLTNPageItem.h"
+
+#if SWIFT_PACKAGE
+@import BLTNInterfaceBuilder;
+#else
 #import "BLTNBoardSwiftSupport.h"
+#endif
 
 @interface BLTNPageItem ()
 
@@ -90,8 +95,8 @@
     insertComplementaryViews(@selector(makeHeaderViewsWithInterfaceBuilder:));
 
     // Title label
-
-    self.titleLabel = [interfaceBuilder makeTitleLabel];
+    BOOL isNextToCloseButton = self.isDismissable && self.requiresCloseButton;
+    self.titleLabel = [interfaceBuilder makeTitleLabelNextToCloseButton:isNextToCloseButton];
     self.titleLabel.label.text = self.title;
 
     [contentViews addObject:self.titleLabel];

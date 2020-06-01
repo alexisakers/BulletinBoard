@@ -3,7 +3,7 @@
  *  Copyright (c) 2017 - present Alexis Aubry. Licensed under the MIT license.
  */
 
-import Foundation
+import UIKit
 
 @available(*, unavailable, renamed: "BLTNItem")
 @objc public protocol BulletinItem {}

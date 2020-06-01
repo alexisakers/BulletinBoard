@@ -63,7 +63,7 @@
  * the item is removed from bulletin.
  */
 
-@property (nonatomic, nullable, weak) BLTNItemManager *manager;
+@property (nonatomic, nullable, weak) id<BLTNItemManagerProtocol> manager;
 
 /**
  * Whether the page can be dismissed.

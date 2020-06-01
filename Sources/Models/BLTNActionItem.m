@@ -4,8 +4,13 @@
  */
 
 #import "BLTNActionItem.h"
-#import "BLTNBoardSwiftSupport.h"
 #import <objc/message.h>
+
+#if SWIFT_PACKAGE
+@import BLTNInterfaceBuilder;
+#else
+#import "BLTNBoardSwiftSupport.h"
+#endif
 
 @interface BLTNActionItem ()
 
@@ -93,8 +98,7 @@
     NSAssert([self.interfaceBuilderType isSubclassOfClass:[BLTNInterfaceBuilder class]],
              @"InterfaceBuilderType must be a subclass of BulletinInterfaceBuilder, or BulletinInterfaceBuilder.");
 
-    BLTNInterfaceBuilder *interfaceBuilder = [[self.interfaceBuilderType alloc] initWithAppearance:self.appearance
-                                                                                              item:self];
+    BLTNInterfaceBuilder *interfaceBuilder = [[self.interfaceBuilderType alloc] initWithAppearance:self.appearance];
 
     NSArray<UIView *> *contentViews = [self makeContentViewsWithInterfaceBuilder:interfaceBuilder];
     [arrangedSubviews addObjectsFromArray:contentViews];

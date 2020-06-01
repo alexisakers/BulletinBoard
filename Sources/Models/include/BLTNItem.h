@@ -4,8 +4,7 @@
  */
 
 @import UIKit;
-
-@class BLTNItemManager;
+#import "BLTNItemManagerProtocol.h"
 
 /**
  * An item that can be displayed inside a bulletin card.
@@ -24,7 +23,7 @@
  * When implementing `BLTNItem`, you should mark this property `weak` to avoid retain cycles.
  */
 
-@property (nonatomic, nullable, weak) BLTNItemManager *manager;
+@property (nonatomic, nullable, weak) id<BLTNItemManagerProtocol> manager;
 
 /**
  * Whether the page can be dismissed.
