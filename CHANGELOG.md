@@ -1,5 +1,7 @@
 # _BulletinBoard_ Changelog
 ## Unreleased
+### Changes
+- Support for Swift Package Manager
 
 ## 🔖 v4.1.1
 ### Changes
