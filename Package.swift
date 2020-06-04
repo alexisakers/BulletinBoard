@@ -5,25 +5,14 @@ let package = Package(
     name: "BLTNBoard",
     platforms: [.iOS(.v9)],
     products: [
-        .library(name: "BLTNBoard", targets: ["BLTNInterfaceBuilder", "BLTNModels", "BLTNBoard"]),
+        .library(name: "BLTNBoard", targets: ["BLTNBoard"]),
     ],
     dependencies: [],
     targets: [
         .target(
-            name: "BLTNInterfaceBuilder",
-            dependencies: [],
-            path: "Sources/InterfaceBuilder"
-        ),
-        .target(
-            name: "BLTNModels",
-            dependencies: ["BLTNInterfaceBuilder"],
-            path: "Sources/Models"
-        ),
-        .target(
             name: "BLTNBoard",
-            dependencies: ["BLTNInterfaceBuilder", "BLTNModels"],
-            path: "Sources",
-            exclude: ["InterfaceBuilder", "Models"]
+            dependencies: [],
+            path: "Sources"
         ),
     ]
 )

@@ -17,24 +17,14 @@
 		558A12301F7D73CD005EC97C /* BLTNItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122A1F7D73CD005EC97C /* BLTNItemManager.swift */; };
 		558A12321F7D73CD005EC97C /* BulletinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122C1F7D73CD005EC97C /* BulletinViewController.swift */; };
 		558A12331F7D73CD005EC97C /* HighlightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A122D1F7D73CD005EC97C /* HighlightButton.swift */; };
-		558D8089218DC5B6000ADAFD /* BLTNBoardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558D8088218DC5B6000ADAFD /* BLTNBoardTests.swift */; };
-		558D808B218DC5B6000ADAFD /* BLTNBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D97C1BEFF229002C0205 /* BLTNBoard.framework */; };
-		558D8093218DCA81000ADAFD /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 558D8092218DCA81000ADAFD /* FBSnapshotTestCase.framework */; };
-		558D8095218DCA98000ADAFD /* FBSnapshotTestCase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 558D8092218DCA81000ADAFD /* FBSnapshotTestCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5590C04F20B85BCE0045C315 /* BLTNTitleLabelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590C04E20B85BCE0045C315 /* BLTNTitleLabelContainer.swift */; };
 		5590C05320B93B350045C315 /* UIColor+Luminance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590C05220B93B350045C315 /* UIColor+Luminance.swift */; };
-		559F8E95204DB9BA00322949 /* BLTNItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 559F8E94204DB9BA00322949 /* BLTNItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		559F8EA3204DC42D00322949 /* UIView+RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F8EA2204DC42D00322949 /* UIView+RoundedView.swift */; };
 		55B3D1CF1FDADA8E00737791 /* AnimationChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B3D1CE1FDADA8E00737791 /* AnimationChain.swift */; };
 		55BDB08920B9BF25005A6C2B /* Deprecations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BDB08820B9BF25005A6C2B /* Deprecations.swift */; };
 		55BDB0CE20BAF845005A6C2B /* BLTNHighlightButtonWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BDB0CD20BAF845005A6C2B /* BLTNHighlightButtonWrapper.swift */; };
 		55BDB0D120BAFB95005A6C2B /* UIButton+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BDB0D020BAFB95005A6C2B /* UIButton+BackgroundColor.swift */; };
 		55BF9C021F962FD700347D45 /* UIView+SafeAnchors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BF9C011F962FD700347D45 /* UIView+SafeAnchors.swift */; };
-		55C8EF3E204D8A010050E1C2 /* BLTNPageItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 55C8EF3C204D8A010050E1C2 /* BLTNPageItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		55C8EF3F204D8A010050E1C2 /* BLTNPageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C8EF3D204D8A010050E1C2 /* BLTNPageItem.m */; };
-		55CB0F82204D63CC001D0393 /* BLTNActionItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 55CB0F80204D63CC001D0393 /* BLTNActionItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		55CB0F83204D63CC001D0393 /* BLTNActionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CB0F81204D63CC001D0393 /* BLTNActionItem.m */; };
-		55CB0F85204D6466001D0393 /* BLTNBoard.h in Headers */ = {isa = PBXBuildFile; fileRef = 55CB0F84204D6466001D0393 /* BLTNBoard.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55DADE7A1F7D9428001B11A2 /* BLTNInterfaceBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DADE791F7D9428001B11A2 /* BLTNInterfaceBuilder.swift */; };
 		55E8621420B7F11000584EAC /* ContinuousMaskLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E8621320B7F11000584EAC /* ContinuousMaskLayer.swift */; };
 		55E8621720B7F23A00584EAC /* RoundedViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E8621620B7F23A00584EAC /* RoundedViewProtocol.swift */; };
@@ -42,34 +32,12 @@
 		55E8621B20B8476000584EAC /* BLTNViewPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E8621A20B8476000584EAC /* BLTNViewPosition.swift */; };
 		55E8622020B84F3100584EAC /* BulletinCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E8621F20B84F3100584EAC /* BulletinCloseButton.swift */; };
 		55FA45CA1FED1DE40084B6A0 /* BLTNSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA45C91FED1DE40084B6A0 /* BLTNSpacing.swift */; };
+		5E437A3124894748009DBF9A /* BLTNActionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E437A3024894748009DBF9A /* BLTNActionItem.swift */; };
+		5E437A3324894A27009DBF9A /* BLTNPageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E437A3224894A27009DBF9A /* BLTNPageItem.swift */; };
+		5E437A37248971BC009DBF9A /* BLTNItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E437A36248971BC009DBF9A /* BLTNItem.swift */; };
 		5E9D326D2108FCED0032FB06 /* BLTNBoardSwiftSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E9D326C2108FCED0032FB06 /* BLTNBoardSwiftSupport.h */; };
-		5EB7CFE324853F7C0052D611 /* BLTNItemManagerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EB7CFE224853E580052D611 /* BLTNItemManagerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5EB7CFE5248541EA0052D611 /* BLTNItemManager+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB7CFE4248541EA0052D611 /* BLTNItemManager+Helpers.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		558D808C218DC5B6000ADAFD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 52D6D9731BEFF229002C0205 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 52D6D97B1BEFF229002C0205;
-			remoteInfo = BLTNBoard;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		558D8094218DCA85000ADAFD /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				558D8095218DCA98000ADAFD /* FBSnapshotTestCase.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		52D6D97C1BEFF229002C0205 /* BLTNBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BLTNBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,24 +51,16 @@
 		558A122A1F7D73CD005EC97C /* BLTNItemManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLTNItemManager.swift; sourceTree = "<group>"; };
 		558A122C1F7D73CD005EC97C /* BulletinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletinViewController.swift; sourceTree = "<group>"; };
 		558A122D1F7D73CD005EC97C /* HighlightButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighlightButton.swift; sourceTree = "<group>"; };
-		558D8086218DC5B5000ADAFD /* BLTNBoardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BLTNBoardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		558D8088218DC5B6000ADAFD /* BLTNBoardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNBoardTests.swift; sourceTree = "<group>"; };
 		558D808A218DC5B6000ADAFD /* BLTNBoardTests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = BLTNBoardTests.plist; sourceTree = "<group>"; };
 		558D8092218DCA81000ADAFD /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
 		5590C04E20B85BCE0045C315 /* BLTNTitleLabelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNTitleLabelContainer.swift; sourceTree = "<group>"; };
 		5590C05220B93B350045C315 /* UIColor+Luminance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Luminance.swift"; sourceTree = "<group>"; };
-		559F8E94204DB9BA00322949 /* BLTNItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLTNItem.h; sourceTree = "<group>"; };
 		559F8EA2204DC42D00322949 /* UIView+RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+RoundedView.swift"; sourceTree = "<group>"; };
 		55B3D1CE1FDADA8E00737791 /* AnimationChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationChain.swift; sourceTree = "<group>"; };
 		55BDB08820B9BF25005A6C2B /* Deprecations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deprecations.swift; sourceTree = "<group>"; };
 		55BDB0CD20BAF845005A6C2B /* BLTNHighlightButtonWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNHighlightButtonWrapper.swift; sourceTree = "<group>"; };
 		55BDB0D020BAFB95005A6C2B /* UIButton+BackgroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+BackgroundColor.swift"; sourceTree = "<group>"; };
 		55BF9C011F962FD700347D45 /* UIView+SafeAnchors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+SafeAnchors.swift"; sourceTree = "<group>"; };
-		55C8EF3C204D8A010050E1C2 /* BLTNPageItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLTNPageItem.h; sourceTree = "<group>"; };
-		55C8EF3D204D8A010050E1C2 /* BLTNPageItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLTNPageItem.m; sourceTree = "<group>"; };
-		55CB0F80204D63CC001D0393 /* BLTNActionItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLTNActionItem.h; sourceTree = "<group>"; };
-		55CB0F81204D63CC001D0393 /* BLTNActionItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLTNActionItem.m; sourceTree = "<group>"; };
-		55CB0F84204D6466001D0393 /* BLTNBoard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLTNBoard.h; sourceTree = "<group>"; };
 		55DADE791F7D9428001B11A2 /* BLTNInterfaceBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNInterfaceBuilder.swift; sourceTree = "<group>"; };
 		55E8621320B7F11000584EAC /* ContinuousMaskLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinuousMaskLayer.swift; sourceTree = "<group>"; };
 		55E8621620B7F23A00584EAC /* RoundedViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedViewProtocol.swift; sourceTree = "<group>"; };
@@ -108,9 +68,11 @@
 		55E8621A20B8476000584EAC /* BLTNViewPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNViewPosition.swift; sourceTree = "<group>"; };
 		55E8621F20B84F3100584EAC /* BulletinCloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinCloseButton.swift; sourceTree = "<group>"; };
 		55FA45C91FED1DE40084B6A0 /* BLTNSpacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNSpacing.swift; sourceTree = "<group>"; };
+		5E437A3024894748009DBF9A /* BLTNActionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLTNActionItem.swift; sourceTree = "<group>"; };
+		5E437A3224894A27009DBF9A /* BLTNPageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTNPageItem.swift; sourceTree = "<group>"; };
+		5E437A36248971BC009DBF9A /* BLTNItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLTNItem.swift; sourceTree = "<group>"; };
 		5E9D32682108FB9A0032FB06 /* BulletinBoard.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BulletinBoard.podspec; sourceTree = "<group>"; };
 		5E9D326C2108FCED0032FB06 /* BLTNBoardSwiftSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLTNBoardSwiftSupport.h; sourceTree = "<group>"; };
-		5EB7CFE224853E580052D611 /* BLTNItemManagerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLTNItemManagerProtocol.h; sourceTree = "<group>"; };
 		5EB7CFE4248541EA0052D611 /* BLTNItemManager+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BLTNItemManager+Helpers.swift"; sourceTree = "<group>"; };
 		AD2FAA261CD0B6D800659CF4 /* BLTNBoard.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BLTNBoard.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,15 +85,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		558D8083218DC5B5000ADAFD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				558D8093218DCA81000ADAFD /* FBSnapshotTestCase.framework in Frameworks */,
-				558D808B218DC5B6000ADAFD /* BLTNBoard.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -141,7 +94,6 @@
 				5E9D32682108FB9A0032FB06 /* BulletinBoard.podspec */,
 				8933C7811EB5B7E0000D00A4 /* Sources */,
 				52D6D99C1BEFF38C002C0205 /* Configs */,
-				558D8087218DC5B6000ADAFD /* BLTNBoardTests */,
 				52D6D97D1BEFF229002C0205 /* Products */,
 				558D8091218DCA81000ADAFD /* Frameworks */,
 			);
@@ -151,7 +103,6 @@
 			isa = PBXGroup;
 			children = (
 				52D6D97C1BEFF229002C0205 /* BLTNBoard.framework */,
-				558D8086218DC5B5000ADAFD /* BLTNBoardTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -163,14 +114,6 @@
 				558D808A218DC5B6000ADAFD /* BLTNBoardTests.plist */,
 			);
 			path = Configs;
-			sourceTree = "<group>";
-		};
-		558D8087218DC5B6000ADAFD /* BLTNBoardTests */ = {
-			isa = PBXGroup;
-			children = (
-				558D8088218DC5B6000ADAFD /* BLTNBoardTests.swift */,
-			);
-			path = BLTNBoardTests;
 			sourceTree = "<group>";
 		};
 		558D8091218DCA81000ADAFD /* Frameworks */ = {
@@ -201,9 +144,9 @@
 		55B3D1D11FDD644300737791 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5EB7CFDF2484997C0052D611 /* include */,
-				55CB0F81204D63CC001D0393 /* BLTNActionItem.m */,
-				55C8EF3D204D8A010050E1C2 /* BLTNPageItem.m */,
+				5E437A36248971BC009DBF9A /* BLTNItem.swift */,
+				5E437A3024894748009DBF9A /* BLTNActionItem.swift */,
+				5E437A3224894A27009DBF9A /* BLTNPageItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -270,21 +213,9 @@
 			path = ContinuousCorners;
 			sourceTree = "<group>";
 		};
-		5EB7CFDF2484997C0052D611 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				559F8E94204DB9BA00322949 /* BLTNItem.h */,
-				5EB7CFE224853E580052D611 /* BLTNItemManagerProtocol.h */,
-				55CB0F80204D63CC001D0393 /* BLTNActionItem.h */,
-				55C8EF3C204D8A010050E1C2 /* BLTNPageItem.h */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
 		8933C7811EB5B7E0000D00A4 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				55CB0F84204D6466001D0393 /* BLTNBoard.h */,
 				558A122A1F7D73CD005EC97C /* BLTNItemManager.swift */,
 				55BDB08820B9BF25005A6C2B /* Deprecations.swift */,
 				55B3D1D11FDD644300737791 /* Models */,
@@ -301,11 +232,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55C8EF3E204D8A010050E1C2 /* BLTNPageItem.h in Headers */,
-				55CB0F85204D6466001D0393 /* BLTNBoard.h in Headers */,
-				559F8E95204DB9BA00322949 /* BLTNItem.h in Headers */,
-				5EB7CFE324853F7C0052D611 /* BLTNItemManagerProtocol.h in Headers */,
-				55CB0F82204D63CC001D0393 /* BLTNActionItem.h in Headers */,
 				5E9D326D2108FCED0032FB06 /* BLTNBoardSwiftSupport.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,25 +257,6 @@
 			productReference = 52D6D97C1BEFF229002C0205 /* BLTNBoard.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		558D8085218DC5B5000ADAFD /* BLTNBoardTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 558D8090218DC5B6000ADAFD /* Build configuration list for PBXNativeTarget "BLTNBoardTests" */;
-			buildPhases = (
-				558D8082218DC5B5000ADAFD /* Sources */,
-				558D8083218DC5B5000ADAFD /* Frameworks */,
-				558D8094218DCA85000ADAFD /* Embed Frameworks */,
-				558D8084218DC5B5000ADAFD /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				558D808D218DC5B6000ADAFD /* PBXTargetDependency */,
-			);
-			name = BLTNBoardTests;
-			productName = BLTNBoardTests;
-			productReference = 558D8086218DC5B5000ADAFD /* BLTNBoardTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -364,10 +271,6 @@
 					52D6D97B1BEFF229002C0205 = {
 						CreatedOnToolsVersion = 7.1;
 						LastSwiftMigration = 1020;
-					};
-					558D8085218DC5B5000ADAFD = {
-						CreatedOnToolsVersion = 10.0;
-						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -418,20 +321,12 @@
 			projectRoot = "";
 			targets = (
 				52D6D97B1BEFF229002C0205 /* BLTNBoard */,
-				558D8085218DC5B5000ADAFD /* BLTNBoardTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		52D6D97A1BEFF229002C0205 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		558D8084218DC5B5000ADAFD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -455,44 +350,29 @@
 				5543848F1F92050300AFFBCD /* BulletinDismissAnimationController.swift in Sources */,
 				5543848B1F91FAC500AFFBCD /* BulletinPresentationAnimationController.swift in Sources */,
 				55E8621920B844F800584EAC /* BLTNContainerView.swift in Sources */,
+				5E437A3124894748009DBF9A /* BLTNActionItem.swift in Sources */,
 				5543848D1F92026200AFFBCD /* BulletinBackgroundView.swift in Sources */,
 				55E8621720B7F23A00584EAC /* RoundedViewProtocol.swift in Sources */,
 				558A12301F7D73CD005EC97C /* BLTNItemManager.swift in Sources */,
 				55BF9C021F962FD700347D45 /* UIView+SafeAnchors.swift in Sources */,
 				55E8621B20B8476000584EAC /* BLTNViewPosition.swift in Sources */,
 				550675691F90A0A500874D8B /* BLTNBackgroundViewStyle.swift in Sources */,
-				55C8EF3F204D8A010050E1C2 /* BLTNPageItem.m in Sources */,
 				5569CB7F1F920B72000F31EB /* BulletinSwipeInteractionController.swift in Sources */,
 				5590C05320B93B350045C315 /* UIColor+Luminance.swift in Sources */,
+				5E437A3324894A27009DBF9A /* BLTNPageItem.swift in Sources */,
 				559F8EA3204DC42D00322949 /* UIView+RoundedView.swift in Sources */,
 				55FA45CA1FED1DE40084B6A0 /* BLTNSpacing.swift in Sources */,
 				551D2D9C1FC060EA0078DB21 /* BLTNItemAppearance.swift in Sources */,
 				55E8622020B84F3100584EAC /* BulletinCloseButton.swift in Sources */,
-				55CB0F83204D63CC001D0393 /* BLTNActionItem.m in Sources */,
 				5EB7CFE5248541EA0052D611 /* BLTNItemManager+Helpers.swift in Sources */,
 				5568227E1F864B270038E8DD /* ActivityIndicator.swift in Sources */,
 				55BDB0CE20BAF845005A6C2B /* BLTNHighlightButtonWrapper.swift in Sources */,
+				5E437A37248971BC009DBF9A /* BLTNItem.swift in Sources */,
 				558A12321F7D73CD005EC97C /* BulletinViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		558D8082218DC5B5000ADAFD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				558D8089218DC5B6000ADAFD /* BLTNBoardTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		558D808D218DC5B6000ADAFD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 52D6D97B1BEFF229002C0205 /* BLTNBoard */;
-			targetProxy = 558D808C218DC5B6000ADAFD /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		52D6D98E1BEFF229002C0205 /* Debug */ = {
@@ -656,64 +536,6 @@
 			};
 			name = Release;
 		};
-		558D808E218DC5B6000ADAFD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = Configs/BLTNBoardTests.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = fr.alexaubry.BLTNBoardTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		558D808F218DC5B6000ADAFD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = Configs/BLTNBoardTests.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = fr.alexaubry.BLTNBoardTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -731,15 +553,6 @@
 			buildConfigurations = (
 				52D6D9911BEFF229002C0205 /* Debug */,
 				52D6D9921BEFF229002C0205 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		558D8090218DC5B6000ADAFD /* Build configuration list for PBXNativeTarget "BLTNBoardTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				558D808E218DC5B6000ADAFD /* Debug */,
-				558D808F218DC5B6000ADAFD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

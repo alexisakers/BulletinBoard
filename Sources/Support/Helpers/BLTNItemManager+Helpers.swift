@@ -6,9 +6,9 @@
 //  Copyright © 2020 Bulletin. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-extension BLTNItemManagerProtocol {
+extension BLTNItemManager {
     public func displayActivityIndicator() {
         displayActivityIndicator(color: nil)
     }

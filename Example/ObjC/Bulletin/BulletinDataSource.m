@@ -5,8 +5,8 @@
 
 #import "BulletinDataSource.h"
 #import "PermissionsManager.h"
-#import "TextFieldBulletinPage.h"
-#import "PetSelectorBulletinPage.h"
+
+@import CustomBulletins;
 
 @implementation BulletinDataSource
 
@@ -21,11 +21,11 @@
     page.descriptionText = @"Discover curated images of the best pets in the world.";
     page.actionButtonTitle = @"Configure";
 
-    page.dismissable = [self userDidCompleteSetup];
+    page.isDismissable = [self userDidCompleteSetup];
     page.shouldStartWithActivityIndicator = YES;
 
     // After the item is presented, show the contents after 3 seconds
-    page.presentationHandler = ^(id<BLTNItem> _Nonnull _item) {
+    page.presentationHandler = ^(BLTNItem *_item) {
 
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [_item.manager hideActivityIndicator];
@@ -51,7 +51,7 @@
     page.descriptionText = @"To create your profile, please tell us your name. We will use it to customize your feed.";
     page.actionButtonTitle = @"Sign Up";
 
-    page.dismissable = NO;
+    page.isDismissable = NO;
 
     page.textInputHandler = ^(TextFieldBulletinPage * item, NSString * _Nullable text) {
         NSLog(@"Text: %@", text);
@@ -75,7 +75,7 @@
     page.actionButtonTitle = @"Subscribe";
     page.alternativeButtonTitle = @"Not now";
 
-    page.dismissable = NO;
+    page.isDismissable = NO;
 
     page.actionHandler = ^(BLTNActionItem * _Nonnull _item) {
         [[PermissionsManager sharedManager] requestLocalNotifications];
@@ -104,7 +104,7 @@
     page.actionButtonTitle = @"Send location data";
     page.alternativeButtonTitle = @"No thanks";
 
-    page.dismissable = NO;
+    page.isDismissable = NO;
 
     page.actionHandler = ^(BLTNActionItem * _Nonnull _item) {
         [[PermissionsManager sharedManager] requestWhenInUseLocation];
@@ -122,12 +122,16 @@
 
 + (PetSelectorBulletinPage *)makeChoicePage
 {
-    PetSelectorBulletinPage* page = [PetSelectorBulletinPage new];
-    page.appearance = [self makeLightAppearance];
-
+    PetSelectorBulletinPage* page = [[PetSelectorBulletinPage alloc] initWithCompletionHandler:^void (BLTNItem * currentItem) {
+        BLTNPageItem *completionPage = [BulletinDataSource makeCompletionPage];
+        [currentItem.manager pushItem:completionPage];
+    }];
+    
     page.actionButtonTitle = @"Select";
-
-    page.dismissable = NO;
+    page.descriptionText = @"Your favorite pets will appear when you open the app.";
+    
+    page.appearance = [self makeLightAppearance];
+    page.isDismissable = NO;
 
     return page;
 }
@@ -153,7 +157,7 @@
     page.actionButtonTitle = @"Get started";
     page.alternativeButtonTitle = @"Replay";
 
-    page.dismissable = NO;
+    page.isDismissable = NO;
 
     page.actionHandler = ^(BLTNActionItem * _Nonnull _item) {
         [[_item manager] dismissBulletinAnimated:YES];
@@ -163,7 +167,7 @@
         [[_item manager] popToRootItem];
     };
 
-    page.dismissalHandler = ^(id<BLTNItem> _Nonnull _item) {
+    page.dismissalHandler = ^(BLTNItem *_item) {
         [[NSNotificationCenter defaultCenter] postNotificationName:SetupDidCompleteNotificationName object:_item];
     };
 
