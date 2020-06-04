@@ -5,11 +5,7 @@ let package = Package(
     name: "BLTNBoard",
     platforms: [.iOS(.v9)],
     products: [
-        .library(name: "BLTNInterfaceBuilder", targets: ["BLTNInterfaceBuilder"]),
-        .library(name: "BLTNModels", targets: ["BLTNModels"]),
-        .library(
-            name: "BLTNBoard",
-            targets: ["BLTNBoard"]),
+        .library(name: "BLTNBoard", targets: ["BLTNInterfaceBuilder", "BLTNModels", "BLTNBoard"]),
     ],
     dependencies: [],
     targets: [

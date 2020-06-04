@@ -7,7 +7,6 @@
 
 #import "BLTNItem.h"
 
-@class BLTNItemManager;
 @class BLTNItemAppearance;
 @class BLTNInterfaceBuilder;
 
