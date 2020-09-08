@@ -106,7 +106,11 @@ class BulletinCloseButton: UIControl {
 
 extension Bundle {
     fileprivate static var UIKitCore: Bundle {
-        return Bundle(identifier: "com.apple.UIKitCore")!
+        if #available(iOS 12, *) {
+            return Bundle(identifier: "com.apple.UIKitCore")!
+        } else {
+            return Bundle(for: UIApplication.self)
+        }
     }
 }
 

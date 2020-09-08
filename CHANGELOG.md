@@ -3,6 +3,11 @@
 ### Changes
 - Support for Swift Package Manager
 
+## 🔖 v4.1.2
+### Fixes
+- Fix crash for iOS 11 and under
+[#177](https://github.com/alexaubry/BulletinBoard/issues/177)
+
 ## 🔖 v4.1.1
 ### Changes
 - Do not use external resources for close button
