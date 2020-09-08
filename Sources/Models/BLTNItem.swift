@@ -147,6 +147,6 @@ import UIKit
      */
 
     open func onDismiss() {
-        presentationHandler?(self)
+        dismissalHandler?(self)
     }
 }
