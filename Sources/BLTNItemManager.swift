@@ -181,11 +181,8 @@ extension BLTNItemManager {
         bulletinController.transitioningDelegate = bulletinController
         bulletinController.loadBackgroundView()
         bulletinController.setNeedsStatusBarAppearanceUpdate()
-
-        if #available(iOS 11.0, *) {
-            bulletinController.setNeedsUpdateOfHomeIndicatorAutoHidden()
-        }
-
+        bulletinController.setNeedsUpdateOfHomeIndicatorAutoHidden()
+        
         isPrepared = true
         isPreparing = true
         shouldDisplayActivityIndicator = rootItem.shouldStartWithActivityIndicator
