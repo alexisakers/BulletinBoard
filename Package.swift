@@ -3,17 +3,16 @@ import PackageDescription
 
 let package = Package(
     name: "BLTNBoard",
+    platforms: [.iOS(.v9)],
     products: [
-        .library(
-            name: "BLTNBoard",
-            targets: ["BLTNBoard"]),
+        .library(name: "BLTNBoard", targets: ["BLTNBoard"]),
     ],
-    dependencies: [
-    ],
+    dependencies: [],
     targets: [
         .target(
             name: "BLTNBoard",
             dependencies: [],
-            path: "Sources"),
+            path: "Sources"
+        ),
     ]
 )

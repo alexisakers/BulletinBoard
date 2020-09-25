@@ -5,6 +5,7 @@
 
 import UIKit
 import BLTNBoard
+import CustomBulletins
 
 /**
  * A view controller displaying a set of images.

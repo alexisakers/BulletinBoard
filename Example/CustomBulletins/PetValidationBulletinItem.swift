@@ -12,18 +12,19 @@ import BLTNBoard
  * This item demonstrates popping to the previous item, and including a collection view inside the page.
  */
 
-class PetValidationBLTNItem: FeedbackPageBLTNItem {
+@objc public class PetValidationBLTNItem: FeedbackPageBLTNItem {
 
     let dataSource: CollectionDataSource
     let animalType: String
+    let validationHandler: (BLTNItem) -> Void
 
     let selectionFeedbackGenerator = SelectionFeedbackGenerator()
     let successFeedbackGenerator = SuccessFeedbackGenerator()
 
-    init(dataSource: CollectionDataSource, animalType: String) {
-
+    init(dataSource: CollectionDataSource, animalType: String, validationHandler: @escaping (BLTNItem) -> Void) {
         self.dataSource = dataSource
         self.animalType = animalType
+        self.validationHandler = validationHandler
         super.init(title: "Choose your Favorite")
 
         isDismissable = false
@@ -37,7 +38,7 @@ class PetValidationBLTNItem: FeedbackPageBLTNItem {
 
     var collectionView: UICollectionView?
 
-    override func makeViewsUnderDescription(with interfaceBuilder: BLTNInterfaceBuilder) -> [UIView]? {
+    override public func makeViewsUnderDescription(with interfaceBuilder: BLTNInterfaceBuilder) -> [UIView]? {
 
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
@@ -57,7 +58,7 @@ class PetValidationBLTNItem: FeedbackPageBLTNItem {
 
     }
 
-    override func tearDown() {
+    override public func tearDown() {
         super.tearDown()
         collectionView?.dataSource = nil
         collectionView?.delegate = nil
@@ -65,7 +66,7 @@ class PetValidationBLTNItem: FeedbackPageBLTNItem {
 
     // MARK: - Touch Events
 
-    override func actionButtonTapped(sender: UIButton) {
+    override public func actionButtonTapped(sender: UIButton) {
 
         // > Play Haptic Feedback
 
@@ -81,22 +82,16 @@ class PetValidationBLTNItem: FeedbackPageBLTNItem {
         let delay = DispatchTime.now() + .seconds(2)
 
         DispatchQueue.main.asyncAfter(deadline: delay) {
-
             // Play success haptic feedback
-
             self.successFeedbackGenerator.prepare()
             self.successFeedbackGenerator.success()
 
             // Display next item
-
-            self.next = BulletinDataSource.makeCompletionPage()
-            self.manager?.displayNextItem()
-
+            self.validationHandler(self)
         }
-
     }
 
-    override func alternativeButtonTapped(sender: UIButton) {
+    public override func alternativeButtonTapped(sender: UIButton) {
 
         // Play selection haptic feedback
 
@@ -115,15 +110,15 @@ class PetValidationBLTNItem: FeedbackPageBLTNItem {
 
 extension PetValidationBLTNItem: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    public func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 9
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ImageCollectionViewCell
         cell.imageView.image = dataSource.image(at: indexPath.row)
@@ -134,7 +129,7 @@ extension PetValidationBLTNItem: UICollectionViewDataSource, UICollectionViewDel
 
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         let squareSideLength = (collectionView.frame.width / 3) - 3
         return CGSize(width: squareSideLength, height: squareSideLength)

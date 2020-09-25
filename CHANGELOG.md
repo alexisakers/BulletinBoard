@@ -1,5 +1,8 @@
 # _BulletinBoard_ Changelog
 ## Unreleased
+### Changes
+- Support for Swift Package Manager
+
 ### Fixes
 - Fix the background view origin when presenting
 [#183](https://github.com/alexaubry/BulletinBoard/pull/183)

@@ -303,7 +303,8 @@ extension BLTNItemManager {
      * - parameter item: The item to display.
      */
 
-    @objc public func push(item: BLTNItem) {
+    @objc(pushItem:)
+    public func push(item: BLTNItem) {
 
         assertIsPrepared()
         assertIsMainThread()
@@ -352,7 +353,8 @@ extension BLTNItemManager {
      * - parameter orDismiss: If true, dismiss bullein if not found. Otherwise popToRootItem()
      */
     
-    @objc public func popTo(item: BLTNItem, orDismiss: Bool) {
+    @objc(popToItem:orDismiss:)
+    public func popTo(item: BLTNItem, orDismiss: Bool) {
         
         assertIsPrepared()
         assertIsMainThread()

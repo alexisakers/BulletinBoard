@@ -9,27 +9,24 @@ import UIKit
  * A button to close the bulletin.
  */
 
-class BulletinCloseButton: UIControl, HighlighterTarget {
-
+class BulletinCloseButton: UIControl {
     private let backgroundContainer = UIView()
     private let closeGlyph = UIImageView()
-
-    private let highlighter = Highlighter()
 
     // MARK: - Initialization
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        highlighter.target = self
         configureSubviews()
         configureConstraints()
+        configureHighlighting()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        highlighter.target = self
         configureSubviews()
         configureConstraints()
+        configureHighlighting()
     }
 
     private func configureSubviews() {
@@ -85,38 +82,26 @@ class BulletinCloseButton: UIControl, HighlighterTarget {
 
     // MARK: - Highlighting
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        highlighter.handleTouchesBegan(touches, with: event)
+    private func configureHighlighting() {
+        addTarget(self, action: #selector(highlight), for: [.touchUpInside, .touchDragEnter])
+        addTarget(self, action: #selector(unhighlight), for: [.touchUpInside, .touchDragExit])
     }
-
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        highlighter.handleTouchesMoved(touches, with: event)
-    }
-
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        highlighter.handleTouchesEnded(touches, with: event)
-    }
-
-    func highlight() {
-
+    
+    @objc private func highlight() {
         let animations = {
             self.alpha = 0.5
         }
 
         UIView.transition(with: self, duration: 0.1, animations: animations)
-
     }
 
-    func unhighlight() {
-
+    @objc func unhighlight() {
         let animations = {
             self.alpha = 1
         }
 
         UIView.transition(with: self, duration: 0.1, animations: animations)
-
     }
-
 }
 
 extension Bundle {
