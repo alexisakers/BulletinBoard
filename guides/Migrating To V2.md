@@ -57,7 +57,7 @@ bulletinManager.presentBulletin(above: self)
 By:
 
 ~~~swift
-bulletinManager.showBulletin(above: self)
+BLTNItemManager.showBulletin(above: self)
 ~~~
 
 ## Creating custom items
