@@ -13,23 +13,23 @@ import BLTNBoard
  * when the keyboard is visible.
  */
 
-class TextFieldBulletinPage: FeedbackPageBLTNItem {
+@objc public class TextFieldBulletinPage: FeedbackPageBLTNItem {
 
     @objc public var textField: UITextField!
 
-    @objc public var textInputHandler: ((BLTNActionItem, String?) -> Void)? = nil
+    @objc public var textInputHandler: ((TextFieldBulletinPage, String?) -> Void)? = nil
 
-    override func makeViewsUnderDescription(with interfaceBuilder: BLTNInterfaceBuilder) -> [UIView]? {
+    override public func makeViewsUnderDescription(with interfaceBuilder: BLTNInterfaceBuilder) -> [UIView]? {
         textField = interfaceBuilder.makeTextField(placeholder: "First and Last Name", returnKey: .done, delegate: self)
         return [textField]
     }
 
-    override func tearDown() {
+    override public func tearDown() {
         super.tearDown()
         textField?.delegate = nil
     }
 
-    override func actionButtonTapped(sender: UIButton) {
+    override public func actionButtonTapped(sender: UIButton) {
         textField.resignFirstResponder()
         super.actionButtonTapped(sender: sender)
     }
@@ -50,16 +50,16 @@ extension TextFieldBulletinPage: UITextFieldDelegate {
 
     }
 
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+    public func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         return true
     }
 
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
 
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    public func textFieldDidEndEditing(_ textField: UITextField) {
 
         if isInputValid(text: textField.text) {
             textInputHandler?(self, textField.text)

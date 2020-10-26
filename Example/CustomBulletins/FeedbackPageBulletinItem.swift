@@ -12,11 +12,11 @@ import BLTNBoard
  * This class demonstrates how to override `PageBLTNItem` to customize button tap handling.
  */
 
-class FeedbackPageBLTNItem: BLTNPageItem {
+@objc public class FeedbackPageBLTNItem: BLTNPageItem {
 
     private let feedbackGenerator = SelectionFeedbackGenerator()
 
-    override func actionButtonTapped(sender: UIButton) {
+    override public func actionButtonTapped(sender: UIButton) {
 
         // Play an haptic feedback
 
@@ -29,7 +29,7 @@ class FeedbackPageBLTNItem: BLTNPageItem {
 
     }
 
-    override func alternativeButtonTapped(sender: UIButton) {
+    override public func alternativeButtonTapped(sender: UIButton) {
 
         // Play an haptic feedback
 

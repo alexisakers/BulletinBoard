@@ -22,7 +22,7 @@ To develop _BulletinBoard_, you will need to use an Xcode version compatible wit
 
 ### Checking out the repository
 
-We use gitflow for PRs. The `master` branch contains the state of the latest released version. `develop` contains the changes from the current unreleased state. You create your PRs againts the `develop` branch.
+We use gitflow for PRs. The `main` branch contains the state of the latest released version. `develop` contains the changes from the current unreleased state. You create your PRs againts the `develop` branch.
 
 - Click the “Fork” button in the upper right corner of repo
 - Clone your fork:

@@ -31,15 +31,18 @@ class BulletinPresentationAnimationController: NSObject, UIViewControllerAnimate
             return
         }
 
+        let containerView = transitionContext.containerView
+
         // Fix the frame (Needed for iPad app running in split view)
-        if let fromFrame = transitionContext.viewController(forKey: .from)?.view.frame {
+        // (Convert the "from" view's frame coordinates to the container view's coordinate system)
+        if let fromView = transitionContext.viewController(forKey: .from)?.view {
+            let fromFrame = containerView.convert(fromView.frame, from: fromView)
             toVC.view.frame = fromFrame
         }
 
         let rootView = toVC.view!
         let contentView = toVC.contentView
         let backgroundView = toVC.backgroundView!
-        let containerView = transitionContext.containerView
 
         // Add root view
 
