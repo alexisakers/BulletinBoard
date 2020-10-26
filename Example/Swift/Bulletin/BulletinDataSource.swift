@@ -6,6 +6,7 @@
 import UIKit
 import BLTNBoard
 import SafariServices
+import CustomBulletins
 
 /**
  * A set of tools to interact with the demo data.
@@ -202,7 +203,11 @@ enum BulletinDataSource {
 
     static func makeChoicePage() -> PetSelectorBulletinPage {
 
-        let page = PetSelectorBulletinPage(title: "Choose your Favorite")
+        let page = PetSelectorBulletinPage(completionHandler: { currentItem in
+            let completionPage = BulletinDataSource.makeCompletionPage()
+            currentItem.manager?.push(item: completionPage)
+        })
+        
         page.isDismissable = false
         page.descriptionText = "Your favorite pets will appear when you open the app."
         page.actionButtonTitle = "Select"

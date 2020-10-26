@@ -10,25 +10,20 @@ import UIKit
  */
 
 @objc public class BLTNBackgroundViewStyle: NSObject {
-
-    enum Style {
-
+    public enum Style {
         case none
         case dimmed
         case blurred(style: UIBlurEffect.Style, isDark: Bool)
 
-        var isDark: Bool {
-
+        public var isDark: Bool {
             switch self {
             case .none, .dimmed: return true
             case .blurred(_, let isDarkBlur): return isDarkBlur
             }
-
         }
-
     }
 
-    let rawValue: Style
+    public let rawValue: Style
 
     init(rawValue: Style) {
         self.rawValue = rawValue
@@ -38,17 +33,12 @@ import UIKit
     override init() {
         fatalError("BLTNBackgroundViewStyle.init is unavailable. Use one of the presets instead.")
     }
-
 }
 
 // MARK: - Presets
 
 extension BLTNBackgroundViewStyle {
-
-    /**
-     * The background content is not covered.
-     */
-
+    /// The background content is not covered.
     @objc public static let none = BLTNBackgroundViewStyle(rawValue: .none)
 
     /**
@@ -83,5 +73,4 @@ extension BLTNBackgroundViewStyle {
     /// The background blurred with a dark style.
     @available(iOS 10, *)
     @objc public static let blurredDark: BLTNBackgroundViewStyle = .blurred(style: .dark, isDark: true)
-
 }

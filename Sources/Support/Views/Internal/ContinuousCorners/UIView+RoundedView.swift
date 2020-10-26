@@ -16,15 +16,3 @@ class RoundedView: UIView, RoundedViewProtocol {
     }
 
 }
-
-/**
- * A button with rounded corners.
- */
-
-class RoundedButton: UIButton, RoundedViewProtocol {
-
-    override class var layerClass: AnyClass {
-        return ContinuousMaskLayer.self
-    }
-
-}

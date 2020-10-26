@@ -1,7 +1,5 @@
 # BulletinBoard
 
-[![CI Status](https://dev.azure.com/alexaubry/BulletinBoard/_apis/build/status/alexaubry.BulletinBoard)](https://dev.azure.com/alexaubry/BulletinBoard/_build/latest?definitionId=3)
-[![CI Status](https://travis-ci.org/alexaubry/BulletinBoard.svg?branch=master)](https://travis-ci.org/alexaubry/BulletinBoard)
 [![Version](https://img.shields.io/cocoapods/v/BulletinBoard.svg?style=flat)](https://cocoapods.org/pods/BulletinBoard)
 [![License](https://img.shields.io/cocoapods/l/BulletinBoard.svg?style=flat)](https://cocoapods.org/pods/BulletinBoard)
 [![Platform](https://img.shields.io/cocoapods/p/BulletinBoard.svg?style=flat)](https://cocoapods.org/pods/BulletinBoard)
@@ -40,13 +38,15 @@ Two demo targets are available:
 
 Build and run the scheme for your favorite language to open the demo app.
 
-Here's a video showing it in action:
-
-[![Watch Demo on YouTube](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_thumbnail.png)](https://youtu.be/f4UErY-epYY)
-
 ## Installation
 
-BulletinBoard is available via CocoaPods and Carthage.
+### Swift Package Manager
+
+To install BulletinBoard using the [Swift Package Manager](https://swift.org/package-manager/), add this dependency to your `Package.swift` file:
+
+~~~swift
+.package(url: "https://github.com/alexaubry/BulletinBoard.git", from: "4.2.0")
+~~~
 
 ### CocoaPods
 

@@ -13,12 +13,18 @@ import BLTNBoard
  * next item based on user interaction.
  */
 
-class PetSelectorBulletinPage: FeedbackPageBLTNItem {
-
+@objc public class PetSelectorBulletinPage: FeedbackPageBLTNItem {
     private var catButtonContainer: UIButton!
     private var dogButtonContainer: UIButton!
     private var selectionFeedbackGenerator = SelectionFeedbackGenerator()
+    
+    let completionHandler: (BLTNItem) -> Void
 
+    @objc public init(completionHandler: @escaping (BLTNItem) -> Void) {
+        self.completionHandler = completionHandler
+        super.init(title: "Choose your Favorite")
+    }
+    
     // MARK: - BLTNItem
 
     /**
@@ -28,7 +34,7 @@ class PetSelectorBulletinPage: FeedbackPageBLTNItem {
      * button targets from your views to avoid retain cycles.
      */
 
-    override func tearDown() {
+    public override func tearDown() {
         catButtonContainer?.removeTarget(self, action: nil, for: .touchUpInside)
         dogButtonContainer?.removeTarget(self, action: nil, for: .touchUpInside)
     }
@@ -39,10 +45,10 @@ class PetSelectorBulletinPage: FeedbackPageBLTNItem {
      * We need to return the view in the order we want them displayed. You should use a
      * `BulletinInterfaceFactory` to generate standard views, such as title labels and buttons.
      */
-
-    override func makeViewsUnderDescription(with interfaceBuilder: BLTNInterfaceBuilder) -> [UIView]? {
+    
+    public override func makeViewsUnderDescription(with interfaceBuilder: BLTNInterfaceBuilder) -> [UIView]? {
         
-        let favoriteTabIndex = BulletinDataSource.favoriteTabIndex
+        let favoriteTabIndex = UserDefaults.standard.favoriteTabIndex
 
         // Pets Stack
 
@@ -116,7 +122,7 @@ class PetSelectorBulletinPage: FeedbackPageBLTNItem {
         button.layer.borderColor = buttonColor.cgColor
 
         if isSelected {
-            next = PetValidationBLTNItem(dataSource: dataSource, animalType: animalType.lowercased())
+            next = PetValidationBLTNItem(dataSource: dataSource, animalType: animalType.lowercased(), validationHandler: completionHandler)
         }
 
         return button
@@ -153,8 +159,7 @@ class PetSelectorBulletinPage: FeedbackPageBLTNItem {
 
         // Set the next item
 
-        next = PetValidationBLTNItem(dataSource: .cat, animalType: "cats")
-
+        next = PetValidationBLTNItem(dataSource: .cat, animalType: "cats", validationHandler: completionHandler)
     }
 
     /// Called when the dog button is tapped.
@@ -184,20 +189,15 @@ class PetSelectorBulletinPage: FeedbackPageBLTNItem {
                                         userInfo: ["Index": 1])
 
         // Set the next item
-
-        next = PetValidationBLTNItem(dataSource: .dog, animalType: "dogs")
-
+        next = PetValidationBLTNItem(dataSource: .dog, animalType: "dogs", validationHandler: completionHandler)
     }
 
-    override func actionButtonTapped(sender: UIButton) {
-
+    override public func actionButtonTapped(sender: UIButton) {
         // Play haptic feedback
         selectionFeedbackGenerator.prepare()
         selectionFeedbackGenerator.selectionChanged()
 
         // Ask the manager to present the next item.
         manager?.displayNextItem()
-
     }
-
 }

@@ -83,9 +83,9 @@ class BulletinBackgroundView: UIView {
             addSubview(dimmingView)
             contentView = .dim(dimmingView, 1.0)
 
-        case .blurred(let blurredBackground):
+        case .blurred(let blurredBackground, _):
 
-            let blurEffect = UIBlurEffect(style: blurredBackground.style)
+            let blurEffect = UIBlurEffect(style: blurredBackground)
             let blurEffectView = UIVisualEffectView(effect: nil)
             blurEffectView.translatesAutoresizingMaskIntoConstraints = false
 
