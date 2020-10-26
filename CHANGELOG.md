@@ -1,5 +1,7 @@
 # _BulletinBoard_ Changelog
 ## Unreleased
+
+## 🔖 v5.0.0
 ### Changes
 - Require iOS 11.0
 - Support for Swift Package Manager
