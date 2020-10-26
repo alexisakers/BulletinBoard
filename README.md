@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/cocoapods/l/BulletinBoard.svg?style=flat)](https://cocoapods.org/pods/BulletinBoard)
 [![Platform](https://img.shields.io/cocoapods/p/BulletinBoard.svg?style=flat)](https://cocoapods.org/pods/BulletinBoard)
 [![Documentation](https://img.shields.io/badge/Documentation-available-blue.svg)](https://alexaubry.github.io/BulletinBoard)
-[![Contact: @_alexaubry](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/twitter_badge.svg?sanitize=true)](https://twitter.com/_alexaubry)
+[![Contact: @_alexaubry](https://raw.githubusercontent.com/alexaubry/BulletinBoard/main/.assets/twitter_badge.svg?sanitize=true)](https://twitter.com/_alexaubry)
 
 BulletinBoard is an iOS library that generates and manages contextual cards displayed at the bottom of the screen. It is especially well suited for quick user interactions such as onboarding screens or configuration.
 
@@ -14,7 +14,7 @@ It has built-in support for accessibility features such as VoiceOver and Switch 
 
 Here are some screenshots showing what you can build with BulletinBoard:
 
-![Demo Screenshots](https://raw.githubusercontent.com/alexaubry/BulletinBoard/master/.assets/demo_screenshots.png)
+![Demo Screenshots](https://raw.githubusercontent.com/alexaubry/BulletinBoard/main/.assets/demo_screenshots.png)
 
 ## Requirements
 
@@ -45,7 +45,7 @@ Build and run the scheme for your favorite language to open the demo app.
 To install BulletinBoard using the [Swift Package Manager](https://swift.org/package-manager/), add this dependency to your `Package.swift` file:
 
 ~~~swift
-.package(url: "https://github.com/alexaubry/BulletinBoard.git", from: "4.2.0")
+.package(url: "https://github.com/alexaubry/BulletinBoard.git", from: "5.0.0")
 ~~~
 
 ### CocoaPods
