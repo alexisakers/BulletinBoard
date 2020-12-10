@@ -3,8 +3,8 @@
  *  Copyright (c) 2017 - present Alexis Aubry. Licensed under the MIT license.
  */
 
+#import <CustomBulletins/CustomBulletins-Swift.h>
 #import "RootViewController.h"
-#import "ImageCollectionViewCell.h"
 #import "BulletinDataSource.h"
 #import "CollectionDataSource.h"
 #import "BackgroundViewStyle.h"
