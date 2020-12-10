@@ -8,7 +8,7 @@ The following is a set of guidelines for contributing to _BulletinBoard_ on GitH
 
 Before submitting a new GitHub issue, please make sure to
 
-- Check out the [documentation](https://alexaubry.github.io/BulletinBoard).
+- Check out the [documentation](https://alexisakers.github.io/BulletinBoard).
 - Read the usage guide on [the README](https://github.com/alexaubry/BulletinBoard/#usage).
 - Search for [existing GitHub issues](https://github.com/alexaubry/BulletinBoard/issues).
 
