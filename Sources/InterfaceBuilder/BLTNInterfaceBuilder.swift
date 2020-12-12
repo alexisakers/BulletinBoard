@@ -28,7 +28,6 @@ import UIKit
     open func makeTitleLabel(isNextToCloseButton: Bool) -> BLTNTitleLabelContainer {
 
         let titleLabel = UILabel()
-        titleLabel.textAlignment = .center
         titleLabel.textColor = appearance.titleTextColor
         titleLabel.accessibilityTraits.insert(.header)
         titleLabel.numberOfLines = 2

@@ -27,6 +27,9 @@ import UIKit
     /// The title of the page.
     @objc public let title: String
 
+    /// The alignment of the title.
+    @objc public var titleAlignment: NSTextAlignment = .center
+
     /**
      * An image to display below the title.
      *
@@ -181,6 +184,7 @@ import UIKit
         let isNextToCloseButton = isDismissable && requiresCloseButton
         let titleView = interfaceBuilder.makeTitleLabel(isNextToCloseButton: isNextToCloseButton)
         titleView.label.text = title
+        titleView.label.textAlignment = titleAlignment
         
         self.titleLabel = titleView
         contentViews.append(titleView)
