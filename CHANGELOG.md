@@ -1,5 +1,8 @@
 # _BulletinBoard_ Changelog
 ## Unreleased
+### New Features
+- Make the alignment of the title editable
+[#198](https://github.com/alexisakers/BulletinBoard/pull/198)
 
 ## 🔖 v5.0.0
 ### Changes
