@@ -3,6 +3,7 @@
  *  Copyright (c) 2017 - present Alexis Aubry. Licensed under the MIT license.
  */
 
+#import <UserNotifications/UserNotifications.h>
 #import "PermissionsManager.h"
 
 @interface PermissionsManager ()
@@ -36,9 +37,10 @@
 
 -(void)requestLocalNotifications
 {
-    UIUserNotificationSettings* settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound) categories:NULL];
-
-    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    UNAuthorizationOptions options = UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound;
+    [UNUserNotificationCenter.currentNotificationCenter requestAuthorizationWithOptions:options completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        // no-op
+    }];
 }
 
 -(void)requestWhenInUseLocation
