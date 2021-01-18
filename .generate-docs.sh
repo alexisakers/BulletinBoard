@@ -9,7 +9,7 @@ AUTHOR_URL="https://twitter.com/_alexaubry"
 MODULE_NAME="BLTNBoard"
 COPYRIGHT="Copyright © 2017 - present $AUTHOR. Available under the MIT License."
 GITHUB_URL="https://github.com/alexaubry/BulletinBoard"
-GH_PAGES_URL="https://alexaubry.github.io/BulletinBoard"
+GH_PAGES_URL="https://alexisakers.github.io/BulletinBoard"
 
 bundle exec jazzy \
     --swift-version $SWIFT_VERSION \
@@ -21,7 +21,7 @@ bundle exec jazzy \
     -g "$GITHUB_URL" \
     --github-file-prefix "$GITHUB_URL/tree/master" \
     -r "$GH_PAGES_URL" \
-    -o "$OUTPUT"\
+    -o "$OUTPUT" \
     --min-acl public \
     --use-safe-filenames \
     --exclude="Sources/Support/*.swift" \

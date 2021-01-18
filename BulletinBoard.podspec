@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.source_files  = "Sources/**/*"
   s.private_header_files = "Sources/Support/**/*.h"
   s.frameworks  = "UIKit"
-  s.documentation_url = "https://alexaubry.github.io/BulletinBoard"
+  s.documentation_url = "https://alexisakers.github.io/BulletinBoard"
   s.module_name = "BLTNBoard"
   s.swift_version = "5.0"
 end

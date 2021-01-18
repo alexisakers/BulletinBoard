@@ -3,7 +3,7 @@
 [![Version](https://img.shields.io/cocoapods/v/BulletinBoard.svg?style=flat)](https://cocoapods.org/pods/BulletinBoard)
 [![License](https://img.shields.io/cocoapods/l/BulletinBoard.svg?style=flat)](https://cocoapods.org/pods/BulletinBoard)
 [![Platform](https://img.shields.io/cocoapods/p/BulletinBoard.svg?style=flat)](https://cocoapods.org/pods/BulletinBoard)
-[![Documentation](https://img.shields.io/badge/Documentation-available-blue.svg)](https://alexaubry.github.io/BulletinBoard)
+[![Documentation](https://img.shields.io/badge/Documentation-available-blue.svg)](https://alexisakers.github.io/BulletinBoard)
 [![Contact: @_alexaubry](https://raw.githubusercontent.com/alexaubry/BulletinBoard/main/.assets/twitter_badge.svg?sanitize=true)](https://twitter.com/_alexaubry)
 
 BulletinBoard is an iOS library that generates and manages contextual cards displayed at the bottom of the screen. It is especially well suited for quick user interactions such as onboarding screens or configuration.
@@ -66,8 +66,8 @@ github "alexaubry/BulletinBoard"
 
 ## Documentation
 
-- The full library documentation is available [here](https://alexaubry.github.io/BulletinBoard).
-- To learn how to start using `BulletinBoard`, check out our [Getting Started](https://alexaubry.github.io/BulletinBoard/getting-started.html) guide.
+- The full library documentation is available [here](https://alexisakers.github.io/BulletinBoard).
+- To learn how to start using `BulletinBoard`, check out our [Getting Started](https://alexisakers.github.io/BulletinBoard/getting-started.html) guide.
 
 ## Contributing
 
