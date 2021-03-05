@@ -30,6 +30,11 @@ enum BulletinDataSource {
     static func makeIntroPage() -> FeedbackPageBLTNItem {
 
         let page = FeedbackPageBLTNItem(title: "Welcome to\nPetBoard")
+        
+        page.titleAlignment = .right
+        page.descriptionAlignment = .right
+        page.imageContentMode = .right
+        
         page.image = #imageLiteral(resourceName: "RoundedIcon")
         page.imageAccessibilityLabel = "😻"
         page.appearance = makeLightAppearance()

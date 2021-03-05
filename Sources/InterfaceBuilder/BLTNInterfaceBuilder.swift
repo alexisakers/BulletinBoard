@@ -24,11 +24,11 @@ import UIKit
      * Creates a standard title label.
      */
 
-    @objc(makeTitleLabelNextToCloseButton:)
-    open func makeTitleLabel(isNextToCloseButton: Bool) -> BLTNTitleLabelContainer {
+    @objc(makeTitleLabelNextToCloseButton:titleAlginment:)
+    open func makeTitleLabel(isNextToCloseButton: Bool, titleAlginment:  NSTextAlignment) -> BLTNTitleLabelContainer {
 
         let titleLabel = UILabel()
-        titleLabel.textAlignment = .center
+        titleLabel.textAlignment = titleAlginment
         titleLabel.textColor = appearance.titleTextColor
         titleLabel.accessibilityTraits.insert(.header)
         titleLabel.numberOfLines = 2
@@ -45,10 +45,10 @@ import UIKit
      * Creates a standard description label.
      */
 
-    @objc open func makeDescriptionLabel() -> UILabel {
+    @objc open func makeDescriptionLabel(descriptionAlginment: NSTextAlignment) -> UILabel {
 
         let descriptionLabel = UILabel()
-        descriptionLabel.textAlignment = .center
+        descriptionLabel.textAlignment = descriptionAlginment
         descriptionLabel.textColor = appearance.descriptionTextColor
         descriptionLabel.numberOfLines = 0
         descriptionLabel.font = appearance.makeDescriptionFont()

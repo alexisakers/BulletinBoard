@@ -26,6 +26,11 @@ import UIKit
 
     /// The title of the page.
     @objc public let title: String
+    
+    /// The alignments of the title and description
+    public var titleAlignment: NSTextAlignment = .center
+    public var descriptionAlignment: NSTextAlignment = .center
+    public var imageContentMode: UIView.ContentMode = .scaleAspectFit
 
     /**
      * An image to display below the title.
@@ -179,7 +184,7 @@ import UIKit
         
         // Title
         let isNextToCloseButton = isDismissable && requiresCloseButton
-        let titleView = interfaceBuilder.makeTitleLabel(isNextToCloseButton: isNextToCloseButton)
+        let titleView = interfaceBuilder.makeTitleLabel(isNextToCloseButton: isNextToCloseButton, titleAlginment: titleAlignment)
         titleView.label.text = title
         
         self.titleLabel = titleView
@@ -189,7 +194,8 @@ import UIKit
         // Image View
         if let image = self.image {
             let imageView = UIImageView(image: image)
-            imageView.contentMode = .scaleAspectFit
+            imageView.contentMode = imageContentMode
+//            imageView.contentMode = .scaleAspectFit
             imageView.tintColor = appearance.imageViewTintColor
             
             if let accessibilityLabel = imageAccessibilityLabel {
@@ -206,13 +212,13 @@ import UIKit
         
         // Description Label
         if let attributedDescription = attributedDescriptionText {
-            let label = interfaceBuilder.makeDescriptionLabel()
+            let label = interfaceBuilder.makeDescriptionLabel(descriptionAlginment: descriptionAlignment)
             label.attributedText = attributedDescription
             contentViews.append(label)
             self.descriptionLabel = label
             insertComplementaryViews(makeViewsUnderDescription)
         } else if let description = descriptionText {
-            let label = interfaceBuilder.makeDescriptionLabel()
+            let label = interfaceBuilder.makeDescriptionLabel(descriptionAlginment: descriptionAlignment)
             label.text = description
             contentViews.append(label)
             self.descriptionLabel = label
