@@ -9,6 +9,9 @@
 ### Fixes
 - Fix the background view origin when presenting
 [#183](https://github.com/alexaubry/BulletinBoard/pull/183)
+-Fix the ability to change alignment for title, description and image
+[#128](https://github.com/alexisakers/BulletinBoard/pull/200)
+
 
 ## 🔖 v4.1.2
 ### Fixes
