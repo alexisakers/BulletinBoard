@@ -54,7 +54,7 @@ import UIKit
     @objc open var alternativeButtonTitle: String? {
         didSet {
             alternativeButton?
-                .setTitle(actionButtonTitle, for: .normal)
+                .setTitle(alternativeButtonTitle, for: .normal)
         }
     }
     
